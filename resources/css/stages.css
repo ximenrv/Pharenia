@@ -1,0 +1,142 @@
+/* 1. Resetear márgenes por defecto del navegador para quitar las líneas blancas */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden; /* Evita que salga barra de scroll horizontal */
+}
+
+/* 2. Forzar a que la sección completa ocupe TODO el ancho */
+.stage-page {
+    width: 100% ;
+    margin: 5rem 0 0 0 ;
+    padding-left: 0;
+    padding-right: 0;
+    box-sizing: border-box;
+}
+
+/* 3. El contenedor mantiene centrado el contenido pero el fondo ya cubre los lados */
+.stage-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    box-sizing: border-box;
+}
+.stage-header {
+    text-align: center;
+    margin-bottom: 5rem;
+}
+
+.stage-header__subtitle {
+    font-family: sans-serif;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 1rem;
+}
+
+.stage-header__title {
+    font-family: 'Georgia', serif;
+    font-size: 3.8rem;
+    color: #2c525a;
+    margin: 0.5rem 0 1.5rem;
+}
+
+.stage-header__intro {
+    font-family: sans-serif;
+    color: #4a5568;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Grilla del trio de juegos */
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+}
+
+.game-card {
+    background: #ffffff;
+    border-radius: 24px;
+    overflow: hidden;
+    text-decoration: none;
+    box-shadow: 0 10px 30px rgba(44, 82, 90, 0.05);
+    border: 1px solid rgba(44, 82, 90, 0.08);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.game-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 45px rgba(44, 82, 90, 0.15);
+}
+
+.game-card__image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    background: #f7fafc;
+}
+
+.game-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.game-card:hover .game-card__img {
+    transform: scale(1.08);
+}
+
+/* Capa interactiva de juego al pasar el mouse */
+.game-card__overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease;
+}
+
+.game-card:hover .game-card__overlay {
+    opacity: 0.9;
+}
+
+.game-card__play-btn {
+    color: #ffffff;
+    font-family: sans-serif;
+    font-weight: 800;
+    letter-spacing: 1px;
+    border: 2px solid #ffffff;
+    padding: 0.8rem 1.8rem;
+    border-radius: 30px;
+    font-size: 0.9rem;
+}
+
+.game-card__info {
+    padding: 2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.game-card__title {
+    font-family: sans-serif;
+    color: #2c525a;
+    font-size: 1.4rem;
+    margin: 0 0 0.8rem 0;
+}
+
+.game-card__description {
+    font-family: sans-serif;
+    color: #718096;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}

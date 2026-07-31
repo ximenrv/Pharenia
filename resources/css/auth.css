@@ -1,0 +1,399 @@
+/* resources/css/auth.css */
+
+.auth-body {
+    margin: 0;
+    padding: 0;
+    background-image: url("/public/img/background-auth.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    position: relative;
+    font-family: sans-serif;
+    overflow: hidden;
+}
+
+/* === LOGO (Fijo de manera independiente en la pantalla) === */
+.auth-logo {
+    position: absolute;
+    top: 1rem;
+    left: 10%;
+    z-index: 10;
+}
+
+.auth-logo a {
+    display: block;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.auth-logo img {
+    height: 62px;
+    width: auto;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.auth-logo a:hover img {
+    transform: scale(1.05);
+}
+
+/* === CONTENEDOR CENTRAL === */
+.auth-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+    padding-right: 12vw;
+    padding-bottom: 5rem;
+}
+
+.auth-main-container {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+/* TÍTULO FIJO */
+.auth-title {
+    font-family: sans-serif;
+    font-size: 2.1rem;
+    color: #1e3b41;
+    margin: 0 0 0.5rem 2.2rem;
+    line-height: 1.1;
+    font-weight: 600;
+}
+
+.auth-title span {
+    color: #1a3339;
+}
+
+/* TARJETA CON SCROLL INTERNO OPTIMIZADO */
+.auth-card {
+    padding: 1.2rem 4rem 1.8rem 2.2rem;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    max-height: 51vh;
+    max-width: 35vw;
+    overflow-y: auto;
+}
+
+.auth-card::-webkit-scrollbar {
+    width: 4px;
+}
+.auth-card::-webkit-scrollbar-thumb {
+    background: rgba(44, 82, 90, 0.2);
+    border-radius: 10px;
+}
+
+/* === FORMULARIO E INPUTS === */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    width: 100%;
+}
+
+.auth-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    position: relative;
+}
+
+.auth-group label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #4a5568;
+    letter-spacing: 0.8px;
+}
+
+.auth-group input {
+    border: none;
+    border-bottom: 1.5px solid #cbd5e0;
+    padding: 0.3rem 0;
+    font-size: 0.85rem;
+    color: #2d3748;
+    background: transparent;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.auth-group input::placeholder {
+    color: #a0aec0;
+    font-weight: 300;
+}
+
+.auth-group input:focus {
+    border-bottom-color: #bfa12b;
+}
+
+/* Estilos optimizados para compactar y embellecer las tarjetas de rol */
+.role-cards-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 6px;
+}
+.role-option-card {
+    position: relative;
+    cursor: pointer;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 10px 12px;
+    background-color: #f8fafc;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.role-option-card input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+.role-title {
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: #1e293b;
+    margin-bottom: 2px;
+}
+.role-desc {
+    font-size: 0.72rem;
+    color: #64748b;
+    line-height: 1.25;
+}
+.role-option-card:hover {
+    border-color: #cbd5e1;
+    background-color: #ffffff;
+}
+.role-option-card.active {
+    border-color: #0ea5e9;
+    background-color: #f0f9ff;
+    box-shadow: 0 2px 8px rgba(14, 165, 233, 0.1);
+}
+
+.password-wrapper {
+    position: relative;
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 2.2rem;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #718096;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.toggle-password svg {
+    width: 18px;
+    height: 18px;
+}
+
+.auth-errors {
+    background: rgba(192, 57, 43, 0.1);
+    border: 1px solid rgba(192, 57, 43, 0.3);
+    border-radius: 6px;
+    padding: 0.4rem 0.7rem;
+    margin: 0 0 0.8rem 0;
+    list-style: none;
+}
+
+.auth-errors li {
+    color: #c0392b;
+    font-size: 0.75rem;
+}
+
+/* === ENLACE DE OLVIDÓ CONTRASEÑA === */
+.auth-forgot-container {
+    margin-top: -0.2rem;
+    margin-bottom: 0.2rem;
+}
+
+.auth-link {
+    font-size: 0.75rem;
+    color: #2c525a;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.auth-link:hover {
+    color: #bfa12b;
+    text-decoration: underline;
+}
+
+/* === BOTÓN DE ENVÍO === */
+.auth-btn-submit {
+    align-self: flex-start;
+    background: linear-gradient(135deg, #bfa12b 0%, #2c525a 50%, #bfa12b 100%);
+    background-size: 200% auto;
+    background-position: left center;
+    color: #ffffff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    padding: 0.6rem 1.8rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(44, 82, 90, 0.2);
+    transition:
+        background-position 0.5s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+    margin-top: 0.2rem;
+}
+
+.auth-btn-submit:hover {
+    transform: translateY(-2px);
+    background-position: right center;
+    box-shadow: 0 6px 16px rgba(44, 82, 90, 0.3);
+}
+
+.auth-switch {
+    margin-top: 0.8rem;
+    font-size: 0.75rem;
+    color: #718096;
+}
+
+.auth-switch a {
+    color: #2c525a;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.auth-switch a:hover {
+    color: #bfa12b;
+    text-decoration: underline;
+}
+
+/* === MEDIDOR DE FUERZA DE CONTRASEÑA === */
+.password-strength {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 4px;
+}
+
+.password-strength-bars {
+    display: flex;
+    gap: 4px;
+    width: 100%;
+}
+
+.strength-bar {
+    flex: 1;
+    height: 3px;
+    background-color: #cbd5e0;
+    border-radius: 2px;
+    transition: background-color 0.3s ease;
+}
+
+.strength-bar.debil {
+    background-color: #e53e3e;
+}
+
+.strength-bar.media {
+    background-color: #dd6b20;
+}
+
+.strength-bar.fuerte {
+    background-color: #38a169;
+}
+
+.strength-label {
+    font-size: 0.65rem;
+    color: #718096;
+}
+
+.auth-error-message {
+    color: #e53e3e;
+    font-size: 0.7rem;
+    margin-top: 2px;
+}
+
+/* === CORALES DECORATIVOS (Fijos al fondo) === */
+.auth-decorations {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.auth-coral {
+    position: absolute;
+    bottom: -1rem;
+}
+
+.coral {
+    left: -8rem;
+    bottom: -4rem;
+    width: 350px;
+    transform-origin: bottom left;
+    animation: coralSway 6s infinite ease-in-out;
+}
+
+.coral-2 {
+    left: 60%;
+    bottom: -4rem;
+    width: 180px;
+    transform-origin: bottom center;
+    animation: coralSwayCenter 7s infinite ease-in-out;
+}
+
+.coral-3 {
+    right: -4rem;
+    bottom: -1.5rem;
+    width: 300px;
+    transform-origin: bottom right;
+    animation: coralSway 6s infinite ease-in-out;
+    animation-delay: -2s;
+}
+
+/* === ANIMACIONES === */
+@keyframes coralSway {
+    0%,
+    100% {
+        transform: rotate(0deg) translateY(0px);
+    }
+    50% {
+        transform: rotate(1.2deg) translateY(-4px);
+    }
+}
+
+@keyframes coralSwayCenter {
+    0%,
+    100% {
+        transform: translateX(-50%) rotate(0deg) translateY(0px);
+    }
+    50% {
+        transform: translateX(-50%) rotate(-1deg) translateY(-3px);
+    }
+}

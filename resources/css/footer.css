@@ -1,0 +1,105 @@
+.main-footer {
+    /* 🎯 SOLUCIÓN: Forzamos a que ocupe todo el ancho visual de la pantalla de lado a lado */
+    width: 100vw; 
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-top: -6rem;
+    background-image: url('/public/img/background-footer.png'); 
+    background-size: 100% auto; 
+    background-position: center top;
+    background-repeat: no-repeat;
+    padding-top: 28vw; 
+    box-sizing: border-box;
+    overflow: hidden; /* Evita cualquier desborde horizontal accidental */
+}
+
+.main-footer__content {
+    background-color: transparent; 
+    padding: 2rem 4rem; 
+    color: #ffffff;
+    font-family: sans-serif;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.main-footer__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Alinea los bloques por arriba perfectamente */
+    gap: 6rem;
+}
+
+.main-footer__brand {
+    flex: 0 0 160px; 
+}
+
+.main-footer__logo {
+    width: 85%;
+    height: auto;
+    object-fit: contain;
+}
+
+.main-footer__links-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4rem;
+}
+
+.main-footer__title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-top: 0;
+    margin-bottom: 1.2rem;
+    color: #ffffff;
+}
+
+.main-footer__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.main-footer__list a {
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.2s ease, padding-left 0.2s ease;
+}
+
+.main-footer__list a:hover {
+    color: #bfa12b; 
+    padding-left: 4px;
+}
+
+.main-footer__bottom {
+    max-width: 1200px;
+    margin: 2rem auto 0 auto; 
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 1.5rem;
+    text-align: center;
+}
+
+.main-footer__credits {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+.main-footer__slogan {
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0.5rem 0 0 0;
+}

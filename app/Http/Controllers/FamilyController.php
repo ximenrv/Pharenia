@@ -1,0 +1,48 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\ChildProfile;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
+
+class FamilyController extends Controller
+{
+    // Muestra el panel familiar con los perfiles del tutor autenticado
+    public function index()
+    {
+        $children = auth()->user()->children()->get();
+        return view('family-panel', compact('children'));
+    }
+
+    // Procesa el registro del menor con validaciones
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'birthdate' => 'required|date',
+            'parent_pin' => 'required|digits:4',
+        ]);
+
+        // Calcular la edad exacta
+        $age = Carbon::parse($request->birthdate)->age;
+
+        // Validar que sea estrictamente menor de 12 años
+        if ($age >= 12) {
+            return back()
+                ->withErrors(['birthdate' => 'El perfil debe pertenecer a un menor de 12 años.'])
+                ->withInput();
+        }
+
+        // Guardar en la base de datos vinculado al usuario actual
+        ChildProfile::create([
+            'user_id' => auth()->id(),
+            'name' => $request->name,
+            'birthdate' => $request->birthdate,
+            'parent_pin' => Hash::make($request->parent_pin),
+        ]);
+
+        return redirect()->route('family-panel')->with('success', '¡Perfil de menor creado exitosamente!');
+    }
+}

@@ -1,0 +1,272 @@
+/* Estilos de la Página de Inicio */
+.home-body {
+    margin-top: 6rem;
+    padding: 0;
+    background-image: url("../../public/img/background.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 10rem;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.hero__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* --- BLOQUE DE INFORMACIÓN IZQUIERDA --- */
+.hero__content {
+    flex: 1;
+    max-width: 580px;
+    padding-left: 6rem;
+    margin-top: -7rem;
+    z-index: 10;
+}
+
+.hero__title {
+    font-size: 4.2rem;
+    color: #2c525a;
+    margin: 0 0 0.5rem 0;
+    font-family: Georgia, serif;
+    line-height: 1.1;
+}
+
+.hero__title--highlight {
+    color: #bfa12b;
+    display: block;
+    margin-top: 0.5rem;
+}
+
+.hero__description {
+    font-size: 1.2rem;
+    color: #4a5568;
+    line-height: 1.7;
+    margin-top: 1.5rem;
+    margin-bottom: 3rem;
+    font-family: sans-serif;
+}
+
+/* --- DISEÑO ESTÉTICO DE BOTONES --- */
+.hero__actions {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.hero__btn {
+    font-family: sans-serif;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.hero__btn--primary {
+    background-color: #bfa12b;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    padding: 1rem 2.2rem;
+    box-shadow: 0 4px 6px rgba(191, 161, 43, 0.2);
+    position: relative;
+    overflow: hidden;
+    animation: buttonShimmer 4s infinite ease-in-out;
+}
+
+.hero__btn--primary:hover {
+    background-color: #a38722;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(191, 161, 43, 0.3);
+}
+
+.hero__btn--secondary {
+    color: #2c525a;
+    background: none;
+    border: none;
+    padding: 0.5rem 0;
+    position: relative;
+    cursor: pointer;
+}
+
+.hero__btn--secondary::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #bfa12b;
+    transition: transform 0.3s ease;
+    transform-origin: right;
+    transform: scaleX(0);
+}
+
+.hero__btn--secondary:hover {
+    color: #bfa12b;
+}
+
+.hero__btn--secondary:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* --- CONTENEDOR GRÁFICO ANIMADO --- */
+.hero__character-container {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 50vw;
+    height: 75vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    overflow: visible;
+    z-index: 5;
+}
+
+.hero__layer {
+    position: absolute;
+    height: auto;
+    object-fit: contain;
+    pointer-events: none;
+    will-change: transform, filter;
+}
+
+.hero__layer--glow {
+    width: 130%;
+    bottom: -10%;
+    right: -10%;
+    z-index: 1;
+    opacity: 0.9;
+}
+
+.hero__layer--feather-1 {
+    width: 25%;
+    bottom: 55%;
+    right: 95%;
+    z-index: 2;
+    transform: rotate(-25deg);
+    animation: featherFloat1 5s infinite ease-in-out;
+}
+
+.hero__layer--feather-2 {
+    width: 18%;
+    bottom: 25%;
+    right: -2%;
+    z-index: 2;
+    transform: rotate(35deg);
+    animation: featherFloat2 6s infinite ease-in-out;
+}
+
+.hero__layer--feather-3 {
+    width: 20%;
+    bottom: 70%;
+    right: 8%;
+    z-index: 2;
+    transform: rotate(15deg);
+    animation: featherFloat1 7s infinite ease-in-out;
+}
+
+.hero__layer--cloud {
+    width: 100%;
+    bottom: -90px;
+    transform: scale(1.1);
+    transform-origin: bottom right;
+    z-index: 3;
+    animation: cloudSway 8s infinite ease-in-out;
+}
+
+.hero__layer--lumen {
+    width: 80%;
+    bottom: 1%;
+    right: 10%;
+    z-index: 4;
+    animation: lumenFloatAndGlow 5s infinite ease-in-out;
+}
+
+/* --- SISTEMA DE ANIMACIONES --- */
+
+/* Flotación y Brillo de Lumen */
+@keyframes lumenFloatAndGlow {
+    0% {
+        transform: translateY(0) scale(1);
+        filter: drop-shadow(0 0 5px rgba(191, 161, 43, 0.3));
+    }
+    50% {
+        transform: translateY(-12px) scale(1.01);
+        filter: drop-shadow(0 0 25px rgba(191, 161, 43, 0.8));
+    }
+    100% {
+        transform: translateY(0) scale(1);
+        filter: drop-shadow(0 0 5px rgba(191, 161, 43, 0.3));
+    }
+}
+
+/* Balanceo de la nube */
+@keyframes cloudSway {
+    0% {
+        transform: scale(1.1) translateX(0);
+    }
+    50% {
+        transform: scale(1.1) translateX(-3px);
+    }
+    100% {
+        transform: scale(1.1) translateX(0);
+    }
+}
+
+/* Flotación de plumas */
+@keyframes featherFloat1 {
+    0% {
+        transform: translateY(0) rotate(-25deg);
+    }
+    50% {
+        transform: translateY(-8px) rotate(-20deg);
+    }
+    100% {
+        transform: translateY(0) rotate(-25deg);
+    }
+}
+
+@keyframes featherFloat2 {
+    0% {
+        transform: translateY(0) rotate(35deg);
+    }
+    50% {
+        transform: translateY(-10px) rotate(40deg);
+    }
+    100% {
+        transform: translateY(0) rotate(35deg);
+    }
+}
+
+/* Destello sutil en el Botón Principal */
+@keyframes buttonShimmer {
+    0%,
+    100% {
+        box-shadow: 0 4px 6px rgba(191, 161, 43, 0.2);
+    }
+    50% {
+        box-shadow: 0 4px 20px rgba(191, 161, 43, 0.6);
+    }
+}

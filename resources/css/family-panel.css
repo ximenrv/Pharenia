@@ -1,0 +1,192 @@
+/* =================================================================
+   PANEL FAMILIAR - PALETA DE COLORES OFICIAL PHARENIA
+   ================================================================= */
+
+body {
+    background-color: #f6f5f0; /* Tono marfil/crema suave de fondo general */
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #2b3e50;
+    margin: 0;
+    padding: 40px 20px;
+}
+
+.family-panel-container {
+    max-width: 1050px;
+    margin: 0 auto;
+    margin-top: 5rem;
+}
+
+/* Cabecera */
+.family-panel__header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.family-panel__badge {
+    background-color: #dfd8c8; /* Tono arena/dorado suave */
+    color: #3b4c58;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+}
+
+.family-panel__header h1 {
+    font-size: 34px;
+    color: #2f4f4f; /* Azul verdoso/oscuro característico de los títulos */
+    margin: 12px 0 6px 0;
+    font-weight: 700;
+}
+
+.family-panel__header p {
+    color: #616f7a;
+    font-size: 16px;
+    margin: 0 0 20px 0;
+}
+
+.family-panel__back-btn {
+    display: inline-block;
+    color: #2f4f4f;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    background: #fdfcf7;
+    padding: 8px 18px;
+    border-radius: 20px;
+    border: 1px solid #dcd6c5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    transition: all 0.2s;
+}
+
+.family-panel__back-btn:hover {
+    background-color: #2f4f4f;
+    color: #ffffff;
+    border-color: #2f4f4f;
+}
+
+/* Cuadrícula de Tarjetas */
+.family-panel__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+@media (max-width: 768px) {
+    .family-panel__grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Estilo de Tarjeta Contenedor (Fondo crema/marfil de las tarjetas de contenido) */
+.pharenia-card {
+    background: #fdfcf7;
+    border: 1px solid #e3dec9;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 8px 20px rgba(47, 79, 79, 0.04);
+}
+
+.pharenia-card__header h3 {
+    margin: 0 0 8px 0;
+    font-size: 20px;
+    color: #2f4f4f;
+    font-weight: 600;
+}
+
+.pharenia-card__desc {
+    font-size: 14px;
+    color: #616f7a;
+    margin: 0 0 25px 0;
+    line-height: 1.5;
+}
+
+/* Formulario interno */
+.pharenia-form__group {
+    margin-bottom: 20px;
+}
+
+.pharenia-form__group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #3b4c58;
+    margin-bottom: 8px;
+}
+
+.pharenia-form__group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #dcd6c5;
+    border-radius: 10px;
+    font-size: 15px;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    transition: all 0.2s;
+    color: #2b3e50;
+}
+
+.pharenia-form__group input:focus {
+    outline: none;
+    border-color: #2f4f4f;
+    box-shadow: 0 0 0 3px rgba(47, 79, 79, 0.12);
+}
+
+/* Botón de acción principal (Azul oscuro institucional de los botones "Comenzar") */
+.pharenia-btn {
+    width: 100%;
+    background-color: #2f4f4f;
+    color: #ffffff;
+    border: none;
+    padding: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer; /* <-- Esto es vital para que responda al mouse */
+    pointer-events: auto; /* <-- Asegura que reciba los clics */
+    position: relative;
+    z-index: 10; /* <-- Lo coloca por encima de cualquier capa que pudiera estorbar */
+    transition: background-color 0.2s;
+}
+
+.pharenia-btn:hover {
+    background-color: #223a3a;
+}
+
+/* Lista de elementos */
+.pharenia-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pharenia-list__item {
+    background: #ffffff;
+    border: 1px solid #e3dec9;
+    border-radius: 10px;
+    padding: 15px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pharenia-list__info strong {
+    display: block;
+    color: #2f4f4f;
+    font-size: 15px;
+}
+
+.pharenia-list__info span {
+    font-size: 12px;
+    color: #616f7a;
+}
+
+.pharenia-badge-active {
+    background-color: #e2ebd8;
+    color: #2f4f32;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 12px;
+}

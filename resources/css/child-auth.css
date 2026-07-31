@@ -1,0 +1,124 @@
+/* Estilos generales para las pantallas de autenticación infantil y control parental */
+.child-auth-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #f8fafc;
+    margin: 0;
+    font-family:
+        "Inter",
+        system-ui,
+        -apple-system,
+        sans-serif;
+}
+
+.child-auth-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 35px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+}
+
+.child-auth-card h3 {
+    margin-top: 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: #2f4f4f;
+    margin-bottom: 8px;
+}
+
+.child-auth-card p {
+    font-size: 14px;
+    color: #616f7a;
+    line-height: 1.5;
+    margin-bottom: 24px;
+}
+
+.child-auth-form__group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.child-auth-form__group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 8px;
+}
+
+.child-auth-input {
+    width: 100%;
+    padding: 12px;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 10px;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 8px;
+    outline: none;
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s;
+    box-sizing: border-box;
+}
+
+.child-auth-input:focus {
+    border-color: #2f4f4f;
+    box-shadow: 0 0 0 3px rgba(47, 79, 79, 0.15);
+}
+
+.child-auth-btn {
+    width: 100%;
+    background-color: #2f4f4f;
+    color: #ffffff;
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.child-auth-btn:hover {
+    background-color: #223a3a;
+}
+
+.child-auth-btn--danger {
+    background-color: #c53030;
+}
+
+.child-auth-btn--danger:hover {
+    background-color: #9b2c2c;
+}
+
+.child-auth-alert {
+    color: #c53030;
+    background: #fff5f5;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    border: 1px solid #fed7d7;
+}
+
+.child-auth-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.child-auth-footer a {
+    font-size: 13px;
+    color: #64748b;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.child-auth-footer a:hover {
+    color: #0f172a;
+    text-decoration: underline;
+}

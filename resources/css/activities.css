@@ -1,0 +1,242 @@
+.act-body {
+    margin-top: 7.5rem;
+    padding: 0;
+    background-image: url('/public/img/background-3.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    width: 100vw;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.act-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem 5rem 2rem;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+/* === ENCABEZADO CON FARO INTEGRADO === */
+.act-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 6rem;
+    width: 100%;
+}
+
+.act-header__center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.act-header__title-wrapper {
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    gap: 1.5rem; 
+}
+
+.act-header__word {
+    font-family: 'Georgia', serif;
+    font-size: 5rem; 
+    color: #bfa12b; 
+    font-weight: bold;
+    line-height: 1;
+    letter-spacing: 6px;
+}
+
+.act-header__lighthouse {
+    height: 350px; 
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin-top: -0.5rem; 
+    animation: lighthouseFloat 5s infinite ease-in-out;
+}
+
+/* === BOTONES INFERIORES === */
+/* === BOTONES INFERIORES CENTRADOS JUNTOS === */
+.act-header__actions {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centra los dos elementos perfectamente */
+    gap: 3rem;              /* Espacio de separación horizontal entre el botón y el texto */
+    margin-top: 4rem;       /* Separación respecto al faro de arriba */
+    width: 100%;
+}
+
+.act-btn-wrapper {
+    text-decoration: none;
+    display: inline-block; /* Evita que ocupe todo el ancho */
+}
+
+/* Botón Azul Oscuro "COMENZAR" */
+.act-btn--primary {
+    background-color: #0d2c3f; 
+    color: #ffffff;
+    font-family: sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 1rem 2.2rem;
+    border: none;
+    border-radius: 8px; /* Bordes estilizados como tu diseño */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    box-shadow: 0 4px 15px rgba(13, 44, 63, 0.15);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.act-btn--primary:hover {
+    transform: translateY(-3px);
+    background-color: #143d57; 
+    box-shadow: 0 8px 20px rgba(13, 44, 63, 0.3);
+}
+
+.act-btn--primary:hover .act-btn__arrow {
+    transform: translateX(4px); 
+}
+
+.act-btn__arrow {
+    font-size: 1.1rem;
+    line-height: 1;
+    transition: transform 0.3s ease;
+}
+
+/* Enlace Subrayado "¿ACTIVIDADES?" */
+.act-link {
+    font-family: sans-serif;
+    color: #2c525a; 
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 0.4rem;
+    transition: color 0.3s ease;
+    white-space: nowrap; /* Evita que el texto se parta en dos líneas */
+}
+
+.act-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #bfa12b;
+    transition: transform 0.3s ease;
+    transform-origin: left;
+    transform: scaleX(0);
+}
+
+.act-link:hover {
+    color: #bfa12b; 
+}
+
+.act-link:hover::after {
+    transform: scaleX(1); 
+    transform-origin: left;
+}
+/* === GRID DE CONTENIDO FUTURO === */
+.act-main-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* === ANIMACIÓN DE FLOTACIÓN === */
+@keyframes lighthouseFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-6px); 
+    }
+}
+
+/* --- ESTILOS DEL MODAL --- */
+.act-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(44, 82, 90, 0.6); /* Fondo oscuro con el tono azul marino de tu app */
+    backdrop-filter: blur(5px); /* Efecto difuminado de fondo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Por encima de todo */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+/* Clase que se activa con JavaScript */
+.act-modal--show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.act-modal__content {
+    background-color: #ffffff;
+    padding: 2.5rem;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 550px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    position: relative;
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+}
+
+.act-modal--show .act-modal__content {
+    transform: translateY(0);
+}
+
+/* Botón de cerrar (X) */
+.act-modal__close {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.5rem;
+    font-size: 2rem;
+    color: #a0aec0;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.act-modal__close:hover {
+    color: #2c525a;
+}
+
+.act-modal__title {
+    font-family: sans-serif;
+    color: #2c525a;
+    font-size: 1.8rem;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
+
+.act-modal__text {
+    font-family: sans-serif;
+    color: #4a5568;
+    line-height: 1.6;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
