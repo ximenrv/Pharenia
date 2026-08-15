@@ -12,7 +12,7 @@ class ProfileController extends Controller
     public function edit()
     {
         // Cambiado para que busque directamente en views/edit-profile.blade.php
-        return view('edit-profile', ['user' => Auth::user()]);
+        return view('profile.edit-profile', ['user' => Auth::user()]);
     }
 
     // Procesa la actualización de los datos

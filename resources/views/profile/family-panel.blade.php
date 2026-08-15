@@ -15,8 +15,7 @@
         <header class="family-panel__header">
             <span class="family-panel__badge">Gestión de Tutoría</span>
             <h1>Panel Familiar</h1>
-            <p>Administra de forma segura los perfiles de los menores a tu cargo.</p>
-            <a href="/" class="family-panel__back-btn">← Volver al Inicio</a>
+            <p>Administra de forma segura los perfiles y supervisa el progreso a tu cargo.</p>
         </header>
 
         <div class="family-panel__grid">
@@ -62,7 +61,7 @@
 
             <div class="pharenia-card">
                 <div class="pharenia-card__header">
-                    <h3>Perfiles Registrados</h3>
+                    <h3>Menores Registrados</h3>
                 </div>
                 <p class="pharenia-card__desc">Menores vinculados actualmente a tu cuenta de tutor.</p>
 
@@ -81,6 +80,30 @@
                     @empty
                         <li class="pharenia-list__item" style="justify-content: center; color: #616f7a; padding: 20px 0;">
                             No hay perfiles registrados aún.
+                        </li>
+                    @endforelse
+                </ul>
+            </div>
+
+            <div class="pharenia-card" style="grid-column: span 2;">
+                <div class="pharenia-card__header">
+                    <h3>Jóvenes a tu cargo</h3>
+                </div>
+                <p class="pharenia-card__desc">Adolescentes que te han seleccionado como su adulto supervisor desde su panel.</p>
+
+                <ul class="pharenia-list">
+                    @forelse($supervisedTeens as $teen)
+                        <li class="pharenia-list__item" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #edf2f7;">
+                            <div class="pharenia-list__info">
+                                <strong>{{ $teen->name }}</strong>
+                                <span style="font-size: 12px; color: #616f7a; display: block;">Correo: {{ $teen->email }}</span>
+                            </div>
+                            
+                            
+                        </li>
+                    @empty
+                        <li class="pharenia-list__item" style="justify-content: center; color: #616f7a; padding: 20px 0;">
+                            No hay jóvenes vinculados a tu cuenta todavía.
                         </li>
                     @endforelse
                 </ul>

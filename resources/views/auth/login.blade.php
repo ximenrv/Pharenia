@@ -8,7 +8,7 @@
 </head>
 <body class="auth-body">
 
-    @include('loader')
+    @include('components.loader')
 
     <div class="auth-logo">
         <a href="{{ url('/') }}" title="Volver al inicio">
@@ -58,7 +58,7 @@
                     </div>
 
                     <div class="auth-forgot-container">
-                        <a href="{{ route('password.request') }}" class="auth-link">¿Olvidó su contraseña?</a>
+                        <a href="{{ route('forgot-password') }}" class="auth-link">¿Olvidó su contraseña?</a>
                     </div>
 
                     <button type="submit" class="auth-btn-submit">

@@ -13,11 +13,11 @@
 </head>
 <body class="info-body">
 
-    @include('loader')
+    @include('components.loader')
 
     <x-navbar />
 
-    @include('transition-waves')
+    @include('components.transition-waves')
 
     <div class="info-container" id="section01">
         

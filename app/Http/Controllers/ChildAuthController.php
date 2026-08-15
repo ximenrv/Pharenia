@@ -12,7 +12,7 @@ class ChildAuthController extends Controller
     public function showPinForm($id)
     {
         $child = ChildProfile::findOrFail($id);
-        return view('child-pin', compact('child'));
+        return view('auth.child-pin', compact('child'));
     }
 
     // Verifica el PIN de ingreso
@@ -76,7 +76,7 @@ public function activities()
             return redirect()->route('family-panel');
         }
 
-        return view('child-logout-pin');
+        return view('auth.child-logout-pin');
     }
 
     // Verifica el PIN para autorizar el cierre de sesión

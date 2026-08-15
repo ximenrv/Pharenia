@@ -2,6 +2,7 @@
 
 use App\Http\Middleware\PreventBackHistoryCache;
 use App\Http\Middleware\CheckChildSession;
+use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -17,9 +18,10 @@ return Application::configure(basePath: dirname(__DIR__))
         // Mantiene tu middleware global para evitar el caché de retroceso
         $middleware->appendToGroup('web', PreventBackHistoryCache::class);
 
-        // Registramos el alias para proteger las rutas del menor
+        // Registramos los alias para proteger rutas (menor y administrador)
         $middleware->alias([
             'child.auth' => CheckChildSession::class,
+            'admin' => AdminMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

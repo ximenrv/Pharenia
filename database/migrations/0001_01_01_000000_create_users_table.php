@@ -14,11 +14,14 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name'); // Nombre completo único
-            $table->string('username')->unique();
             $table->string('email')->unique();
             $table->date('birthdate');
-            $table->string('role')->default('ally_no_tea'); // tutor, adult_tea, ally_no_tea, teen
+            $table->string('role')->default('ally_no_tea'); // tutor, adult_tea, ally_no_tea, teen, minor
             $table->string('parent_pin', 4)->nullable();
+            
+            // NUEVO: Columna para guardar el ID del adulto supervisor del joven (13-17 años)
+            $table->foreignId('supervisor_id')->nullable()->constrained('users')->nullOnDelete();
+
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

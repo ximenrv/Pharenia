@@ -17,6 +17,7 @@ class User extends Authenticatable
         'birthdate',
         'role',
         'parent_pin',
+        'supervisor_id', // Asegúrate de incluir esta si quieres asignarla por fillable
         'password',
     ];
 
@@ -34,8 +35,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
     public function children()
-{
-    return $this->hasMany(ChildProfile::class);
-}
+    {
+        return $this->hasMany(ChildProfile::class);
+    }
+
+    public function supervisor()
+    {
+        return $this->belongsTo(User::class, 'supervisor_id');
+    }
 }

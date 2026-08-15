@@ -17,10 +17,9 @@ class AuthController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string', 'max:255', 'unique:users,username'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'birthdate' => ['required', 'date', 'before:today'],
-            'role' => ['required', 'string', 'in:adult_tea,ally_no_tea'],
+            'role' => ['required', 'string', 'in:adult_tea,ally_no_tea,teen'],
             'password' => [
                 'required',
                 'string',
@@ -39,22 +38,37 @@ class AuthController extends Controller
         ]);
 
         $age = Carbon::parse($validated['birthdate'])->age;
-
-        // Por defecto toma la elección del adulto (+18)
         $role = $validated['role']; 
 
-        // Validación y desvío automático por rangos de edad
-        if ($age >= 13 && $age <= 17) {
-            $role = 'teen'; 
-        } elseif ($age < 13) {
+        // 🛡️ BLOQUEO ESTRICTO POR EDAD Y PERFIL INCORRECTO
+
+        // 1. Menores de 13 años (prohibido registro independiente)
+        if ($age < 13) {
             return back()->withErrors([
                 'birthdate' => 'Los menores de 13 años no pueden registrarse de forma independiente. Deben ser registrados por un adulto responsable desde el panel familiar.'
             ])->withInput();
         }
 
+        // 2. Adolescentes (13 a 17 años): SOLO pueden ser 'teen'
+        if ($age >= 13 && $age <= 17) {
+            if ($role !== 'teen') {
+                return back()->withErrors([
+                    'role' => 'Tu fecha de nacimiento indica que eres menor de edad (13-17 años). Debes seleccionar el perfil de Joven / Adolescente.'
+                ])->withInput();
+            }
+        } 
+        // 3. Adultos (18 años o más): NO pueden ser 'teen'
+        else {
+            if ($role === 'teen') {
+                return back()->withErrors([
+                    'role' => 'No puedes seleccionar el perfil de adolescente si eres mayor de edad (18+).'
+                ])->withInput();
+            }
+        }
+
+        // Si pasa todas las validaciones, creamos el usuario
         $user = User::create([
             'name' => $validated['name'],
-            'username' => $validated['username'],
             'email' => $validated['email'],
             'birthdate' => $validated['birthdate'],
             'role' => $role,
@@ -64,14 +78,9 @@ class AuthController extends Controller
         Auth::login($user);
         $request->session()->regenerate();
 
-        // Redirección inteligente según el rol final asignado
-        if ($user->role === 'teen') {
-            return redirect()->route('teen.dashboard');
-        }
-
         return redirect()->route('home');
     }
-
+    
     public function login(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
@@ -87,20 +96,21 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
+        // Obtenemos al usuario autenticado
         $user = Auth::user();
 
-        // Si es adolescente al iniciar sesión, va directo a su espacio protegido
-        if ($user->role === 'teen') {
-            return redirect()->route('teen.dashboard');
+        // Redirección inteligente basada en el rol
+        if ($user->role === 'admin') {
+            return redirect()->intended('home'); 
         }
 
+        // Para los demás usuarios (adult_tea, ally_no_tea, teen, minor)
         return redirect()->intended(route('home'));
     }
 
     public function logout(Request $request): RedirectResponse
     {
         Auth::logout();
-
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
@@ -109,11 +119,11 @@ class AuthController extends Controller
 
     public function showLoginForm()
     {
-        return view('login');
+        return view('auth.login');
     }
 
     public function showRegistrationForm()
     {
-        return view('register');
+        return view('auth.register');
     }
 }

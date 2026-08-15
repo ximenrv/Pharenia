@@ -8,7 +8,7 @@
 </head>
 <body class="home-body">
 
-    @include('loader')
+    @include('components.loader')
 
     <x-navbar />
 

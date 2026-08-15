@@ -8,7 +8,7 @@
 </head>
 <body class="auth-body">
 
-    @include('loader')
+    @include('components.loader')
 
     <div class="auth-logo">
         <a href="{{ url('/') }}" title="Volver al inicio">
@@ -44,11 +44,6 @@
                     </div>
 
                     <div class="auth-group">
-                        <label for="username">NOMBRE DE USUARIO</label>
-                        <input type="text" id="username" name="username" value="{{ old('username') }}" placeholder="Digite su nombre de usuario" required>
-                    </div>
-
-                    <div class="auth-group">
                         <label for="email">EMAIL</label>
                         <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="Digite su dirección email" required>
                     </div>
@@ -59,20 +54,13 @@
                     </div>
 
                     <div class="auth-group">
-                        <label>¿QUÉ PERFIL DESCRIBE TU OBJETIVO?</label>
-                        <div class="role-cards-wrapper">
-                            <label class="role-option-card {{ old('role') == 'adult_tea' ? 'active' : '' }}" onclick="seleccionarRol(this, 'adult_tea')">
-                                <input type="radio" name="role" value="adult_tea" required {{ old('role') == 'adult_tea' ? 'checked' : '' }}>
-                                <span class="role-title">Adulto Autogestor (TEA)</span>
-                                <span class="role-desc">Herramientas diarias y autonomía.</span>
-                            </label>
-                            
-                            <label class="role-option-card {{ old('role') == 'ally_no_tea' ? 'active' : '' }}" onclick="seleccionarRol(this, 'ally_no_tea')">
-                                <input type="radio" name="role" value="ally_no_tea" {{ old('role') == 'ally_no_tea' ? 'checked' : '' }}>
-                                <span class="role-title">Tutor / Aliado (+18)</span>
-                                <span class="role-desc">Supervisión y gestión familiar.</span>
-                            </label>
-                        </div>
+                        <label for="role">¿QUÉ PERFIL DESCRIBE TU OBJETIVO?</label>
+                        <select id="role" name="role" required style="width: 100%; padding: 12px; border: 1px solid #cbd5e0; border-radius: 8px; background-color: #fff; font-size: 14px; color: #2f4f4f;">
+                            <option value="" disabled selected>Selecciona tu perfil...</option>
+                            <option value="adult_tea" {{ old('role') == 'adult_tea' ? 'selected' : '' }}>Adulto Autogestor (TEA)</option>
+                            <option value="ally_no_tea" {{ old('role') == 'ally_no_tea' ? 'selected' : '' }}>Tutor / Aliado (+18)</option>
+                            <option value="teen" {{ old('role') == 'teen' ? 'selected' : '' }}>Joven / Adolescente (13-17 años)</option>
+                        </select>
                     </div>
 
                     <div class="auth-group auth-group--password">
@@ -192,6 +180,8 @@
 
         confirmInput.addEventListener('input', validarPasswords);
     }
+
+    
 </script>
 </body>
 </html>

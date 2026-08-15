@@ -9,7 +9,7 @@
 </head>
 <body>
 
-    @include('loader')
+    @include('components.loader')
 
     <x-navbar />
 
@@ -22,21 +22,21 @@
                 </svg>
 
                 <div class="timeline-node node-child" data-stage="child">
-                    <a href="{{ route('activities.stage', ['stage' => 'ninez']) }}" class="node-point-link">
+                    <a href="{{ route('activities.child') }}" class="node-point-link">
                         <div class="node-point"></div>
                     </a>
                     <span class="node-label">Niñez</span>
                 </div>
 
                 <div class="timeline-node node-youth" data-stage="youth">
-                    <a href="{{ route('activities.stage', ['stage' => 'juventud']) }}" class="node-point-link">
+                    <a href="{{ route('activities.youth') }}" class="node-point-link">
                         <div class="node-point"></div>
                     </a>
                     <span class="node-label">Juventud</span>
                 </div>
 
                 <div class="timeline-node node-adult" data-stage="adult">
-                    <a href="{{ route('activities.stage', ['stage' => 'adultez']) }}" class="node-point-link">
+                    <a href="{{ route('activities.adultez') }}" class="node-point-link">
                         <div class="node-point"></div>
                     </a>
                     <span class="node-label">Adultez</span>

@@ -67,7 +67,7 @@
 </head>
 <body class="auth-body">
 
-    @include('loader')
+    @include('components.loader')
 
     <div class="auth-logo">
         <a href="{{ url('/') }}" title="Volver al inicio">

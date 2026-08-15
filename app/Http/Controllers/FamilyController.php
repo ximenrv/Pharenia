@@ -4,16 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ChildProfile;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class FamilyController extends Controller
 {
-    // Muestra el panel familiar con los perfiles del tutor autenticado
+    // Muestra el panel familiar con los menores y los jóvenes supervisados
     public function index()
     {
+        $adultId = Auth::id();
+
+        // 1. Menores de 12 años (asumiendo que los guardas con relación o en la misma tabla)
         $children = auth()->user()->children()->get();
-        return view('family-panel', compact('children'));
+
+        // 2. Jóvenes (13-17 años) que vincularon a este adulto por correo
+        $supervisedTeens = User::where('supervisor_id', $adultId)
+            ->where('role', 'teen')
+            ->get();
+
+        return view('profile.family-panel', compact('children', 'supervisedTeens'));
     }
 
     // Procesa el registro del menor con validaciones

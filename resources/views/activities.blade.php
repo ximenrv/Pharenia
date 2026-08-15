@@ -8,7 +8,7 @@
 </head>
 <body class="act-body">
 
-    @include('loader')
+    @include('components.loader')
 
     <x-navbar />
 
@@ -23,7 +23,7 @@
             </div>
             
             <div class="act-header__actions">
-                <a href="{{ route('actividades.start') }}" class="act-btn-wrapper">
+                <a href="{{ route('activities.start') }}" class="act-btn-wrapper">
                     <button class="act-btn act-btn--primary">
                         COMENZAR 
                         <span class="act-btn__arrow">→</span>

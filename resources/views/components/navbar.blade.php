@@ -7,24 +7,41 @@
 
     <ul class="navbar__menu">
         <li class="navbar__item">
-            <a href="/" class="navbar__link {{ Request::is('/') ? 'navbar__link--active' : '' }}">Inicio</a>
+            <a href="/home" class="navbar__link {{ Request::is('/') ? 'navbar__link--active' : '' }}">Inicio</a>
         </li>
         <li class="navbar__item">
             <a href="/information" class="navbar__link {{ Request::is('information*') ? 'navbar__link--active' : '' }}">Información</a>
         </li>
 
         @auth
-            {{-- Si es Adulto Autogestor, ve Actividades --}}
-            @if(auth()->user()->role === 'adult_tea')
+            {{-- Si es Administrador --}}
+            @if(auth()->user()->role === 'admin')
                 <li class="navbar__item">
                     <a href="/activities" class="navbar__link {{ Request::is('activities*') ? 'navbar__link--active' : '' }}">Actividades</a>
                 </li>
-            @endif
+                <li class="navbar__item">
+                    <a href="{{ route('admin.dashboard') }}" class="navbar__link {{ Request::is('admin*') ? 'navbar__link--active' : '' }}">Panel Admin</a>
+                </li>
 
-            {{-- Si es Tutor / Aliado, ve el Panel Familiar y se ocultan actividades --}}
-            @if(auth()->user()->role === 'ally_no_tea')
+            {{-- Si es Adulto Autogestor, ve Actividades --}}
+            @elseif(auth()->user()->role === 'adult_tea')
+                <li class="navbar__item">
+                    <a href="/activities" class="navbar__link {{ Request::is('activities*') ? 'navbar__link--active' : '' }}">Actividades</a>
+                </li>
+
+            {{-- Si es Tutor / Aliado, ve el Panel Familiar --}}
+            @elseif(auth()->user()->role === 'ally_no_tea')
                 <li class="navbar__item">
                     <a href="{{ route('family-panel') }}" class="navbar__link {{ Request::is('family*') ? 'navbar__link--active' : '' }}">Panel Familiar</a>
+                </li>
+
+            {{-- Si es Joven / Adolescente, ve su Stage y la opción de Vincular Adulto Supervisor --}}
+            @elseif(auth()->user()->role === 'teen')
+                <li class="navbar__item">
+                    <a href="{{ route('stage.youth') }}" class="navbar__link {{ Request::is('stage-youth*') ? 'navbar__link--active' : '' }}">Actividades</a>
+                </li>
+                <li class="navbar__item">
+                    <a href="{{ route('supervisor.vincular') }}" class="navbar__link {{ Request::is('vincular-adulto*') ? 'navbar__link--active' : '' }}">Adulto Supervisor</a>
                 </li>
             @endif
         @else
