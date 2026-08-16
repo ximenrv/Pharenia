@@ -11,7 +11,7 @@
     @include('components.loader')
 
     <div class="auth-logo">
-        <a href="{{ url('/') }}" title="Volver al inicio">
+        <a href="{{ url('home') }}" title="Volver al inicio">
             <img src="{{ asset('img/logo.png') }}" alt="Pharenia Logo">
         </a>
     </div>

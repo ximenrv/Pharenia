@@ -51,7 +51,7 @@ class FamilyController extends Controller
             'user_id' => auth()->id(),
             'name' => $request->name,
             'birthdate' => $request->birthdate,
-            'parent_pin' => Hash::make($request->parent_pin),
+            'parent_pin' => $request->parent_pin,
         ]);
 
         return redirect()->route('family-panel')->with('success', '¡Perfil de menor creado exitosamente!');

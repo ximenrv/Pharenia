@@ -190,3 +190,197 @@ body {
     padding: 4px 10px;
     border-radius: 12px;
 }
+
+/* ==========================================
+   PANEL DE ADMINISTRACIÓN - ESTILOS LIMPIOS
+   ========================================== */
+
+.pharenia-table-action-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.pharenia-data-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.pharenia-data-table th,
+.pharenia-data-table td {
+    padding: 12px;
+    font-size: 14px;
+}
+
+.pharenia-data-table th {
+    border-bottom: 2px solid #e2e8f0;
+    color: #2f4f4f;
+}
+
+.pharenia-data-table td {
+    border-bottom: 1px solid #edf2f7;
+}
+
+.pharenia-role-badge {
+    background: #e2e8f0;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #2f4f4f;
+}
+
+/* Botones personalizados */
+.pharenia-btn-primary,
+.pharenia-btn-secondary,
+.pharenia-btn-danger,
+.pharenia-btn-disabled {
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.pharenia-btn-primary {
+    background: #2f4f4f;
+    color: #ffffff;
+    padding: 10px 18px;
+}
+.pharenia-btn-primary:hover {
+    background: #1e3333;
+}
+
+.pharenia-btn-secondary {
+    background: #cbd5e1;
+    color: #2f4f4f;
+    padding: 10px 20px;
+}
+.pharenia-btn-secondary:hover {
+    background: #b1c2d4;
+}
+
+.pharenia-btn-danger {
+    background: #e53e3e;
+    color: #ffffff;
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 4px;
+}
+.pharenia-btn-danger:hover {
+    background: #c53030;
+}
+
+.pharenia-btn-disabled {
+    background: #cbd5e1;
+    color: #ffffff;
+    padding: 6px 10px;
+    font-size: 12px;
+    cursor: not-allowed;
+    border-radius: 4px;
+}
+
+/* Alertas */
+.pharenia-alert {
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+.pharenia-alert--success {
+    background: #d4edda;
+    color: #155724;
+}
+.pharenia-alert--error {
+    background: #f8d7da;
+    color: #721c24;
+}
+.pharenia-alert--error ul {
+    margin: 0;
+    padding-left: 15px;
+}
+
+/* Ventanas Emergentes (Modales) */
+.pharenia-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0; /* Abreviación limpia para top, right, bottom, left en 0 */
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.pharenia-modal-content {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    position: relative;
+}
+
+.pharenia-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: #718096;
+}
+
+.pharenia-modal-title {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #2f4f4f;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.pharenia-form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.pharenia-form-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #2f4f4f;
+    letter-spacing: 0.5px;
+}
+
+.pharenia-form-group input,
+.pharenia-form-group select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: #ffffff;
+    font-size: 14px;
+    color: #2f4f4f;
+    box-sizing: border-box;
+}
+
+.pharenia-modal-submit {
+    width: 100%;
+    background: #2f4f4f;
+    color: #ffffff;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+    letter-spacing: 0.5px;
+    transition: background-color 0.2s ease;
+}
+.pharenia-modal-submit:hover {
+    background: #1e3333;
+}

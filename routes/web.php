@@ -34,24 +34,24 @@ Route::get('/activities', function () {
 })->name('activities');
 
 // Línea de tiempo interactiva (Antes activities-start)
-Route::middleware(['auth'])->group(function () {
-    Route::get('/activities/start', function () {
-        return view('activities.activities-start');
-    })->name('activities.start');
-});
+Route::get('/activities/start', function () {
+    return view('activities.activities-start');
+})->name('activities.start');
 
 // Dinámica por etapas individuales
-Route::get('/activities/ninez', function () {
-    return view('stages.child');
-})->name('activities.child');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/activities/ninez', function () {
+        return view('stages.child');
+    })->name('activities.child');
 
-Route::get('/activities/juventud', function () {
-    return view('stages.youth');
-})->name('activities.youth');
+    Route::get('/activities/juventud', function () {
+        return view('stages.youth');
+    })->name('activities.youth');
 
-Route::get('/activities/adultez', function () {
-    return view('stages.adult');
-})->name('activities.adultez');
+    Route::get('/activities/adultez', function () {
+        return view('stages.adult');
+    })->name('activities.adultez');
+});
 
 
 /*
@@ -61,10 +61,6 @@ Route::get('/activities/adultez', function () {
 */
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
-
-Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-});
 
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
@@ -76,7 +72,25 @@ Route::get('/forgot-password', function () {
     return view('auth.forgot-password');
 })->name('forgot-password');
 
+/*
+|--------------------------------------------------------------------------
+| Admin
+|--------------------------------------------------------------------------
+*/
 
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    
+    // Rutas de Usuarios (Adultos y Adolescentes)
+    Route::post('/users/store', [AdminController::class, 'storeUser'])->name('admin.users.store');
+    Route::put('/users/{id}', [AdminController::class, 'update'])->name('admin.users.update');
+    Route::delete('/users/{id}', [AdminController::class, 'destroyUser'])->name('admin.users.destroy');
+
+    // Rutas de Menores
+    Route::post('/minor/store', [AdminController::class, 'storeMinor'])->name('admin.minor.store');
+    Route::put('/minor/{id}', [AdminController::class, 'updateMinor'])->name('admin.minor.update');
+    Route::delete('/minor/{id}', [AdminController::class, 'destroyMinor'])->name('admin.minor.destroy');
+});
 /*
 |--------------------------------------------------------------------------
 | Panel Familiar y Gestión de Menores (Carpeta: profile/ y auth/)
