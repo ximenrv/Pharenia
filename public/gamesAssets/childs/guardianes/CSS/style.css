@@ -1,0 +1,887 @@
+:root{
+    --game-width:100vw;
+    --game-height:100vh;
+    --hud-height:100px;
+    --bottom-height:150px;
+    --transition:.3s;
+    --hud-padding:25px;
+    --panel-scale:1.35;
+    --lumen-size:320px;
+    --dialog-speed:.35s;
+}
+
+#game{
+    position:relative;
+    width:100vw;
+    height:100vh;
+    overflow:hidden;
+}
+
+/*---Mapa--Fondo---*/
+
+#world{
+    position:absolute;
+    overflow:hidden;
+    inset:0;
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-position:center;
+}
+
+#ocean{
+    transform: scaleY(-1);
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:45%;
+    overflow:hidden;
+    z-index:20;
+    transition: transform 1.5s ease-in-out;
+}
+
+#ocean.highTide{
+    transform: translateY(105px) scaleY(-3);
+    transition: transform .95s ease-in-out;
+}
+
+#waveBack,
+#waveFront{
+    position:absolute;
+    width:100%;
+    height:100%;
+    left:0;
+    bottom:0;
+}
+
+#waveBack{
+    animation:tide 6s ease-in-out infinite;
+    transform: scaleY(-1);
+    z-index:1;
+}
+
+#waveFront{
+    animation-delay:2.5s;
+    animation:tide 4.5s ease-in-out infinite;
+    transform: scaleY(-1);
+    z-index:3;
+}
+
+/*---Espuma---*/
+#waveFoam{
+    position:absolute;
+    width:100%;
+    height:110%;
+    left:0;
+    bottom:-4px;
+    opacity:.75;
+    z-index:0;
+    animation:foamMove 4.5s ease-in-out infinite;
+    filter:url(#foamNoise);
+}
+
+#effectsLayer{
+    z-index:40;
+}
+
+#background{
+    position:absolute;
+    inset:0;
+    z-index:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center;
+    user-select:none;
+    pointer-events:none;
+}
+
+/*---Paneles---*/
+
+#hud{
+    position:absolute;
+    inset:0;
+    top:20px;
+    left:0;
+    width:100%;
+    justify-content:space-between;
+    z-index:100;
+    pointer-events:none;
+    padding:0 80px;
+}
+
+.panel{
+    position:relative;
+    width:420px;
+    height:100px;
+}
+
+.panel img{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%) scale(1.95);
+    width:100%;
+    height:100%;
+    object-fit:contain;
+}
+
+#scorePanel{
+    position:absolute;
+    top:-15px;
+    left:-95px;
+}
+#recordPanel{
+    position:absolute;
+    top:127px;
+    right:-90px;
+}
+
+.panelContent{
+    position:absolute;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    letter-spacing:1px;
+    transform:translate(18px,-6px);
+    font-family:'Nunito',sans-serif;
+    font-size:27px;
+    font-weight:800;
+    color:white;
+    text-shadow:3px 3px 6px rgba(0,0,0,.45);
+}
+
+#scorePanel .panelContent{
+    transform:translate(5.5px,-5px) rotate(-10deg);
+}
+
+#recordPanel .panelContent{
+    transform:translate(-6px,-4px) rotate(10deg);
+}
+
+#recordPanel img{
+    transform: translate(-50%,-50%) scale(-1.95,1.95);
+}
+
+#gameStatus{
+    position:absolute;
+    top:15px;
+    left:50%;
+    display:flex;
+    gap:25px;
+    z-index:100;
+    opacity:0;
+    transform:translate(-50%,-80px);
+}
+
+.hudBox{
+    position:relative;
+    width:180px;
+    height:80px;
+}
+
+.hudBox img{
+    width:100%;
+    height:100%;
+    display:block;
+}
+
+.hudContent{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    pointer-events:none;
+}
+
+.hudValue{
+    font-size:32px;
+    font-weight:bold;
+}
+
+.hudTitle{
+    font-size:25px;
+    font-weight:bold;
+}
+
+
+#waveBox{
+    animation-delay:0s;
+}
+
+#timerBox{
+    animation-delay:.12s;
+}
+
+#waveValue,
+#timerValue{
+    color:#f7f475;
+}
+
+#waveValue{
+    margin-bottom:4px;
+    margin-left:2px;
+}
+
+#timerValue{
+    margin-bottom:6px;
+}
+
+.gameStatusEnter{
+    animation:gameStatusEnter .7s cubic-bezier(.2,1.4,.4,1) forwards;
+}
+
+/*---Lumen Asistente---*/
+
+#assistant{
+    position:absolute;
+    top:20px;
+    right:20px;
+    width:320px;
+    height:220px;
+    z-index:250;
+
+    opacity:0;
+    transform:translateX(180px);
+}
+
+
+
+#assistant img{
+    width:120px;
+    height:auto;
+}
+
+#assistantBubble{
+    position:absolute;
+    width:270px;
+    right:40px;
+    bottom:140px;
+    transform:scale(2.8);
+    z-index:1;
+}
+
+#assistantHead{
+    position:absolute;
+    width:110px;
+    right:42px;
+    bottom:115px;
+    z-index:2;
+    transform:scaleX(-1);
+}
+
+#assistantText{
+    position:absolute;
+    width:450px;
+    left:-280px;
+    top: -15px;
+    z-index:3;
+    opacity: 0;
+    transform:translateY(25px) scale(.7);
+    transition:opacity .35s, transform .35s cubic-bezier(.18,1.4,.45,1);
+    transform-origin:90% 85%;
+
+}
+
+#assistantText p{
+    position:absolute;
+    top:25px;
+    left:80px;
+    right:120px;
+    bottom:5px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    font-family:'Nunito',sans-serif;
+    font-size:20px;
+    line-height:1.3;
+    color:white;
+    font-weight:bold;
+    text-shadow:2px 2px 4px rgba(0,0,0,.4);
+    word-wrap:break-word;
+}
+
+#assistantText img{
+    width:100%;
+    height:auto;
+    transform:scaleX(-1)
+}
+
+#assistantText.showBubble{
+    opacity:1;
+    transform:translateY(0) scale(1) rotate(360deg);
+}
+#assistantText.hideBubble{
+    opacity:0;
+    transform:translateY(15px) scale(.25) rotate(180deg);
+}
+
+.assistantAppear{
+    animation:assistantEntrance .7s cubic-bezier(.2,1.2,.4,1) forwards;
+}
+
+/*---Cuerpo del juego---*/
+
+body{
+    background:#1d1d1d;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    overflow:hidden;
+    font-family:'Nunito', sans-serif;
+}
+
+#bottomUI{
+    background:transparent;
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:100%;
+    height:180px;
+    z-index:90;
+}
+
+/*---Lumen---*/
+
+#lumenContainer{
+    position:absolute;
+    left:-15px;
+    bottom:-90px;
+    opacity:0;
+}
+
+#lumen{
+    display: block;
+    height:380px;
+    transition:transform .25s ease;
+    transform-origin:center bottom;
+}
+
+.lumenTalking{
+    animation:lumenTalk .45s ease;
+}
+
+/*---Basura---*/
+.trash{
+    position:absolute;
+    user-select:none;
+    opacity:0;
+    transform-origin:center;
+    animation:spawnTrash 3.2s ease forwards;
+    width:95px;
+    height:auto;
+    user-select:none;
+    cursor:pointer;
+    z-index:30;
+}
+
+#trashLayer{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:30;
+}
+
+/*---Agarre de basura Y regreso---*/
+
+.draggingTrash{
+    transform:scale(1.15);
+    transition: transform .25s cubic-bezier(.2,1.3,.4,1);
+    z-index:999;
+    cursor:grabbing;
+}
+
+.returningTrash{
+    transition: left .35s ease, top .35s ease, transform .35s ease;
+}
+
+
+/*---Contenedores---*/
+#binLayer{
+    position:absolute;
+    right:0;
+    bottom:0;
+    width:900px;
+    height:500px;
+    z-index:20;
+    pointer-events:none;
+}
+
+#metalBin{
+    width:200px;
+    animation-duration: .70s;
+}
+
+#glassBin{
+    width:210px;
+    animation-duration: .60s;
+}
+
+#plasticBin{
+    width:260px;
+}
+
+.bin{
+    transform:translateY(80px) scale(.2);
+    opacity:0;
+    transform-origin:center bottom;
+    transition: transform .20s ease, filter .20s ease;
+    filter:drop-shadow(0 6px 10px rgba(0,0,0,.25));
+    pointer-events:none;
+}
+
+.binSlot{
+    position:absolute;
+    visibility:hidden;
+}
+
+.binVisible{
+    opacity:1;
+    visibility:visible;
+    pointer-events:none;
+}
+
+.metalSlot{
+    transform:rotate(-4deg);
+    left:-20px;
+    bottom:-85px;
+}
+
+.glassSlot{
+    transform:rotate(1deg);
+    left:275px;
+    bottom:-100px;
+}
+
+.plasticSlot{
+   left:580px;
+   bottom:-130px;
+   transform:rotate(8deg);
+}
+
+/*---Tutorial/Explicación---*/
+#tutorialLayer{
+    position:absolute;
+    inset:0;
+    z-index:200;
+}
+
+#tutorialPanel{
+    position:absolute;
+    left:225px;
+    bottom:-15px;
+    width:1025px;
+    opacity:0;
+    transform: translateY(40px) rotate(8deg) scale(.15);
+    transform-origin:10% 88%;
+}
+
+#tutorialPanel.show{
+    opacity:1;
+    transform: translateY(0) rotate(0deg) scale(1);
+    transition: transform .6s cubic-bezier(.18,1.4,.45,1), opacity .4s;
+}
+
+#tutorialContent{
+    position:absolute;
+    inset:0;
+}
+
+#tutorialButtons{
+    display:flex;
+    justify-content:flex-end;
+    gap:15px;
+}
+
+#tutorialBubble{
+    width:100%;
+    display:block;
+}
+
+#tutorialText{
+    position:absolute;
+    top:140px;
+    left:210px;
+    width:560px;
+    color:white;
+    font-size:28px;
+    font-family:'Nunito';
+    font-weight:800;
+    line-height:1.3;
+}
+
+#tutorialButtons{
+    position:absolute;
+    right:45px;
+    bottom:35px;
+    width:170px;
+    height:90px;
+}
+
+.uiButton{
+    position:absolute;
+    transform-origin:12% 50%;
+    cursor:pointer;
+    opacity:0;
+    transition:transform .25s cubic-bezier(.2,1.4,.4,1), opacity .25s, filter .25s;
+}
+
+.uiButton.hidden{
+    opacity:0;
+    pointer-events:none;
+    transform:translateY(40px) rotate(25deg) scale(.2);
+}
+
+.uiButton.show{
+    opacity:1;
+    pointer-events:auto;
+    transform: translateY(0) rotate(0deg) scale(1);
+    transition: transform .55s cubic-bezier(.18,1.4,.45,1), opacity .55s, filter .25s;
+}
+
+.uiButton.show:hover{
+    transform: translateY(-4px) rotate(-6deg) scale(1.08);
+    filter:brightness(1.15);
+}
+
+.uiButton.hide{
+    opacity:0;
+    pointer-events:none;
+    transform: translateY(40px) rotate(25deg) scale(.2);
+    transition: transform .35s ease, opacity .35s;
+}
+
+#nextButton{
+    right:-85px;
+    bottom:0px;
+    width:270px;
+}
+
+#playButton{
+    right:-85px;
+    bottom:0px;
+    width:270px;
+}
+
+/*---Nombre del personaje---*/
+#speakerName{
+    position:absolute;
+    left:190px;
+    top:53px;
+    width:165px;
+    opacity:0;
+    text-align:center;
+    font-size:36px;
+    font-weight:900;
+    font-family:'Nunito',sans-serif;
+    color:#13254b;
+    letter-spacing:2px;
+    transform:rotate(-5deg);
+    transform:translateY(-8px);
+    transition: opacity .25s ease, transform .25s ease;
+}
+
+#speakerName.show{
+    opacity:1;
+    transform:translateY(0) rotate(-5deg);
+}
+/*--- Puntos/ Efectos ---*/
+
+#effectsLayer{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:200;
+}
+
+.floatingScore{
+    position:absolute;
+    font-family:'Nunito',sans-serif;
+    font-size:40px;
+    font-weight:bold;
+    color:#fdd50f;
+    text-shadow:0 0 8px rgba(236, 195, 13, 0.897), 2px 2px 4px rgba(0,0,0,.35);
+    pointer-events:none;
+    animation:scoreFloat 1.2s ease forwards;
+}
+
+.floatingScore.special{
+    font-size:46px;
+    color:#fcdb71;
+    text-shadow: 0 0 16px rgb(180, 154, 2), 2px 2px 5px rgba(0,0,0,.35);
+}
+
+/*--- Game Over---*/
+#gameOverTitle{
+    position:absolute;
+    top:90px;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:64px;
+    font-weight:bold;
+    color:white;
+    text-shadow: 4px 4px 0 black,0 0 20px rgba(255,255,255,.4);
+    opacity:0;
+    z-index:10000;
+    pointer-events:none;
+}
+
+.showGameOverTitle{
+    animation:titleAppear .8s ease forwards;
+}
+
+#gameOverMessage{
+    position:absolute;
+    top:12%;
+    left:53.5%;
+    transform:translateX(-50%);
+    width:68%;
+    text-align:center;
+    color:white;
+    font-size:30px;
+    font-weight:bold;
+    line-height:1.35;
+    text-shadow:3px 3px 0 black;
+    opacity:0;
+    z-index:8;
+    pointer-events:none;
+}
+
+#messageTitle{
+    font-size:42px;
+    color: #e7c739;
+    filter:brightness(1.5);
+}
+
+.showMessage{
+    animation:messageAppear .45s ease forwards;
+}
+
+
+
+#gameOverScreen{
+    position:fixed;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    background:rgba(0,0,0,.30);
+    opacity:0;
+    visibility:hidden;
+    transition:opacity .35s ease;
+    z-index:9999;
+}
+
+#gameOverPanel{
+    position:relative;
+    width:auto;
+    height:100vh;
+    z-index:5;
+}
+
+#returnButton{
+    position:absolute;
+    left:35%;
+    top:5%;
+    width:300px;
+    opacity:0;
+    transform:translateX(-295px) rotate(-20deg);
+    transform-origin:90% 85%;
+    z-index:10001;
+    cursor:pointer;
+    pointer-events:auto;
+}
+
+
+#returnButton.show{
+    opacity:1;
+    transform: translateX(-295px) rotate(-20deg);
+    transition:transform .25s ease;
+}
+
+.showReturn{
+    animation:returnAppear .7s cubic-bezier(.2,1.4,.4,1) forwards;
+}
+
+#gameOverScreen.show{
+    opacity:1;
+    visibility:visible;
+}
+
+#returnButton.show:hover{
+    transform: translateX(-300px) rotate(1deg) scale(1.08);
+    filter:brightness(1.15);
+}
+
+#gameOverStats{
+    position:absolute;
+    top:35%;
+    left:51%;
+    transform:translateX(-50%);
+    width:75%;
+    z-index:6;
+}
+
+.gameOverBlock{
+    padding:5px 0;
+    text-align:center;
+    opacity:0;
+    transform:translateY(15px);
+}
+
+.statTitle{
+    margin:0;
+    color:white;
+    font-size:22px;
+    letter-spacing:2px;
+    text-shadow:3px 3px 0 black;
+}
+
+.statValue{
+    display:block;
+    margin-top:10px;
+    color:#FFD65A;
+    font-size:48px;
+    font-weight:bold;
+    text-shadow:4px 4px 0 black;
+}
+
+.showStat{
+    animation:showStat .45s ease forwards;
+}
+
+.divider{
+    width:38%;
+    height:3px;
+    margin:20px auto;
+    background:linear-gradient(to right,transparent,
+        rgba(255,255,255,.45) 15%,
+        rgba(255,255,255,.9) 50%,
+        rgba(255,255,255,.45) 85%,
+        transparent
+    );
+}
+
+#gameOverLumen{
+    position:absolute;
+    right:calc(18% - 310px);
+    bottom:-5px;
+    z-index:4;
+    pointer-events:none;
+    opacity: 0;
+}
+
+#gameOverLumen img{
+    width:550px;
+    transform:rotate(16deg);
+    transform-origin:bottom left;
+}
+
+.showLumen{
+    animation:lumenRise .8s cubic-bezier(.2,1.4,.4,1) forwards;
+}
+
+#retryButton{
+    position:absolute;
+    left:54%;
+    bottom:30px;
+    transform:translateX(120px) rotate(10deg);
+    opacity:0;
+    z-index:8;
+    cursor:pointer;
+}
+
+#retryButton img{
+    width:340px;
+    height:auto;
+    transform-origin: 1% 60%;
+    transition: transform .25s ease, filter .25s ease;
+}
+
+.showRetry{
+    animation:retryAppear .55s cubic-bezier(.2,1.4,.4,1) forwards;
+}
+
+#retryButton:hover img{
+    transform:scale(1.15) rotate(3deg);
+    filter:brightness(1.1);
+}
+
+#gameOverContainer{
+    position:absolute;
+    left:50%;
+    top:0;
+    transform:translate(-50%,120vh);
+}
+
+.showContainer{
+    animation: panelRise .11s cubic-bezier(.2,1,.4,1) forwards;
+}
+
+.hideContainer{
+    animation:panelDown .3s ease forwards;
+}
+
+/*---Animacion de entrada/salida---*/
+.lumenEntrance{
+    animation: lumenEntrance .6s ease-out forwards;
+}
+.lumenExit{
+    animation:lumenExit .6s ease-in forwards;
+}
+
+.bubbleAppear{
+    animation:bubbleAppear .55s cubic-bezier(.2,1.35,.35,1) forwards;
+}
+.bubbleDisappear{
+    animation:bubbleDisappear .45s ease-in forwards;
+}
+
+.metalAppear{ 
+    animation:binAppear .72s cubic-bezier(.2,1.4,.4,1) forwards;
+}
+.binAppear{
+    animation:binAppear .6s cubic-bezier(.2,1.4,.4,1) forwards;
+}
+.plasticAppear{
+    animation:binAppear .75s cubic-bezier(.2,1.4,.4,1) forwards;
+}
+
+.binActiveMetal{
+    transform:scale(1.08);
+    filter: brightness(1.2) drop-shadow(0 0 14px rgba(255,70,70,.95));
+    transition:.18s ease;
+}
+
+.binActiveGlass{
+    transform:scale(1.08);
+    filter: brightness(1.2) drop-shadow(0 0 14px rgba(80,170,255,.95));
+    transition:.18s ease;
+}
+
+.binActivePlastic{
+    transform:scale(1.08);
+    filter: brightness(1.2) drop-shadow(0 0 14px rgba(90,255,120,.95));
+    transition:.18s ease;
+}
+
+.trashSuccess{
+    animation:trashSuccess .35s ease forwards;
+    pointer-events:none;
+}
+
+.binReady{
+    opacity:1;
+    transform:translateY(0) scale(1);
+}
+

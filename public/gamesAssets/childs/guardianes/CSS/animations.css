@@ -1,0 +1,269 @@
+@keyframes oceanMove{
+    0%{
+        transform:translateY(0px);
+    }
+    50%{
+        transform:translateY(15px);
+    }
+    100%{
+        transform:translateY(0px);
+    }
+}
+
+@keyframes foamMove{
+    0%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(15px);
+    }
+    100%{
+        transform:translateY(0);
+    }
+}
+
+@keyframes tide {
+
+    0%{
+        transform:translateY(0px);
+    }
+
+    50%{
+        transform:translateY(40px);
+    }
+
+    100%{
+        transform:translateY(0px);
+    }
+
+}
+
+@keyframes spawnTrash{
+    from{
+        opacity:0;
+    }
+    to{
+        opacity:1;
+    }
+}
+
+@keyframes lumenTalk{
+    0%{transform:translateY(0);}
+    25%{transform:translateY(-10px);}
+    50%{transform:translateY(0);}
+    75%{transform:translateY(-4px);}
+    100%{transform:translateY(0);}
+}
+
+@keyframes lumenEntrance{
+    0%{
+        transform:translateY(220px);
+    }
+    70%{
+        transform:translateY(-12px);
+    }
+    100%{
+        transform:translateY(0);
+    }
+}
+
+@keyframes lumenExit{
+    0%{
+        transform:translateY(0);
+    }
+    100%{
+        transform:translateY(300px);
+    }
+}
+
+@keyframes bubbleAppear{
+    0%{
+        opacity:0;
+        transform: translateY(40px) rotate(18deg) scale(.15);
+    }
+    70%{
+        opacity:1;
+        transform: translateY(-6px) rotate(-2deg) scale(1.04);
+    }
+    100%{
+        opacity:1;
+        transform: translateY(0) rotate(0) scale(1);
+    }
+}
+
+@keyframes bubbleDisappear{
+    0%{
+        opacity:1;
+        transform: translateY(0) rotate(0) scale(1);
+    }
+    100%{
+        opacity:0;
+        transform: translateY(40px) rotate(10deg) scale(.2);
+    }
+}
+
+@keyframes binAppear{
+    0%{
+        opacity:0;
+        transform:translateY(80px) scale(.25);
+    }
+    70%{
+        opacity:1;
+        transform:translateY(-10px) scale(1.08);
+    }
+    100%{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+@keyframes assistantEntrance{
+    0%{
+        opacity:0;
+        transform:translateX(180px);
+    }
+    100%{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+
+@keyframes trashSuccess{
+    0%{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+    100%{
+        opacity:0;
+        transform:translateY(45px) scale(.2);
+    }
+}
+
+@keyframes scoreFloat{
+    0%{
+        opacity:0;
+        transform:translateY(0) scale(.7);
+    }
+    15%{
+        opacity:1;
+        transform:translateY(-8px) scale(1);
+    }
+    80%{
+        opacity:1;
+    }
+    100%{
+        opacity:0;
+        transform:translateY(-70px) scale(1.15);
+    }
+}
+
+@keyframes gameStatusEnter{
+    0%{
+        opacity:0;
+        transform:translate(-50%,-80px);
+    }
+    70%{
+        opacity:1;
+        transform:translate(-50%,8px);
+    }
+    100%{
+        opacity:1;
+        transform:translate(-50%,0);
+    }
+}
+
+@keyframes panelRise{
+    from{
+        transform:translate(-50%,120vh);
+    }
+    to{
+        transform:translate(-50%,0);
+    }
+}
+
+@keyframes titleAppear{
+    from{
+        opacity:0;
+        transform:translateX(-50%) translateY(-30px);
+    }
+    to{
+        opacity:1;
+        transform:translateX(-50%) translateY(0);
+    }
+}
+
+@keyframes returnAppear{
+    0%{
+        opacity:0;
+        transform: translateX(-295px) rotate(-28deg) scale(.2);
+    }
+    70%{
+        opacity:1;
+        transform: translateX(-295px) rotate(-24deg) scale(1.10);
+    }
+    100%{
+        opacity:1;
+        transform: translateX(-295px) rotate(-20deg) scale(1);
+    }
+}
+
+@keyframes showStat{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes lumenRise{
+    0%{
+        opacity: 0;
+        transform: translateX(-50%) translateY(80px);
+    }
+    70%{
+        opacity: 1;
+        transform: translateX(-50%) translateY(-8px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+@keyframes messageAppear{
+    from{
+        opacity:0;
+        transform: translateX(-50%) translateY(-18px);
+    }
+    to{
+        opacity:1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+@keyframes retryAppear{
+    0%{
+        opacity:0;
+        transform: translateX(120px) scale(.25) rotate(-10deg);
+    }
+    70%{
+        opacity:1;
+        transform: translateX(120px) scale(1.08) rotate(2deg);
+    }
+    100%{
+        opacity:1;
+        transform: translateX(120px) scale(1) rotate(0deg);
+    }
+}
+
+@keyframes panelDown{
+    from{
+        transform:translate(-50%,0);
+    }
+    to{
+        transform:translate(-50%,120vh);
+    }
+}

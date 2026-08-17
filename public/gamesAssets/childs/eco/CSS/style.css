@@ -1,0 +1,806 @@
+:root{
+    --game-width:100vw;
+    --game-height:100vh;
+    --hud-height:100px;
+    --bottom-height:150px;
+    --transition:.3s;
+    --hud-padding:25px;
+    --panel-scale:1.35;
+    --lumen-size:320px;
+    --dialog-speed:.35s;
+}
+
+#game{
+    position:relative;
+    width:100vw;
+    height:100vh;
+    overflow:hidden;
+}
+
+/*---Estructura Base del Mapa/Fondo---*/
+
+#world{
+    position:absolute;
+    overflow:hidden;
+    inset:0;
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-position:center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+#background{
+    position:absolute;
+    inset:0;
+    z-index:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center;
+    user-select:none;
+    pointer-events:none;
+}
+
+/*--- HUD SUPERIOR (PUNTOS Y RÉCORD) ---*/
+
+#hud{
+    position:absolute;
+    top:25px;
+    left:0;
+    width:100%;
+    height:120px;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    z-index:100;
+    pointer-events:none;
+    padding:0 60px;
+}
+
+.panel{
+    position:relative;
+    height:110px;
+}
+
+.panel img{
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:100%;
+    height:100%;
+    object-fit:contain;
+}
+
+#scorePanel{
+    width:550px;
+    top: -5px;
+    left: -120px;
+}
+
+#scorePanel img{
+    transform:translate(-50%,-50%) scale(2.8);
+}
+
+#recordPanel{
+    width:320px;
+    top: 10px;
+    right: -15px;
+}
+
+#recordPanel img{
+    transform: translate(-50%,-50%) scale(-1.85, 1.85);
+}
+
+.panelContent{
+    position:absolute;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    letter-spacing:1px;
+    font-family:'Nunito',sans-serif;
+    font-size:29px;
+    font-weight:800;
+    color:white;
+    text-shadow:3px 3px 6px rgba(0,0,0,.6);
+}
+
+#scorePanel .panelContent{
+    transform:translate(0px, -4px) rotate(-10deg);
+    font-size:28px;
+}
+
+#recordPanel .panelContent{
+    transform:translate(-3px, 20px) rotate(0deg);
+}
+
+/*--- TABLERO CENTRAL ---*/
+
+#memoryBoard {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 50;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    padding: 45px 50px;
+    width: 68vw;
+    max-width: 980px;
+    background: rgba(0, 0, 0, 0.22);
+    backdrop-filter: blur(10px);
+    border-radius: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    justify-items: center;
+    align-items: center;
+}
+
+.colorBubble {
+    width: 135px;
+    height: 135px;
+    cursor: pointer;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: transform 0.2s cubic-bezier(.2, 1.4, .4, 1), filter 0.2s ease;
+    user-select: none;
+}
+
+.colorBubble:hover {
+    transform: scale(1.12) !important;
+}
+
+.colorBubble:active {
+    transform: scale(0.92) !important;
+}
+
+#bubbleBlue { 
+    background-image: url('/gamesAssets/childs/eco/ASSETS/bubbles/base/Blue.png'); 
+    transform: translateY(-22px);
+    animation: floatIdleBlue 3.2s ease-in-out infinite; 
+}
+#bubbleCyan { 
+    background-image: url('/gamesAssets/childs/eco/ASSETS/bubbles/base/Cyan.png'); 
+    transform: translateY(18px);
+    animation: floatIdleCyan 3.6s ease-in-out infinite 0.4s; 
+}
+#bubbleBlack { 
+    background-image: url('/gamesAssets/childs/eco/ASSETS/bubbles/base/Black.png'); 
+    transform: translateY(-16px);
+    animation: floatIdleBlack 3.0s ease-in-out infinite 0.8s; 
+}
+#bubbleViolet { 
+    background-image: url('/gamesAssets/childs/eco/ASSETS/bubbles/base/Violet.png'); 
+    transform: translateY(24px);
+    animation: floatIdleViolet 3.4s ease-in-out infinite 0.2s; 
+}
+
+/* Animaciones flotantes */
+@keyframes floatIdleBlue {
+    0%, 100% { transform: translateY(-22px); }
+    50% { transform: translateY(-32px); }
+}
+@keyframes floatIdleCyan {
+    0%, 100% { transform: translateY(18px); }
+    50% { transform: translateY(8px); }
+}
+@keyframes floatIdleBlack {
+    0%, 100% { transform: translateY(-16px); }
+    50% { transform: translateY(-26px); }
+}
+@keyframes floatIdleViolet {
+    0%, 100% { transform: translateY(24px); }
+    50% { transform: translateY(14px); }
+}
+
+/*--- Estados Activos (Shiny) ---*/
+#bubbleBlue.active {
+    background-image: url('/gamesAssets/childs/eco/ASSETS/bubbles/shiny/SBlue.png');
+    filter: drop-shadow(0 0 25px rgba(17, 49, 230, 0.95));
+    transform: translateY(-22px) scale(1.18) !important;
+}
+
+#bubbleCyan.active {
+    background-image: url('/gamesAssets/childs/eco/ASSETS/bubbles/shiny/SCyan.png');
+    filter: drop-shadow(0 0 25px rgba(111, 185, 253, 0.95));
+    transform: translateY(18px) scale(1.18) !important;
+}
+
+#bubbleBlack.active {
+    background-image: url('/gamesAssets/childs/eco/ASSETS/bubbles/shiny/SBlack.png');
+    filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.95));
+    transform: translateY(-16px) scale(1.18) !important;
+}
+
+#bubbleViolet.active {
+    background-image: url('/gamesAssets/childs/eco/ASSETS/bubbles/shiny/SViolet.png');
+    filter: drop-shadow(0 0 25px rgba(188, 113, 250, 0.95));
+    transform: translateY(24px) scale(1.18) !important;
+}
+
+/*--- ASSISTANT ZONE ---*/
+
+#assistantZone {
+    position: absolute;
+    right: 35px;
+    bottom: 25px;
+    z-index: 250;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(100px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+#assistantZone.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+/*--- Barra de Secuencia ---*/
+#sequenceBar {
+    width: 360px;
+    height: 56px;
+    background: rgba(19, 37, 75, 0.9);
+    border: 3px solid #f7f475;
+    border-radius: 28px;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+    overflow-x: auto;
+}
+
+#sequenceSlots {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.miniBubble {
+    width: 32px;
+    height: 32px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    flex-shrink: 0;
+}
+
+.miniBubble.blue   { background-image: url('/gamesAssets/childs/eco/ASSETS/bubbles/base/Blue.png'); }
+.miniBubble.cyan   { background-image: url('/gamesAssets/childs/eco/ASSETS/bubbles/base/Cyan.png'); }
+.miniBubble.black  { background-image: url('/gamesAssets/childs/eco/ASSETS/bubbles/base/Black.png'); }
+.miniBubble.violet { background-image: url('/gamesAssets/childs/eco/ASSETS/bubbles/base/Violet.png'); }
+
+/*--- Lumen Asistente & Pedestal ---*/
+#assistant {
+    position: relative;
+    width: 330px;
+    height: 230px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+
+#assistantBubble {
+    position: absolute;
+    width: 500px;
+    bottom: -15px;
+    z-index: 1;
+    filter: drop-shadow(0 8px 14px rgba(0,0,0,0.6));
+}
+
+#assistantHead {
+    position: absolute;
+    width: 190px;
+    bottom: 38px;
+    z-index: 2;
+    transform: scaleX(-1);
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+}
+
+/* --- DIÁLOGO DEL ASISTENTE --- */
+#assistantText {
+    position: absolute;
+    width: 550px;
+    left: -450px;
+    top: 50px;
+    z-index: 300;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px) scale(0.7);
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.18, 1.4, 0.45, 1);
+}
+
+#assistantText img {
+    width: 100%;
+    height: auto;
+    transform: scaleX(-1);
+    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.4));
+}
+
+#assistantText p {
+    position: absolute;
+    top: 40px;
+    left: 10px;
+    right: 50px;
+    bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    font-size: 25px;
+    line-height: 1.25;
+    color: white;
+    font-weight: 800;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    word-wrap: break-word;
+    white-space: pre-wrap; /* Permite saltos de línea si usas \n en el texto */
+    overflow-wrap: break-word;
+}
+
+#assistantText.showBubble {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0px) scale(1);
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+#assistantText.hideBubble {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px) scale(0.7);
+}
+
+/*--- Barra de Vidas ---*/
+#healthBarContainer {
+    width: 300px;
+    height: 40px;
+    background: rgba(15, 23, 42, 0.95);
+    border: 3px solid #475569;
+    border-radius: 16px;
+    display: flex;
+    padding: 4px;
+    gap: 6px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+}
+
+.healthSegment {
+    flex: 1;
+    height: 100%;
+    background: linear-gradient(180deg, #4ade80 0%, #16a34a 100%);
+    border-radius: 8px;
+    box-shadow: 0 0 6px rgba(74, 222, 128, 0.6);
+    transition: background 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+}
+
+.healthSegment.lost {
+    background: linear-gradient(180deg, #334155 0%, #1e293b 100%);
+    box-shadow: none;
+    opacity: 0.35;
+}
+
+/*---Cuerpo General & Bottom UI---*/
+
+body{
+    background:#1d1d1d;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    overflow:hidden;
+    font-family:'Nunito', sans-serif;
+}
+
+#bottomUI{
+    background:transparent;
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:100%;
+    height:180px;
+    z-index:90;
+    pointer-events:none;
+}
+
+/*---Lumen Tutorial---*/
+
+#lumenContainer{
+    position:absolute;
+    left:-15px;
+    bottom:-90px;
+    opacity:0;
+}
+
+#lumen{
+    display: block;
+    height:380px;
+    transition:transform .25s ease;
+    transform-origin:center bottom;
+}
+
+/*---Tutorial Panel---*/
+
+#tutorialLayer{
+    position:absolute;
+    inset:0;
+    z-index:200;
+    pointer-events:none;
+}
+
+#tutorialPanel{
+    position:absolute;
+    left:225px;
+    bottom:-15px;
+    width:1025px;
+    opacity:0;
+    transform: translateY(40px) rotate(8deg) scale(.15);
+    transform-origin:10% 88%;
+}
+
+#tutorialPanel.show{
+    opacity:1;
+    transform: translateY(0) rotate(0deg) scale(1);
+    transition: transform .6s cubic-bezier(.18,1.4,.45,1), opacity .4s;
+    pointer-events:auto;
+}
+
+#tutorialPanel.hide-animation {
+    animation: bubbleDisappear 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+#tutorialPanel.hidden,
+#tutorialLayer.hidden {
+    display: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+#tutorialContent{
+    position:absolute;
+    inset:0;
+}
+
+#tutorialBubble{
+    width:100%;
+    display:block;
+}
+
+#tutorialText{
+    position:absolute;
+    top:140px;
+    left:210px;
+    width:560px;
+    color:white;
+    font-size:28px;
+    font-family:'Nunito';
+    font-weight:800;
+    line-height:1.3;
+}
+
+#tutorialButtons{
+    position:absolute;
+    right:45px;
+    bottom:35px;
+    width:170px;
+    height:90px;
+    display:flex;
+    justify-content:flex-end;
+    gap:15px;
+}
+
+/*--- Botones UI Tutorial ---*/
+
+.uiButton {
+    position: absolute;
+    right: -85px;
+    bottom: 0px;
+    width: 270px;
+    transform-origin: 12% 50%;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(40px) rotate(25deg) scale(.2);
+    transition: transform .35s ease, opacity .35s, filter .25s;
+}
+
+.uiButton.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0) rotate(0deg) scale(1);
+    transition: transform .55s cubic-bezier(.18,1.4,.45,1), opacity .55s, filter .25s;
+}
+
+.uiButton.show:hover {
+    transform: translateY(-4px) rotate(-6deg) scale(1.08);
+    filter: brightness(1.15);
+}
+
+.uiButton.hide {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(40px) rotate(25deg) scale(.2);
+    transition: transform .35s ease, opacity .35s;
+}
+
+#nextButton, #playButton {
+    right: -85px;
+    bottom: 0px;
+    width: 270px;
+}
+
+/*---Nombre del personaje---*/
+
+#speakerName{
+    position:absolute;
+    left:190px;
+    top:53px;
+    width:165px;
+    opacity:0;
+    text-align:center;
+    font-size:36px;
+    font-weight:900;
+    font-family:'Nunito',sans-serif;
+    color:#13254b;
+    letter-spacing:2px;
+    transform:rotate(-5deg) translateY(-8px);
+    transition: opacity .25s ease, transform .25s ease;
+}
+
+#speakerName.show{
+    opacity:1;
+    transform:translateY(0) rotate(-5deg);
+}
+
+/*--- Puntos / Efectos flotantes ---*/
+
+#effectsLayer{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:200;
+}
+
+.floatingScore{
+    position:absolute;
+    font-family:'Nunito',sans-serif;
+    font-size:40px;
+    font-weight:bold;
+    color:#fdd50f;
+    text-shadow:0 0 8px rgba(236, 195, 13, 0.897), 2px 2px 4px rgba(0,0,0,.35);
+    pointer-events:none;
+    animation:scoreFloat 1.2s ease forwards;
+}
+
+.floatingScore.special{
+    font-size:46px;
+    color:#fcdb71;
+    text-shadow: 0 0 16px rgb(180, 154, 2), 2px 2px 5px rgba(0,0,0,.35);
+}
+
+/*--- Game Over Screen---*/
+#gameOverScreen {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .35s ease;
+    z-index: 9999;
+}
+
+#gameOverScreen.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- CONTENEDOR PRINCIPAL DEL PANEL --- */
+#gameOverContainer {
+    position: relative;
+    left: 0;
+    width: 68vw;
+    max-width: 1050px;
+    min-width: 680px;
+    height: 100vh;
+    background: url('/gamesAssets/childs/eco/ASSETS/ui/gameOverMenu.png') no-repeat center center;
+    background-size: 100% 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 280px 0 20px; 
+    box-sizing: border-box;
+    transform: translateX(-100vw);
+    z-index: 5;
+}
+
+#gameOverLumen {
+    position: absolute;
+    left: 24vw;
+    bottom: -140px; 
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0;
+}
+
+#gameOverLumen img {
+    width: 580px;
+    height: auto;
+    transform: rotate(10deg); 
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6));
+}
+
+/* --- TEXTOS Y FUENTES --- */
+#gameOverTitle {
+    font-size: 58px;
+    font-weight: 800;
+    color: white;
+    text-shadow: 4px 4px 0 black, 0 0 20px rgba(255, 255, 255, 0.4);
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#gameOverMessage {
+    text-align: center;
+    color: white;
+    margin-bottom: 25px;
+    max-width: 480px;
+}
+
+#messageTitle {
+    font-size: 28px;
+    color: #e7c739;
+    text-shadow: 2px 2px 0 black;
+    margin-bottom: 8px;
+}
+
+#messageText {
+    font-size: 20px;
+    line-height: 1.3;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
+}
+
+#gameOverStats {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gameOverBlock {
+    text-align: center;
+    margin: 5px 0;
+}
+
+.statTitle {
+    color: white;
+    font-size: 22px;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 0 black;
+}
+
+.statValue {
+    display: block;
+    color: #FFD65A;
+    font-size: 50px;
+    font-weight: 800;
+    text-shadow: 4px 4px 0 black;
+}
+
+.divider {
+    width: 220px;
+    height: 3px;
+    margin: 10px auto;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.8) 50%, transparent);
+}
+
+/* --- ACCIONES E ICONOS (BOTONES Y ESTRELLA) --- */
+#gameOverActions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 35px;
+    width: 100%;
+    transform: translate(-35px, 20px); 
+}
+
+#returnButton img, #retryButton img {
+    width: 260px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+#returnButton:hover img, #retryButton:hover img {
+    transform: scale(1.12);
+    filter: brightness(1.18);
+}
+
+#gameOverStar img {
+    width: 115px;
+    height: 115px;
+    filter: drop-shadow(0 0 18px #ffd700);
+}
+/* --- Animaciones --- */
+
+.showContainer { 
+    animation: panelSlideLeftIn 0.6s cubic-bezier(.18, 1.25, .4, 1) forwards; 
+}
+
+.hideContainer { 
+    animation: panelSlideLeftOut 0.4s ease-in forwards; 
+}
+
+.showGameOverTitle { 
+    animation: titleAppear 0.5s ease forwards 0.2s; 
+}
+
+.showMessage { 
+    animation: messageAppear 0.5s ease forwards 0.3s; 
+}
+
+.showStat { 
+    animation: showStat 0.45s ease forwards 0.4s; 
+}
+
+.showReturn { 
+    animation: returnAppear 0.5s cubic-bezier(.2, 1.4, .4, 1) forwards 0.5s; 
+}
+.showStar { 
+    animation: starAppear 0.5s cubic-bezier(.2, 1.4, .4, 1) forwards 0.55s;
+}
+.showRetry { 
+    animation: retryAppear 0.5s cubic-bezier(.2, 1.4, .4, 1) forwards 0.6s; 
+}
+
+.showLumen { 
+    animation: lumenRise 0.7s cubic-bezier(.2, 1.4, .4, 1) forwards 0.3s;
+}
+
+.assistantAppear {
+    animation: assistantEntrance .7s cubic-bezier(.2,1.2,.4,1) forwards;
+}
+
+.lumenEntrance {
+    animation: lumenEntrance .6s ease-out forwards;
+}
+
+.lumenExit {
+    animation: lumenExit .6s ease-in forwards;
+}
+
+.lumenTalking {
+    animation: lumenTalk .45s ease;
+}
+
+.gameStatusEnter {
+    animation: gameStatusEnter .7s cubic-bezier(.2,1.4,.4,1) forwards;
+}
+
+.bubbleAppear {
+    animation: bubbleAppear .55s cubic-bezier(.2,1.35,.35,1) forwards;
+}
+
+.bubbleDisappear {
+    animation: bubbleDisappear .45s ease-in forwards;
+}
