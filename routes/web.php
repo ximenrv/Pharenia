@@ -72,6 +72,10 @@ Route::get('/forgot-password', function () {
     return view('auth.forgot-password');
 })->name('forgot-password');
 
+Route::post('/forgot-password', function () {
+    return view('auth.forgot-password');
+});
+
 /*
 |--------------------------------------------------------------------------
 | Admin
