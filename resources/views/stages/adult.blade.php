@@ -7,7 +7,7 @@
     @vite(['resources/css/stages.css', 'resources/css/navbar.css', 'resources/css/footer.css'])
 </head>
 <body style="background-color: #f5efff; margin: 0; padding: 0;">
-
+    @include('components.loader')
     @if(session()->has('active_child_id'))
         <div style="max-width: 600px; margin: 40px auto -70px auto; padding: 30px; border-radius: 12px; text-align: center; border: 1px solid #e9d5ff;">
             <h1 style="color: #7c4dff; font-size: 28px; font-weight: bold; margin: 0 0 8px 0;">
