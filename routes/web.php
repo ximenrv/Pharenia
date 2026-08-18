@@ -7,6 +7,7 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MchatChallenge;
 use App\Http\Controllers\SimulationChallenge;
+use App\Http\Controllers\MythChallengeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TeenController;
 use App\Http\Controllers\AdminController;
@@ -169,4 +170,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/', [SimulationChallenge::class, 'getProgress']);
     Route::post('/simulation/save-progress', [SimulationChallenge::class, 'saveProgress']);
     Route::post('/simulation/submit', [SimulationChallenge::class, 'submitSimulation']);
+
+    Route::get('/challenges/mitos/progress', [MythChallengeController::class, 'getProgress']);
+Route::post('/challenges/mitos/save-progress', [MythChallengeController::class, 'saveProgress']);
+Route::post('/challenges/mitos/submit', [MythChallengeController::class, 'submitChallenge']);
 });

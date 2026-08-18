@@ -46,8 +46,11 @@ class ChallengeApp {
     forceHideModulesOnStart() {
         const mchatWrapper = document.getElementById("mchatModuleWrapper");
         const simWrapper = document.getElementById("simulationModuleWrapper");
+        const mythWrapper = document.getElementById("mythModuleWrapper"); // 👈 Añadido
+
         if (mchatWrapper) mchatWrapper.classList.add("hidden");
         if (simWrapper) simWrapper.classList.add("hidden");
+        if (mythWrapper) mythWrapper.classList.add("hidden"); // 👈 Añadido
     }
 
     initQuestionsDOM() {
@@ -86,12 +89,14 @@ class ChallengeApp {
         const menuWrapper = document.getElementById("sectionHeaderWrapper");
         const mchatModule = document.getElementById("mchatModuleWrapper");
         const simModule = document.getElementById("simulationModuleWrapper");
+        const mythModule = document.getElementById("mythModuleWrapper"); // <--- NUEVO
         const header = document.getElementById("mainHeaderSection");
         const descBox = document.getElementById("headerDescriptionBox");
 
         if (menuWrapper) menuWrapper.classList.add("hidden");
         if (mchatModule) mchatModule.classList.add("hidden");
         if (simModule) simModule.classList.add("hidden");
+        if (mythModule) mythModule.classList.add("hidden"); // <--- NUEVO
 
         if (header) header.classList.add("header-centered");
         if (descBox) descBox.style.display = "none";
@@ -110,6 +115,14 @@ class ChallengeApp {
                 window.simulationApp = new SimulationApp();
             }
             window.simulationApp.start();
+        } else if (moduleName === "mitos") {
+            // <--- NUEVO BLOQUE
+            if (mythModule) mythModule.classList.remove("hidden");
+
+            if (!window.mythApp) {
+                window.mythApp = new MythChallengeApp();
+            }
+            window.mythApp.start();
         }
     }
 
@@ -117,11 +130,13 @@ class ChallengeApp {
         const menuWrapper = document.getElementById("sectionHeaderWrapper");
         const mchatModule = document.getElementById("mchatModuleWrapper");
         const simModule = document.getElementById("simulationModuleWrapper");
+        const mythModule = document.getElementById("mythModuleWrapper"); // <--- NUEVO
         const header = document.getElementById("mainHeaderSection");
         const descBox = document.getElementById("headerDescriptionBox");
 
         if (mchatModule) mchatModule.classList.add("hidden");
         if (simModule) simModule.classList.add("hidden");
+        if (mythModule) mythModule.classList.add("hidden"); // <--- NUEVO
         if (menuWrapper) menuWrapper.classList.remove("hidden");
 
         if (header) header.classList.remove("header-centered");
@@ -674,3 +689,302 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 window.SimulationApp = SimulationApp;
+
+class MythChallengeApp {
+    constructor() {
+        this.currentStep = 1;
+        this.totalSteps = 10;
+        this.answers = {};
+
+        const container = document.getElementById("mythSection");
+        this.initialHTML = container ? container.innerHTML : "";
+
+        // Banco de 10 afirmaciones sobre autismo
+        this.myths = {
+            1: {
+                statement:
+                    "El autismo es una enfermedad mental que se puede curar con tratamiento médico.",
+                isTrue: false,
+                explanation:
+                    "Falso. El autismo no es una enfermedad ni se puede 'curar'; es una condición del neurodesarrollo de por vida.",
+            },
+            2: {
+                statement:
+                    "Las personas autistas pueden desarrollar una vida independiente y laboralmente exitosa.",
+                isTrue: true,
+                explanation:
+                    "Verdadero. Con los apoyos adecuados, accesibilidad y entornos empáticos, muchas personas autistas logran una gran autonomía.",
+            },
+            3: {
+                statement:
+                    "Todas las personas autistas tienen habilidades extraordinarias en matemáticas o cálculo.",
+                isTrue: false,
+                explanation:
+                    "Falso. Esto es un estereotipo mediático (el mito del 'sabio'). El espectro es sumamente diverso.",
+            },
+            4: {
+                statement:
+                    "La sobrecarga sensorial puede causar crisis o colapsos ('meltdowns') en algunas personas autistas.",
+                isTrue: true,
+                explanation:
+                    "Verdadero. Estímulos intensos (luces, ruidos, aglomeraciones) pueden saturar el sistema sensorial y provocar una crisis.",
+            },
+            5: {
+                statement:
+                    "Las personas autistas no sienten empatía ni les interesa relacionarse con los demás.",
+                isTrue: false,
+                explanation:
+                    "Falso. Sí sienten empatía, a menudo profundamente; lo que puede variar es la forma en que la expresan o interpretan.",
+            },
+            6: {
+                statement:
+                    "El autismo se diagnostica principalmente a través de la observación clínica y del desarrollo conductual.",
+                isTrue: true,
+                explanation:
+                    "Verdadero. No existe un análisis de sangre o imagen médica para detectarlo; el diagnóstico se basa en pautas de comportamiento y entrevistas.",
+            },
+            7: {
+                statement:
+                    "Cualquier persona puede volverse autista debido a experiencias traumáticas en su etapa adulta.",
+                isTrue: false,
+                explanation:
+                    "Falso. El autismo es congénito y acompaña a la persona desde su nacimiento o primera infancia.",
+            },
+            8: {
+                statement:
+                    "Los sistemas de comunicación aumentativa y alternativa ayudan a las personas autistas no hablantes a expresarse.",
+                isTrue: true,
+                explanation:
+                    "Verdadero. Herramientas visuales, pictogramas o dispositivos tecnológicos facilitan enormemente la comunicación.",
+            },
+            9: {
+                statement:
+                    "Las rutinas repetitivas o la necesidad de previsibilidad son características comunes en el autismo.",
+                isTrue: true,
+                explanation:
+                    "Verdadero. Las rutinas aportan orden, seguridad y reducen la ansiedad frente a un entorno que puede resultar impredecible.",
+            },
+            10: {
+                statement:
+                    "El autismo afecta exactamente igual a hombres y a mujeres en su manifestación conductual.",
+                isTrue: false,
+                explanation:
+                    "Falso. Las mujeres y niñas autistas suelen camuflar o enmascarar mejor sus rasgos ('masking'), lo que a menudo retrasa su diagnóstico.",
+            },
+        };
+    }
+
+    async start() {
+        this.answers = {};
+
+        try {
+            const response = await fetch("/challenges/mitos/progress");
+            const data = await response.json();
+            if (data.success && data.answers) {
+                this.answers = data.answers;
+                const answeredKeys = Object.keys(this.answers);
+                this.currentStep =
+                    answeredKeys.length > 0
+                        ? Math.min(answeredKeys.length + 1, this.totalSteps)
+                        : 1;
+            }
+        } catch (e) {
+            console.warn("Aviso: Iniciando en modo local por fallo de red:", e);
+            this.currentStep = 1;
+        }
+
+        this.renderMyth(this.currentStep);
+    }
+
+    renderMyth(step) {
+        const myth = this.myths[step];
+        if (!myth) return;
+
+        this.currentStep = step;
+
+        const card = document.getElementById("activeMythCard");
+        if (card) card.classList.remove("is-flipped");
+
+        const stepIndicator = document.getElementById("mythStepIndicator");
+        const statementText = document.getElementById("mythStatementText");
+        const optionsContainer = document.getElementById(
+            "mythOptionsContainer",
+        );
+        const navContainer = document.getElementById("mythNavContainer");
+
+        if (stepIndicator)
+            stepIndicator.innerText = `Pregunta ${step} de ${this.totalSteps}`;
+        if (statementText) statementText.innerText = myth.statement;
+
+        // Obtenemos el objeto guardado para esta pregunta (ej: { userChoice: true, isCorrect: false })
+        const savedAnswerObj = this.answers[`q_${step}`];
+
+        // Extraemos únicamente la elección del usuario (true o false) si existe
+        const previousChoice = savedAnswerObj
+            ? savedAnswerObj.userChoice
+            : null;
+
+        if (optionsContainer) {
+            const isTrueSelected = previousChoice === true;
+            const isFalseSelected = previousChoice === false;
+
+            optionsContainer.innerHTML = `
+                <button type="button" class="myth-opt-btn ${isTrueSelected ? "selected" : ""}" onclick="window.mythApp.selectAnswer(${step}, true)">Verdadero</button>
+                <button type="button" class="myth-opt-btn ${isFalseSelected ? "selected" : ""}" onclick="window.mythApp.selectAnswer(${step}, false)">Falso</button>
+            `;
+        }
+
+        // Control dinámico del botón "Anterior"
+        if (navContainer) {
+            if (step > 1) {
+                navContainer.innerHTML = `
+                    <button type="button" class="myth-secondary-btn" onclick="window.mythApp.prevMyth()">← Anterior</button>
+                `;
+            } else {
+                navContainer.innerHTML = "";
+            }
+        }
+    }
+
+    prevMyth() {
+        if (this.currentStep > 1) {
+            this.currentStep--;
+            this.renderMyth(this.currentStep);
+        }
+    }
+
+    selectAnswer(step, userChoice) {
+        const myth = this.myths[step];
+        const isCorrect = userChoice === myth.isTrue;
+
+        // Guardar localmente con el formato q_X
+        this.answers[`q_${step}`] = {
+            userChoice: userChoice,
+            isCorrect: isCorrect,
+        };
+
+        const iconEl = document.getElementById("mythFeedbackIcon");
+        const titleEl = document.getElementById("mythFeedbackTitle");
+        const descEl = document.getElementById("mythFeedbackDesc");
+        const nextBtn = document.getElementById("mythNextBtn");
+
+        if (iconEl) iconEl.innerText = isCorrect ? "✨" : "💡";
+        if (titleEl) {
+            titleEl.innerText = isCorrect
+                ? "¡Excelente, respuesta correcta!"
+                : "Respuesta incorrecta:";
+            titleEl.style.color = isCorrect ? "#10b981" : "#f59e0b";
+        }
+
+        if (descEl) descEl.innerText = myth.explanation;
+
+        if (nextBtn) {
+            if (step === this.totalSteps) {
+                nextBtn.innerText = "Ver Resultado Final →";
+                nextBtn.onclick = (e) => {
+                    e.preventDefault();
+                    this.submitFinalChallenge();
+                };
+            } else {
+                nextBtn.innerText = "Siguiente Pregunta →";
+                nextBtn.onclick = (e) => {
+                    e.preventDefault();
+                    this.nextMyth();
+                };
+            }
+        }
+
+        // Voltear tarjeta en 3D
+        const card = document.getElementById("activeMythCard");
+        if (card) card.classList.add("is-flipped");
+
+        // Guardar automáticamente en la base de datos
+        this.saveProgressToServer();
+    }
+
+    nextMyth() {
+        if (this.currentStep < this.totalSteps) {
+            this.currentStep++;
+            this.renderMyth(this.currentStep);
+        }
+    }
+
+    getCsrfToken() {
+        const meta = document.querySelector('meta[name="csrf-token"]');
+        return meta ? meta.getAttribute("content") : "";
+    }
+
+    saveProgressToServer() {
+        const answersObj = Object.assign({}, this.answers);
+
+        fetch("/challenges/mitos/save-progress", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": this.getCsrfToken(),
+            },
+            body: JSON.stringify({
+                answers: answersObj,
+                current_step: this.currentStep,
+            }),
+        }).catch((err) => console.error("Error guardando progreso:", err));
+    }
+
+    renderResultState(data) {
+        const container = document.getElementById("mythSection");
+        if (!container) return;
+
+        container.innerHTML = `
+            <div class="myth-card" style="padding: 3rem; text-align: center;">
+                <div style="font-size: 4rem; margin-bottom: 1rem;">🏆</div>
+                <h2 style="font-size: 1.8rem; color: #1f2937; margin-bottom: 0.5rem;">¡Desafío Completado!</h2>
+                <p style="color: #4b5563; margin-bottom: 1.5rem;">Tu puntuación obtenida es:</p>
+                <div style="background: #eef2ff; color: #4f46e5; padding: 1rem; border-radius: 12px; font-size: 1.3rem; font-weight: bold; margin-bottom: 1.5rem;">
+                    ${data.score || "10/10 aciertos"}
+                </div>
+                <p style="color: #374151; font-size: 1.05rem; line-height: 1.6; margin-bottom: 2rem;">
+                    ${data.feedback}
+                </p>
+                <button type="button" class="myth-primary-btn" onclick="window.mythApp.resetChallenge()">
+                    🔄 Repetir Desafío
+                </button>
+            </div>
+        `;
+    }
+
+    async resetChallenge() {
+        const container = document.getElementById("mythSection");
+        if (container && this.initialHTML)
+            container.innerHTML = this.initialHTML;
+
+        await this.start();
+    }
+
+    submitFinalChallenge() {
+        fetch("/challenges/mitos/submit", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": this.getCsrfToken(),
+            },
+            body: JSON.stringify({
+                answers: this.answers,
+                current_step: this.totalSteps,
+            }),
+        })
+            .then((res) => {
+                if (!res.ok) throw new Error("Error en el servidor");
+                return res.json();
+            })
+            .then((data) => {
+                if (data && data.success) {
+                    this.renderResultState(data);
+                }
+            })
+            .catch((err) => {
+                console.warn("Modo local activado:", err);
+            });
+    }
+}
+
+window.MythChallengeApp = MythChallengeApp;

@@ -331,11 +331,11 @@
                                 <span class="challenge-card__action">Entrar al Simulador →</span>
                             </div>
 
-                            <div class="challenge-card">
+                            <div class="challenge-card" onclick="appChallenges.loadModule('mitos')">
                                 <div class="challenge-card__badge">Educación</div>
                                 <h3 class="challenge-card__title">Mitos vs Realidades</h3>
-                                <p class="challenge-card__desc">Derriba estigmas sociales respondiendo de forma ágil un Verdadero o Falso dinámico.</p>
-                                <span class="challenge-card__action">Próximamente</span>
+                                <p class="challenge-card__desc">Derriaba estigmas sociales respondiendo de forma ágil un Verdadero o Falso dinámico.</p>
+                                <span class="challenge-card__action">Iniciar Desafío →</span>
                             </div>
                         </div>
                     </div>
@@ -419,6 +419,39 @@
                     </div>
                 </div> 
 
+                <div id="mythModuleWrapper" class="myth-challenges-wrapper hidden" >
+                    <button type="button" class="myth-back-btn" onclick="appChallenges.returnToMenu()">
+                        ← Volver al menú de desafíos
+                    </button>
+
+                    <div class="myth-container" id="mythSection">
+                        <div class="myth-card" id="activeMythCard">
+                            <!-- CARA FRONTAL: Afirmación y Opciones -->
+                            <div class="myth-card__face myth-card__front">
+                                <span class="myth-badge" id="mythStepIndicator">Pregunta 1 de 10</span>
+                                <p class="myth-text" id="mythStatementText">Cargando enunciado...</p>
+                                
+                                <div class="myth-options" id="mythOptionsContainer">
+                                    <!-- Inyección dinámica de Verdadero / Falso -->
+                                </div>
+
+                                <!-- Contenedor para botones de navegación (Anterior / Siguiente si aplica) -->
+                                <div class="myth-navigation-container" id="mythNavContainer" style="display: flex; justify-content: space-between; margin-top: 1.5rem;">
+                                    <!-- Se inyecta dinámicamente desde JS -->
+                                </div>
+                            </div>
+
+                            <!-- CARA TRASERA: Retroalimentación y Explicación -->
+                            <div class="myth-card__face myth-card__back">
+                                <div id="mythFeedbackIcon" class="myth-feedback-icon">✨</div>
+                                <h3 id="mythFeedbackTitle" class="myth-feedback-title">¡Correcto!</h3>
+                                <p id="mythFeedbackDesc" class="myth-feedback-desc">Explicación detallada del mito y la realidad.</p>
+                                <button type="button" class="myth-primary-btn" id="mythNextBtn" onclick="window.mythApp.nextMyth()">Siguiente Pregunta →</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -441,6 +474,11 @@
         document.addEventListener("DOMContentLoaded", () => {
         window.simulationApp = new SimulationApp();
         window.simulationApp.start();
+    });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            window.mythApp = new MythChallengeApp();
+            window.mythApp.start();
     });
     </script>
 
