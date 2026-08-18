@@ -18,7 +18,6 @@ class AdminUserSeeder extends Seeder
                 'birthdate' => '1990-01-01',
                 'role' => 'admin',
                 'password' => Hash::make('phareniadmin'),
-                'email_verified_at' => now(),
             ]
         );
     }

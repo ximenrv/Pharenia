@@ -1,3 +1,7 @@
+/* ==========================================================================
+   01. ESTRUCTURA GENERAL Y FONDO (ACTIVIDADES / FARO)
+   ========================================================================== */
+
 .act-body {
     margin-top: 6rem;
     padding: 0;
@@ -22,7 +26,10 @@
     box-sizing: border-box;
 }
 
-/* === ENCABEZADO CON FARO INTEGRADO === */
+/* ==========================================================================
+   02. ENCABEZADO CON FARO INTEGRADO
+   ========================================================================== */
+
 .act-header {
     display: flex;
     flex-direction: column;
@@ -65,23 +72,24 @@
     animation: lighthouseFloat 5s infinite ease-in-out;
 }
 
-/* === BOTONES INFERIORES === */
-/* === BOTONES INFERIORES CENTRADOS JUNTOS === */
+/* ==========================================================================
+   03. BOTONES Y ACCIONES INFERIORES
+   ========================================================================== */
+
 .act-header__actions {
     display: flex;
     align-items: center;
-    justify-content: center; /* Centra los dos elementos perfectamente */
-    gap: 3rem; /* Espacio de separación horizontal entre el botón y el texto */
-    margin-top: 4rem; /* Separación respecto al faro de arriba */
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 4rem;
     width: 100%;
 }
 
 .act-btn-wrapper {
     text-decoration: none;
-    display: inline-block; /* Evita que ocupe todo el ancho */
+    display: inline-block;
 }
 
-/* Botón Azul Oscuro "COMENZAR" */
 .act-btn--primary {
     background-color: #0d2c3f;
     color: #ffffff;
@@ -91,7 +99,7 @@
     letter-spacing: 2px;
     padding: 1rem 2.2rem;
     border: none;
-    border-radius: 8px; /* Bordes estilizados como tu diseño */
+    border-radius: 8px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -116,7 +124,6 @@
     transition: transform 0.3s ease;
 }
 
-/* Enlace Subrayado "¿ACTIVIDADES?" */
 .act-link {
     font-family: sans-serif;
     color: #2c525a;
@@ -127,7 +134,7 @@
     position: relative;
     padding-bottom: 0.4rem;
     transition: color 0.3s ease;
-    white-space: nowrap; /* Evita que el texto se parta en dos líneas */
+    white-space: nowrap;
 }
 
 .act-link::after {
@@ -151,7 +158,11 @@
     transform: scaleX(1);
     transform-origin: left;
 }
-/* === GRID DE CONTENIDO FUTURO === */
+
+/* ==========================================================================
+   04. GRID DE CONTENIDO Y ANIMACIONES
+   ========================================================================== */
+
 .act-main-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -160,7 +171,6 @@
     box-sizing: border-box;
 }
 
-/* === ANIMACIÓN DE FLOTACIÓN === */
 @keyframes lighthouseFloat {
     0%,
     100% {
@@ -171,30 +181,27 @@
     }
 }
 
-/* --- ESTILOS DEL MODAL --- */
+/* ==========================================================================
+   05. MODAL DE ACTIVIDADES
+   ========================================================================== */
+
 .act-modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(
-        44,
-        82,
-        90,
-        0.6
-    ); /* Fondo oscuro con el tono azul marino de tu app */
-    backdrop-filter: blur(5px); /* Efecto difuminado de fondo */
+    background-color: rgba(44, 82, 90, 0.6);
+    backdrop-filter: blur(5px);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999; /* Por encima de todo */
+    z-index: 9999;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
 }
 
-/* Clase que se activa con JavaScript */
 .act-modal--show {
     opacity: 1;
     pointer-events: auto;
@@ -216,7 +223,6 @@
     transform: translateY(0);
 }
 
-/* Botón de cerrar (X) */
 .act-modal__close {
     position: absolute;
     top: 1.2rem;

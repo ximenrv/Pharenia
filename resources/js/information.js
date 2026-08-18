@@ -1,3 +1,9 @@
+function __(key) {
+    return window.translations && window.translations[key]
+        ? window.translations[key]
+        : key;
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     /*TIPOS DE TRATAMIENTO LISTADO */
     function switchLevelTab(event, levelId) {
@@ -20,21 +26,33 @@ class ChallengeApp {
         this.pageSize = 5;
 
         this.questions = {
-            1: "Si usted señala algo al otro lado de la habitación, ¿su hijo/a lo mira?",
-            2: "¿Alguna vez se ha preguntado si su hijo/a podría ser sordo/a?",
-            3: "¿Su hijo/a juega a juegos de simulación o de hacer creer?",
-            4: "¿A su hijo/a le gusta subirse a las cosas?",
-            5: "¿Hace su hijo/a movimientos raros con los dedos cerca de sus ojos?",
-            6: "¿Su hijo/a responde cuando usted lo/a llama por su nombre?",
-            7: "¿Su hijo/a sonríe en respuesta a su sonrisa o a su rostro?",
-            8: "¿Su hijo/a se enoja con los ruidos cotidianos comunes?",
-            9: "¿Su hijo/a camina bien?",
-            10: "¿Su hijo/a lo mira a los ojos cuando le habla, lo viste o juega con él/ella?",
-            11: "¿Intenta su hijo/a imitar lo que usted hace?",
-            12: "¿Gira la cabeza para ver si usted está mirando algo interesante?",
-            13: "¿Su hijo/a intenta que usted lo/a mire para admirar algo?",
-            14: "¿Comprende su hijo/a cuando usted le pide que haga algo?",
-            15: "¿Parece su hijo/a ensimismado o desconectado del entorno a veces?",
+            1: __(
+                "Si usted señala algo al otro lado de la habitación, ¿su hijo/a lo mira?",
+            ),
+            2: __(
+                "¿Alguna vez se ha preguntado si su hijo/a podría ser sordo/a?",
+            ),
+            3: __("¿Su hijo/a juega a juegos de simulación o de hacer creer?"),
+            4: __("¿A su hijo/a le gusta subirse a las cosas?"),
+            5: __(
+                "¿Hace su hijo/a movimientos raros con los dedos cerca de sus ojos?",
+            ),
+            6: __("¿Su hijo/a responde cuando usted lo/a llama por su nombre?"),
+            7: __("¿Su hijo/a sonríe en respuesta a su sonrisa o a su rostro?"),
+            8: __("¿Su hijo/a se enoja con los ruidos cotidianos comunes?"),
+            9: __("¿Su hijo/a camina bien?"),
+            10: __(
+                "¿Su hijo/a lo mira a los ojos cuando le habla, lo viste o juega con él/ella?",
+            ),
+            11: __("¿Intenta su hijo/a imitar lo que usted hace?"),
+            12: __(
+                "¿Gira la cabeza para ver si usted está mirando algo interesante?",
+            ),
+            13: __("¿Su hijo/a intenta que usted lo/a mire para admirar algo?"),
+            14: __("¿Comprende su hijo/a cuando usted le pide que haga algo?"),
+            15: __(
+                "¿Parece su hijo/a ensimismado o desconectado del entorno a veces?",
+            ),
         };
 
         this.savedAnswers = window.savedAnswers || {};
@@ -46,11 +64,11 @@ class ChallengeApp {
     forceHideModulesOnStart() {
         const mchatWrapper = document.getElementById("mchatModuleWrapper");
         const simWrapper = document.getElementById("simulationModuleWrapper");
-        const mythWrapper = document.getElementById("mythModuleWrapper"); // 👈 Añadido
+        const mythWrapper = document.getElementById("mythModuleWrapper");
 
         if (mchatWrapper) mchatWrapper.classList.add("hidden");
         if (simWrapper) simWrapper.classList.add("hidden");
-        if (mythWrapper) mythWrapper.classList.add("hidden"); // 👈 Añadido
+        if (mythWrapper) mythWrapper.classList.add("hidden");
     }
 
     initQuestionsDOM() {
@@ -65,6 +83,9 @@ class ChallengeApp {
             let isCheckedNo =
                 this.savedAnswers[`q_${num}`] === "no" ? "checked" : "";
 
+            let textSi = __("Sí");
+            let textNo = __("No");
+
             let html = `
                 <div class="mchat-question hidden" data-qid="${num}" data-index="${num}">
                     <span class="mchat-question__number">${paddedNum}</span>
@@ -72,11 +93,11 @@ class ChallengeApp {
                     <div class="mchat-options">
                         <label class="mchat-option">
                             <input type="radio" name="q_${num}" value="si" ${isCheckedSi}>
-                            <span class="mchat-option__btn">Sí</span>
+                            <span class="mchat-option__btn">${textSi}</span>
                         </label>
                         <label class="mchat-option">
                             <input type="radio" name="q_${num}" value="no" ${isCheckedNo}>
-                            <span class="mchat-option__btn mchat-option__btn--no">No</span>
+                            <span class="mchat-option__btn mchat-option__btn--no">${textNo}</span>
                         </label>
                     </div>
                 </div>
@@ -89,14 +110,14 @@ class ChallengeApp {
         const menuWrapper = document.getElementById("sectionHeaderWrapper");
         const mchatModule = document.getElementById("mchatModuleWrapper");
         const simModule = document.getElementById("simulationModuleWrapper");
-        const mythModule = document.getElementById("mythModuleWrapper"); // <--- NUEVO
+        const mythModule = document.getElementById("mythModuleWrapper");
         const header = document.getElementById("mainHeaderSection");
         const descBox = document.getElementById("headerDescriptionBox");
 
         if (menuWrapper) menuWrapper.classList.add("hidden");
         if (mchatModule) mchatModule.classList.add("hidden");
         if (simModule) simModule.classList.add("hidden");
-        if (mythModule) mythModule.classList.add("hidden"); // <--- NUEVO
+        if (mythModule) mythModule.classList.add("hidden");
 
         if (header) header.classList.add("header-centered");
         if (descBox) descBox.style.display = "none";
@@ -116,7 +137,6 @@ class ChallengeApp {
             }
             window.simulationApp.start();
         } else if (moduleName === "mitos") {
-            // <--- NUEVO BLOQUE
             if (mythModule) mythModule.classList.remove("hidden");
 
             if (!window.mythApp) {
@@ -130,13 +150,13 @@ class ChallengeApp {
         const menuWrapper = document.getElementById("sectionHeaderWrapper");
         const mchatModule = document.getElementById("mchatModuleWrapper");
         const simModule = document.getElementById("simulationModuleWrapper");
-        const mythModule = document.getElementById("mythModuleWrapper"); // <--- NUEVO
+        const mythModule = document.getElementById("mythModuleWrapper");
         const header = document.getElementById("mainHeaderSection");
         const descBox = document.getElementById("headerDescriptionBox");
 
         if (mchatModule) mchatModule.classList.add("hidden");
         if (simModule) simModule.classList.add("hidden");
-        if (mythModule) mythModule.classList.add("hidden"); // <--- NUEVO
+        if (mythModule) mythModule.classList.add("hidden");
         if (menuWrapper) menuWrapper.classList.remove("hidden");
 
         if (header) header.classList.remove("header-centered");
@@ -161,7 +181,7 @@ class ChallengeApp {
         let ranges = { 1: "1-5", 2: "6-10", 3: "11-15" };
         const indicator = document.getElementById("quizStepIndicator");
         if (indicator) {
-            indicator.innerText = `Paso ${step} de 3 (Preguntas ${ranges[step]})`;
+            indicator.innerText = `${__("Bloque")} ${step} ${__("de")} 3 (${__("Preguntas")} ${ranges[step]})`;
         }
 
         const prevBtn = document.getElementById("prevBtn");
@@ -173,7 +193,9 @@ class ChallengeApp {
         if (prevBtn) prevBtn.classList.toggle("hidden", step === 1);
         if (nextBtn) {
             nextBtn.innerText =
-                step === 3 ? "Calcular Resultado Final" : "Siguiente Bloque →";
+                step === 3
+                    ? __("Calcular Resultado Final")
+                    : __("Siguiente Bloque →");
         }
 
         const section = document.getElementById("challenges-section");
@@ -308,11 +330,11 @@ class ChallengeApp {
         document.getElementById("finalScoreVal").innerText = score;
 
         let badge = document.getElementById("finalRiskBadge");
-        badge.innerText = `Riesgo ${riskLevel}`;
+        badge.innerText = `${__("Riesgo")} ${riskLevel}`;
         badge.className = `mchat-result__badge mchat-result__badge--${riskLevel.toLowerCase()}`;
         document.getElementById("finalFeedbackText").innerText = feedback;
         document.getElementById("quizStepIndicator").innerText =
-            "Test Completado";
+            __("Test Completado");
     }
 
     showResultState() {
@@ -327,7 +349,7 @@ class ChallengeApp {
             .getElementById("quizResultContainer")
             .classList.remove("hidden");
         document.getElementById("quizStepIndicator").innerText =
-            "Test Completado";
+            __("Test Completado");
     }
 
     closeModal() {
@@ -367,64 +389,98 @@ class SimulationApp {
 
         this.scenarios = {
             1: {
-                question:
+                question: __(
                     "Un compañero con TEA comienza a taparse los oídos fuertemente y agitar las manos debido al ruido de la bocina escolar. ¿Qué harías?",
+                ),
                 options: {
-                    a: "Gritarle para que se calme y preste atención.",
-                    b: "Guiarlo con calma hacia un espacio con menos ruido y estímulos.",
-                    c: "Ignorarlo por completo para que se acostumbre al entorno.",
+                    a: __("Gritarle para que se calme y preste atención."),
+                    b: __(
+                        "Guiarlo con calma hacia un espacio con menos ruido y estímulos.",
+                    ),
+                    c: __(
+                        "Ignorarlo por completo para que se acostumbre al entorno.",
+                    ),
                 },
                 correct: "b",
-                feedback:
+                feedback: __(
                     "Reducir la sobrecarga sensorial alejándolo del ruido es el paso clave para evitar una crisis por estimulación excesiva.",
+                ),
             },
             2: {
-                question:
+                question: __(
                     "Durante una actividad en equipo, notas que un alumno con TEA prefiere trabajar solo y evita mirar a los demás. ¿Qué enfoque es el más empático?",
+                ),
                 options: {
-                    a: "Exigirle que participe mirando a los ojos como sus compañeros.",
-                    b: "Respetar su espacio y ofrecerle un rol alternativo donde se sienta cómodo.",
-                    c: "Excluirlo del equipo para no retrasar el trabajo.",
+                    a: __(
+                        "Exigirle que participe mirando a los ojos como sus compañeros.",
+                    ),
+                    b: __(
+                        "Respetar su espacio y ofrecerle un rol alternativo donde se sienta cómodo.",
+                    ),
+                    c: __("Excluirlo del equipo para no retrasar el trabajo."),
                 },
                 correct: "b",
-                feedback:
+                feedback: __(
                     "La empatía compasiva implica respetar las diferencias de comunicación y ofrecer alternativas seguras de integración.",
+                ),
             },
             3: {
-                question:
+                question: __(
                     "En el recreo, un niño con TEA repite una frase una y otra vez (ecolalia) moviendo un objeto en sus manos. ¿Cómo actuarías?",
+                ),
                 options: {
-                    a: "Decirle de forma cortante que deje de repetir eso.",
-                    b: "Comprender que es su forma de autorregulación y permitirle su espacio sin juzgar.",
-                    c: "Quitarle el objeto para que interactúe con los demás juegos.",
+                    a: __("Decirle de forma cortante que deje de repetir eso."),
+                    b: __(
+                        "Comprender que es su forma de autorregulación y permitirle su espacio sin juzgar.",
+                    ),
+                    c: __(
+                        "Quitarle el objeto para que interactúe con los demás juegos.",
+                    ),
                 },
                 correct: "b",
-                feedback:
+                feedback: __(
                     "Los movimientos repetitivos y la ecolalia suelen ser mecanismos vitales de autorregulación ante la ansiedad o la emoción.",
+                ),
             },
             4: {
-                question:
+                question: __(
                     "Tienes que explicar un cambio repentino en la rutina escolar del día. ¿Cuál es la mejor manera de comunicárselo?",
+                ),
                 options: {
-                    a: "Decírselo de imprevisto en el momento para que aprenda a ser flexible.",
-                    b: "Anticipárselo visualmente o con antelación explicando los cambios paso a paso.",
-                    c: "No decirle nada para evitar que se preocupe antes de tiempo.",
+                    a: __(
+                        "Decírselo de imprevisto en el momento para que aprenda a ser flexible.",
+                    ),
+                    b: __(
+                        "Anticipárselo visualmente o con antelación explicando los cambios paso a paso.",
+                    ),
+                    c: __(
+                        "No decirle nada para evitar que se preocupe antes de tiempo.",
+                    ),
                 },
                 correct: "b",
-                feedback:
+                feedback: __(
                     "La anticipación visual y estructurada reduce drásticamente la ansiedad generada por la incertidumbre en personas con TEA.",
+                ),
             },
             5: {
-                question:
+                question: __(
                     "Un padre te comenta que su hijo se siente abrumado en las fiestas de cumpleaños ruidosas. ¿Qué consejo de aliado le darías?",
+                ),
                 options: {
-                    a: "Obligarlo a quedarse toda la fiesta para que supere su miedo social.",
-                    b: "Permitirle retirarse a una zona tranquila o planificar descansos cortos durante el evento.",
-                    c: "Prohibirle asistir a cualquier evento social en adelante.",
+                    a: __(
+                        "Obligarlo a quedarse toda la fiesta para que supere su miedo social.",
+                    ),
+                    b: __(
+                        "Permitirle retirarse a una zona tranquila o planificar descansos cortos durante el evento.",
+                    ),
+                    c: __(
+                        "Prohibirle asistir a cualquier evento social en adelante.",
+                    ),
                 },
                 correct: "b",
-                feedback:
+                feedback: __(
                     "Establecer zonas de escape o tiempos regulados permite la socialización saludable sin llevar al agotamiento sensorial.",
+                ),
             },
         };
     }
@@ -445,7 +501,10 @@ class SimulationApp {
                         : 1;
             }
         } catch (e) {
-            console.warn("Aviso: Iniciando en modo local por fallo de red:", e);
+            console.warn(
+                __("Aviso: Iniciando en modo local por fallo de red:"),
+                e,
+            );
             this.currentStep = 1;
         }
 
@@ -467,7 +526,7 @@ class SimulationApp {
         const prevBtnFront = document.getElementById("prevBtnFront");
 
         if (stepIndicator)
-            stepIndicator.innerText = `Situación ${step} de ${this.totalSteps}`;
+            stepIndicator.innerText = `${__("Situación")} ${step} ${__("de")} ${this.totalSteps}`;
         if (questionText) questionText.innerText = scenario.question;
 
         if (optionsContainer) {
@@ -497,11 +556,9 @@ class SimulationApp {
         const scenario = this.scenarios[step];
         const isCorrect = choice === scenario.correct;
 
-        // 1. Guardamos la respuesta explícitamente
         this.answers[`q_${step}`] = choice;
 
-        // 🔍 PRUEBA DE DEPURACIÓN: Abre tu consola (F12) y verifica que aquí aparezca la respuesta
-        console.log("Respuestas actuales en memoria:", this.answers);
+        console.log(__("Respuestas actuales en memoria:"), this.answers);
 
         const iconEl = document.getElementById("simFeedbackIcon");
         const titleEl = document.getElementById("simFeedbackTitle");
@@ -511,8 +568,8 @@ class SimulationApp {
         if (iconEl) iconEl.innerText = isCorrect ? "✨" : "💡";
         if (titleEl) {
             titleEl.innerText = isCorrect
-                ? "¡Excelente, respuesta correcta!"
-                : "Buena reflexión, pero hay una mejor opción:";
+                ? __("¡Excelente, respuesta correcta!")
+                : __("Buena reflexión, pero hay una mejor opción:");
             titleEl.style.color = isCorrect ? "#10b981" : "#f59e0b";
         }
 
@@ -520,13 +577,13 @@ class SimulationApp {
 
         if (nextBtn) {
             if (step === this.totalSteps) {
-                nextBtn.innerText = "Ver Resultado Final de Empatía →";
+                nextBtn.innerText = __("Ver Resultado Final de Empatía →");
                 nextBtn.onclick = (e) => {
                     e.preventDefault();
                     this.submitFinalSimulation();
                 };
             } else {
-                nextBtn.innerText = "Siguiente Situación →";
+                nextBtn.innerText = __("Siguiente Situación →");
                 nextBtn.onclick = (e) => {
                     e.preventDefault();
                     this.nextScenario();
@@ -539,9 +596,9 @@ class SimulationApp {
         if (activeCard)
             activeCard.style.transform = `rotateY(${this.currentRotation}deg)`;
 
-        // 2. Enviamos al servidor
         this.saveProgressToServer();
     }
+
     nextScenario() {
         if (this.currentStep < this.totalSteps) {
             this.currentStep++;
@@ -554,7 +611,10 @@ class SimulationApp {
 
             const section = document.getElementById("challenges-section");
             if (section)
-                section.scrollIntoView({ behavior: "smooth", block: "start" });
+                section.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                });
         }
     }
 
@@ -570,7 +630,10 @@ class SimulationApp {
 
             const section = document.getElementById("challenges-section");
             if (section)
-                section.scrollIntoView({ behavior: "smooth", block: "start" });
+                section.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                });
         }
     }
 
@@ -580,7 +643,6 @@ class SimulationApp {
     }
 
     saveProgressToServer() {
-        // Asegurarnos de que las respuestas se envíen como un objeto plano estructurado
         const answersObj = Object.assign({}, this.answers);
 
         fetch("/simulation/save-progress", {
@@ -596,27 +658,41 @@ class SimulationApp {
         })
             .then((res) => res.json())
             .then((data) => {
-                console.log("Progreso guardado correctamente en la BD:", data);
+                console.log(
+                    __("Progreso guardado correctamente en la BD:"),
+                    data,
+                );
             })
-            .catch((err) => console.error("Error guardando progreso:", err));
+            .catch((err) =>
+                console.error(__("Error guardando progreso:"), err),
+            );
     }
+
     renderResultState(data) {
         const container = document.getElementById("simulationSection");
         if (!container) return;
 
+        const titleText = __("¡Simulación Completada!");
+        const subtitleText = __("Tu nivel de empatía obtenido es:");
+        const defaultLevel = __("Aliado Compasivo");
+        const defaultFeedback = __(
+            "Has completado con éxito todas las situaciones del simulador de aliados.",
+        );
+        const repeatBtnText = __("🔄 Repetir Simulador");
+
         container.innerHTML = `
             <div class="simulator-card text-center" style="padding: 3rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
                 <div style="font-size: 4rem; margin-bottom: 1rem;">🏆</div>
-                <h2 style="font-size: 1.8rem; color: #1f2937; margin-bottom: 0.5rem;">¡Simulación Completada!</h2>
-                <p style="color: #4b5563; margin-bottom: 1.5rem;">Tu nivel de empatía obtenido es:</p>
+                <h2 style="font-size: 1.8rem; color: #1f2937; margin-bottom: 0.5rem;">${titleText}</h2>
+                <p style="color: #4b5563; margin-bottom: 1.5rem;">${subtitleText}</p>
                 <div style="background: #eef2ff; color: #4f46e5; padding: 1rem; border-radius: 12px; font-size: 1.3rem; font-weight: bold; margin-bottom: 1.5rem;">
-                    ${data.empathy_level || "Aliado Compasivo"}
+                    ${data.empathy_level || defaultLevel}
                 </div>
                 <p style="color: #374151; font-size: 1.05rem; line-height: 1.6; margin-bottom: 2rem;">
-                    ${data.feedback || "Has completado con éxito todas las situaciones del simulador de aliados."}
+                    ${data.feedback || defaultFeedback}
                 </p>
                 <button type="button" class="challenges-primary-btn" onclick="window.simulationApp.resetSimulator()">
-                    🔄 Repetir Simulador
+                    ${repeatBtnText}
                 </button>
             </div>
         `;
@@ -634,7 +710,6 @@ class SimulationApp {
         if (container && this.initialHTML)
             container.innerHTML = this.initialHTML;
 
-        // Reiniciamos llamando a start() para que el backend cree un nuevo attempt limpio
         await this.start();
 
         const challengeSection = document.getElementById("challenges-section");
@@ -653,12 +728,12 @@ class SimulationApp {
                 "X-CSRF-TOKEN": this.getCsrfToken(),
             },
             body: JSON.stringify({
-                answers: this.answers, // 👈 Aquí pasas this.answers
+                answers: this.answers,
                 current_step: this.currentStep,
             }),
         })
             .then((res) => {
-                if (!res.ok) throw new Error("Error en el servidor");
+                if (!res.ok) throw new Error(__("Error en el servidor"));
                 return res.json();
             })
             .then((data) => {
@@ -666,18 +741,20 @@ class SimulationApp {
                     this.renderResultState(data);
                 } else {
                     this.renderResultState({
-                        empathy_level: "Aliado Compasivo Destacado",
-                        feedback:
+                        empathy_level: __("Aliado Compasivo Destacado"),
+                        feedback: __(
                             "Has demostrado una excelente comprensión de las situaciones y los retos que viven las personas con TEA.",
+                        ),
                     });
                 }
             })
             .catch((err) => {
-                console.warn("Modo local activado:", err);
+                console.warn(__("Modo local activado:"), err);
                 this.renderResultState({
-                    empathy_level: "Aliado Empático en Formación",
-                    feedback:
+                    empathy_level: __("Aliado Empático en Formación"),
+                    feedback: __(
                         "Completaste satisfactoriamente todas las situaciones del simulador de aliados.",
+                    ),
                 });
             });
     }
@@ -689,6 +766,8 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 window.SimulationApp = SimulationApp;
+
+/* DESAFÍO DE MITOS SOBRE AUTISMO */
 
 class MythChallengeApp {
     constructor() {
@@ -702,74 +781,94 @@ class MythChallengeApp {
         // Banco de 10 afirmaciones sobre autismo
         this.myths = {
             1: {
-                statement:
+                statement: __(
                     "El autismo es una enfermedad mental que se puede curar con tratamiento médico.",
+                ),
                 isTrue: false,
-                explanation:
+                explanation: __(
                     "Falso. El autismo no es una enfermedad ni se puede 'curar'; es una condición del neurodesarrollo de por vida.",
+                ),
             },
             2: {
-                statement:
+                statement: __(
                     "Las personas autistas pueden desarrollar una vida independiente y laboralmente exitosa.",
+                ),
                 isTrue: true,
-                explanation:
+                explanation: __(
                     "Verdadero. Con los apoyos adecuados, accesibilidad y entornos empáticos, muchas personas autistas logran una gran autonomía.",
+                ),
             },
             3: {
-                statement:
+                statement: __(
                     "Todas las personas autistas tienen habilidades extraordinarias en matemáticas o cálculo.",
+                ),
                 isTrue: false,
-                explanation:
+                explanation: __(
                     "Falso. Esto es un estereotipo mediático (el mito del 'sabio'). El espectro es sumamente diverso.",
+                ),
             },
             4: {
-                statement:
+                statement: __(
                     "La sobrecarga sensorial puede causar crisis o colapsos ('meltdowns') en algunas personas autistas.",
+                ),
                 isTrue: true,
-                explanation:
+                explanation: __(
                     "Verdadero. Estímulos intensos (luces, ruidos, aglomeraciones) pueden saturar el sistema sensorial y provocar una crisis.",
+                ),
             },
             5: {
-                statement:
+                statement: __(
                     "Las personas autistas no sienten empatía ni les interesa relacionarse con los demás.",
+                ),
                 isTrue: false,
-                explanation:
+                explanation: __(
                     "Falso. Sí sienten empatía, a menudo profundamente; lo que puede variar es la forma en que la expresan o interpretan.",
+                ),
             },
             6: {
-                statement:
+                statement: __(
                     "El autismo se diagnostica principalmente a través de la observación clínica y del desarrollo conductual.",
+                ),
                 isTrue: true,
-                explanation:
+                explanation: __(
                     "Verdadero. No existe un análisis de sangre o imagen médica para detectarlo; el diagnóstico se basa en pautas de comportamiento y entrevistas.",
+                ),
             },
             7: {
-                statement:
+                statement: __(
                     "Cualquier persona puede volverse autista debido a experiencias traumáticas en su etapa adulta.",
+                ),
                 isTrue: false,
-                explanation:
+                explanation: __(
                     "Falso. El autismo es congénito y acompaña a la persona desde su nacimiento o primera infancia.",
+                ),
             },
             8: {
-                statement:
+                statement: __(
                     "Los sistemas de comunicación aumentativa y alternativa ayudan a las personas autistas no hablantes a expresarse.",
+                ),
                 isTrue: true,
-                explanation:
+                explanation: __(
                     "Verdadero. Herramientas visuales, pictogramas o dispositivos tecnológicos facilitan enormemente la comunicación.",
+                ),
             },
             9: {
-                statement:
+                statement: __(
                     "Las rutinas repetitivas o la necesidad de previsibilidad son características comunes en el autismo.",
+                ),
                 isTrue: true,
-                explanation:
+                explanation: __(
                     "Verdadero. Las rutinas aportan orden, seguridad y reducen la ansiedad frente a un entorno que puede resultar impredecible.",
+                ),
             },
             10: {
-                statement:
+                statement: __(
                     "El autismo afecta exactamente igual a hombres y a mujeres en su manifestación conductual.",
+                ),
                 isTrue: false,
-                explanation:
+                explanation: __(
                     "Falso. Las mujeres y niñas autistas suelen camuflar o enmascarar mejor sus rasgos ('masking'), lo que a menudo retrasa su diagnóstico.",
+                ),
             },
         };
     }
@@ -780,7 +879,7 @@ class MythChallengeApp {
         try {
             const response = await fetch("/challenges/mitos/progress");
             const data = await response.json();
-            if (data.success && data.answers) {
+            if (data.success && data.answers && !Array.isArray(data.answers)) {
                 this.answers = data.answers;
                 const answeredKeys = Object.keys(this.answers);
                 this.currentStep =
@@ -789,7 +888,10 @@ class MythChallengeApp {
                         : 1;
             }
         } catch (e) {
-            console.warn("Aviso: Iniciando en modo local por fallo de red:", e);
+            console.warn(
+                __("Aviso: Iniciando en modo local por fallo de red:"),
+                e,
+            );
             this.currentStep = 1;
         }
 
@@ -813,13 +915,10 @@ class MythChallengeApp {
         const navContainer = document.getElementById("mythNavContainer");
 
         if (stepIndicator)
-            stepIndicator.innerText = `Pregunta ${step} de ${this.totalSteps}`;
+            stepIndicator.innerText = `${__("Pregunta")} ${step} ${__("de")} ${this.totalSteps}`;
         if (statementText) statementText.innerText = myth.statement;
 
-        // Obtenemos el objeto guardado para esta pregunta (ej: { userChoice: true, isCorrect: false })
         const savedAnswerObj = this.answers[`q_${step}`];
-
-        // Extraemos únicamente la elección del usuario (true o false) si existe
         const previousChoice = savedAnswerObj
             ? savedAnswerObj.userChoice
             : null;
@@ -829,16 +928,15 @@ class MythChallengeApp {
             const isFalseSelected = previousChoice === false;
 
             optionsContainer.innerHTML = `
-                <button type="button" class="myth-opt-btn ${isTrueSelected ? "selected" : ""}" onclick="window.mythApp.selectAnswer(${step}, true)">Verdadero</button>
-                <button type="button" class="myth-opt-btn ${isFalseSelected ? "selected" : ""}" onclick="window.mythApp.selectAnswer(${step}, false)">Falso</button>
+                <button type="button" class="myth-opt-btn ${isTrueSelected ? "selected" : ""}" onclick="window.mythApp.selectAnswer(${step}, true)">${__("Verdadero")}</button>
+                <button type="button" class="myth-opt-btn ${isFalseSelected ? "selected" : ""}" onclick="window.mythApp.selectAnswer(${step}, false)">${__("Falso")}</button>
             `;
         }
 
-        // Control dinámico del botón "Anterior"
         if (navContainer) {
             if (step > 1) {
                 navContainer.innerHTML = `
-                    <button type="button" class="myth-secondary-btn" onclick="window.mythApp.prevMyth()">← Anterior</button>
+                    <button type="button" class="myth-secondary-btn" onclick="window.mythApp.prevMyth()">${__("← Anterior")}</button>
                 `;
             } else {
                 navContainer.innerHTML = "";
@@ -857,7 +955,6 @@ class MythChallengeApp {
         const myth = this.myths[step];
         const isCorrect = userChoice === myth.isTrue;
 
-        // Guardar localmente con el formato q_X
         this.answers[`q_${step}`] = {
             userChoice: userChoice,
             isCorrect: isCorrect,
@@ -871,8 +968,8 @@ class MythChallengeApp {
         if (iconEl) iconEl.innerText = isCorrect ? "✨" : "💡";
         if (titleEl) {
             titleEl.innerText = isCorrect
-                ? "¡Excelente, respuesta correcta!"
-                : "Respuesta incorrecta:";
+                ? __("¡Excelente, respuesta correcta!")
+                : __("Respuesta incorrecta:");
             titleEl.style.color = isCorrect ? "#10b981" : "#f59e0b";
         }
 
@@ -880,13 +977,13 @@ class MythChallengeApp {
 
         if (nextBtn) {
             if (step === this.totalSteps) {
-                nextBtn.innerText = "Ver Resultado Final →";
+                nextBtn.innerText = __("Ver Resultado Final →");
                 nextBtn.onclick = (e) => {
                     e.preventDefault();
                     this.submitFinalChallenge();
                 };
             } else {
-                nextBtn.innerText = "Siguiente Pregunta →";
+                nextBtn.innerText = __("Siguiente Pregunta →");
                 nextBtn.onclick = (e) => {
                     e.preventDefault();
                     this.nextMyth();
@@ -894,11 +991,9 @@ class MythChallengeApp {
             }
         }
 
-        // Voltear tarjeta en 3D
         const card = document.getElementById("activeMythCard");
         if (card) card.classList.add("is-flipped");
 
-        // Guardar automáticamente en la base de datos
         this.saveProgressToServer();
     }
 
@@ -927,26 +1022,31 @@ class MythChallengeApp {
                 answers: answersObj,
                 current_step: this.currentStep,
             }),
-        }).catch((err) => console.error("Error guardando progreso:", err));
+        }).catch((err) => console.error(__("Error guardando progreso:"), err));
     }
 
     renderResultState(data) {
         const container = document.getElementById("mythSection");
         if (!container) return;
 
+        const titleText = __("¡Desafío Completado!");
+        const subtitleText = __("Tu puntuación obtenida es:");
+        const defaultScore = __("10/10 aciertos");
+        const repeatBtnText = __("🔄 Repetir Desafío");
+
         container.innerHTML = `
             <div class="myth-card" style="padding: 3rem; text-align: center;">
                 <div style="font-size: 4rem; margin-bottom: 1rem;">🏆</div>
-                <h2 style="font-size: 1.8rem; color: #1f2937; margin-bottom: 0.5rem;">¡Desafío Completado!</h2>
-                <p style="color: #4b5563; margin-bottom: 1.5rem;">Tu puntuación obtenida es:</p>
+                <h2 style="font-size: 1.8rem; color: #1f2937; margin-bottom: 0.5rem;">${titleText}</h2>
+                <p style="color: #4b5563; margin-bottom: 1.5rem;">${subtitleText}</p>
                 <div style="background: #eef2ff; color: #4f46e5; padding: 1rem; border-radius: 12px; font-size: 1.3rem; font-weight: bold; margin-bottom: 1.5rem;">
-                    ${data.score || "10/10 aciertos"}
+                    ${data.score || defaultScore}
                 </div>
                 <p style="color: #374151; font-size: 1.05rem; line-height: 1.6; margin-bottom: 2rem;">
                     ${data.feedback}
                 </p>
                 <button type="button" class="myth-primary-btn" onclick="window.mythApp.resetChallenge()">
-                    🔄 Repetir Desafío
+                    ${repeatBtnText}
                 </button>
             </div>
         `;
@@ -957,10 +1057,35 @@ class MythChallengeApp {
         if (container && this.initialHTML)
             container.innerHTML = this.initialHTML;
 
-        await this.start();
+        this.answers = {};
+        this.currentStep = 1;
+
+        try {
+            const response = await fetch("/challenges/mitos/reset", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": this.getCsrfToken(),
+                },
+            });
+            const data = await response.json();
+            if (data.success) {
+                this.currentStep = data.step || 1;
+                this.answers =
+                    data.answers && !Array.isArray(data.answers)
+                        ? data.answers
+                        : {};
+            }
+        } catch (e) {
+            console.warn(__("Aviso: reset en modo local por fallo de red:"), e);
+        }
+
+        this.renderMyth(this.currentStep);
     }
 
     submitFinalChallenge() {
+        const answersObj = Object.assign({}, this.answers);
+
         fetch("/challenges/mitos/submit", {
             method: "POST",
             headers: {
@@ -968,12 +1093,12 @@ class MythChallengeApp {
                 "X-CSRF-TOKEN": this.getCsrfToken(),
             },
             body: JSON.stringify({
-                answers: this.answers,
+                answers: answersObj,
                 current_step: this.totalSteps,
             }),
         })
             .then((res) => {
-                if (!res.ok) throw new Error("Error en el servidor");
+                if (!res.ok) throw new Error(__("Error en el servidor"));
                 return res.json();
             })
             .then((data) => {
@@ -982,7 +1107,7 @@ class MythChallengeApp {
                 }
             })
             .catch((err) => {
-                console.warn("Modo local activado:", err);
+                console.warn(__("Modo local activado:"), err);
             });
     }
 }

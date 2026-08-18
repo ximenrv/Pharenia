@@ -1,29 +1,36 @@
-/* =================================================================
-   PANEL FAMILIAR - PALETA DE COLORES OFICIAL PHARENIA
-   ================================================================= */
+/* ==========================================================================
+   01. CONFIGURACIÓN BASE Y LAYOUT GENERAL
+   ========================================================================== */
 
 body {
-    background-color: #f6f5f0; /* Tono marfil/crema suave de fondo general */
+    background-color: #f6f5f0;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     color: #2b3e50;
     margin: 0;
-    padding: 40px 20px;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .family-panel-container {
     max-width: 1050px;
-    margin: 0 auto;
-    margin-top: 5rem;
+    margin: 6rem auto 0 auto;
+    padding-bottom: 80px;
+    flex: 1;
 }
 
-/* Cabecera */
+/* ==========================================================================
+   02. CABECERA DEL PANEL
+   ========================================================================== */
+
 .family-panel__header {
     text-align: center;
     margin-bottom: 40px;
 }
 
 .family-panel__badge {
-    background-color: #dfd8c8; /* Tono arena/dorado suave */
+    background-color: #dfd8c8;
     color: #3b4c58;
     font-size: 11px;
     font-weight: 700;
@@ -35,7 +42,7 @@ body {
 
 .family-panel__header h1 {
     font-size: 34px;
-    color: #2f4f4f; /* Azul verdoso/oscuro característico de los títulos */
+    color: #2f4f4f;
     margin: 12px 0 6px 0;
     font-weight: 700;
 }
@@ -66,20 +73,16 @@ body {
     border-color: #2f4f4f;
 }
 
-/* Cuadrícula de Tarjetas */
+/* ==========================================================================
+   03. TARJETAS Y GRILLA (CARDS & GRID)
+   ========================================================================== */
+
 .family-panel__grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 30px;
 }
 
-@media (max-width: 768px) {
-    .family-panel__grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Estilo de Tarjeta Contenedor (Fondo crema/marfil de las tarjetas de contenido) */
 .pharenia-card {
     background: #fdfcf7;
     border: 1px solid #e3dec9;
@@ -102,7 +105,10 @@ body {
     line-height: 1.5;
 }
 
-/* Formulario interno */
+/* ==========================================================================
+   04. FORMULARIOS Y BOTONES GENERALES
+   ========================================================================== */
+
 .pharenia-form__group {
     margin-bottom: 20px;
 }
@@ -133,7 +139,6 @@ body {
     box-shadow: 0 0 0 3px rgba(47, 79, 79, 0.12);
 }
 
-/* Botón de acción principal (Azul oscuro institucional de los botones "Comenzar") */
 .pharenia-btn {
     width: 100%;
     background-color: #2f4f4f;
@@ -143,10 +148,10 @@ body {
     font-size: 15px;
     font-weight: 600;
     border-radius: 10px;
-    cursor: pointer; /* <-- Esto es vital para que responda al mouse */
-    pointer-events: auto; /* <-- Asegura que reciba los clics */
+    cursor: pointer;
+    pointer-events: auto;
     position: relative;
-    z-index: 10; /* <-- Lo coloca por encima de cualquier capa que pudiera estorbar */
+    z-index: 10;
     transition: background-color 0.2s;
 }
 
@@ -154,7 +159,10 @@ body {
     background-color: #223a3a;
 }
 
-/* Lista de elementos */
+/* ==========================================================================
+   05. LISTAS Y ELEMENTOS
+   ========================================================================== */
+
 .pharenia-list {
     list-style: none;
     padding: 0;
@@ -191,9 +199,9 @@ body {
     border-radius: 12px;
 }
 
-/* ==========================================
-   PANEL DE ADMINISTRACIÓN - ESTILOS LIMPIOS
-   ========================================== */
+/* ==========================================================================
+   06. TABLAS Y ACCIONES DE ADMINISTRACIÓN
+   ========================================================================== */
 
 .pharenia-table-action-header {
     display: flex;
@@ -206,12 +214,16 @@ body {
     width: 100%;
     border-collapse: collapse;
     text-align: left;
+    position: relative;
+    z-index: 5;
 }
 
 .pharenia-data-table th,
 .pharenia-data-table td {
     padding: 12px;
     font-size: 14px;
+    position: relative;
+    z-index: 6;
 }
 
 .pharenia-data-table th {
@@ -232,7 +244,10 @@ body {
     color: #2f4f4f;
 }
 
-/* Botones personalizados */
+/* ==========================================================================
+   07. BOTONES ESPECÍFICOS DE ACCIÓN
+   ========================================================================== */
+
 .pharenia-btn-primary,
 .pharenia-btn-secondary,
 .pharenia-btn-danger,
@@ -240,7 +255,6 @@ body {
     border: none;
     border-radius: 6px;
     font-weight: 600;
-    cursor: pointer;
     transition: background-color 0.2s ease;
 }
 
@@ -248,7 +262,11 @@ body {
     background: #2f4f4f;
     color: #ffffff;
     padding: 10px 18px;
+    position: relative;
+    z-index: 10;
+    cursor: pointer !important;
 }
+
 .pharenia-btn-primary:hover {
     background: #1e3333;
 }
@@ -257,7 +275,11 @@ body {
     background: #cbd5e1;
     color: #2f4f4f;
     padding: 10px 20px;
+    position: relative;
+    z-index: 10;
+    cursor: pointer !important;
 }
+
 .pharenia-btn-secondary:hover {
     background: #b1c2d4;
 }
@@ -268,7 +290,11 @@ body {
     padding: 6px 12px;
     font-size: 12px;
     border-radius: 4px;
+    position: relative;
+    z-index: 10;
+    cursor: pointer !important;
 }
+
 .pharenia-btn-danger:hover {
     background: #c53030;
 }
@@ -282,31 +308,40 @@ body {
     border-radius: 4px;
 }
 
-/* Alertas */
+/* ==========================================================================
+   08. ALERTAS
+   ========================================================================== */
+
 .pharenia-alert {
     padding: 12px 16px;
     border-radius: 6px;
     margin-bottom: 20px;
     font-size: 14px;
 }
+
 .pharenia-alert--success {
     background: #d4edda;
     color: #155724;
 }
+
 .pharenia-alert--error {
     background: #f8d7da;
     color: #721c24;
 }
+
 .pharenia-alert--error ul {
     margin: 0;
     padding-left: 15px;
 }
 
-/* Ventanas Emergentes (Modales) */
+/* ==========================================================================
+   09. VENTANAS EMERGENTES (MODALES)
+   ========================================================================== */
+
 .pharenia-modal-overlay {
     display: none;
     position: fixed;
-    inset: 0; /* Abreviación limpia para top, right, bottom, left en 0 */
+    inset: 0;
     background: rgba(0, 0, 0, 0.5);
     justify-content: center;
     align-items: center;
@@ -381,6 +416,7 @@ body {
     letter-spacing: 0.5px;
     transition: background-color 0.2s ease;
 }
+
 .pharenia-modal-submit:hover {
     background: #1e3333;
 }

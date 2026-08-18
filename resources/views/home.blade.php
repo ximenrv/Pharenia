@@ -3,8 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pharenia - Inicio</title>
-    @vite(['resources/css/app.css'])
+    <title>Pharenia - {{ __('Inicio') }}</title>
+    
+    <!-- Script síncrono para evitar parpadeo de tema -->
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.dataset.theme = savedTheme;
+        })();
+    </script>
+
+    @vite(['resources/css/home.css', 'resources/css/navbar.css', 'resources/css/settings-menu.css', 'resources/js/settings-menu.js', 'resources/css/dark-theme.css'])
 </head>
 <body class="home-body">
 
@@ -17,16 +26,16 @@
             
             <section class="hero__content">
                 <h1 class="hero__title">
-                    Pharenia<br><span class="hero__title--highlight">El TEA.</span>
+                    Pharenia<br><span class="hero__title--highlight">{{ __('El TEA.') }}</span>
                 </h1>
                 
                 <p class="hero__description">
-                    Pharenia es un lugar con el fin de potenciar las capacidades naturales de personas con Trastorno del Espectro Autista.
+                    {{ __('Pharenia es un lugar con el fin de potenciar las capacidades naturales de personas con Trastorno del Espectro Autista.') }}
                 </p>
 
                 <div class="hero__actions">
-                    <a href="/activities" class="hero__btn hero__btn--primary">EXPLORAR ACTIVIDADES</a>
-                    <a href="/information" class="hero__btn hero__btn--secondary">CONOCER MÁS</a>
+                    <a href="/activities" class="hero__btn hero__btn--primary">{{ __('EXPLORAR ACTIVIDADES') }}</a>
+                    <a href="/information" class="hero__btn hero__btn--secondary">{{ __('CONOCER MÁS') }}</a>
                 </div>
             </section>
 
@@ -44,6 +53,9 @@
 
         </div>
     </main>
+
+    <!-- Componente del Menú Flotante -->
+    <x-settings-menu />
 
 </body>
 </html>

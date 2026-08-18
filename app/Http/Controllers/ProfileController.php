@@ -11,7 +11,6 @@ class ProfileController extends Controller
     // Muestra la pantalla del perfil
     public function edit()
     {
-        // Cambiado para que busque directamente en views/edit-profile.blade.php
         return view('profile.edit-profile', ['user' => Auth::user()]);
     }
 
@@ -22,7 +21,7 @@ class ProfileController extends Controller
 
         // Validar los campos obligatorios
         $request->validate([
-            'name' => 'required|string|max:255', // <-- Limpiado aquí para que solo quede un max:255
+            'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Máximo 2MB
         ]);
@@ -44,6 +43,6 @@ class ProfileController extends Controller
 
         $user->save();
 
-        return redirect()->back()->with('success', '¡Perfil actualizado correctamente!');
+        return redirect()->back()->with('success', __('profile.updated_success'));
     }
 }

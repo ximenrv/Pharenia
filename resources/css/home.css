@@ -1,4 +1,7 @@
-/* Estilos de la Página de Inicio */
+/* ==========================================================================
+   01. ESTILOS DE LA PÁGINA DE INICIO (HOME)
+   ========================================================================== */
+
 .home-body {
     margin-top: 6rem;
     padding: 0;
@@ -16,7 +19,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 10rem;
+    padding-top: 11rem;
     box-sizing: border-box;
     position: relative;
 }
@@ -28,7 +31,10 @@
     width: 100%;
 }
 
-/* --- BLOQUE DE INFORMACIÓN IZQUIERDA --- */
+/* ==========================================================================
+   02. BLOQUE DE INFORMACIÓN IZQUIERDA
+   ========================================================================== */
+
 .hero__content {
     flex: 1;
     max-width: 580px;
@@ -39,7 +45,7 @@
 
 .hero__title {
     font-size: 4.2rem;
-    color: #2c525a;
+    color: var(--text-color, #2c525a);
     margin: 0 0 0.5rem 0;
     font-family: Georgia, serif;
     line-height: 1.1;
@@ -60,7 +66,10 @@
     font-family: sans-serif;
 }
 
-/* --- DISEÑO ESTÉTICO DE BOTONES --- */
+/* ==========================================================================
+   03. DISEÑO DE BOTONES Y ACCIONES
+   ========================================================================== */
+
 .hero__actions {
     display: flex;
     align-items: center;
@@ -130,7 +139,10 @@
     transform-origin: left;
 }
 
-/* --- CONTENEDOR GRÁFICO ANIMADO --- */
+/* ==========================================================================
+   04. CONTENEDOR GRÁFICO Y CAPAS ANIMADAS
+   ========================================================================== */
+
 .hero__character-container {
     position: fixed;
     bottom: 0;
@@ -190,6 +202,7 @@
 .hero__layer--cloud {
     width: 100%;
     bottom: -90px;
+    left: 2px;
     transform: scale(1.1);
     transform-origin: bottom right;
     z-index: 3;
@@ -204,9 +217,10 @@
     animation: lumenFloatAndGlow 5s infinite ease-in-out;
 }
 
-/* --- SISTEMA DE ANIMACIONES --- */
+/* ==========================================================================
+   05. SISTEMA DE ANIMACIONES (@KEYFRAMES)
+   ========================================================================== */
 
-/* Flotación y Brillo de Lumen */
 @keyframes lumenFloatAndGlow {
     0% {
         transform: translateY(0) scale(1);
@@ -222,7 +236,6 @@
     }
 }
 
-/* Balanceo de la nube */
 @keyframes cloudSway {
     0% {
         transform: scale(1.1) translateX(0);
@@ -235,7 +248,6 @@
     }
 }
 
-/* Flotación de plumas */
 @keyframes featherFloat1 {
     0% {
         transform: translateY(0) rotate(-25deg);
@@ -260,7 +272,6 @@
     }
 }
 
-/* Destello sutil en el Botón Principal */
 @keyframes buttonShimmer {
     0%,
     100% {

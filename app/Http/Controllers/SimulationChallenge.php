@@ -12,7 +12,7 @@ class SimulationChallenge extends Controller
     {
         $userId = Auth::id();
         if (!$userId) {
-            return response()->json(['success' => false, 'message' => 'No autorizado'], 401);
+            return response()->json(['success' => false, 'message' => __('simulation.unauthorized')], 401);
         }
 
         $simulation = SimulationModel::where('user_id', $userId)
@@ -43,7 +43,7 @@ class SimulationChallenge extends Controller
     {
         $userId = Auth::id();
         if (!$userId) {
-            return response()->json(['success' => false, 'message' => 'No autorizado'], 401);
+            return response()->json(['success' => false, 'message' => __('simulation.unauthorized')], 401);
         }
 
         $step = $request->input('current_step', 1);
@@ -63,8 +63,10 @@ class SimulationChallenge extends Controller
             $simulation->simulation_current_step = $step;
             $simulation->save();
         } else {
+            $lastAttempt = SimulationModel::where('user_id', $userId)->max('simulation_attempt') ?? 0;
             SimulationModel::create([
                 'user_id' => $userId,
+                'simulation_attempt' => $lastAttempt + 1,
                 'simulation_answers' => $answers,
                 'simulation_current_step' => $step,
                 'simulation_is_completed' => 0,
@@ -78,7 +80,7 @@ class SimulationChallenge extends Controller
     {
         $userId = Auth::id();
         if (!$userId) {
-            return response()->json(['success' => false, 'message' => 'No autorizado'], 401);
+            return response()->json(['success' => false, 'message' => __('simulation.unauthorized')], 401);
         }
 
         $answers = $request->input('answers', []);
@@ -87,7 +89,7 @@ class SimulationChallenge extends Controller
         }
 
         $step = $request->input('current_step', 5);
-        $empathyLevel = "Aliado Compasivo Destacado";
+        $empathyLevel = __('simulation.empathy_level');
 
         $simulation = SimulationModel::where('user_id', $userId)
             ->where('simulation_is_completed', 0)
@@ -106,7 +108,7 @@ class SimulationChallenge extends Controller
         return response()->json([
             'success' => true,
             'empathy_level' => $empathyLevel,
-            'feedback' => '¡Felicidades! Has completado todas las situaciones demostrando un gran nivel de empatía y comprensión hacia el TEA.',
+            'feedback' => __('simulation.completion_feedback'),
         ]);
     }
 }

@@ -42,9 +42,9 @@ class AdminController extends Controller
             'role' => ['required', 'string', 'in:adult_tea,ally_no_tea,teen'],
             'password' => ['required', 'string', 'min:6'],
         ], [
-            'password.min' => 'La contraseña temporal debe tener al menos 6 caracteres.',
-            'email.unique' => 'Este correo electrónico ya se encuentra registrado.',
-            'birthdate.before' => 'La fecha de nacimiento debe ser anterior al día de hoy.',
+            'password.min' => __('admin.pass_min_6'),
+            'email.unique' => __('admin.email_unique'),
+            'birthdate.before' => __('admin.birthdate_before'),
         ]);
 
         $birthdate = Carbon::parse($validated['birthdate']);
@@ -52,13 +52,13 @@ class AdminController extends Controller
 
         if (in_array($validated['role'], ['adult_tea', 'ally_no_tea']) && $age < 18) {
             return back()->withErrors([
-                'birthdate' => 'El usuario registrado como Adulto/Aliado debe tener al menos 18 años.'
+                'birthdate' => __('admin.adult_age_error')
             ])->withInput();
         }
 
         if ($validated['role'] === 'teen' && ($age < 13 || $age > 17)) {
             return back()->withErrors([
-                'birthdate' => 'El usuario registrado como Joven (Teen) debe tener entre 13 y 17 años.'
+                'birthdate' => __('admin.teen_age_error')
             ])->withInput();
         }
 
@@ -70,7 +70,7 @@ class AdminController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
 
-        return redirect()->route('admin.dashboard')->with('success', 'Usuario registrado correctamente.');
+        return redirect()->route('admin.dashboard')->with('success', __('admin.user_registered'));
     }
 
     /**
@@ -84,8 +84,8 @@ class AdminController extends Controller
             'parent_pin' => ['required', 'digits:4'],
             'tutor_email' => ['required', 'email'],
         ], [
-            'parent_pin.digits' => 'El PIN parental debe ser exactamente de 4 dígitos.',
-            'birthdate.before' => 'La fecha de nacimiento debe ser anterior al día de hoy.',
+            'parent_pin.digits' => __('admin.pin_digits'),
+            'birthdate.before' => __('admin.birthdate_before'),
         ]);
 
         $birthdate = Carbon::parse($validated['birthdate']);
@@ -93,7 +93,7 @@ class AdminController extends Controller
 
         if ($age >= 13) {
             return back()->withErrors([
-                'birthdate' => 'El perfil de menor solo está permitido para niños menores de 13 años.'
+                'birthdate' => __('admin.minor_age_error')
             ])->withInput();
         }
 
@@ -103,7 +103,7 @@ class AdminController extends Controller
 
         if (!$tutor) {
             return back()->withErrors([
-                'tutor_email' => 'El correo indicado no pertenece a un usuario con el rol de Aliado (ally_no_tea) válido.'
+                'tutor_email' => __('admin.tutor_invalid')
             ])->withInput();
         }
 
@@ -114,18 +114,17 @@ class AdminController extends Controller
             'parent_pin' => $validated['parent_pin'],
         ]);
 
-        return redirect()->route('admin.dashboard')->with('success', 'Menor registrado correctamente bajo la tutela de ' . $tutor->name);
+        return redirect()->route('admin.dashboard')->with('success', __('admin.minor_registered', ['name' => $tutor->name]));
     }
 
    /**
-     * Edición para Adultos (Nombre, Correo, Rol) y Adolescentes (Nombre, Correo, Supervisor ID)
+     * Edición para Adultos y Adolescentes
      */
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
 
         if ($user->role === 'teen') {
-            // ADOLESCENTES: Nombre, Correo y Supervisor ID (validando que sea un ally_no_tea)
             $validated = $request->validate([
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'email', 'unique:users,email,' . $id],
@@ -137,7 +136,7 @@ class AdminController extends Controller
                               ->first();
 
             if (!$supervisor) {
-                return back()->withErrors(['supervisor_id' => 'El supervisor seleccionado debe ser obligatoriamente un registro con rol Aliado (ally_no_tea).'])->withInput();
+                return back()->withErrors(['supervisor_id' => __('admin.supervisor_invalid')])->withInput();
             }
 
             $user->update([
@@ -147,31 +146,27 @@ class AdminController extends Controller
             ]);
 
         } else {
-            // ADULTOS: Nombre, Correo y Rol
             $validated = $request->validate([
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'email', 'unique:users,email,' . $id],
-                'role' => ['required', 'string', 'in:adult_tea,ally_no_tea']
             ]);
 
             $user->update([
                 'name' => $validated['name'],
                 'email' => $validated['email'],
-                'role' => $validated['role']
             ]);
         }
 
-        return redirect()->route('admin.dashboard')->with('success', 'Usuario actualizado correctamente.');
+        return redirect()->route('admin.dashboard')->with('success', __('admin.user_updated'));
     }
 
     /**
-     * Edición para Menores (Nombre, PIN, Supervisor ID)
+     * Edición para Menores
      */
     public function updateMinor(Request $request, $id)
     {
         $minor = ChildProfile::findOrFail($id);
 
-        // MENORES: Nombre, PIN y Supervisor ID (validando que sea un ally_no_tea)
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'parent_pin' => ['required', 'digits:4'],
@@ -183,37 +178,37 @@ class AdminController extends Controller
                           ->first();
 
         if (!$supervisor) {
-            return back()->withErrors(['supervisor_id' => 'El supervisor seleccionado debe ser obligatoriamente un registro con rol Aliado (ally_no_tea).'])->withInput();
+            return back()->withErrors(['supervisor_id' => __('admin.supervisor_invalid')])->withInput();
         }
 
         $minor->update([
             'name' => $validated['name'],
             'parent_pin' => $validated['parent_pin'],
-            'user_id' => $validated['supervisor_id'] // user_id almacena el ID del tutor en la tabla de menores
+            'user_id' => $validated['supervisor_id']
         ]);
 
-        return redirect()->route('admin.dashboard')->with('success', 'Menor actualizado correctamente.');
+        return redirect()->route('admin.dashboard')->with('success', __('admin.minor_updated'));
     }
     
     /**
-     * Elimina un usuario (Adulto o Joven).
+     * Elimina un usuario.
      */
     public function destroyUser($id)
     {
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('admin.dashboard')->with('success', 'Usuario eliminado correctamente.');
+        return redirect()->route('admin.dashboard')->with('success', __('admin.user_deleted'));
     }
 
     /**
-     * Elimina un perfil de menor (ChildProfile).
+     * Elimina un perfil de menor.
      */
     public function destroyMinor($id)
     {
         $minor = ChildProfile::findOrFail($id);
         $minor->delete();
 
-        return redirect()->route('admin.dashboard')->with('success', 'Registro de menor eliminado correctamente.');
+        return redirect()->route('admin.dashboard')->with('success', __('admin.minor_deleted'));
     }
 }

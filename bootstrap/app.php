@@ -3,6 +3,7 @@
 use App\Http\Middleware\PreventBackHistoryCache;
 use App\Http\Middleware\CheckChildSession;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\SetLocale;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -15,8 +16,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        // Mantiene tu middleware global para evitar el caché de retroceso
+        // Mantiene tus middlewares globales para el caché y el idioma
         $middleware->appendToGroup('web', PreventBackHistoryCache::class);
+        $middleware->appendToGroup('web', SetLocale::class);
 
         // Registramos los alias para proteger rutas (menor y administrador)
         $middleware->alias([

@@ -1,6 +1,6 @@
-/* ==========================================
-   PHARENIA - ESTILOS EXCLUSIVOS MI PERFIL
-   ========================================== */
+/* ==========================================================================
+   01. PHARENIA - ESTILOS EXCLUSIVOS MI PERFIL
+   ========================================================================== */
 
 .profile-body {
     margin: 0 !important;
@@ -16,7 +16,7 @@
     width: 100% !important;
     margin: 0 !important;
     padding: 7rem 0 4rem 0 !important;
-    flex: 1; 
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,6 +32,10 @@
     flex-direction: column;
     align-items: center;
 }
+
+/* ==========================================================================
+   02. CABECERA DEL PERFIL
+   ========================================================================== */
 
 .profile-header {
     text-align: center;
@@ -54,6 +58,10 @@
     line-height: 1.5;
     margin: 0;
 }
+
+/* ==========================================================================
+   03. TARJETA Y CONTENEDOR DE AVATAR
+   ========================================================================== */
 
 .profile-card {
     background: #ffffff;
@@ -87,10 +95,10 @@
     height: 130px !important;
     max-width: 130px !important;
     max-height: 130px !important;
-    object-fit: cover !important; 
-    border-radius: 50% !important; 
+    object-fit: cover !important;
+    border-radius: 50% !important;
     border: 4px solid #2c525a !important;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
     display: block !important;
 }
 
@@ -110,6 +118,10 @@
 .profile-avatar-label:hover {
     background-color: #1e3b41;
 }
+
+/* ==========================================================================
+   04. FORMULARIO, CAMPOS Y BOTONES
+   ========================================================================== */
 
 .profile-form-group {
     display: flex;
@@ -159,6 +171,10 @@
 .profile-submit-btn:hover {
     background-color: #1e3b41;
 }
+
+/* ==========================================================================
+   05. ALERTAS DE ESTADO Y MENSAJES
+   ========================================================================== */
 
 .profile-alert-success {
     background-color: #c6f6d5;

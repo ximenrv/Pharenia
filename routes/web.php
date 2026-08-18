@@ -7,6 +7,7 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MchatChallenge;
 use App\Http\Controllers\SimulationChallenge;
+use App\Http\Controllers\InformationController;
 use App\Http\Controllers\MythChallengeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TeenController;
@@ -169,12 +170,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/information/mchat/submit', [MchatChallenge::class, 'calculateResult']);
     Route::post('/information/mchat/reset', [MchatChallenge::class, 'resetTest'])->name('information.mchat.reset');
 
-    Route::get('/', [SimulationChallenge::class, 'getProgress']);
+    Route::get('/simulation/progress', [SimulationChallenge::class, 'getProgress']);
     Route::post('/simulation/save-progress', [SimulationChallenge::class, 'saveProgress']);
     Route::post('/simulation/submit', [SimulationChallenge::class, 'submitSimulation']);
 <<<<<<< HEAD
 
     Route::get('/challenges/mitos/progress', [MythChallengeController::class, 'getProgress']);
+<<<<<<< Updated upstream
 Route::post('/challenges/mitos/save-progress', [MythChallengeController::class, 'saveProgress']);
 Route::post('/challenges/mitos/submit', [MythChallengeController::class, 'submitChallenge']);
 =======
@@ -196,3 +198,28 @@ Route::middleware(['auth'])->prefix('games/childs')->group(function () {
     Route::get('/record/get', [GameRecordController::class, 'getRecords'])->name('games.childs.record.get');
 >>>>>>> 3285df014fcee84ef7e58251d4eb5551eb57784d
 });
+=======
+    Route::post('/challenges/mitos/save-progress', [MythChallengeController::class, 'saveProgress']);
+    Route::post('/challenges/mitos/submit', [MythChallengeController::class, 'submitChallenge']);
+    Route::post('/challenges/mitos/reset', [MythChallengeController::class, 'resetChallenge']);
+});
+
+Route::get('/lang/{locale}', function ($locale) {
+    // Validamos que el idioma sea uno de los permitidos
+    if (in_array($locale, ['es', 'en'])) {
+        session(['locale' => $locale]);
+    }
+    return redirect()->back();
+})->name('lang.switch');
+
+Route::get('/information', function () {
+    $currentLocale = App::getLocale();
+    $path = lang_path($currentLocale . '.json');
+    $translations = file_exists($path) ? json_decode(file_get_contents($path), true) : [];
+
+    return view('information', compact('translations'));
+});
+
+// Ejemplo de cómo debe estar definida tu ruta
+Route::get('/information/{module}', [InformationController::class, 'index'])->name('information');
+>>>>>>> Stashed changes

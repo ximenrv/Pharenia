@@ -3,16 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pharenia - Iniciar Sesión</title>
-    @vite(['resources/css/app.css'])
+    <title>Pharenia - {{ __('Iniciar Sesión') }}</title>
+    <!-- Script síncrono para evitar parpadeo de tema -->
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.dataset.theme = savedTheme;
+        })();
+    </script>
+    @vite(['resources/css/auth.css', 'resources/css/settings-menu.css', 'resources/js/settings-menu.js', 'resources/css/dark-theme.css'])
 </head>
 <body class="auth-body">
 
     @include('components.loader')
 
     <div class="auth-logo">
-        <a href="{{ url('home') }}" title="Volver al inicio">
-            <img src="{{ asset('img/logo.png') }}" alt="Pharenia Logo">
+        <a href="{{ url('home') }}" title="{{ __('Volver al inicio') }}">
+            <img src="{{ asset('img/logo.png') }}" alt="{{ __('Pharenia Logo') }}">
         </a>
     </div>
 
@@ -25,7 +32,7 @@
     <div class="auth-wrapper">
         <main class="auth-main-container">
             
-            <h1 class="auth-title">Bienvenido a<br><span>Pharenia</span></h1>
+            <h1 class="auth-title">{{ __('Bienvenido a') }}<br><span>Pharenia</span></h1>
 
             <div class="auth-card">
                 @if ($errors->any())
@@ -40,14 +47,14 @@
                     @csrf
 
                     <div class="auth-group">
-                        <label for="email">EMAIL</label>
-                        <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="Digite su dirección email" required autofocus>
+                        <label for="email">{{ __('EMAIL') }}</label>
+                        <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="{{ __('Digite su dirección email') }}" required autofocus>
                     </div>
 
                     <div class="auth-group auth-group--password">
-                        <label for="password">CONTRASEÑA</label>
+                        <label for="password">{{ __('CONTRASEÑA') }}</label>
                         <div class="password-wrapper">
-                            <input type="password" id="password" name="password" placeholder="Digite su contraseña" required>
+                            <input type="password" id="password" name="password" placeholder="{{ __('Digite su contraseña') }}" required>
                             <button type="button" class="toggle-password" onclick="togglePassword('password', this)">
                                 <svg class="eye-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -58,18 +65,20 @@
                     </div>
 
                     <div class="auth-forgot-container">
-                        <a href="{{ route('forgot-password') }}" class="auth-link">¿Olvidó su contraseña?</a>
+                        <a href="{{ route('forgot-password') }}" class="auth-link">{{ __('¿Olvidó su contraseña?') }}</a>
                     </div>
 
                     <button type="submit" class="auth-btn-submit">
-                        INICIAR SESIÓN
+                        {{ __('INICIAR SESIÓN') }}
                     </button>
                 </form>
 
-                <p class="auth-switch">¿No tienes cuenta? <a href="{{ route('register') }}">Regístrate aquí</a></p>
+                <p class="auth-switch">{{ __('¿No tienes cuenta?') }} <a href="{{ route('register') }}">{{ __('Regístrate aquí') }}</a></p>
             </div>
         </main>
     </div>
+
+    <x-settings-menu />
 
     <script>
         function togglePassword(fieldId, btn) {
@@ -84,5 +93,6 @@
             }
         }
     </script>
+    
 </body>
 </html>

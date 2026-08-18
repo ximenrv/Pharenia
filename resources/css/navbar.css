@@ -1,3 +1,7 @@
+/* ==========================================================================
+   01. BARRA DE NAVEGACIÓN (NAVBAR)
+   ========================================================================== */
+
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -32,7 +36,7 @@
 }
 
 .navbar__link {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: 1.25rem;
     color: #2c525a;
     text-decoration: none;
@@ -63,7 +67,7 @@
 }
 
 .navbar__logout-btn {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: 1rem;
     font-weight: 500;
     color: #fff;
@@ -80,7 +84,7 @@
 }
 
 .navbar__login-link {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: 1rem;
     font-weight: 700;
     color: #fff;
@@ -90,7 +94,9 @@
     padding: 0.5rem 1.25rem;
     text-decoration: none;
     letter-spacing: 0.5px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition:
+        background-color 0.3s ease,
+        transform 0.3s ease;
 }
 
 .navbar__login-link:hover {
@@ -98,9 +104,12 @@
     transform: translateY(-1px);
 }
 
-/* --- CONTROLAR EL AVATAR EN EL NAVBAR --- */
-.nav-avatar, 
-nav img[alt="Perfil"], 
+/* ==========================================================================
+   02. CONTROL Y ESTILOS DE AVATAR
+   ========================================================================== */
+
+.nav-avatar,
+nav img[alt="Perfil"],
 .act-body img[src*="storage/avatars"] {
     width: 45px !important;
     height: 45px !important;

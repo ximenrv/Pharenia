@@ -1,4 +1,6 @@
-/* resources/css/auth.css */
+/* ==========================================================================
+   01. ESTRUCTURA GENERAL Y FONDO (AUTH)
+   ========================================================================== */
 
 .auth-body {
     margin: 0;
@@ -18,7 +20,10 @@
     overflow: hidden;
 }
 
-/* === LOGO (Fijo de manera independiente en la pantalla) === */
+/* ==========================================================================
+   02. LOGOTIPO
+   ========================================================================== */
+
 .auth-logo {
     position: absolute;
     top: 1rem;
@@ -42,7 +47,10 @@
     transform: scale(1.05);
 }
 
-/* === CONTENEDOR CENTRAL === */
+/* ==========================================================================
+   03. CONTENEDOR CENTRAL Y TARJETA
+   ========================================================================== */
+
 .auth-wrapper {
     width: 100%;
     height: 100%;
@@ -61,7 +69,6 @@
     box-sizing: border-box;
 }
 
-/* TÍTULO FIJO */
 .auth-title {
     font-family: sans-serif;
     font-size: 2.1rem;
@@ -75,7 +82,6 @@
     color: #1a3339;
 }
 
-/* TARJETA CON SCROLL INTERNO OPTIMIZADO */
 .auth-card {
     padding: 1.2rem 4rem 1.8rem 2.2rem;
     width: 100%;
@@ -91,12 +97,16 @@
 .auth-card::-webkit-scrollbar {
     width: 4px;
 }
+
 .auth-card::-webkit-scrollbar-thumb {
     background: rgba(44, 82, 90, 0.2);
     border-radius: 10px;
 }
 
-/* === FORMULARIO E INPUTS === */
+/* ==========================================================================
+   04. FORMULARIO E INPUTS
+   ========================================================================== */
+
 .auth-form {
     display: flex;
     flex-direction: column;
@@ -138,50 +148,63 @@
     border-bottom-color: #bfa12b;
 }
 
-/* Estilos optimizados para compactar y embellecer las tarjetas de rol */
+/* ==========================================================================
+   05. TARJETAS DE ROL
+   ========================================================================== */
+
 .role-cards-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
     margin-top: 6px;
 }
+
 .role-option-card {
     position: relative;
     cursor: pointer;
     border: 2px solid #e2e8f0;
     border-radius: 10px;
-    padding: 10px 12px;
+    padding: 5px 12px;
     background-color: #f8fafc;
     transition: all 0.2s ease;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
+
 .role-option-card input[type="radio"] {
     position: absolute;
     opacity: 0;
     pointer-events: none;
 }
+
 .role-title {
     font-weight: 700;
     font-size: 0.8rem;
     color: #1e293b;
     margin-bottom: 2px;
 }
+
 .role-desc {
     font-size: 0.72rem;
     color: #64748b;
     line-height: 1.25;
 }
+
 .role-option-card:hover {
     border-color: #cbd5e1;
     background-color: #ffffff;
 }
+
 .role-option-card.active {
     border-color: #0ea5e9;
     background-color: #f0f9ff;
     box-shadow: 0 2px 8px rgba(14, 165, 233, 0.1);
 }
+
+/* ==========================================================================
+   06. VISIBILIDAD DE CONTRASEÑA Y ERRORES
+   ========================================================================== */
 
 .password-wrapper {
     position: relative;
@@ -226,7 +249,10 @@
     font-size: 0.75rem;
 }
 
-/* === ENLACE DE OLVIDÓ CONTRASEÑA === */
+/* ==========================================================================
+   07. ENLACES Y BOTONES
+   ========================================================================== */
+
 .auth-forgot-container {
     margin-top: -0.2rem;
     margin-bottom: 0.2rem;
@@ -245,7 +271,6 @@
     text-decoration: underline;
 }
 
-/* === BOTÓN DE ENVÍO === */
 .auth-btn-submit {
     align-self: flex-start;
     background: linear-gradient(135deg, #bfa12b 0%, #2c525a 50%, #bfa12b 100%);
@@ -290,7 +315,10 @@
     text-decoration: underline;
 }
 
-/* === MEDIDOR DE FUERZA DE CONTRASEÑA === */
+/* ==========================================================================
+   08. MEDIDOR DE FUERZA DE CONTRASEÑA
+   ========================================================================== */
+
 .password-strength {
     display: flex;
     flex-direction: column;
@@ -335,7 +363,10 @@
     margin-top: 2px;
 }
 
-/* === CORALES DECORATIVOS (Fijos al fondo) === */
+/* ==========================================================================
+   09. CORALES DECORATIVOS Y ANIMACIONES
+   ========================================================================== */
+
 .auth-decorations {
     position: absolute;
     top: 0;
@@ -377,7 +408,6 @@
     animation-delay: -2s;
 }
 
-/* === ANIMACIONES === */
 @keyframes coralSway {
     0%,
     100% {

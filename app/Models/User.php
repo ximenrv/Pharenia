@@ -16,25 +16,11 @@ class User extends Authenticatable
         'email',
         'birthdate',
         'role',
-        'parent_pin',
         'supervisor_id', // Asegúrate de incluir esta si quieres asignarla por fillable
         'password',
     ];
 
-    protected $hidden = [
-        'password',
-        'remember_token',
-        'parent_pin',
-    ];
 
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'birthdate' => 'date:Y-m-d',
-            'password' => 'hashed',
-        ];
-    }
 
     public function children()
     {

@@ -21,19 +21,19 @@ class TeenController extends Controller
         $request->validate([
             'supervisor_email' => ['required', 'email', 'exists:users,email'],
         ], [
-            'supervisor_email.exists' => 'El correo ingresado no pertenece a ningún usuario registrado como tutor en la plataforma.',
+            'supervisor_email.exists' => __('teen.supervisor_not_found'),
         ]);
 
         $supervisor = User::where('email', $request->supervisor_email)->first();
 
         if (in_array($supervisor->role, ['minor', 'teen'])) {
-            return back()->withErrors(['supervisor_email' => 'El correo debe pertenecer a un adulto responsable o tutor.']);
+            return back()->withErrors(['supervisor_email' => __('teen.supervisor_must_be_adult')]);
         }
 
         Auth::user()->update([
             'supervisor_id' => $supervisor->id
         ]);
 
-        return back()->with('success', '¡Adulto supervisor vinculado exitosamente!');
+        return back()->with('success', __('teen.supervisor_linked_success'));
     }
 }

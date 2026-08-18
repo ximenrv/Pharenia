@@ -29,7 +29,7 @@ class MchatChallenge extends Controller
 
                     $progress = MchatModel::create([
                         'user_id' => Auth::id(),
-                        'mchat_attempt' => $newAttemptNumber, // <-- Actualizado aquí
+                        'mchat_attempt' => $newAttemptNumber,
                         'mchat_answers' => [],
                         'mchat_current_step' => 1,
                         'mchat_is_completed' => false,
@@ -41,13 +41,12 @@ class MchatChallenge extends Controller
         return view('information', compact('progress'));
     }
 
-public function saveProgress(Request $request)
+    public function saveProgress(Request $request)
     {
         if (!Auth::check()) {
-            return response()->json(['success' => false, 'message' => 'No autorizado'], 401);
+            return response()->json(['success' => false, 'message' => __('mchat.unauthorized')], 401);
         }
 
-        // 👈 Cambiar 'step' por 'current_step' para que coincida con el JS
         $step = $request->input('current_step', 1);
         $answers = $request->input('answers', []);
 
@@ -63,12 +62,10 @@ public function saveProgress(Request $request)
             ->first();
 
         if ($progress) {
-            // Forzamos la asignación explícita para columnas JSON
             $progress->mchat_answers = $answers;
             $progress->mchat_current_step = $step;
             $progress->save();
         } else {
-            // Si por alguna razón no existe un borrador abierto, lo creamos
             MchatModel::create([
                 'user_id' => Auth::id(),
                 'mchat_answers' => $answers,
@@ -83,7 +80,7 @@ public function saveProgress(Request $request)
     public function calculateResult(Request $request)
     {
         if (!Auth::check()) {
-            return response()->json(['success' => false, 'message' => 'No autorizado'], 401);
+            return response()->json(['success' => false, 'message' => __('mchat.unauthorized')], 401);
         }
 
         $answers = $request->input('answers', []);
@@ -105,7 +102,7 @@ public function saveProgress(Request $request)
             $riskLevel = 'Alto';
         }
 
-        // Buscamos el borrador activo actual y lo ACTUALIZAMOS (evitamos duplicar filas vacías)
+        // Buscamos el borrador activo actual y lo ACTUALIZAMOS
         $progress = MchatModel::where('user_id', Auth::id())
             ->where('mchat_is_completed', false)
             ->latest()
@@ -120,7 +117,6 @@ public function saveProgress(Request $request)
                 'mchat_risk_level' => $riskLevel,
             ]);
         } else {
-            // Plan de respaldo por si el borrador no se encontraba abierto
             MchatModel::create([
                 'user_id' => Auth::id(),
                 'mchat_answers' => $answers,
@@ -156,7 +152,6 @@ public function saveProgress(Request $request)
             'mchat_is_completed' => false,
         ]);
 
-        // Solo la ruta con el parámetro, sin concatenar hashes extra
         return redirect()->route('information', ['module' => 'mchat']);
     }
 
@@ -164,11 +159,11 @@ public function saveProgress(Request $request)
     {
         switch ($riskLevel) {
             case 'Alto':
-                return 'La puntuación indica un riesgo alto. Se recomienda una evaluación clínica detallada por un especialista.';
+                return __('mchat.risk_high_feedback');
             case 'Medio':
-                return 'La puntuación indica un riesgo moderado. Se sugiere un seguimiento cercano y reevaluación.';
+                return __('mchat.risk_medium_feedback');
             default:
-                return 'La puntuación indica un riesgo bajo. No se requieren acciones adicionales a menos que se observen otros signos.';
+                return __('mchat.risk_low_feedback');
         }
     }
 }

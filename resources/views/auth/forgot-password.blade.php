@@ -15,15 +15,15 @@
             $correo = trim((string) request('correo'));
 
             if (! filter_var($correo, FILTER_VALIDATE_EMAIL)) {
-                $errores[] = 'Por favor ingresa un correo válido.';
+                $errores[] = __('Por favor ingresa un correo válido.');
                 $paso = 1;
             } elseif (! User::where('email', $correo)->exists()) {
-                $errores[] = 'No encontramos ninguna cuenta con ese correo.';
+                $errores[] = __('No encontramos ninguna cuenta con ese correo.');
                 $paso = 1;
             } else {
                 $paso = 2;
                 $correoEncontrado = $correo;
-                $status = 'Correo encontrado. Ahora puedes cambiar tu contraseña.';
+                $status = __('Correo encontrado. Ahora puedes cambiar tu contraseña.');
             }
         } elseif ($accion === 'cambiar_contrasena') {
             $paso = 2;
@@ -32,27 +32,27 @@
             $confirmar = (string) request('confirmar_contrasena');
 
             if (strlen($nueva) < 8) {
-                $errores[] = 'La contraseña debe tener al menos 8 caracteres.';
+                $errores[] = __('La contraseña debe tener al menos 8 caracteres.');
             }
             if (! preg_match('/[0-9]/', $nueva)) {
-                $errores[] = 'La contraseña debe contener al menos un número.';
+                $errores[] = __('La contraseña debe contener al menos un número.');
             }
             // Validación separada para minúsculas y mayusculas
             if (! preg_match('/[a-z]/', $nueva) || ! preg_match('/[A-Z]/', $nueva)) {
-                $errores[] = 'La contraseña debe contener letras mayúsculas y minúsculas.';
+                $errores[] = __('La contraseña debe contener letras mayúsculas y minúsculas.');
             }
             // Validación para símbolos
             if (! preg_match('/[^a-zA-Z0-9]/', $nueva)) {
-                $errores[] = 'La contraseña debe contener al menos un símbolo.';
+                $errores[] = __('La contraseña debe contener al menos un símbolo.');
             }
             if ($nueva !== $confirmar) {
-                $errores[] = 'Las contraseñas no coinciden.';
+                $errores[] = __('Las contraseñas no coinciden.');
             }
 
             if (! $errores) {
                 User::where('email', $correoEncontrado)->update(['password' => Hash::make($nueva)]);
                 $actualizado = true;
-                $status = 'Contraseña actualizada correctamente. Ya puedes iniciar sesión.';
+                $status = __('Contraseña actualizada correctamente. Ya puedes iniciar sesión.');
             }
         }
     }
@@ -62,16 +62,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pharenia - Recuperar Contraseña</title>
-    @vite(['resources/css/forgot-password.css'])
+    <title>Pharenia - {{ __('Recuperar Contraseña') }}</title>
+    <!-- Script síncrono para evitar parpadeo de tema -->
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.dataset.theme = savedTheme;
+        })();
+    </script>
+    @vite(['resources/css/forgot-password.css', 'resources/css/settings-menu.css', 'resources/js/settings-menu.js', 'resources/css/dark-theme.css'])
 </head>
 <body class="auth-body">
 
     @include('components.loader')
 
     <div class="auth-logo">
-        <a href="{{ url('/') }}" title="Volver al inicio">
-            <img src="{{ asset('img/logo.png') }}" alt="Pharenia Logo">
+        <a href="{{ url('home') }}" title="{{ __('Volver al inicio') }}">
+            <img src="{{ asset('img/logo.png') }}" alt="{{ __('Pharenia Logo') }}">
         </a>
     </div>
 
@@ -84,7 +91,7 @@
     <div class="auth-wrapper">
         <main class="auth-main-container">
             
-            <h1 class="auth-title">Recuperar<br><span>Contraseña</span></h1>
+            <h1 class="auth-title">{{ __('Recuperar') }}<br><span>{{ __('Contraseña') }}</span></h1>
 
             <div class="auth-card">
                 @if ($errores)
@@ -107,12 +114,12 @@
                         <input type="hidden" name="accion" value="buscar_correo">
 
                         <div class="auth-group">
-                            <label for="correo">EMAIL</label>
-                            <input type="email" id="correo" name="correo" value="{{ old('correo') }}" placeholder="Digite su dirección email" required autofocus>
+                            <label for="correo">{{ __('EMAIL') }}</label>
+                            <input type="email" id="correo" name="correo" value="{{ old('correo') }}" placeholder="{{ __('Digite su dirección email') }}" required autofocus>
                         </div>
 
                         <button type="submit" class="auth-btn-submit">
-                            BUSCAR MI CUENTA
+                            {{ __('BUSCAR MI CUENTA') }}
                         </button>
                     </form>
                 @elseif (! $actualizado)
@@ -122,9 +129,9 @@
                         <input type="hidden" name="correo_hidden" value="{{ $correoEncontrado }}">
 
                         <div class="auth-group auth-group--password">
-                            <label for="nueva_contrasena">NUEVA CONTRASEÑA</label>
+                            <label for="nueva_contrasena">{{ __('NUEVA CONTRASEÑA') }}</label>
                             <div class="password-wrapper">
-                                <input type="password" id="nueva_contrasena" name="nueva_contrasena" placeholder="Mín. 8 caracteres (May, min, núm)" required>
+                                <input type="password" id="nueva_contrasena" name="nueva_contrasena" placeholder="{{ __('Mín. 8 caracteres (May, min, núm, símbolo)') }}" required>
                                 <button type="button" class="toggle-password" onclick="togglePassword('nueva_contrasena', this)">
                                     <svg class="eye-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -138,14 +145,14 @@
                                     <span class="strength-bar" id="strengthBar2"></span>
                                     <span class="strength-bar" id="strengthBar3"></span>
                                 </div>
-                                <span class="strength-label" id="strengthLabel">Escribe una contraseña</span>
+                                <span class="strength-label" id="strengthLabel">{{ __('Escribe una contraseña') }}</span>
                             </div>
                         </div>
 
                         <div class="auth-group auth-group--password">
-                            <label for="confirmar_contrasena">CONFIRMAR CONTRASEÑA</label>
+                            <label for="confirmar_contrasena">{{ __('CONFIRMAR CONTRASEÑA') }}</label>
                             <div class="password-wrapper">
-                                <input type="password" id="confirmar_contrasena" name="confirmar_contrasena" placeholder="Repita su contraseña" required>
+                                <input type="password" id="confirmar_contrasena" name="confirmar_contrasena" placeholder="{{ __('Repita su contraseña') }}" required>
                                 <button type="button" class="toggle-password" onclick="togglePassword('confirmar_contrasena', this)">
                                     <svg class="eye-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -157,12 +164,12 @@
                         </div>
 
                         <button type="submit" class="auth-btn-submit">
-                            GUARDAR CONTRASEÑA
+                            {{ __('GUARDAR CONTRASEÑA') }}
                         </button>
                     </form>
                 @endif
 
-                <p class="auth-switch">¿Recordaste tu contraseña? <a href="{{ route('login') }}">Inicia sesión aquí</a></p>
+                <p class="auth-switch">{{ __('¿Recordaste tu contraseña?') }} <a href="{{ route('login') }}">{{ __('Inicia sesión aquí') }}</a></p>
             </div>
         </main>
     </div>
@@ -230,6 +237,7 @@
             confirmar.addEventListener('input', validarPasswords);
         }
     </script>
+
+    <x-settings-menu />
 </body>
 </html>
-

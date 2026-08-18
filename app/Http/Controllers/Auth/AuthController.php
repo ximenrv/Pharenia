@@ -32,20 +32,20 @@ class AuthController extends Controller
                     ->symbols(),
             ],
         ], [
-            'password.regex' => 'La contraseña no debe contener espacios en blanco.',
-            'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
-            'role.required' => 'Debe seleccionar un objetivo de perfil.',
+            'password.regex' => __('auth.password_regex'),
+            'password.min' => __('auth.password_min'),
+            'role.required' => __('auth.role_required'),
         ]);
 
         $age = Carbon::parse($validated['birthdate'])->age;
-        $role = $validated['role']; 
+        $role = $validated['role'];
 
         // 🛡️ BLOQUEO ESTRICTO POR EDAD Y PERFIL INCORRECTO
 
         // 1. Menores de 13 años (prohibido registro independiente)
         if ($age < 13) {
             return back()->withErrors([
-                'birthdate' => 'Los menores de 13 años no pueden registrarse de forma independiente. Deben ser registrados por un adulto responsable desde el panel familiar.'
+                'birthdate' => __('auth.under_13')
             ])->withInput();
         }
 
@@ -53,15 +53,15 @@ class AuthController extends Controller
         if ($age >= 13 && $age <= 17) {
             if ($role !== 'teen') {
                 return back()->withErrors([
-                    'role' => 'Tu fecha de nacimiento indica que eres menor de edad (13-17 años). Debes seleccionar el perfil de Joven / Adolescente.'
+                    'role' => __('auth.teen_role_required')
                 ])->withInput();
             }
-        } 
+        }
         // 3. Adultos (18 años o más): NO pueden ser 'teen'
         else {
             if ($role === 'teen') {
                 return back()->withErrors([
-                    'role' => 'No puedes seleccionar el perfil de adolescente si eres mayor de edad (18+).'
+                    'role' => __('auth.adult_no_teen')
                 ])->withInput();
             }
         }
@@ -80,7 +80,7 @@ class AuthController extends Controller
 
         return redirect()->route('home');
     }
-    
+
     public function login(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
@@ -90,22 +90,19 @@ class AuthController extends Controller
 
         if (! Auth::attempt($credentials, $request->boolean('remember'))) {
             return back()->withErrors([
-                'email' => 'Las credenciales proporcionadas no coinciden con nuestros registros.',
+                'email' => __('auth.failed'),
             ])->onlyInput('email');
         }
 
         $request->session()->regenerate();
 
-        // Obtenemos al usuario autenticado
         $user = Auth::user();
 
-        // Redirección inteligente basada en el rol
         if ($user->role === 'admin') {
-            return redirect()->intended('home'); 
+            return redirect()->route('home');
         }
 
-        // Para los demás usuarios (adult_tea, ally_no_tea, teen, minor)
-        return redirect()->intended(route('home'));
+        return redirect()->route('home');
     }
 
     public function logout(Request $request): RedirectResponse

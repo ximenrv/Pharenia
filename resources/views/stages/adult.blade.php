@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estación de la Adultez - Pharenia</title>
-    @vite(['resources/css/stages.css', 'resources/css/navbar.css', 'resources/css/footer.css'])
+    @vite(['resources/css/stages.css', 'resources/css/navbar.css', 'resources/css/footer.css', 'resources/css/dark-theme.css'])
 </head>
 <body style="background-color: #f5efff; margin: 0; padding: 0;">
     @include('components.loader')

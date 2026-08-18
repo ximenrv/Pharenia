@@ -16,7 +16,7 @@ class FamilyController extends Controller
     {
         $adultId = Auth::id();
 
-        // 1. Menores de 12 años (asumiendo que los guardas con relación o en la misma tabla)
+        // 1. Menores de 12 años
         $children = auth()->user()->children()->get();
 
         // 2. Jóvenes (13-17 años) que vincularon a este adulto por correo
@@ -31,9 +31,15 @@ class FamilyController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'birthdate' => 'required|date',
-            'parent_pin' => 'required|digits:4',
+            'name' => ['required', 'string', 'max:255'],
+            'birthdate' => ['required', 'date'],
+            'parent_pin' => ['required', 'digits:4'],
+        ], [
+            'name.required' => __('family.name_required'),
+            'birthdate.required' => __('family.birthdate_required'),
+            'birthdate.date' => __('family.birthdate_date'),
+            'parent_pin.required' => __('family.pin_required'),
+            'parent_pin.digits' => __('family.pin_digits'),
         ]);
 
         // Calcular la edad exacta
@@ -42,7 +48,7 @@ class FamilyController extends Controller
         // Validar que sea estrictamente menor de 12 años
         if ($age >= 12) {
             return back()
-                ->withErrors(['birthdate' => 'El perfil debe pertenecer a un menor de 12 años.'])
+                ->withErrors(['birthdate' => __('family.under_12_error')])
                 ->withInput();
         }
 
@@ -54,6 +60,6 @@ class FamilyController extends Controller
             'parent_pin' => $request->parent_pin,
         ]);
 
-        return redirect()->route('family-panel')->with('success', '¡Perfil de menor creado exitosamente!');
+        return redirect()->route('family-panel')->with('success', __('family.success_created'));
     }
 }
