@@ -7,7 +7,7 @@
     @vite(['resources/css/stages.css', 'resources/css/navbar.css', 'resources/css/footer.css'])
 </head>
 <body style="background-color: #eef7f9; margin: 0; padding: 0;">
-
+    @include('components.loader')
     @if(session()->has('active_child_id'))
         <div style="max-width: 1200px; margin: 3rem auto -6rem auto; padding: 0 2rem; box-sizing: border-box;">
             <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 20px;">
@@ -34,13 +34,14 @@
     <div class="stage-page">
         <div class="stage-container">
             <header class="stage-header" style="padding-top: 20px;">
-                <span class="stage-header__subtitle" style="color: #2c525a">Nivel 1 — Explorando emociones y colores</span>
+                <span class="stage-header__subtitle" style="color: #2c525a">Nivel 1 — Explorando figuras y colores</span>
                 <h1 class="stage-header__title">Mundo de la Niñez</h1>
                 <p class="stage-header__intro">Selecciona cualquiera de nuestros tres módulos interactivos para comenzar a jugar y poner a prueba tus habilidades.</p>
             </header>
 
             <div class="games-grid">
-                <a href="/juegos/ninez/rompecabezas" class="game-card">
+                <!-- Cazador de Burbujas -->
+                <div class="game-card" data-name="Cazador de Burbujas" data-url="{{ route('games.cazador') }}">
                     <div class="game-card__image-wrapper">
                         <img src="{{ asset('img/game-ninez-1.png') }}" alt="Rompecabezas de Emociones" class="game-card__img">
                         <div class="game-card__overlay" style="background-color: #2c525a;">
@@ -48,12 +49,13 @@
                         </div>
                     </div>
                     <div class="game-card__info">
-                        <h3 class="game-card__title">Rompecabezas de Emociones</h3>
-                        <p class="game-card__description">Asocia las caras de Lumen con su respectiva emoción.</p>
+                        <h3 class="game-card__title">Cazador de Burbujas</h3>
+                        <p class="game-card__description">Atrapa las burbujas con la forma que te pida Lumen. (En desarrollo)</p>
                     </div>
-                </a>
+                </div>
 
-                <a href="/juegos/ninez/oceano" class="game-card">
+                <!-- Guardianes del Planeta -->
+                <div class="game-card" data-name="Guardianes del Planeta" data-url="{{ route('games.guardianes') }}">
                     <div class="game-card__image-wrapper">
                         <img src="{{ asset('img/game-ninez-2.png') }}" alt="El Limpiador del Océano" class="game-card__img">
                         <div class="game-card__overlay" style="background-color: #2c525a;">
@@ -61,12 +63,13 @@
                         </div>
                     </div>
                     <div class="game-card__info">
-                        <h3 class="game-card__title">El Limpiador del Océano</h3>
-                        <p class="game-card__description">Ayuda al pulpo a clasificar la basura del mar.</p>
+                        <h3 class="game-card__title">Guardianes del Planeta</h3>
+                        <p class="game-card__description">Ayuda a Lumen a limpiar la playa.</p>
                     </div>
-                </a>
+                </div>
 
-                <a href="/juegos/ninez/sonidos" class="game-card">
+                <!-- Eco de los Colores -->
+                <div class="game-card" data-name="Eco de los Colores" data-url="{{ route('games.eco') }}">
                     <div class="game-card__image-wrapper">
                         <img src="{{ asset('img/game-ninez-3.png') }}" alt="Sonidos Sagrados" class="game-card__img">
                         <div class="game-card__overlay" style="background-color: #2c525a;">
@@ -74,10 +77,21 @@
                         </div>
                     </div>
                     <div class="game-card__info">
-                        <h3 class="game-card__title">Sonidos Sagrados</h3>
-                        <p class="game-card__description">Descubre qué instrumento musical está sonando.</p>
+                        <h3 class="game-card__title">Eco de los Colores</h3>
+                        <p class="game-card__description">Memoriza el patrón de burbujas mágicas.</p>
                     </div>
-                </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Pop-up -->
+    <div id="confirmModal" class="modal-overlay">
+        <div class="modal-box">
+            <h2 id="modalText" class="modal-title">¿Quieres jugar?</h2>
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn--cancel" onclick="closeModal()">Cancelar</button>
+                <button id="confirmPlayBtn" class="modal-btn modal-btn--confirm">¡Sí, jugar!</button>
             </div>
         </div>
     </div>
@@ -86,5 +100,28 @@
         @include('components.footer')
     @endif
 
+    <script>
+        let targetGameUrl = '';
+
+        document.querySelectorAll('.game-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const gameName = this.getAttribute('data-name');
+                targetGameUrl = this.getAttribute('data-url');
+                
+                document.getElementById('modalText').innerText = `¿Quieres jugar ${gameName}?`;
+                document.getElementById('confirmModal').classList.add('active');
+            });
+        });
+
+        function closeModal() {
+            document.getElementById('confirmModal').classList.remove('active');
+        }
+
+        document.getElementById('confirmPlayBtn').addEventListener('click', function() {
+            if (targetGameUrl) {
+                window.location.href = targetGameUrl;
+            }
+        });
+    </script>
 </body>
 </html>

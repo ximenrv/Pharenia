@@ -11,6 +11,8 @@ use App\Http\Controllers\MythChallengeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TeenController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\GameRecordController;
+use App\Http\Controllers\ChildGamesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -170,8 +172,27 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/', [SimulationChallenge::class, 'getProgress']);
     Route::post('/simulation/save-progress', [SimulationChallenge::class, 'saveProgress']);
     Route::post('/simulation/submit', [SimulationChallenge::class, 'submitSimulation']);
+<<<<<<< HEAD
 
     Route::get('/challenges/mitos/progress', [MythChallengeController::class, 'getProgress']);
 Route::post('/challenges/mitos/save-progress', [MythChallengeController::class, 'saveProgress']);
 Route::post('/challenges/mitos/submit', [MythChallengeController::class, 'submitChallenge']);
+=======
+});
+
+/*
+|--------------------------------------------------------------------------
+| Juegos Niñez
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->prefix('games/childs')->group(function () {
+    // Vistas de los Juegos
+    Route::get('/guardianes', [ChildGamesController::class, 'guardianes'])->name('games.guardianes');
+    Route::get('/eco', [ChildGamesController::class, 'eco'])->name('games.eco');
+    Route::get('/cazador', [ChildGamesController::class, 'cazador'])->name('games.cazador');
+
+    // Rutas para la gestión de Récords
+    Route::post('/record/update', [GameRecordController::class, 'updateRecord'])->name('games.childs.record.update');
+    Route::get('/record/get', [GameRecordController::class, 'getRecords'])->name('games.childs.record.get');
+>>>>>>> 3285df014fcee84ef7e58251d4eb5551eb57784d
 });
