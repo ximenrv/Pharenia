@@ -67,6 +67,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/activities/adultez', function () {
         return view('stages.adult');
     })->name('activities.adultez');
+
+    Route::get('/juegos/juventud/quizzsense', function () {
+        return view('games.youth.quizzsense');
+    })->name('games.youth.quizzsense');
+
+    Route::get('/juegos/juventud/paises', function () {
+        return view('games.youth.paises');
+    })->name('games.youth.paises');
 });
 
 

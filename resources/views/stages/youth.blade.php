@@ -33,33 +33,33 @@
             </header>
 
             <div class="games-grid">
-                <a href="/juegos/juventud/rutina" class="game-card">
+                <a href="#" class="game-card" data-game-url="{{ route('games.youth.quizzsense') }}" data-game-name="QuizzSense">
                     <div class="game-card__image-wrapper">
-                        <img src="{{ asset('img/game-juve-1.png') }}" alt="Planificador Diario" class="game-card__img">
+                        <img src="{{ asset('img/game-juve-1.svg') }}" alt="QuizzSense" class="game-card__img">
                         <div class="game-card__overlay" style="background-color: #bfa12b;">
                             <span class="game-card__play-btn">¡JUGAR AHORA!</span>
                         </div>
                     </div>
                     <div class="game-card__info">
-                        <h3 class="game-card__title">Planificador Diario</h3>
-                        <p class="game-card__description">Organiza las tareas de la semana de forma eficiente.</p>
+                        <h3 class="game-card__title">QuizzSense</h3>
+                        <p class="game-card__description">Responde situaciones cotidianas y entrena tus habilidades sociales.</p>
                     </div>
                 </a>
 
-                <a href="/juegos/juventud/social" class="game-card">
+                <a href="#" class="game-card" data-game-url="{{ route('games.youth.paises') }}" data-game-name="Países del mundo">
                     <div class="game-card__image-wrapper">
-                        <img src="{{ asset('img/game-juve-2.png') }}" alt="Conversaciones en el Aula" class="game-card__img">
+                        <img src="{{ asset('img/game-juve-2.svg') }}" alt="Países del mundo" class="game-card__img">
                         <div class="game-card__overlay" style="background-color: #bfa12b;">
                             <span class="game-card__play-btn">¡JUGAR AHORA!</span>
                         </div>
                     </div>
                     <div class="game-card__info">
-                        <h3 class="game-card__title">Conversaciones en el Aula</h3>
-                        <p class="game-card__description">Elige las mejores respuestas para interactuar con amigos.</p>
+                        <h3 class="game-card__title">Países del mundo</h3>
+                        <p class="game-card__description">Explora continentes y localiza países en el mapa.</p>
                     </div>
                 </a>
 
-                <a href="/juegos/juventud/mapa" class="game-card">
+                <a href="#" class="game-card" data-game-url="/juegos/juventud/mapa" data-game-name="Descifra el Mapa">
                     <div class="game-card__image-wrapper">
                         <img src="{{ asset('img/game-juve-3.png') }}" alt="Descifra el Mapa" class="game-card__img">
                         <div class="game-card__overlay" style="background-color: #bfa12b;">
@@ -74,6 +74,60 @@
             </div>
         </div>
     </div>
+
+    {{-- Modal de confirmación antes de entrar al juego --}}
+    <div class="modal-overlay" id="game-confirm-modal" aria-hidden="true">
+        <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <h2 class="modal-title" id="modal-title">¿Quieres jugar?</h2>
+            <div class="modal-actions">
+                <button type="button" class="modal-btn modal-btn--cancel" id="modal-cancel">Cancelar</button>
+                <button type="button" class="modal-btn modal-btn--confirm" id="modal-confirm">¡Sí, jugar!</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const modal = document.getElementById('game-confirm-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const btnCancel = document.getElementById('modal-cancel');
+            const btnConfirm = document.getElementById('modal-confirm');
+            let targetUrl = '';
+
+            document.querySelectorAll('.game-card').forEach(function (card) {
+                card.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    targetUrl = card.getAttribute('data-game-url');
+                    const gameName = card.getAttribute('data-game-name');
+                    modalTitle.textContent = '¿Quieres jugar ' + gameName + '?';
+                    modal.classList.add('active');
+                    modal.setAttribute('aria-hidden', 'false');
+                });
+            });
+
+            function closeModal() {
+                modal.classList.remove('active');
+                modal.setAttribute('aria-hidden', 'true');
+            }
+
+            btnCancel.addEventListener('click', closeModal);
+            modal.addEventListener('click', function (e) {
+                if (e.target === modal) closeModal();
+            });
+
+            btnConfirm.addEventListener('click', function () {
+                if (targetUrl) {
+                    window.location.href = targetUrl;
+                }
+            });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
 
     @include('components.footer')
 </body>

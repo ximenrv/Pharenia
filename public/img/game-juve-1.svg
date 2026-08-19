@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1c2454"/>
+      <stop offset="50%" stop-color="#131a42"/>
+      <stop offset="100%" stop-color="#070a1c"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#efc45e" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#efc45e" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow1" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feOffset dx="0" dy="6" result="offsetBlur"/>
+      <feMerge>
+        <feMergeNode in="offsetBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Fondo -->
+  <rect width="800" height="600" fill="url(#bg1)"/>
+  <ellipse cx="400" cy="240" rx="360" ry="260" fill="url(#glow1)"/>
+
+  <!-- Estrellas decorativas -->
+  <g fill="#f6d789" opacity="0.6">
+    <circle cx="120" cy="80" r="3"/>
+    <circle cx="180" cy="140" r="2"/>
+    <circle cx="680" cy="90" r="3"/>
+    <circle cx="720" cy="160" r="2"/>
+    <circle cx="60" cy="200" r="2"/>
+    <circle cx="740" cy="220" r="2.5"/>
+    <circle cx="250" cy="60" r="2"/>
+    <circle cx="550" cy="70" r="2"/>
+  </g>
+
+  <!-- Bocadillos de conversación: habilidades sociales -->
+  <g filter="url(#shadow1)">
+    <!-- Bocadillo izquierdo -->
+    <path d="M 150 140 Q 120 110 150 80 Q 220 50 280 90 Q 310 120 280 150 Q 240 180 200 170 L 160 200 L 170 170 Q 140 160 150 140 Z" fill="#eceef8" stroke="#bfa12b" stroke-width="3"/>
+    <text x="220" y="125" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#bfa12b">?</text>
+
+    <!-- Bocadillo derecho -->
+    <path d="M 520 120 Q 500 90 530 70 Q 600 40 660 80 Q 690 110 660 140 Q 620 170 580 160 L 540 190 L 550 160 Q 520 150 520 120 Z" fill="#eceef8" stroke="#8577c9" stroke-width="3"/>
+    <text x="600" y="115" text-anchor="middle" font-family="Arial, sans-serif" font-size="40" font-weight="bold" fill="#8577c9">!</text>
+
+    <!-- Bocadillo inferior izquierdo -->
+    <path d="M 100 320 Q 80 290 110 270 Q 170 240 220 270 Q 250 300 220 330 Q 190 360 150 350 L 120 380 L 130 350 Q 100 340 100 320 Z" fill="#eceef8" stroke="#4caf7d" stroke-width="3"/>
+    <text x="165" y="330" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="#37936a">…</text>
+
+    <!-- Bocadillo inferior derecho -->
+    <path d="M 580 320 Q 560 290 590 270 Q 650 240 700 270 Q 730 300 700 330 Q 670 360 630 350 L 600 380 L 610 350 Q 580 340 580 320 Z" fill="#eceef8" stroke="#e0a83c" stroke-width="3"/>
+    <text x="645" y="325" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#b98324">A</text>
+  </g>
+
+  <!-- Mascota centrada -->
+  <image x="200" y="180" width="400" height="400" href="mascota.png" preserveAspectRatio="xMidYMid meet"/>
+
+  <!-- Sombra del suelo -->
+  <ellipse cx="400" cy="500" rx="220" ry="40" fill="#000" opacity="0.35"/>
+</svg>
