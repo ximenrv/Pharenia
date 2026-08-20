@@ -1,0 +1,49 @@
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fade-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes personaje-hablar {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-8px) rotate(-1.5deg); }
+    50% { transform: translateY(-16px) rotate(0deg); }
+    75% { transform: translateY(-8px) rotate(1.5deg); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+}
+
+@keyframes tarjeta-entrada {
+    from { opacity: 0; transform: translateY(30px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes hint-palpita {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.035); }
+}
+
+.fade-in {
+    animation: fade-in 0.3s ease-in;
+}
+
+.fade-out {
+    animation: fade-out 0.3s ease-out;
+}
+
+.feedback-correcto {
+    outline: 3px solid var(--color-correcto);
+}
+
+.feedback-incorrecto {
+    outline: 3px solid var(--color-incorrecto);
+    animation: shake 0.3s ease;
+}

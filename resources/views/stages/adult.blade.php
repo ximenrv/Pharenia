@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estación de la Adultez - Pharenia</title>
     @vite(['resources/css/stages.css', 'resources/css/navbar.css', 'resources/css/footer.css', 'resources/css/dark-theme.css'])
+    <style>
+        /* Zoom sutil para recortar bordes decorativos de las portadas */
+        .game-card__img {
+            transform: scale(1.06);
+        }
+        .game-card:hover .game-card__img {
+            transform: scale(1.14);
+        }
+    </style>
 </head>
 <body style="background-color: #f5efff; margin: 0; padding: 0;">
     @include('components.loader')
@@ -33,29 +42,29 @@
             </header>
 
             <div class="games-grid">
-                <a href="/juegos/adultez/compras" class="game-card">
+                <a href="#" class="game-card" data-game-url="{{ route('games.adults.ofertaoengano') }}" data-game-name="Oferta o Engaño">
                     <div class="game-card__image-wrapper">
-                        <img src="{{ asset('img/game-adul-1.png') }}" alt="Simulador de Compras" class="game-card__img">
+                        <img src="{{ asset('gamesAssets/adults/ofertaoengano/ASSETS/backgrounds/ofertaoenganoport.png') }}" alt="Oferta o Engaño" class="game-card__img">
                         <div class="game-card__overlay" style="background-color: #7c4dff;">
                             <span class="game-card__play-btn">¡JUGAR AHORA!</span>
                         </div>
                     </div>
                     <div class="game-card__info">
-                        <h3 class="game-card__title">Simulador de Compras</h3>
-                        <p class="game-card__description">Administra tu dinero comprando los víveres necesarios.</p>
+                        <h3 class="game-card__title">Oferta o Engaño</h3>
+                        <p class="game-card__description">Aprende a identificar ofertas reales y engaños del día a día.</p>
                     </div>
                 </a>
 
-                <a href="/juegos/adultez/entrevista" class="game-card">
+                <a href="#" class="game-card" data-game-url="{{ route('games.adults.siguelareceta') }}" data-game-name="Sigue la Receta">
                     <div class="game-card__image-wrapper">
-                        <img src="{{ asset('img/game-adul-2.png') }}" alt="Entrevista de Trabajo" class="game-card__img">
+                        <img src="{{ asset('gamesAssets/adults/siguelareceta/assets/backgrounds/siguelarecetaport.png') }}" alt="Sigue la Receta" class="game-card__img">
                         <div class="game-card__overlay" style="background-color: #7c4dff;">
                             <span class="game-card__play-btn">¡JUGAR AHORA!</span>
                         </div>
                     </div>
                     <div class="game-card__info">
-                        <h3 class="game-card__title">Entrevista de Trabajo</h3>
-                        <p class="game-card__description">Practica el lenguaje corporal y respuestas clave.</p>
+                        <h3 class="game-card__title">Sigue la Receta</h3>
+                        <p class="game-card__description">Aprende a cocinar paso a paso siguiendo las instrucciones.</p>
                     </div>
                 </a>
 
@@ -74,6 +83,61 @@
             </div>
         </div>
     </div>
+
+    {{-- Modal de confirmación antes de entrar al juego --}}
+    <div class="modal-overlay" id="game-confirm-modal" aria-hidden="true">
+        <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <h2 class="modal-title" id="modal-title">¿Quieres jugar?</h2>
+            <div class="modal-actions">
+                <button type="button" class="modal-btn modal-btn--cancel" id="modal-cancel">Cancelar</button>
+                <button type="button" class="modal-btn modal-btn--confirm" id="modal-confirm">¡Sí, jugar!</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const modal = document.getElementById('game-confirm-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const btnCancel = document.getElementById('modal-cancel');
+            const btnConfirm = document.getElementById('modal-confirm');
+            let targetUrl = '';
+
+            document.querySelectorAll('.game-card').forEach(function (card) {
+                card.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    targetUrl = card.getAttribute('data-game-url');
+                    var gameName = card.getAttribute('data-game-name');
+                    if (!targetUrl || !gameName) return;
+                    modalTitle.textContent = '¿Quieres jugar ' + gameName + '?';
+                    modal.classList.add('active');
+                    modal.setAttribute('aria-hidden', 'false');
+                });
+            });
+
+            function closeModal() {
+                modal.classList.remove('active');
+                modal.setAttribute('aria-hidden', 'true');
+            }
+
+            btnCancel.addEventListener('click', closeModal);
+            modal.addEventListener('click', function (e) {
+                if (e.target === modal) closeModal();
+            });
+
+            btnConfirm.addEventListener('click', function () {
+                if (targetUrl) {
+                    window.location.href = targetUrl;
+                }
+            });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
 
     @include('components.footer')
 </body>

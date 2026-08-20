@@ -15,12 +15,17 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GameRecordController;
 use App\Http\Controllers\ChildGamesController;
 use App\Http\Controllers\InformationController;
+use App\Http\Controllers\AdultGameRecordController;
 
 /*
 |--------------------------------------------------------------------------
 | Vistas Públicas Principales (Raíz)
 |--------------------------------------------------------------------------
 */
+Route::get('/', function () {
+    return redirect('/home');
+});
+
 Route::get('/home', function () {
     return view('home');
 })->name('home');
@@ -75,6 +80,17 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/juegos/juventud/paises', function () {
         return view('games.youth.paises');
     })->name('games.youth.paises');
+
+    Route::get('/juegos/adultez/ofertaoengano', function () {
+        return view('games.adults.ofertaoengano');
+    })->name('games.adults.ofertaoengano');
+
+    Route::get('/juegos/adultez/siguelareceta', function () {
+        return view('games.adults.siguelareceta');
+    })->name('games.adults.siguelareceta');
+
+    Route::post('/games/adults/record/update', [AdultGameRecordController::class, 'updateRecord'])->name('games.adults.record.update');
+    Route::get('/games/adults/record/get', [AdultGameRecordController::class, 'getRecords'])->name('games.adults.record.get');
 });
 
 
