@@ -15,8 +15,6 @@
 </head>
 <body class="auth-body">
 
-    @include('components.loader')
-
     <div class="auth-logo">
         <a href="{{ url('home') }}" title="{{ __('Volver al inicio') }}">
             <img src="{{ asset('img/logo.png') }}" alt="{{ __('Pharenia Logo') }}">
@@ -48,13 +46,13 @@
 
                     <div class="auth-group">
                         <label for="email">{{ __('EMAIL') }}</label>
-                        <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="{{ __('Digite su dirección email') }}" required autofocus>
+                        <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="{{ __('Digite su dirección email') }}" required autofocus autocomplete="email">
                     </div>
 
                     <div class="auth-group auth-group--password">
                         <label for="password">{{ __('CONTRASEÑA') }}</label>
                         <div class="password-wrapper">
-                            <input type="password" id="password" name="password" placeholder="{{ __('Digite su contraseña') }}" required>
+                            <input type="password" id="password" name="password" placeholder="{{ __('Digite su contraseña') }}" required autocomplete="current-password">
                             <button type="button" class="toggle-password" onclick="togglePassword('password', this)">
                                 <svg class="eye-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -66,6 +64,13 @@
 
                     <div class="auth-forgot-container">
                         <a href="{{ route('forgot-password') }}" class="auth-link">{{ __('¿Olvidó su contraseña?') }}</a>
+                    </div>
+
+                    <div class="auth-group" style="display: flex; flex-direction: row !important; align-items: center; justify-content: flex-end; gap: 10px; ">
+                        <input type="checkbox" id="remember" name="remember" value="1" {{ old('remember') ? 'checked' : '' }} style="width: 20px; height: 20px; cursor: pointer; accent-color: #2f4f4f; margin: 0;">
+                        <label for="remember" style="font-size: 13px; margin-bottom: 0; cursor: pointer;">
+                            {{ __('Recordarme') }}
+                        </label>
                     </div>
 
                     <button type="submit" class="auth-btn-submit">

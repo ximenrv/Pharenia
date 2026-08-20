@@ -482,5 +482,22 @@
     "Tu puntuación obtenida es:": "Tu puntuación obtenida es:",
     "10/10 aciertos": "10/10 aciertos",
     "🔄 Repetir Desafío": "🔄 Repetir Desafío",
-    "Aviso: reset en modo local por fallo de red:": "Aviso: reset en modo local por fallo de red:"
+    "Aviso: reset en modo local por fallo de red:": "Aviso: reset en modo local por fallo de red:",
+
+    "Acepto los": "Acepto los",
+    "Términos y Condiciones": "Términos y Condiciones",
+    "Términos y Condiciones de Pharenia": "Términos y Condiciones de Pharenia",
+    "Bienvenido a Pharenia. Al registrarte en nuestra plataforma, aceptas hacer un uso responsable de las herramientas de gestión y control parental. Nos comprometemos a proteger la privacidad de tus datos y la de los menores a tu cargo.": "Bienvenido a Pharenia. Al registrarte en nuestra plataforma, aceptas hacer un uso responsable de las herramientas de gestión y control parental. Nos comprometemos a proteger la privacidad de tus datos y la de los menores a tu cargo.",
+    "Entendido y Cerrar": "Entendido y Cerrar",
+
+    "El nombre completo es obligatorio.": "El nombre completo es obligatorio.",
+    "El correo electrónico es obligatorio.": "El correo electrónico es obligatorio.",
+    "Por favor, introduce un correo válido.": "Por favor, introduce un correo válido.",
+    "Este correo ya está registrado en otra cuenta.": "Este correo ya está registrado en otra cuenta.",
+    "La fecha de nacimiento es obligatoria.": "La fecha de nacimiento es obligatoria.",
+    "La fecha de nacimiento debe ser anterior a hoy.": "La fecha de nacimiento debe ser anterior a hoy.",
+    "Debes seleccionar un perfil válido.": "Debes seleccionar un perfil válido.",
+    "El perfil seleccionado no es válido.": "El perfil seleccionado no es válido.",
+    "Debes aceptar los términos y condiciones para continuar.": "Debes aceptar los términos y condiciones para continuar.",
+    "La contraseña es obligatoria.": "La contraseña es obligatoria."
 }

@@ -15,7 +15,6 @@
 </head>
 <body class="auth-body">
 
-    @include('components.loader')
 
     <div class="auth-logo">
         <a href="{{ url('home') }}" title="{{ __('Volver al inicio') }}">
@@ -47,22 +46,22 @@
 
                     <div class="auth-group">
                         <label for="name">{{ __('NOMBRE COMPLETO') }}</label>
-                        <input type="text" id="name" name="name" value="{{ old('name') }}" placeholder="{{ __('Digite su nombre completo') }}" required autofocus>
+                        <input type="text" id="name" name="name" value="{{ old('name') }}" placeholder="{{ __('Digite su nombre completo') }}"  autofocus>
                     </div>
 
                     <div class="auth-group">
                         <label for="email">{{ __('EMAIL') }}</label>
-                        <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="{{ __('Digite su dirección email') }}" required>
+                        <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="{{ __('Digite su dirección email') }}" >
                     </div>
 
                     <div class="auth-group">
                         <label for="birthdate">{{ __('FECHA DE NACIMIENTO') }}</label>
-                        <input type="date" id="birthdate" name="birthdate" value="{{ old('birthdate') }}" required>
+                        <input type="date" id="birthdate" name="birthdate" value="{{ old('birthdate') }}" >
                     </div>
 
                     <div class="auth-group">
                         <label for="role">{{ __('¿QUÉ PERFIL DESCRIBE TU OBJETIVO?') }}</label>
-                        <select id="role" name="role" required style="width: 100%; padding: 7px; border: 1px solid #cbd5e0; border-radius: 8px; background-color: #fff; font-size: 14px; color: #2f4f4f;">
+                        <select id="role" name="role"  style="width: 100%; padding: 7px; border: 1px solid #cbd5e0; border-radius: 8px; background-color: #fff; font-size: 14px; color: #2f4f4f;">
                             <option value="" disabled selected>{{ __('Selecciona tu perfil...') }}</option>
                             <option value="adult_tea" {{ old('role') == 'adult_tea' ? 'selected' : '' }}>{{ __('Adulto Autogestor (TEA)') }}</option>
                             <option value="ally_no_tea" {{ old('role') == 'ally_no_tea' ? 'selected' : '' }}>{{ __('Tutor / Aliado (+18)') }}</option>
@@ -73,7 +72,7 @@
                     <div class="auth-group auth-group--password">
                         <label for="password">{{ __('CONTRASEÑA') }}</label>
                         <div class="password-wrapper">
-                            <input type="password" id="password" name="password" placeholder="{{ __('Mín. 8 caracteres (May, min, núm, símbolo)') }}" required>
+                            <input type="password" id="password" name="password" placeholder="{{ __('Mín. 8 caracteres (May, min, núm, símbolo)') }}" >
                             <button type="button" class="toggle-password" onclick="togglePassword('password', this)">
                                 <svg class="eye-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -104,6 +103,12 @@
                         </div>
                         <span class="auth-error-message" id="confirmError"></span>
                     </div>
+                    <div class="auth-group" style="display: flex; flex-direction: row !important; align-items: center; justify-content: flex-end; gap: 10px; margin-bottom: 20px;">
+                        <input type="checkbox" id="terms" name="terms" value="1" {{ old('terms') ? 'checked' : '' }}  style="width: 20px; height: 20px; cursor: pointer; accent-color: #2f4f4f; margin: 0;">
+                        <label for="terms" style="font-size: 13px; margin-bottom: 0; cursor: pointer;">
+                            {{ __('Acepto los') }} <a href="#" onclick="openTermsModal(event)" style="text-decoration: underline;">{{ __('Términos y Condiciones') }}</a>
+                        </label>
+                    </div>
 
                     <button type="submit" class="auth-btn-submit">
                         {{ __('REGISTRARSE') }}
@@ -116,6 +121,29 @@
     </div>
 
     <x-settings-menu />
+
+    <div id="termsModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 9999; justify-content: center; align-items: center;">
+        <div style="background: var(--card-bg, #ffffff); padding: 25px; border-radius: 12px; max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto; box-shadow: 0 4px 20px rgba(0,0,0,0.3); text-align: left; color: #2f4f4f;">
+            <h3 style="margin-top: 0; margin-bottom: 15px; font-size: 18px;">{{ __('Términos y Condiciones de Pharenia') }}</h3>
+            <p style="font-size: 14px; line-height: 1.5; margin-bottom: 15px;">
+                {{ __('Bienvenido a Pharenia. Al registrarte en nuestra plataforma, aceptas hacer un uso responsable de las herramientas de gestión y control parental. Nos comprometemos a proteger la privacidad de tus datos y la de los menores a tu cargo.') }}
+            </p>
+            <button type="button" onclick="closeTermsModal()" style="background: #2f4f4f; color: #fff; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 14px; display: block; width: 100%;">
+                {{ __('Entendido y Cerrar') }}
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function openTermsModal(event) {
+            event.preventDefault();
+            document.getElementById('termsModal').style.display = 'flex';
+        }
+
+        function closeTermsModal() {
+            document.getElementById('termsModal').style.display = 'none';
+        }
+    </script>
 
     <script>
     // Función para manejar el diseño activo de las tarjetas de rol

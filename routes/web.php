@@ -19,9 +19,11 @@ use App\Http\Controllers\AdultGameRecordController;
 
 /*
 |--------------------------------------------------------------------------
-| Vistas Públicas Principales (Raíz)
+| Vistas Públicas (Invitados y Todos)
 |--------------------------------------------------------------------------
 */
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
 Route::get('/', function () {
     return redirect('/home');
 });
@@ -29,24 +31,31 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('home');
 })->name('home');
+=======
+Route::get('/home', function () { return view('home'); })->name('home');
+>>>>>>> Stashed changes
+=======
+Route::get('/home', function () { return view('home'); })->name('home');
+>>>>>>> Stashed changes
 
 Route::get('/information', function () {
     $currentLocale = App::getLocale();
     $path = lang_path($currentLocale . '.json');
     $translations = file_exists($path) ? json_decode(file_get_contents($path), true) : [];
-
     return view('information', compact('translations'));
 });
 
-// Selector de Idioma
 Route::get('/lang/{locale}', function ($locale) {
-    if (in_array($locale, ['es', 'en'])) {
-        session(['locale' => $locale]);
-    }
+    if (in_array($locale, ['es', 'en'])) { session(['locale' => $locale]); }
     return redirect()->back();
 })->name('lang.switch');
 
+// Actividades públicas y de inicio general
+Route::get('/activities', function () { return view('activities'); })->name('activities');
+Route::get('/activities/start', function () { return view('activities.activities-start'); })->name('activities.start');
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
 /*
 |--------------------------------------------------------------------------
 | Flujo de Actividades (Carpeta: activities/)
@@ -99,97 +108,110 @@ Route::middleware(['auth'])->group(function () {
 | Autenticación General (Carpeta: auth/)
 |--------------------------------------------------------------------------
 */
+=======
+// Autenticación
+>>>>>>> Stashed changes
+=======
+// Autenticación
+>>>>>>> Stashed changes
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
-
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
-
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
-
-Route::get('/forgot-password', function () {
-    return view('auth.forgot-password');
-})->name('forgot-password');
-
-Route::post('/forgot-password', function () {
-    return view('auth.forgot-password');
-});
+Route::post('/forgot-password', function () { return view('auth.forgot-password'); })->name('forgot-password');
 
 
 /*
 |--------------------------------------------------------------------------
-| Admin
+| Rutas para: admin, adult_tea, teen (Actividades de Etapas y Juegos)
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+Route::middleware(['auth', 'role:admin,adult_tea,teen,ally_no_tea'])->group(function () {
+    Route::get('/activities/juventud', function () { return view('stages.youth'); })->name('activities.youth');
+    Route::get('/stage-youth', function () { return view('stages.youth'); })->name('stage.youth');
+    Route::get('/juegos/juventud/quizzsense', function () { return view('games.youth.quizzsense'); })->name('games.youth.quizzsense');
+    Route::get('/juegos/juventud/paises', function () { return view('games.youth.paises'); })->name('games.youth.paises');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Rutas para: admin, adult_tea (Etapa Adultez)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'role:admin,adult_tea,ally_no_tea'])->group(function () {
+    Route::get('/activities/adultez', function () { return view('stages.adult'); })->name('activities.adultez');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Rutas Exclusivas para Joven (Teen): Vincular Supervisor
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'role:teen'])->group(function () {
+    Route::get('/vincular-adulto', [TeenController::class, 'dashboard'])->name('supervisor.vincular');
+    Route::post('/vincular-adulto', [TeenController::class, 'updateSupervisor'])->name('supervisor.store');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Rutas Exclusivas para Tutor / Aliado (ally_no_tea)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'role:ally_no_tea'])->group(function () {
+    Route::get('/family-panel', [FamilyController::class, 'index'])->name('family-panel');
+    Route::post('/family-panel', [FamilyController::class, 'store'])->name('family-panel.store');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Rutas para Administrador (admin)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-    
     Route::post('/users/store', [AdminController::class, 'storeUser'])->name('admin.users.store');
     Route::put('/users/{id}', [AdminController::class, 'update'])->name('admin.users.update');
     Route::delete('/users/{id}', [AdminController::class, 'destroyUser'])->name('admin.users.destroy');
-
     Route::post('/minor/store', [AdminController::class, 'storeMinor'])->name('admin.minor.store');
     Route::put('/minor/{id}', [AdminController::class, 'updateMinor'])->name('admin.minor.update');
     Route::delete('/minor/{id}', [AdminController::class, 'destroyMinor'])->name('admin.minor.destroy');
 });
 
-
 /*
 |--------------------------------------------------------------------------
-| Panel Familiar y Gestión de Menores
+| Perfil (Para cualquier usuario autenticado)
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth'])->group(function () {
-    Route::get('/family-panel', [FamilyController::class, 'index'])->name('family-panel');
-    Route::post('/family-panel', [FamilyController::class, 'store'])->name('family-panel.store');
-
     Route::get('/perfil', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/perfil', [ProfileController::class, 'update'])->name('profile.update');
-
+    
+    // Rutas de PIN para entrar como menor
     Route::get('/child/{id}/login', [ChildAuthController::class, 'showPinForm'])->name('child.login.form');
     Route::post('/child/{id}/login', [ChildAuthController::class, 'verifyPin'])->name('child.login.verify');
 });
 
-
 /*
 |--------------------------------------------------------------------------
-| Rutas Protegidas para el Joven y Vinculación
+| Rutas Exclusivas para el Menor Autenticado (Child)
 |--------------------------------------------------------------------------
 */
-Route::get('/stage-youth', function () {
-    return view('stages.youth');
-})->name('stage.youth')->middleware('auth');
-
-Route::get('/vincular-adulto', [TeenController::class, 'dashboard'])
-    ->name('supervisor.vincular')
-    ->middleware('auth');
-
-Route::post('/vincular-adulto', [TeenController::class, 'updateSupervisor'])
-    ->name('supervisor.store')
-    ->middleware('auth');
-
-
-/*
-|--------------------------------------------------------------------------
-| Rutas Protegidas Exclusivamente para el Menor Autenticado
-|--------------------------------------------------------------------------
-*/
-Route::middleware(['child.auth'])->group(function () {
-    Route::get('/actividades/ninez', function () {
-        return view('stages.child');
-    })->name('child.activities');
-    
+Route::middleware(['auth','role:admin,adult_tea,ally_no_tea'])->group(function () {
+    Route::get('/actividades/ninez', function () { return view('stages.child'); })->name('child.activities');
+    Route::get('/activities/ninez', function () { return view('stages.child'); })->name('activities.child'); // Por si acaso usas ambas
     Route::get('/child/logout-confirm', [ChildAuthController::class, 'showLogoutPinForm'])->name('child.logout.form');
     Route::post('/child/logout-confirm', [ChildAuthController::class, 'verifyLogoutPin'])->name('child.logout.verify');
 });
 
 
+
 /*
 |--------------------------------------------------------------------------
-| Módulos de Pruebas, Simulaciones y Mitos (Tus cambios + los de tu amigo)
+| Módulos de Pruebas, Simulaciones y Mitos (Para todos menos 'child')
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'role:admin,adult_tea,teen,ally_no_tea'])->group(function () {
     Route::post('/information/mchat/progress', [MchatChallenge::class, 'saveProgress']);
     Route::post('/information/mchat/submit', [MchatChallenge::class, 'calculateResult']);
     Route::post('/information/mchat/reset', [MchatChallenge::class, 'resetTest'])->name('information.mchat.reset');
@@ -210,14 +232,24 @@ Route::get('/information/{module}', [InformationController::class, 'index'])->na
 
 /*
 |--------------------------------------------------------------------------
-| Juegos Niñez (Aportados por tu amigo)
+| Juegos Niñez (Solo para Admin, Adulto TEA y Menores/Child)
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth'])->prefix('games/childs')->group(function () {
+// Para Admin y Adulto TEA (vía rol normal)
+Route::middleware(['auth', 'role:admin,adult_tea,ally_no_tea'])->prefix('games/childs')->group(function () {
     Route::get('/guardianes', [ChildGamesController::class, 'guardianes'])->name('games.guardianes');
     Route::get('/eco', [ChildGamesController::class, 'eco'])->name('games.eco');
     Route::get('/cazador', [ChildGamesController::class, 'cazador'])->name('games.cazador');
 
     Route::post('/record/update', [GameRecordController::class, 'updateRecord'])->name('games.childs.record.update');
     Route::get('/record/get', [GameRecordController::class, 'getRecords'])->name('games.childs.record.get');
+});
+
+// Para el Menor autenticado por PIN (vía child.auth)
+Route::middleware(['child.auth'])->prefix('games/childs')->group(function () {
+    // Usamos nombres distintos o evitamos duplicar nombres de ruta si causan conflicto, 
+    // o puedes compartir la misma lógica si tu middleware permite ambos.
+    Route::get('/guardianes-child', [ChildGamesController::class, 'guardianes'])->name('child.games.guardianes');
+    Route::get('/eco-child', [ChildGamesController::class, 'eco'])->name('child.games.eco');
+    Route::get('/cazador-child', [ChildGamesController::class, 'cazador'])->name('child.games.cazador');
 });

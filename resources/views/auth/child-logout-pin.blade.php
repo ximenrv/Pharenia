@@ -13,7 +13,7 @@
     </script>
     @vite(['resources/css/child-auth.css', 'resources/css/settings-menu.css', 'resources/js/settings-menu.js', 'resources/css/dark-theme.css'])
 </head>
-<body style="display: flex; justify-content: center; align-items: center; height: 100vh; background: var(--bg-color, #fff5f5); margin: 0; font-family: sans-serif;">
+<body style="display: flex; justify-content: center; align-items: center; height: 100vh; background: var(--bg-color, #fff5f5); margin: 0; font-family: "Segoe UI", Tahoma,  Verdana, sans-serif;">
 
     <div style="width: 100%; max-width: 400px; padding: 30px; background: var(--card-bg, white); border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: center;">
         <h3 style="margin-top: 0; color: #c53030;">{{ __('Control Parental Requerido') }}</h3>

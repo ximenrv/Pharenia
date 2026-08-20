@@ -15,6 +15,8 @@
 </head>
 <body>
 
+    @include('components.loader')
+
     <x-navbar/>
 
     <div class="family-panel-container">
@@ -74,7 +76,7 @@
 
                 <ul class="pharenia-list">
                     @forelse($children as $child)
-                        <li class="pharenia-list__item" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #edf2f7;">
+                        <li class="pharenia-list__item" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 5p10; margin-top: 15px; ">
                             <div class="pharenia-list__info">
                                 <strong>{{ $child->name }}</strong>
                                 <span style="font-size: 12px; color: #616f7a; display: block;">{{ __('Nacimiento:') }} {{ $child->birthdate }}</span>
@@ -100,7 +102,7 @@
 
                 <ul class="pharenia-list">
                     @forelse($supervisedTeens as $teen)
-                        <li class="pharenia-list__item" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #edf2f7;">
+                        <li class="pharenia-list__item" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 10px; margin-top: 15px; ">
                             <div class="pharenia-list__info">
                                 <strong>{{ $teen->name }}</strong>
                                 <span style="font-size: 12px; color: #616f7a; display: block;">{{ __('Correo:') }} {{ $teen->email }}</span>

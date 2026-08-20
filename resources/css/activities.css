@@ -93,7 +93,7 @@
 .act-btn--primary {
     background-color: #0d2c3f;
     color: #ffffff;
-    font-family: sans-serif;
+    font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
     font-size: 0.9rem;
     font-weight: 700;
     letter-spacing: 2px;
@@ -125,7 +125,7 @@
 }
 
 .act-link {
-    font-family: sans-serif;
+    font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
     color: #2c525a;
     font-size: 0.95rem;
     font-weight: 700;
@@ -238,7 +238,7 @@
 }
 
 .act-modal__title {
-    font-family: sans-serif;
+    font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
     color: #2c525a;
     font-size: 1.8rem;
     margin-top: 0;
@@ -246,7 +246,7 @@
 }
 
 .act-modal__text {
-    font-family: sans-serif;
+    font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
     color: #4a5568;
     line-height: 1.6;
     font-size: 1rem;

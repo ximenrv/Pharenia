@@ -74,8 +74,6 @@
 </head>
 <body class="auth-body">
 
-    @include('components.loader')
-
     <div class="auth-logo">
         <a href="{{ url('home') }}" title="{{ __('Volver al inicio') }}">
             <img src="{{ asset('img/logo.png') }}" alt="{{ __('Pharenia Logo') }}">

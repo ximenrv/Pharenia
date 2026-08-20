@@ -25,6 +25,11 @@ return Application::configure(basePath: dirname(__DIR__))
             'child.auth' => CheckChildSession::class,
             'admin' => AdminMiddleware::class,
         ]);
+        $middleware->alias([
+            'role' => \App\Http\Middleware\CheckRole::class,
+            'child.auth' => \App\Http\Middleware\ChildAuthMiddleware::class, 
+        ]);
+        $middleware->appendToGroup('web', \App\Http\Middleware\PreventChildFromLeaving::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

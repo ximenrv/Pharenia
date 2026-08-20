@@ -36,7 +36,7 @@
 }
 
 .navbar__link {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
     font-size: 1.25rem;
     color: #2c525a;
     text-decoration: none;
@@ -67,7 +67,7 @@
 }
 
 .navbar__logout-btn {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
     font-size: 1rem;
     font-weight: 500;
     color: #fff;
@@ -84,7 +84,7 @@
 }
 
 .navbar__login-link {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
     font-size: 1rem;
     font-weight: 700;
     color: #fff;
@@ -119,4 +119,58 @@ nav img[alt="Perfil"],
     border-radius: 50% !important;
     display: inline-block !important;
     vertical-align: middle;
+}
+
+/* ==========================================================================
+   03. ESTILOS DEL MENÚ DESPLEGABLE (DROPDOWN) EN NAVBAR
+   ========================================================================== */
+
+.navbar__item--dropdown {
+    position: relative;
+}
+
+/* Ocultar el menú desplegable por defecto */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 130%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(44, 82, 90, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    list-style: none;
+    padding: 0.5rem 0;
+    margin-top: -0.4rem;
+    min-width: 140px;
+    z-index: 1000;
+    text-align: center;
+}
+
+/* Enlaces individuales del dropdown */
+.dropdown-link {
+    display: block;
+    padding: 0.6rem 1rem;
+    font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
+    font-size: 1.05rem;
+    color: #2c525a;
+    text-decoration: none;
+    font-weight: 500;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+/* Efecto hover en las opciones desplegables */
+.dropdown-link:hover {
+    background-color: rgba(44, 82, 90, 0.08);
+    color: #bfa12b;
+}
+
+/* Mostrar el menú automáticamente al pasar el mouse por "Actividades" */
+.navbar__item--dropdown:hover .dropdown-menu {
+    display: block;
 }

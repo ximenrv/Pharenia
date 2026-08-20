@@ -12,15 +12,17 @@ class User extends Authenticatable
 
     protected $fillable = [
         'name',
-        'username',
         'email',
         'birthdate',
         'role',
-        'supervisor_id', // Asegúrate de incluir esta si quieres asignarla por fillable
+        'supervisor_id',
         'password',
     ];
 
-
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 
     public function children()
     {

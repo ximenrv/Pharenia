@@ -14,6 +14,9 @@
     @vite(['resources/css/family-panel.css', 'resources/css/navbar.css', 'resources/css/footer.css', 'resources/css/settings-menu.css', 'resources/js/settings-menu.js', 'resources/css/dark-theme.css'])
 </head>
 <body class="supervisor-body">
+
+    @include('components.loader')
+    
     <x-navbar/>
 
     <div class="family-panel-container">

@@ -32,7 +32,7 @@
             </div>
             
             <div class="act-header__actions">
-                <a href="{{ route('activities.start') }}" class="act-btn-wrapper">
+                <a href="{{ auth()->check() && auth()->user()->role === 'teen' ? route('activities.youth') : route('activities.start') }}" class="act-btn-wrapper">
                     <button class="act-btn act-btn--primary">
                         {{ __('COMENZAR') }}
                         <span class="act-btn__arrow">→</span>
