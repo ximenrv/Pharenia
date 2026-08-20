@@ -66,13 +66,6 @@
                         <a href="{{ route('forgot-password') }}" class="auth-link">{{ __('¿Olvidó su contraseña?') }}</a>
                     </div>
 
-                    <div class="auth-group" style="display: flex; flex-direction: row !important; align-items: center; justify-content: flex-end; gap: 10px; ">
-                        <input type="checkbox" id="remember" name="remember" value="1" {{ old('remember') ? 'checked' : '' }} style="width: 20px; height: 20px; cursor: pointer; accent-color: #2f4f4f; margin: 0;">
-                        <label for="remember" style="font-size: 13px; margin-bottom: 0; cursor: pointer;">
-                            {{ __('Recordarme') }}
-                        </label>
-                    </div>
-
                     <button type="submit" class="auth-btn-submit">
                         {{ __('INICIAR SESIÓN') }}
                     </button>
