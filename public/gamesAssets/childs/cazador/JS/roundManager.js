@@ -60,10 +60,10 @@ function setGameOverMessage() {
         text.textContent = "Demostraste una habilidad increible.";
     } else if (currentScore < 600) {
         title.textContent = "¡Increíble!";
-        text.textContent = "¡Tienes el talento para cazar burbujas!";
+        text.textContent = "¡Tienes el talento para ser un Cazador de Burbujas!";
     } else {
         title.textContent = "¡Asombroso!";
-        text.textContent = "¡Has batido tu récord!";
+        text.textContent = "¡Haz batido tu récord!";
     }
 };
 

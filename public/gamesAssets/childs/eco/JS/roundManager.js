@@ -67,13 +67,13 @@ function setGameOverMessage() {
         text.textContent = "Sigue entrenando tu memoria para llegar más lejos.";
     } else if (score < 800) {
         title.textContent = "¡Muy bien!";
-        text.textContent = "Demostraste una gran concentración.";
-    } else if (score < 1500) {
+        text.textContent = "Demostraste una increible gran memoria.";
+    } else if (score < 1100) {
         title.textContent = "¡Increíble!";
-        text.textContent = "¡Tienes una memoria fotográfica digna de un Guardián!";
+        text.textContent = "¡Tu memoria escucha el Eco de los Colores!";
     } else {
         title.textContent = "¡Asombroso!";
-        text.textContent = "¡Has batido todos los récords del planeta!";
+        text.textContent = "¡Haz batido tu record";
     }
 };
 

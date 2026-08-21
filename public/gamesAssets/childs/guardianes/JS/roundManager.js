@@ -44,10 +44,10 @@ function setGameOverMessage(){
         text.textContent = "Cada basura reciclada te hace más rapido";
     }else if(score < 150){
         title.textContent = "¡Increíble!";
-        text.textContent = "Estás convirtiéndote en un verdadero Guardián.";
+        text.textContent = "¡Eres un auténtico Guardián del Planeta!";
     }else{
         title.textContent = "¡Fantástico!";
-        text.textContent = "¡Eres un auténtico Guardián del Planeta!";
+        text.textContent = "¡Haz batido tu récord!";
     }
 };
 
