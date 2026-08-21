@@ -16,37 +16,63 @@
         @auth
             {{-- Si es Administrador --}}
             @if(auth()->user()->role === 'admin')
-                <li class="navbar__item">
-                    <a href="/activities" class="navbar__link {{ Request::is('activities*') ? 'navbar__link--active' : '' }}">{{ __('Actividades') }}</a>
+                <li class="navbar__item navbar__item--dropdown">
+                    <a href="/activities" class="navbar__link {{ Request::is('activities*') ? 'navbar__link--active' : '' }}">{{ __('Actividades') }} ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ route('activities.child') }}" class="dropdown-link">{{ __('Niñez') }}</a></li>
+                        <li><a href="{{ route('activities.youth') }}" class="dropdown-link">{{ __('Juventud') }}</a></li>
+                        <li><a href="{{ route('activities.adultez') }}" class="dropdown-link">{{ __('Adultez') }}</a></li>
+                    </ul>
                 </li>
                 <li class="navbar__item">
                     <a href="{{ route('admin.dashboard') }}" class="navbar__link {{ Request::is('admin*') ? 'navbar__link--active' : '' }}">{{ __('Panel Admin') }}</a>
                 </li>
 
-            {{-- Si es Adulto Autogestor, ve Actividades --}}
+            {{-- Si es Adulto Autogestor --}}
             @elseif(auth()->user()->role === 'adult_tea')
-                <li class="navbar__item">
-                    <a href="/activities" class="navbar__link {{ Request::is('activities*') ? 'navbar__link--active' : '' }}">{{ __('Actividades') }}</a>
+                <li class="navbar__item navbar__item--dropdown">
+                    <a href="/activities" class="navbar__link {{ Request::is('activities*') ? 'navbar__link--active' : '' }}">{{ __('Actividades') }} ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ route('activities.child') }}" class="dropdown-link">{{ __('Niñez') }}</a></li>
+                        <li><a href="{{ route('activities.youth') }}" class="dropdown-link">{{ __('Juventud') }}</a></li>
+                        <li><a href="{{ route('activities.adultez') }}" class="dropdown-link">{{ __('Adultez') }}</a></li>
+                    </ul>
                 </li>
 
-            {{-- Si es Tutor / Aliado, ve el Panel Familiar --}}
+            {{-- Si es Tutor / Aliado --}}
             @elseif(auth()->user()->role === 'ally_no_tea')
+                 <li class="navbar__item navbar__item--dropdown">
+                    <a href="/activities" class="navbar__link {{ Request::is('activities*') ? 'navbar__link--active' : '' }}">{{ __('Actividades') }} ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ route('activities.child') }}" class="dropdown-link">{{ __('Niñez') }}</a></li>
+                        <li><a href="{{ route('activities.youth') }}" class="dropdown-link">{{ __('Juventud') }}</a></li>
+                        <li><a href="{{ route('activities.adultez') }}" class="dropdown-link">{{ __('Adultez') }}</a></li>
+                    </ul>
+                </li>
                 <li class="navbar__item">
                     <a href="{{ route('family-panel') }}" class="navbar__link {{ Request::is('family*') ? 'navbar__link--active' : '' }}">{{ __('Panel Familiar') }}</a>
                 </li>
 
-            {{-- Si es Joven / Adolescente, ve su Stage y la opción de Vincular Adulto Supervisor --}}
+            {{-- Si es Joven / Adolescente --}}
             @elseif(auth()->user()->role === 'teen')
-                <li class="navbar__item">
-                    <a href="{{ route('stage.youth') }}" class="navbar__link {{ Request::is('stage-youth*') ? 'navbar__link--active' : '' }}">{{ __('Actividades') }}</a>
+                <li class="navbar__item navbar__item--dropdown">
+                    <a href="{{ route('activities') }}" class="navbar__link {{ Request::is('activities*') ? 'navbar__link--active' : '' }}">{{ __('Actividades') }} ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ route('activities.youth') }}" class="dropdown-link">{{ __('Juventud') }}</a></li>
+                    </ul>
                 </li>
                 <li class="navbar__item">
                     <a href="{{ route('supervisor.vincular') }}" class="navbar__link {{ Request::is('vincular-adulto*') ? 'navbar__link--active' : '' }}">{{ __('Adulto Supervisor') }}</a>
                 </li>
             @endif
         @else
-            <li class="navbar__item">
-                <a href="/activities" class="navbar__link {{ Request::is('activities*') ? 'navbar__link--active' : '' }}">{{ __('Actividades') }}</a>
+            <li class="navbar__item navbar__item--dropdown">
+                <a href="/activities" class="navbar__link {{ Request::is('activities*') ? 'navbar__link--active' : '' }}">{{ __('Actividades') }} ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="{{ route('activities.child') }}" class="dropdown-link">{{ __('Niñez') }}</a></li>
+                    <li><a href="{{ route('activities.youth') }}" class="dropdown-link">{{ __('Juventud') }}</a></li>
+                    <li><a href="{{ route('activities.adultez') }}" class="dropdown-link">{{ __('Adultez') }}</a></li>
+                </ul>
             </li>
         @endauth
     </ul>

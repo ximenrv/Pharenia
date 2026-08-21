@@ -10,16 +10,16 @@
     @include('components.loader')
     @if(session()->has('active_child_id'))
         <div style="max-width: 1200px; margin: 3rem auto -6rem auto; padding: 0 2rem; box-sizing: border-box;">
-            <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 20px; ">
                 <div>
-                    <h1 style="color: #2c525a; font-size: 1.8rem; font-family: sans-serif; font-weight: 700; margin: 0;">
+                    <h1 style="color: #2c525a; font-size: 1.8rem; font-family: Segoe UI, Tahoma,  Verdana, sans-serif; font-weight: 700; margin: 0;">
                         ¡Hola, {{ session('active_child_name') }}! 
                     </h1>
-                    <p style="color: #4a5568; font-size: 1.05rem; font-family: sans-serif; margin: 4px 0 0 0;">
+                    <p style="color: #4a5568; font-size: 1.05rem; font-family: Segoe UI, Tahoma,  Verdana, sans-serif; margin: 4px 0 0 0;">
                         Bienvenido a tu espacio seguro. ¡Disfruta tus actividades!
                     </p>
                 </div>
-                <a href="{{ route('child.logout.form') }}" style="color: #e53e3e; text-decoration: none; font-size: 1.05rem; font-family: sans-serif; font-weight: 600; border-bottom: 2px solid #e53e3e; padding-bottom: 2px; transition: opacity 0.2s, transform 0.2s;" onmouseover="this.style.opacity='0.7'; this.style.transform='scale(1.05)';" onmouseout="this.style.opacity='1'; this.style.transform='scale(1)';">
+                <a href="{{ route('child.logout.form') }}" style="color: #e53e3e; text-decoration: none; font-size: 1.05rem; font-family: Segoe UI, Tahoma,  Verdana, sans-serif; font-weight: 600; border-bottom: 2px solid #e53e3e; padding-bottom: 2px; transition: opacity 0.2s, transform 0.2s;" onmouseover="this.style.opacity='0.7'; this.style.transform='scale(1.05)';" onmouseout="this.style.opacity='1'; this.style.transform='scale(1)';">
                     Cerrar sesión
                 </a>
             </div>
@@ -99,6 +99,7 @@
     @if(!session()->has('active_child_id'))
         @include('components.footer')
     @endif
+
 
     <script>
         let targetGameUrl = '';

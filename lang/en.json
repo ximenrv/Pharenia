@@ -493,7 +493,20 @@
     "Bloque": "Block",
     "Preguntas": "Questions",
 
-    "mchat.risk_low_label": "Low Risk",
-    "mchat.risk_medium_label": "Medium Risk",
-    "mchat.risk_high_label": "High Risk"
+    "Acepto los": "I accept the",
+    "Términos y Condiciones": "Terms and Conditions",
+    "Términos y Condiciones de Pharenia": "Pharenia Terms and Conditions",
+    "Bienvenido a Pharenia. Al registrarte en nuestra plataforma, aceptas hacer un uso responsable de las herramientas de gestión y control parental. Nos comprometemos a proteger la privacidad de tus datos y la de los menores a tu cargo.": "Welcome to Pharenia. By registering on our platform, you agree to make responsible use of the management and parental control tools. We are committed to protecting the privacy of your data and that of the minors under your care.",
+    "Entendido y Cerrar": "Got it and Close",
+
+    "El nombre completo es obligatorio.": "Full name is required.",
+    "El correo electrónico es obligatorio.": "Email address is required.",
+    "Por favor, introduce un correo válido.": "Please enter a valid email address.",
+    "Este correo ya está registrado en otra cuenta.": "This email is already registered to another account.",
+    "La fecha de nacimiento es obligatoria.": "Birth date is required.",
+    "La fecha de nacimiento debe ser anterior a hoy.": "Birth date must be a date before today.",
+    "Debes seleccionar un perfil válido.": "You must select a valid profile.",
+    "El perfil seleccionado no es válido.": "The selected profile is invalid.",
+    "Debes aceptar los términos y condiciones para continuar.": "You must accept the terms and conditions to continue.",
+    "La contraseña es obligatoria.": "Password is required."
 }

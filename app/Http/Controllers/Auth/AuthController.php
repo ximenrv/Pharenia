@@ -20,6 +20,7 @@ class AuthController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'birthdate' => ['required', 'date', 'before:today'],
             'role' => ['required', 'string', 'in:adult_tea,ally_no_tea,teen'],
+            'terms' => ['required', 'accepted'],
             'password' => [
                 'required',
                 'string',
@@ -32,17 +33,31 @@ class AuthController extends Controller
                     ->symbols(),
             ],
         ], [
+            'name.required' => __('El nombre completo es obligatorio.'),
+    
+            'email.required' => __('El correo electrónico es obligatorio.'),
+            'email.email' => __('Por favor, introduce un correo válido.'),
+            'email.unique' => __('Este correo ya está registrado en otra cuenta.'),
+            
+            'birthdate.required' => __('La fecha de nacimiento es obligatoria.'),
+            'birthdate.before' => __('La fecha de nacimiento debe ser anterior a hoy.'),
+            
+            'role.required' => __('Debes seleccionar un perfil válido.'),
+            'role.in' => __('El perfil seleccionado no es válido.'),
+            
+            'terms.required' => __('Debes aceptar los términos y condiciones para continuar.'),
+            'terms.accepted' => __('Debes aceptar los términos y condiciones para continuar.'),
+            
+            'password.required' => __('La contraseña es obligatoria.'),
+            'password.min' => __('La contraseña debe tener al menos 8 caracteres.'),
+            'password.confirmed' => __('Las contraseñas no coinciden.'),
             'password.regex' => __('auth.password_regex'),
-            'password.min' => __('auth.password_min'),
-            'role.required' => __('auth.role_required'),
         ]);
 
         $age = Carbon::parse($validated['birthdate'])->age;
         $role = $validated['role'];
 
-        // 🛡️ BLOQUEO ESTRICTO POR EDAD Y PERFIL INCORRECTO
 
-        // 1. Menores de 13 años (prohibido registro independiente)
         if ($age < 13) {
             return back()->withErrors([
                 'birthdate' => __('auth.under_13')
@@ -83,6 +98,7 @@ class AuthController extends Controller
 
     public function login(Request $request): RedirectResponse
     {
+        
         $credentials = $request->validate([
             'email' => ['required', 'string', 'email'],
             'password' => ['required', 'string'],

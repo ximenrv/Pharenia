@@ -1,0 +1,602 @@
+[
+  {
+    "id": "q001",
+    "category": "sobrecarga_sensorial",
+    "situation": "Estás en el comedor del instituto y hay tanto ruido (platos, conversaciones, música) que sientes que la cabeza te va a estallar. ¿Qué es lo mejor que puedes hacer?",
+    "options": [
+      { "id": "a", "text": "Aguantar en silencio hasta que el malestar se pase solo.", "correct": false },
+      { "id": "b", "text": "Ponerte tus auriculares o salir un momento a un lugar tranquilo, avisando a alguien de confianza.", "correct": true },
+      { "id": "c", "text": "Gritar «¡Silencio todos!» para que bajen el ruido.", "correct": false },
+      { "id": "d", "text": "Tirar tu bandeja al suelo para que se note que estás mal.", "correct": false }
+    ],
+    "explanation": "Cuidar tus oídos y tu calma es lo primero: usar auriculares o retirarte un rato a un lugar tranquilo es una forma sana de autorregularte, y avisar a alguien de confianza hace que sepan dónde estás. Aguantar en silencio solo acumula malestar, y gritar o tirar cosas puede asustar a los demás y empeorar la situación."
+  },
+  {
+    "id": "q002",
+    "category": "sobrecarga_sensorial",
+    "situation": "En una fiesta de cumpleaños las luces parpadeantes y la música alta te empiezan a marear. ¿Cuál es la mejor reacción?",
+    "options": [
+      { "id": "a", "text": "Quedarte junto a los altavoces para «acostumbrarte» al ruido.", "correct": false },
+      { "id": "b", "text": "Decirle al anfitrión que necesitas un rato en una habitación tranquila o salir a tomar el aire.", "correct": true },
+      { "id": "c", "text": "Apagar la música de la fiesta sin pedir permiso.", "correct": false },
+      { "id": "d", "text": "Irte a casa sin despedirte ni avisar a nadie.", "correct": false }
+    ],
+    "explanation": "Pedir un espacio tranquilo o salir a tomar el aire te permite recuperarte sin perderte del todo el plan, y el anfitrión entenderá tu necesidad si se la comunicas. Forzarte a aguantar junto a los altavoces aumenta el malestar, apagar la música sin permiso molesta a los demás, e irte sin avisar puede preocupar a quienes te quieren."
+  },
+  {
+    "id": "q003",
+    "category": "sobrecarga_sensorial",
+    "situation": "Tu camiseta nueva tiene una etiqueta que te raspa el cuello todo el día y no te deja concentrarte en clase. ¿Qué es lo más adecuado?",
+    "options": [
+      { "id": "a", "text": "Cortar la etiqueta o cambiarte de camiseta cuando llegues a casa, y contarle a tu familia qué ropa te resulta cómoda.", "correct": true },
+      { "id": "b", "text": "Rasgarte el cuello con fuerza para que deje de molestar.", "correct": false },
+      { "id": "c", "text": "Quitarte la camiseta en medio de la clase.", "correct": false },
+      { "id": "d", "text": "Soportarlo sin decir nada porque «es solo una etiqueta».", "correct": false }
+    ],
+    "explanation": "Las molestias sensoriales con la ropa son reales e importantes: quitar la etiqueta o elegir ropa cómoda es una solución sencilla, y contárselo a tu familia ayuda a que compren ropa que te siente bien. Rasgarte puede lastimarte, quitarte la ropa en clase te expone innecesariamente, y aguantar en silencio te desgasta sin necesidad."
+  },
+  {
+    "id": "q004",
+    "category": "sobrecarga_sensorial",
+    "situation": "En el centro comercial hay mucha gente, olores fuertes y luces por todas partes. Sientes que todo te supera. ¿Qué es lo mejor que puedes hacer?",
+    "options": [
+      { "id": "a", "text": "Buscar un rincón más tranquilo o sentarte unos minutos, respirar despacio y decidir si sigues o vuelves a casa.", "correct": true },
+      { "id": "b", "text": "Correr entre la gente para salir lo más rápido posible.", "correct": false },
+      { "id": "c", "text": "Cerrar los ojos y taparte los oídos en medio del pasillo hasta que alguien te ayude.", "correct": false },
+      { "id": "d", "text": "Obligarte a seguir de compras como si nada pasara.", "correct": false }
+    ],
+    "explanation": "Parar en un lugar más tranquilo y respirar despacio le da a tu cuerpo el descanso que necesita, y decidir con calma te devuelve el control. Correr entre la gente puede causar un accidente, quedarte bloqueado en medio del pasillo te expone más, y obligarte a seguir solo multiplica la sobrecarga."
+  },
+  {
+    "id": "q005",
+    "category": "sobrecarga_sensorial",
+    "situation": "En la clase de gimnasia el silbato del profesor te lastima los oídos cada vez que suena. ¿Cuál es la mejor opción?",
+    "options": [
+      { "id": "a", "text": "Taparte los oídos y gritar cada vez que suene el silbato.", "correct": false },
+      { "id": "b", "text": "Hablar en privado con el profesor para explicarle que el silbato te duele y buscar juntos una alternativa, como una señal con la mano.", "correct": true },
+      { "id": "c", "text": "Dejar de ir a gimnasia sin explicar el motivo.", "correct": false },
+      { "id": "d", "text": "Esconder el silbato del profesor antes de la clase.", "correct": false }
+    ],
+    "explanation": "Explicar tu necesidad sensorial en privado permite al profesor entenderte y adaptar su señal, y así puedes seguir participando en la clase. Gritar o esconder el silbato genera conflicto, y faltar sin explicar nada hace que nadie sepa cómo ayudarte."
+  },
+  {
+    "id": "q006",
+    "category": "lenguaje_figurado",
+    "situation": "Llegas tarde a clase y un compañero dice: «Vaya, qué puntual eres hoy». Todos se ríen un poco. ¿Qué es lo más probable que quiso decir?",
+    "options": [
+      { "id": "a", "text": "Que de verdad admira tu puntualidad.", "correct": false },
+      { "id": "b", "text": "Que está usando sarcasmo: en realidad señala que llegaste tarde, diciendo lo contrario.", "correct": true },
+      { "id": "c", "text": "Que quiere ser tu mejor amigo.", "correct": false },
+      { "id": "d", "text": "Que no sabe qué hora es.", "correct": false }
+    ],
+    "explanation": "El sarcasmo consiste en decir lo contrario de lo que se piensa, y el tono y las risas son la pista. Lo más probable es que tu compañero señalara tu retraso de forma irónica. No era un cumplido real ni una invitación de amistad; reconocer el sarcasmo te ayuda a interpretar mejor estas situaciones."
+  },
+  {
+    "id": "q007",
+    "category": "lenguaje_figurado",
+    "situation": "Tu profesora dice: «Estoy hasta arriba de trabajo esta semana». ¿Qué significa seguramente?",
+    "options": [
+      { "id": "a", "text": "Que está físicamente subida encima de una pila de papeles.", "correct": false },
+      { "id": "b", "text": "Que quiere que le lleves más tareas.", "correct": false },
+      { "id": "c", "text": "Que tiene muchísimo trabajo y quizá esté ocupada o cansada.", "correct": true },
+      { "id": "d", "text": "Que va a cambiar de profesión.", "correct": false }
+    ],
+    "explanation": "«Estar hasta arriba de algo» es una expresión figurada que significa tener mucho de eso, en este caso trabajo. No es literal (nadie está subido a papeles) ni una petición de más tareas. Entenderla te ayuda a saber que quizá sea un buen momento para ser breve si necesitas hablar con ella."
+  },
+  {
+    "id": "q008",
+    "category": "lenguaje_figurado",
+    "situation": "Un amigo prueba la comida del comedor, hace una mueca y dice: «Mmm... delicioso». ¿Qué es lo más probable?",
+    "options": [
+      { "id": "a", "text": "Que le encanta la comida de verdad.", "correct": false },
+      { "id": "b", "text": "Que está siendo irónico: la mueca indica que no le gusta nada.", "correct": true },
+      { "id": "c", "text": "Que quiere pedir un segundo plato.", "correct": false },
+      { "id": "d", "text": "Que no probó la comida todavía.", "correct": false }
+    ],
+    "explanation": "Cuando las palabras no coinciden con la cara o el tono, suele haber ironía. La mueca de disgusto revela que «delicioso» significa justo lo contrario. Fijarte en las expresiones faciales junto a las palabras es una gran herramienta para entender el lenguaje figurado."
+  },
+  {
+    "id": "q009",
+    "category": "lenguaje_figurado",
+    "situation": "Tu hermano te dice: «Me estás volviendo loco con ese tema». ¿Qué quiere decir probablemente?",
+    "options": [
+      { "id": "a", "text": "Que se está volviendo literalmente loco y necesita un médico.", "correct": false },
+      { "id": "b", "text": "Que el tema le entusiasma muchísimo.", "correct": false },
+      { "id": "c", "text": "Que está algo saturado o cansado de hablar de ese tema y le vendría bien cambiar de conversación.", "correct": true },
+      { "id": "d", "text": "Que quiere que le cuentes más detalles.", "correct": false }
+    ],
+    "explanation": "«Me vuelves loco» es una forma figurada de decir que algo le satura o le cansa. Es una señal amable de que quizá necesita un descanso del tema. No es literal ni médico, y tampoco significa entusiasmo. Notar estas frases te ayuda a ajustar la conversación."
+  },
+  {
+    "id": "q010",
+    "category": "lenguaje_figurado",
+    "situation": "Una compañera dice: «Ese examen fue un regalo». ¿Qué significa casi seguro?",
+    "options": [
+      { "id": "a", "text": "Que el examen venía envuelto en papel de regalo.", "correct": false },
+      { "id": "b", "text": "Que el examen fue muy fácil, como si se lo hubieran regalado.", "correct": true },
+      { "id": "c", "text": "Que el examen fue imposible de hacer.", "correct": false },
+      { "id": "d", "text": "Que alguien le pagó por hacer el examen.", "correct": false }
+    ],
+    "explanation": "Decir que algo «fue un regalo» es una metáfora para expresar que resultó muy fácil o agradable. No tiene que ver con regalos reales ni con pagos. Reconocer estas comparaciones te ayuda a entender el tono general de lo que cuentan los demás."
+  },
+  {
+    "id": "q011",
+    "category": "intereses_especiales",
+    "situation": "Te encanta hablar de astronomía, pero notas que tu amigo mira el reloj, bosteza y responde solo «ajá». ¿Qué es lo mejor que puedes hacer?",
+    "options": [
+      { "id": "a", "text": "Seguir hablando más rápido para contarle todo antes de que se vaya.", "correct": false },
+      { "id": "b", "text": "Pausar y preguntarle si quiere seguir hablando de eso o si prefiere otro tema o momento.", "correct": true },
+      { "id": "c", "text": "Enfadarte con él por no interesarse por lo que te gusta.", "correct": false },
+      { "id": "d", "text": "No volver a hablarle nunca más de ningún tema.", "correct": false }
+    ],
+    "explanation": "Las señales como mirar el reloj o responder «ajá» suelen indicar que la otra persona está cansada del tema. Preguntarle con amabilidad muestra interés por ella y mantiene la amistad fuerte. Acelerar la charla o enfadarte aleja a la gente, y dejar de hablarle para siempre es una solución demasiado extrema."
+  },
+  {
+    "id": "q012",
+    "category": "intereses_especiales",
+    "situation": "En un grupo de trabajo solo tú hablas desde hace diez minutos sobre tu videojuego favorito. Los demás están callados. ¿Qué conviene hacer?",
+    "options": [
+      { "id": "a", "text": "Hacer una pausa y preguntarles qué opinan ellos o qué les gusta a ellos.", "correct": true },
+      { "id": "b", "text": "Interpretar su silencio como que quieren que sigas hablando.", "correct": false },
+      { "id": "c", "text": "Levantar la voz para asegurarte de que te escuchan bien.", "correct": false },
+      { "id": "d", "text": "Salir del grupo enfadado porque nadie habla.", "correct": false }
+    ],
+    "explanation": "Una buena conversación es como un partido: el balón pasa de un lado a otro. Invitar a los demás a opinar reparte los turnos y hace que todos participen. El silencio no siempre significa interés, y gritar o marcharse enfadado dificulta el trabajo en grupo."
+  },
+  {
+    "id": "q013",
+    "category": "intereses_especiales",
+    "situation": "Quieres contarle a tu compañera todo sobre tu colección de minerales, pero ella acaba de contarte que su abuela está enferma. ¿Qué es lo más adecuado?",
+    "options": [
+      { "id": "a", "text": "Contarle igualmente tu colección para animarla.", "correct": false },
+      { "id": "b", "text": "Escucharla primero, preguntarle cómo está su abuela, y guardar tu tema para otro momento.", "correct": true },
+      { "id": "c", "text": "Decirle que su tema es aburrido y cambiar al tuyo.", "correct": false },
+      { "id": "d", "text": "Irte sin decir nada porque no sabes qué hacer.", "correct": false }
+    ],
+    "explanation": "Cuando alguien comparte algo que le preocupa, lo primero es escuchar y mostrar interés por su situación. Tu colección es importante para ti y tendrá su momento, pero en ese instante ella necesita apoyo. Ignorar su tema o menospreciarlo puede herirla, e irte sin más la deja sola."
+  },
+  {
+    "id": "q014",
+    "category": "intereses_especiales",
+    "situation": "Descubres que un chico nuevo también colecciona cartas como tú. Estás emocionadísimo. ¿Cuál es la mejor forma de acercarte?",
+    "options": [
+      { "id": "a", "text": "Recitarle de memoria las 300 cartas que tienes sin parar.", "correct": false },
+      { "id": "b", "text": "Presentarte, mencionar que te gustan las cartas y hacerle una pregunta sobre las suyas para conversar por turnos.", "correct": true },
+      { "id": "c", "text": "Quitarle las cartas de las manos para mirarlas.", "correct": false },
+      { "id": "d", "text": "Observarlo de lejos durante semanas sin hablarle jamás.", "correct": false }
+    ],
+    "explanation": "Compartir un interés común es una gran oportunidad de amistad, y la clave está en conversar por turnos: tú cuentas un poco, preguntas, y escuchas. Recitar todo de una vez abruma, tocar sus cosas sin permiso invade su espacio, y nunca hablarle hace perder la oportunidad."
+  },
+  {
+    "id": "q015",
+    "category": "intereses_especiales",
+    "situation": "Tu amiga te dice: «Ya me has contado tres veces lo del motor del Titanic». ¿Qué es lo mejor que puedes responder?",
+    "options": [
+      { "id": "a", "text": "Contárselo una cuarta vez por si no quedó claro.", "correct": false },
+      { "id": "b", "text": "«Es verdad, perdona. Es que me apasiona. ¿Quieres que hablemos de otra cosa o te interesa alguna parte en concreto?»", "correct": true },
+      { "id": "c", "text": "«Pues no te aguanto», y marcharte.", "correct": false },
+      { "id": "d", "text": "Prometerle que nunca más volverás a hablar de tus temas favoritos.", "correct": false }
+    ],
+    "explanation": "Reconocer el comentario con humor y amabilidad («me apasiona, perdona») arregla el momento sin drama, y ofrecer cambiar de tema o concretar qué le interesa equilibra la conversación. Tus temas favoritos son valiosos: no hace falta renunciar a ellos, solo dosificarlos. Repetirlo o enfadarte empeora el momento."
+  },
+  {
+    "id": "q016",
+    "category": "instrucciones_ambiguas",
+    "situation": "La profesora dice: «Terminad el trabajo cuando podáis». No sabes si es para hoy o para el mes que viene. ¿Qué es lo mejor que puedes hacer?",
+    "options": [
+      { "id": "a", "text": "Suponer que es para dentro de un mes y no preocuparte.", "correct": false },
+      { "id": "b", "text": "Levantar la mano y preguntar: «¿Para qué día exactamente hay que entregarlo?»", "correct": true },
+      { "id": "c", "text": "Entregarlo vacío por si era para hoy.", "correct": false },
+      { "id": "d", "text": "Esperar a que un compañero pregunte, aunque quizá nadie lo haga.", "correct": false }
+    ],
+    "explanation": "Pedir una fecha concreta convierte una instrucción ambigua en una clara, y preguntar es una habilidad muy valiosa, no una molestia: a menudo ayudas a toda la clase. Suponer fechas o entregar en blanco te juega malas pasadas, y esperar a que otro pregunte te deja sin respuesta si nadie lo hace."
+  },
+  {
+    "id": "q017",
+    "category": "instrucciones_ambiguas",
+    "situation": "Tu madre te dice: «Ordena un poco tu cuarto». No sabes qué significa «un poco». ¿Qué es lo más útil?",
+    "options": [
+      { "id": "a", "text": "Mover solo un lápiz de sitio, porque «un poco» es muy poco.", "correct": false },
+      { "id": "b", "text": "Preguntar: «¿Qué cosas quieres que ordene exactamente? ¿La cama, la ropa, el escritorio?»", "correct": true },
+      { "id": "c", "text": "Tirar todo lo que haya por el suelo al armario de golpe.", "correct": false },
+      { "id": "d", "text": "No hacer nada porque la instrucción no está clara.", "correct": false }
+    ],
+    "explanation": "Desglosar «un poco» en tareas concretas (cama, ropa, escritorio) te da una lista clara y alcanzable, y además tu madre ve que te lo tomas en serio. Hacer casi nada o esconder el desorden no resuelve el problema, y no hacer nada por falta de claridad solo pospone el conflicto."
+  },
+  {
+    "id": "q018",
+    "category": "instrucciones_ambiguas",
+    "situation": "En tu primer día de prácticas te dicen: «Encárgate de la recepción un rato». Nadie te explicó qué hay que hacer ahí. ¿Qué es lo mejor?",
+    "options": [
+      { "id": "a", "text": "Sentarte y mirar el móvil hasta que alguien te diga algo.", "correct": false },
+      { "id": "b", "text": "Improvisar contestando lo primero que se te ocurra a quien llegue.", "correct": false },
+      { "id": "c", "text": "Preguntar a un responsable: «¿Qué tareas concretas incluye la recepción? ¿Hay algo que deba saber antes de empezar?»", "correct": true },
+      { "id": "d", "text": "Irte a casa porque nadie te explicó nada.", "correct": false }
+    ],
+    "explanation": "En un lugar nuevo, preguntar las tareas concretas antes de empezar es lo profesional y lo seguro: nadie espera que adivines el trabajo. Improvisar puede causar errores con el público, mirar el móvil da mala imagen, e irte sin más te cierra una oportunidad de aprender."
+  },
+  {
+    "id": "q019",
+    "category": "instrucciones_ambiguas",
+    "situation": "El entrenador grita: «¡Colocaos!» y todo el equipo corre a distintos sitios. Tú no sabes dónde colocarte. ¿Qué haces?",
+    "options": [
+      { "id": "a", "text": "Preguntar rápido: «¿Dónde me pongo yo?» al entrenador o a un compañero.", "correct": true },
+      { "id": "b", "text": "Quedarte quieto en medio del campo sin moverte.", "correct": false },
+      { "id": "c", "text": "Copiar a otro jugador aunque no sepas si es tu posición.", "correct": false },
+      { "id": "d", "text": "Sentarte en el banquillo enfadado.", "correct": false }
+    ],
+    "explanation": "Preguntar tu posición concreta tarda dos segundos y evita desorden en el equipo; a los entrenadores les gusta que preguntes lo que no sabes. Quedarte parado o copiar al azar desorganiza la jugada, y sentarte enfadado te saca del juego sin necesidad."
+  },
+  {
+    "id": "q020",
+    "category": "instrucciones_ambiguas",
+    "situation": "Un compañero te pide: «Pásame eso de ahí» señalando vagamente una mesa llena de objetos. ¿Qué es lo más práctico?",
+    "options": [
+      { "id": "a", "text": "Darle el objeto que esté más cerca, sea cual sea.", "correct": false },
+      { "id": "b", "text": "Preguntar: «¿Cuál exactamente? ¿El cuaderno azul?» señalando los objetos.", "correct": true },
+      { "id": "c", "text": "Ignorarlo porque no se explicó bien.", "correct": false },
+      { "id": "d", "text": "Tirarle todos los objetos de la mesa para que elija.", "correct": false }
+    ],
+    "explanation": "Pedir que concrete («¿el cuaderno azul?») mientras señalas los objetos resuelve la ambigüedad en segundos y es algo que todo el mundo hace, no solo tú. Adivinar puede dar lugar a errores, ignorarle es descortés, y tirar cosas es caótico y puede romper algo."
+  },
+  {
+    "id": "q021",
+    "category": "fatiga_social",
+    "situation": "Llevas todo el día rodeado de gente en el instituto y sientes la «batería social» a cero. Unos amigos te invitan a merendar. ¿Qué es lo más sano?",
+    "options": [
+      { "id": "a", "text": "Ir aunque estés agotado, porque decir que no es de mala educación.", "correct": false },
+      { "id": "b", "text": "Decir con amabilidad: «Gracias, hoy necesito descansar un rato. ¿Quedamos mañana?»", "correct": true },
+      { "id": "c", "text": "No contestar al mensaje y desaparecer sin explicaciones.", "correct": false },
+      { "id": "d", "text": "Ir y pasar toda la merienda enfadado y en silencio.", "correct": false }
+    ],
+    "explanation": "Cuidar tu energía social es legítimo y necesario. Decirlo con amabilidad y proponer otro día muestra que valoras a tus amigos a la vez que te cuidas. Ir agotado te desgasta más y se nota en tu humor, y desaparecer sin contestar puede hacerles sentir rechazados."
+  },
+  {
+    "id": "q022",
+    "category": "fatiga_social",
+    "situation": "En el recreo necesitas estar solo un rato para recargar energías, pero un compañero te sigue hablando sin parar. ¿Qué puedes decirle?",
+    "options": [
+      { "id": "a", "text": "«Déjame en paz de una vez, pesado.»", "correct": false },
+      { "id": "b", "text": "Nada; aguantar hasta que suene el timbre.", "correct": false },
+      { "id": "c", "text": "«Me caes bien, pero ahora necesito un rato tranquilo para mí. Luego hablamos, ¿vale?»", "correct": true },
+      { "id": "d", "text": "Esconderte en el baño sin decirle nada.", "correct": false }
+    ],
+    "explanation": "Pedir espacio con cariño («me caes bien, pero necesito un rato») cuida tu energía sin herir a tu compañero, que entenderá que no es personal. Responder con rudeza daña la relación, aguantar en silencio te agota, y esconderte sin explicar puede hacerle pensar que hizo algo malo."
+  },
+  {
+    "id": "q023",
+    "category": "fatiga_social",
+    "situation": "Después de una semana con exámenes y muchas actividades en grupo, sientes que hasta hablar te cuesta. ¿Qué es lo mejor que puedes hacer el fin de semana?",
+    "options": [
+      { "id": "a", "text": "Planear tiempo a solas o en calma para recargar, y avisar a tu familia de que necesitas ese descanso.", "correct": true },
+      { "id": "b", "text": "Llenar el fin de semana de más planes con gente para «no pensar».", "correct": false },
+      { "id": "c", "text": "Castigarte por no tener energía como los demás.", "correct": false },
+      { "id": "d", "text": "Contestar mal a todo el que te hable en casa.", "correct": false }
+    ],
+    "explanation": "El descanso tras el esfuerzo social es como cargar el móvil: necesario y normal. Planear tiempo en calma y comunicarlo en casa hace que todos lo respeten. Llenar el finde de más planes agota aún más, castigarte es injusto contigo, y contestar mal hace sufrir a quienes te rodean sin que entiendan por qué."
+  },
+  {
+    "id": "q024",
+    "category": "fatiga_social",
+    "situation": "En una excursión de todo el día, a media tarde sientes que no puedes más con tanta gente y tanto ruido. ¿Cuál es la mejor opción?",
+    "options": [
+      { "id": "a", "text": "Alejarte del grupo sin avisar para estar solo.", "correct": false },
+      { "id": "b", "text": "Decirle al profesor o monitor: «Necesito unos minutos de descanso en un sitio tranquilo, ¿puedo?»", "correct": true },
+      { "id": "c", "text": "Provocar una pelea para que te manden de vuelta al autocar.", "correct": false },
+      { "id": "d", "text": "Forzarte a seguir al máximo hasta llegar a casa y explotar allí.", "correct": false }
+    ],
+    "explanation": "Pedir un descanso al adulto responsable te da el respiro que necesitas sin riesgos: ellos saben dónde estás y pueden ayudarte. Alejarte sin avisar les asusta y puede ser peligroso, provocar una pelea trae consecuencias, y aguantar hasta explotar hace que el día acabe mucho peor."
+  },
+  {
+    "id": "q025",
+    "category": "fatiga_social",
+    "situation": "Tu familia organiza una reunión grande en casa y sabes que te va a cansar mucho. ¿Qué es lo más inteligente?",
+    "options": [
+      { "id": "a", "text": "Encerrarte en tu cuarto todo el día sin saludar a nadie.", "correct": false },
+      { "id": "b", "text": "Hablar antes con tu familia y acordar un plan: saludar, estar un rato, y poder retirarte a tu espacio cuando lo necesites.", "correct": true },
+      { "id": "c", "text": "Fingir que estás enfermo para no participar.", "correct": false },
+      { "id": "d", "text": "Participar a la fuerza en todo y acabar teniendo una crisis delante de todos.", "correct": false }
+    ],
+    "explanation": "Anticiparte y acordar un plan te da lo mejor de ambos mundos: participas en lo importante y tienes permiso para descansar cuando lo necesites. Encerrarte sin avisar preocupa a la familia, fingir enfermedad crea mentiras incómodas, y forzarte hasta la crisis es justo lo que el plan evita."
+  },
+  {
+    "id": "q026",
+    "category": "cambios_rutina",
+    "situation": "Llegas al instituto y anuncian que tu clase de matemáticas cambia de aula y de hora sin avisar. Sientes ansiedad. ¿Qué es lo mejor que puedes hacer?",
+    "options": [
+      { "id": "a", "text": "Respirar hondo, preguntar por la nueva aula y hora, y anotarlo para tenerlo claro.", "correct": true },
+      { "id": "b", "text": "Irte a casa porque el día ya no es como esperabas.", "correct": false },
+      { "id": "c", "text": "Llorar y gritar en el pasillo hasta que todo vuelva a ser como antes.", "correct": false },
+      { "id": "d", "text": "Ir al aula de siempre y negarte a moverte.", "correct": false }
+    ],
+    "explanation": "Los imprevistos molestan, y está bien sentirse así. Respirar y concretar la nueva información (dónde, cuándo) devuelve el orden al día: la incertidumbre es lo que más ansiedad da. Irse a casa o quedarse en el aula vieja no cambia el horario, y la angustia sin información solo crece."
+  },
+  {
+    "id": "q027",
+    "category": "cambios_rutina",
+    "situation": "Tu familia tenía planeada una visita al museo el sábado, pero ese día llueve mucho y deciden cambiar el plan. Te sientes decepcionado. ¿Cuál es la mejor reacción?",
+    "options": [
+      { "id": "a", "text": "Enfadarte todo el fin de semana porque el plan cambió.", "correct": false },
+      { "id": "b", "text": "Expresar tu decepción con calma y proponer o preguntar por un plan alternativo, dejando el museo para otro día.", "correct": true },
+      { "id": "c", "text": "Ir al museo solo bajo la lluvia sin avisar.", "correct": false },
+      { "id": "d", "text": "Decidir que nunca más harás planes con tu familia.", "correct": false }
+    ],
+    "explanation": "Decir «me sabe mal, tenía muchas ganas» es honesto y sano, y proponer una alternativa mantiene el plan en marcha. El museo seguirá ahí otro día. Enfadarse todo el finde te amarga a ti, ir solo sin avisar es peligroso, y renunciar a los planes para siempre te priva de buenos momentos futuros."
+  },
+  {
+    "id": "q028",
+    "category": "cambios_rutina",
+    "situation": "El profesor de siempre está enfermo y viene un sustituto que hace la clase de forma totalmente distinta. Te cuesta adaptarte. ¿Qué es lo más útil?",
+    "options": [
+      { "id": "a", "text": "Negarte a participar hasta que vuelva tu profesor.", "correct": false },
+      { "id": "b", "text": "Recordarte que es temporal, centrarte en las instrucciones concretas que da y pedir aclaraciones si las necesitas.", "correct": true },
+      { "id": "c", "text": "Decirle al sustituto que tu profesor lo hace mucho mejor.", "correct": false },
+      { "id": "d", "text": "Salirte de la clase sin permiso.", "correct": false }
+    ],
+    "explanation": "Pensar «esto es temporal» ayuda mucho a tolerar el cambio, y centrarte en instrucciones concretas te da puntos firmes a los que agarrarte. Negarte a participar te hace perder contenido, comparar en voz alta es descortés con el sustituto, y salirte sin permiso trae problemas."
+  },
+  {
+    "id": "q029",
+    "category": "cambios_rutina",
+    "situation": "El autobús que tomas cada día cambia de recorrido y ya no para en tu parada habitual. ¿Qué es lo mejor que puedes hacer?",
+    "options": [
+      { "id": "a", "text": "Subir igualmente y esperar que el conductor haga una excepción por ti.", "correct": false },
+      { "id": "b", "text": "Informarte del nuevo recorrido, localizar tu nueva parada con tiempo y, si puedes, practicar el trayecto antes con un adulto.", "correct": true },
+      { "id": "c", "text": "Dejar de ir al instituto hasta que vuelva el recorrido antiguo.", "correct": false },
+      { "id": "d", "text": "Reprocharle al conductor el cambio cada mañana.", "correct": false }
+    ],
+    "explanation": "Convertir lo desconocido en conocido es la mejor medicina para la ansiedad por los cambios: informarte, localizar la parada y practicar el trayecto te da seguridad. El conductor no decide los recorridos, así que las excepciones o los reproches no funcionan, y dejar de ir al instituto te perjudica a ti."
+  },
+  {
+    "id": "q030",
+    "category": "cambios_rutina",
+    "situation": "Tenías pensado hacer los deberes a las 5 como siempre, pero tu madre te pide ayuda urgente justo a esa hora. Te cuesta cambiar de plan. ¿Qué es lo más equilibrado?",
+    "options": [
+      { "id": "a", "text": "Ayudar a tu madre primero si es urgente, y luego retomar los deberes ajustando tu horario de esa tarde.", "correct": true },
+      { "id": "b", "text": "Negarte rotundamente porque las 5 es tu hora y nada puede cambiarla.", "correct": false },
+      { "id": "c", "text": "Ayudarla, pero enfadado y de mal humor toda la tarde.", "correct": false },
+      { "id": "d", "text": "No hacer los deberes ese día porque el horario ya se rompió.", "correct": false }
+    ],
+    "explanation": "La flexibilidad es un músculo que se entrena: ayudar en algo urgente y luego ajustar tu horario mantiene ambas cosas bajo control. Negarte a todo cambio genera conflicto constante, ayudar enfadado amarga el ambiente, y abandonar los deberes porque el plan cambió te perjudica doblemente."
+  },
+  {
+    "id": "q031",
+    "category": "conflictos_pares",
+    "situation": "Un grupo de compañeros se ríe de cómo hablas cuando te pones nervioso. ¿Cuál es la mejor forma de actuar?",
+    "options": [
+      { "id": "a", "text": "Reírte de ellos también con insultos peores.", "correct": false },
+      { "id": "b", "text": "Decirles con firmeza y calma: «No me gusta que se burlen de mí», y contarlo a un adulto de confianza si continúa.", "correct": true },
+      { "id": "c", "text": "Aguantarlo en silencio para que no se ceben más.", "correct": false },
+      { "id": "d", "text": "Dejar de hablar para siempre en público.", "correct": false }
+    ],
+    "explanation": "Poner un límite con calma y firmeza muestra que te respetas, y avisar a un adulto si sigue es pedir apoyo, no ser «chivato»: la burla repetida es acoso y no debes cargarlo solo. Devolver insultos escala el conflicto, aguantar en silencio lo alimenta, y dejar de hablar te castiga a ti por algo que hacen otros."
+  },
+  {
+    "id": "q032",
+    "category": "conflictos_pares",
+    "situation": "En el grupo de clase organizan una salida y notas que a ti no te han incluido en el chat. Te sientes excluido. ¿Qué es lo mejor que puedes hacer?",
+    "options": [
+      { "id": "a", "text": "Escribir en público que todos son unos falsos.", "correct": false },
+      { "id": "b", "text": "Preguntar con naturalidad a alguien del grupo: «Oye, ¿lo de la salida es del grupo de clase? Me gustaría apuntarme». Quizá fue un despiste.", "correct": true },
+      { "id": "c", "text": "No decir nada y guardarte el dolor para siempre.", "correct": false },
+      { "id": "d", "text": "Organizar otra salida en secreto para excluirlos tú a ellos.", "correct": false }
+    ],
+    "explanation": "Muchas exclusiones son despistes, no maldad: preguntar con naturalidad te saca de dudas y suele terminar en «¡perdona, te añado ahora!». Si fuera a propósito, también te da información para hablarlo con un adulto. Acusar en público o vengarte envenena el grupo, y callarte solo te hace daño a ti."
+  },
+  {
+    "id": "q033",
+    "category": "conflictos_pares",
+    "situation": "Tu amigo te pide que le copies los deberes otra vez. Ya se los pasaste tres veces esta semana. ¿Qué es lo más adecuado?",
+    "options": [
+      { "id": "a", "text": "Pasárselos de nuevo para que no se enfade contigo.", "correct": false },
+      { "id": "b", "text": "Decirle que no puedes seguir pasándoselos, pero ofrecerte a explicarle cómo se hacen.", "correct": true },
+      { "id": "c", "text": "Delatarlo gritando delante de toda la clase.", "correct": false },
+      { "id": "d", "text": "Dejar de hablarle sin explicarle por qué.", "correct": false }
+    ],
+    "explanation": "Decir que no con una alternativa («no te los paso, pero te explico») es poner un límite y ayudar a la vez: le haces más bien enseñándole que copiándole. Pasárselos siempre le perjudica y te usa, humillarlo en público rompe la amistad con crueldad, y dejar de hablarle sin motivo le confunde."
+  },
+  {
+    "id": "q034",
+    "category": "conflictos_pares",
+    "situation": "Un compañero te dice algo que te molesta, pero con su tono no sabes si bromea o va en serio. ¿Qué es lo más inteligente?",
+    "options": [
+      { "id": "a", "text": "Responderle con un insulto por si acaso iba en serio.", "correct": false },
+      { "id": "b", "text": "Reírte por compromiso aunque te haya dolido.", "correct": false },
+      { "id": "c", "text": "Preguntarle directamente y con calma: «¿Lo dices en broma o en serio? Porque a mí me ha molestado un poco».", "correct": true },
+      { "id": "d", "text": "Guardártelo y recordárselo con rencor meses después.", "correct": false }
+    ],
+    "explanation": "Preguntar aclara la intención y expresa cómo te sentiste: dos problemas resueltos de una vez. La mayoría de la gente ajusta su comportamiento cuando se lo dices con calma. Insultar «por si acaso» crea un conflicto de la nada, reírte por compromiso te hace daño, y el rencor guardado envenena la amistad."
+  },
+  {
+    "id": "q035",
+    "category": "conflictos_pares",
+    "situation": "Dos amigos tuyos se han peleado entre ellos y cada uno te pide que te pongas de su lado. ¿Qué es lo más sensato?",
+    "options": [
+      { "id": "a", "text": "Elegir al que te caiga mejor y atacar al otro.", "correct": false },
+      { "id": "b", "text": "Contarle a cada uno los secretos del otro para que lo entiendan.", "correct": false },
+      { "id": "c", "text": "Explicarles que no vas a tomar partido, pero que puedes escuchar a ambos y que quizá un mediador (un adulto) les ayude.", "correct": true },
+      { "id": "d", "text": "Cortar con los dos para no complicarte la vida.", "correct": false }
+    ],
+    "explanation": "No tomar partido pero ofrecer escucha protege ambas amistades y tu tranquilidad; sugerir un mediador es maduro y práctico. Atacar a uno te convierte en parte del conflicto, revelar secretos destruye la confianza en ti, y cortar con los dos te deja sin amigos por una pelea que no era tuya."
+  },
+  {
+    "id": "q036",
+    "category": "autodefensa_comunicacion",
+    "situation": "No has entendido la explicación del profesor y te da vergüenza preguntar delante de todos. ¿Qué es lo mejor que puedes hacer?",
+    "options": [
+      { "id": "a", "text": "Quedarte con la duda y copiar los apuntes de un compañero sin entenderlos.", "correct": false },
+      { "id": "b", "text": "Levantar la mano y preguntar, o acercarte al profesor al final de la clase si te resulta más cómodo.", "correct": true },
+      { "id": "c", "text": "Fingir que lo entendiste todo perfectamente.", "correct": false },
+      { "id": "d", "text": "Rendirte y decidir que esa asignatura no es para ti.", "correct": false }
+    ],
+    "explanation": "Preguntar es una fortaleza, no una debilidad: el trabajo del profesor es que entiendas. Si hablar delante de todos cuesta, acercarte al final funciona igual de bien. Copiar sin entender o fingir solo acumula lagunas que crecen, y rendirse te cierra puertas por una duda que tenía solución."
+  },
+  {
+    "id": "q037",
+    "category": "autodefensa_comunicacion",
+    "situation": "En el comedor, alguien se sienta en la silla que usas siempre y eso te desestabiliza. ¿Cuál es la mejor forma de manejarlo?",
+    "options": [
+      { "id": "a", "text": "Empujar la silla para que se levante.", "correct": false },
+      { "id": "b", "text": "Decirle con calma: «Oye, suelo sentarme aquí, ¿te importaría cambiarte a la de al lado?» y, si no puede ser, aceptar otra silla ese día.", "correct": true },
+      { "id": "c", "text": "Marcharte sin comer.", "correct": false },
+      { "id": "d", "text": "Quedarte de pie junto a la silla mirándole fijamente hasta que se vaya.", "correct": false }
+    ],
+    "explanation": "Pedir con calma lo que necesitas es justo y suele funcionar; y si ese día no puede ser, aceptar una silla distinta es una victoria de flexibilidad que te hace más fuerte. Empujar o intimidar con la mirada genera conflicto, y marcharte sin comer te perjudica solo a ti."
+  },
+  {
+    "id": "q038",
+    "category": "autodefensa_comunicacion",
+    "situation": "Tienes una cita médica y te gustaría que te explicaran las cosas de forma más clara y despacio, pero te da corte pedirlo. ¿Qué es lo más recomendable?",
+    "options": [
+      { "id": "a", "text": "Asentir a todo aunque no entiendas nada.", "correct": false },
+      { "id": "b", "text": "Decir al principio de la cita: «A veces necesito que me expliquen las cosas paso a paso y despacio, ¿puede ser?»", "correct": true },
+      { "id": "c", "text": "No ir a más citas médicas para evitar la incomodidad.", "correct": false },
+      { "id": "d", "text": "Esperar a que el médico adivine que no entendiste.", "correct": false }
+    ],
+    "explanation": "Comunicar cómo necesitas recibir la información al inicio de la cita es un derecho tuyo como paciente, y los profesionales sanitarios lo agradecen: así pueden ayudarte mejor. Asentir sin entender puede afectar a tu salud, faltar a las citas es peor aún, y nadie puede adivinar lo que no dices."
+  },
+  {
+    "id": "q039",
+    "category": "autodefensa_comunicacion",
+    "situation": "Un familiar te abraza fuerte cada vez que te ve y ese contacto te resulta muy incómodo. ¿Qué es lo mejor que puedes hacer?",
+    "options": [
+      { "id": "a", "text": "Soportar el abrazo cada vez aunque te haga sentir mal.", "correct": false },
+      { "id": "b", "text": "Explicarle con cariño: «Te quiero mucho, pero los abrazos fuertes me incomodan. ¿Podemos saludarnos con la mano o un gesto?»", "correct": true },
+      { "id": "c", "text": "Empujarle bruscamente la próxima vez.", "correct": false },
+      { "id": "d", "text": "Evitar a ese familiar para siempre sin explicarle nada.", "correct": false }
+    ],
+    "explanation": "Tu comodidad corporal importa, y se puede pedir un saludo distinto con cariño («te quiero, pero...») sin herir a nadie. La mayoría de familiares lo entienden y se adaptan. Soportarlo te hace daño, empujar le asusta y le hiere, y evitarle para siempre rompe una relación que podría arreglarse con una frase."
+  },
+  {
+    "id": "q040",
+    "category": "autodefensa_comunicacion",
+    "situation": "Te ofrecen quedarte a dormir en casa de un amigo, pero sabes que dormir fuera te cuesta muchísimo. ¿Cuál es la respuesta más sana?",
+    "options": [
+      { "id": "a", "text": "Aceptar y pasar una noche horrible sin decir nada.", "correct": false },
+      { "id": "b", "text": "Inventarte una excusa complicada que luego tengas que mantener.", "correct": false },
+      { "id": "c", "text": "Decir la verdad con tranquilidad: «Gracias por invitarme. Me cuesta dormir fuera, así que paso de quedarme a dormir, pero me encantaría ir hasta la noche».", "correct": true },
+      { "id": "d", "text": "Aceptar y luego no aparecer sin avisar.", "correct": false }
+    ],
+    "explanation": "Decir la verdad con una alternativa («voy hasta la noche») es honesto, cuida tu bienestar y mantiene los planes con tu amigo. Aceptar a la fuerza te hace pasarlo mal, las excusas inventadas se complican y se descubren, y no aparecer sin avisar decepciona y genera desconfianza."
+  },
+  {
+    "id": "q041",
+    "category": "senales_peligro",
+    "situation": "Un desconocido en internet te pide fotos tuyas y te dice que será «vuestro secreto». ¿Qué debes hacer?",
+    "options": [
+      { "id": "a", "text": "Enviarle fotos solo si parece simpático en su perfil.", "correct": false },
+      { "id": "b", "text": "No enviar nada, bloquear esa cuenta y contárselo enseguida a un adulto de confianza.", "correct": true },
+      { "id": "c", "text": "Pedirle primero fotos suyas para ver quién es.", "correct": false },
+      { "id": "d", "text": "Seguirle la conversación por curiosidad, sin enviar nada.", "correct": false }
+    ],
+    "explanation": "Un adulto o desconocido que pide fotos y secretos a un adolescente es una señal de alarma clara: no enviar nada, bloquear y avisar a un adulto de confianza te protege a ti y quizá a otros. Ningún «secreto» así es bueno, y seguir la conversación o pedir fotos a cambio te mantiene expuesto al riesgo."
+  },
+  {
+    "id": "q042",
+    "category": "senales_peligro",
+    "situation": "Un grupo de gente mayor que tú te invita a ir con ellos a un descampado a «pasarlo bien». Algo en tu interior te dice que no es buena idea. ¿Qué es lo mejor?",
+    "options": [
+      { "id": "a", "text": "Ir con ellos para no parecer miedoso.", "correct": false },
+      { "id": "b", "text": "Confiar en esa sensación, decir que no, ir a un lugar con más gente y avisar a alguien de confianza.", "correct": true },
+      { "id": "c", "text": "Ir pero solo un ratito, a ver qué pasa.", "correct": false },
+      { "id": "d", "text": "Preguntarles si lo que planean es peligroso, y fiarte de su respuesta.", "correct": false }
+    ],
+    "explanation": "Esa sensación de «algo no va bien» es tu alarma interior y merece ser escuchada: decir que no, ponerte a salvo entre gente y avisar a alguien de confianza es lo correcto. Parecer miedoso es mil veces mejor que estar en peligro, y quien planea algo malo no te lo va a admitir si se lo preguntas."
+  },
+  {
+    "id": "q043",
+    "category": "senales_peligro",
+    "situation": "En la calle, un adulto que no conoces te dice que tu madre le ha mandado a recogerte. Tú no sabes nada de eso. ¿Qué debes hacer?",
+    "options": [
+      { "id": "a", "text": "Ir con él, porque los adultos no mienten sobre esas cosas.", "correct": false },
+      { "id": "b", "text": "No ir con él, buscar a un adulto conocido (profesor, personal del centro) y llamar a tu madre para comprobarlo.", "correct": true },
+      { "id": "c", "text": "Ir con él solo si sabe tu nombre.", "correct": false },
+      { "id": "d", "text": "Echarte a correr a casa solo por las calles.", "correct": false }
+    ],
+    "explanation": "Ante una recogida inesperada, la regla es comprobar siempre con tu familia o con personal conocido del centro antes de ir con nadie; que sepa tu nombre no prueba nada (puede verlo en tu mochila o redes). Correr solo por la calle también te expone: lo seguro es buscar un adulto conocido y verificar."
+  },
+  {
+    "id": "q044",
+    "category": "senales_peligro",
+    "situation": "Un «amigo» de internet que nunca has visto en persona te propone quedar a solas en un parque por la noche. ¿Qué es lo más seguro?",
+    "options": [
+      { "id": "a", "text": "Ir, porque ya habláis desde hace semanas y parece buena persona.", "correct": false },
+      { "id": "b", "text": "Contárselo a un adulto de confianza; si algún día quedáis, que sea de día, en un lugar público y concurrido, y acompañado.", "correct": true },
+      { "id": "c", "text": "Ir sin decírselo a nadie para no preocuparles.", "correct": false },
+      { "id": "d", "text": "Mandar a otro amigo tuyo en tu lugar para espiarle.", "correct": false }
+    ],
+    "explanation": "En internet no siempre se es quien se dice ser, incluso tras semanas de conversación. Avisar a un adulto y poner condiciones de seguridad (de día, lugar público, acompañado) es lo responsable. Ir a solas de noche o en secreto te deja totalmente vulnerable, y mandar a otro pone a otra persona en riesgo."
+  },
+  {
+    "id": "q045",
+    "category": "senales_peligro",
+    "situation": "En casa de un amigo, su hermano mayor saca unas pastillas y os anima a probarlas «para ver qué se siente». ¿Qué es lo mejor que puedes hacer?",
+    "options": [
+      { "id": "a", "text": "Probar solo una para no quedar mal delante de todos.", "correct": false },
+      { "id": "b", "text": "Negarte, marcharte de ahí si insiste y contárselo a un adulto de confianza.", "correct": true },
+      { "id": "c", "text": "Grabarlo con el móvil y subirlo a redes.", "correct": false },
+      { "id": "d", "text": "Quedarte mirando para ver qué les pasa a los demás.", "correct": false }
+    ],
+    "explanation": "Tomar pastillas que no te ha recetado un médico es peligroso de verdad: negarte e irte es protegerte, y avisar a un adulto puede evitar que alguien acabe en el hospital. Quedarte de espectador te mantiene en una situación de riesgo y presión, y grabarlo para redes convierte un peligro en un espectáculo."
+  },
+  {
+    "id": "q046",
+    "category": "espacios_publicos",
+    "situation": "Vas en el autobús lleno y notas que una persona se te pega demasiado y te incomoda. ¿Qué es lo mejor que puedes hacer?",
+    "options": [
+      { "id": "a", "text": "No hacer nada; en un autobús lleno eso es normal y hay que aguantar.", "correct": false },
+      { "id": "b", "text": "Apartarte hacia otra zona del autobús, acercarte al conductor o a otros pasajeros, y si continúa, decirlo en voz alta o avisar a un adulto.", "correct": true },
+      { "id": "c", "text": "Bajarte en la siguiente parada aunque no sea la tuya, sin avisar a nadie.", "correct": false },
+      { "id": "d", "text": "Pegarle un empujón fuerte sin decir nada.", "correct": false }
+    ],
+    "explanation": "Tu incomodidad es información válida: moverte, buscar gente y avisar al conductor o a un adulto te protege. No hace falta aguantar lo que te hace sentir mal. Bajarte en una parada desconocida te pone en otro riesgo, y empujar sin más puede escalar la situación contra ti."
+  },
+  {
+    "id": "q047",
+    "category": "espacios_publicos",
+    "situation": "En la tienda no encuentras lo que buscas y no sabes si molestar a la dependienta preguntándole. ¿Qué es lo más adecuado?",
+    "options": [
+      { "id": "a", "text": "Dar vueltas 40 minutos hasta encontrarlo tú solo.", "correct": false },
+      { "id": "b", "text": "Acercarte y decir: «Buenas, ¿me puede decir dónde están los...?». Para eso está su trabajo.", "correct": true },
+      { "id": "c", "text": "Abrir varias cajas hasta encontrar lo que buscas.", "correct": false },
+      { "id": "d", "text": "Irte sin comprar nada aunque lo necesitabas.", "correct": false }
+    ],
+    "explanation": "Atender a los clientes es literalmente el trabajo de la dependienta: preguntar no es molestar, es lo normal, y una frase breve y educada basta. Dar vueltas eternas te agota, abrir cajas está mal visto y puede causarte un problema, e irte sin lo que necesitabas es perder el tiempo por nada."
+  },
+  {
+    "id": "q048",
+    "category": "espacios_publicos",
+    "situation": "Te pierdes en una estación de tren grande y no sabes dónde está tu andén. Empiezas a ponerte nervioso. ¿Qué es lo mejor?",
+    "options": [
+      { "id": "a", "text": "Caminar rápido en cualquier dirección a ver si aparece.", "correct": false },
+      { "id": "b", "text": "Pararte un momento, respirar, mirar los paneles informativos y, si no lo aclaras, preguntar en el punto de información o al personal.", "correct": true },
+      { "id": "c", "text": "Subirte al primer tren que llegue, sea cual sea.", "correct": false },
+      { "id": "d", "text": "Sentarte en el suelo a llorar hasta que alguien venga a ayudarte.", "correct": false }
+    ],
+    "explanation": "Parar y respirar primero evita que los nervios decidan por ti; luego los paneles y el personal de información existen exactamente para eso. Caminar a ciegas o subir al tren equivocado te aleja más de tu destino, y esperar a que alguien adivine que necesitas ayuda alarga la angustia innecesariamente."
+  },
+  {
+    "id": "q049",
+    "category": "espacios_publicos",
+    "situation": "En la consulta del médico te llaman por megafonía pero no entiendes bien si han dicho tu nombre. ¿Qué es lo más práctico?",
+    "options": [
+      { "id": "a", "text": "Entrar corriendo a la primera consulta que veas abierta.", "correct": false },
+      { "id": "b", "text": "Acercarte a recepción y decir: «Creo que han llamado a alguien pero no he entendido el nombre. Soy... y tengo cita a las...»", "correct": true },
+      { "id": "c", "text": "Quedarte sentado esperando a que vuelvan a llamar, aunque sea otra persona.", "correct": false },
+      { "id": "d", "text": "Irte a casa por si acaso ya te habían llamado.", "correct": false }
+    ],
+    "explanation": "Recepción está para resolver exactamente estas dudas: dar tu nombre y tu hora de cita aclara todo en un momento y no pierdes tu turno. Entrar a consultas al azar interrumpe a otros pacientes, quedarte esperando pasivamente puede hacer que pierdas la cita, e irte a casa retrasa tu salud por un malentendido."
+  },
+  {
+    "id": "q050",
+    "category": "espacios_publicos",
+    "situation": "En el cine, la película tiene escenas con sonidos muy fuertes que te sobresaltan y te ponen de los nervios. ¿Qué es lo mejor que puedes hacer?",
+    "options": [
+      { "id": "a", "text": "Llevar tapones o auriculares atenuadores por si los necesitas, y permitirte salir un momento al pasillo si alguna escena te supera.", "correct": true },
+      { "id": "b", "text": "Taparte los oídos con fuerza y cerrar los ojos durante toda la película.", "correct": false },
+      { "id": "c", "text": "Gritar «¡bajen el volumen!» a la sala de proyección.", "correct": false },
+      { "id": "d", "text": "No volver a ir al cine nunca más.", "correct": false }
+    ],
+    "explanation": "Anticiparte (llevar atenuadores) y darte permiso para salir un rato te permite disfrutar del cine a tu manera, sin dramas. Muchas salas incluso tienen sesiones adaptadas. Taparte los oídos toda la película te impide disfrutarla, gritar a la sala no cambia el volumen, y renunciar al cine para siempre es rendirse teniendo alternativas."
+  }
+]

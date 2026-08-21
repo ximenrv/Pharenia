@@ -1,0 +1,784 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --color-night-950: #070a1c;
+    --color-night-900: #0b1030;
+    --color-night-800: #131a42;
+    --color-night-700: #1c2454;
+    --color-night-600: #27316b;
+    --color-iris-300: #c3baf5;
+    --color-iris-400: #a99be0;
+    --color-iris-500: #8577c9;
+    --color-iris-600: #6d5ba8;
+    --color-gold-300: #f6d789;
+    --color-gold-400: #efc45e;
+    --color-gold-500: #e0a83c;
+    --color-gold-600: #b98324;
+    --color-mist-100: #eceef8;
+    --color-mist-200: #c9cde4;
+    --color-leaf-400: #4caf7d;
+    --color-leaf-500: #37936a;
+}
+
+@property --frame-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+:root {
+    --ease-smooth: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+html,
+body {
+    min-height: 100%;
+}
+
+body {
+    font-family: var(--font-sans);
+    color: var(--color-mist-100);
+    background:
+        radial-gradient(1100px 650px at 78% -10%, rgba(109, 91, 168, 0.16), transparent 60%),
+        radial-gradient(900px 600px at 8% 108%, rgba(224, 168, 60, 0.07), transparent 60%),
+        linear-gradient(180deg, #0d1330 0%, #0a0f26 50%, #060917 100%);
+    background-attachment: fixed;
+    overflow-x: hidden;
+}
+
+::selection {
+    background: rgba(239, 196, 94, 0.35);
+}
+
+.sky-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.vignette-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: radial-gradient(125% 95% at 50% 42%, transparent 52%, rgba(3, 5, 14, 0.6) 100%);
+}
+
+.noise-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 260px 260px;
+}
+
+.float-gentle {
+    animation: float-gentle 7s ease-in-out infinite;
+}
+
+@keyframes float-gentle {
+    0%,
+    100% {
+        transform: translateY(0) rotate(-1.5deg);
+    }
+    50% {
+        transform: translateY(-12px) rotate(1.5deg);
+    }
+}
+
+.screen {
+    display: none;
+    position: relative;
+    z-index: 10;
+}
+
+.screen.is-active {
+    display: block;
+    animation: screen-in 560ms var(--ease-smooth) both;
+}
+
+@keyframes screen-in {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.question-frame {
+    position: relative;
+    border-radius: 2rem;
+    padding: 2px;
+    background: conic-gradient(
+        from var(--frame-angle),
+        #f6d789 0%,
+        #b98324 22%,
+        #6d5ba8 45%,
+        #3a3175 60%,
+        #b98324 78%,
+        #f6d789 100%
+    );
+    box-shadow:
+        0 24px 60px -18px rgba(0, 0, 0, 0.7),
+        0 0 46px -8px rgba(239, 196, 94, 0.22),
+        0 0 80px -20px rgba(109, 91, 168, 0.35);
+    animation: frame-rotate 16s linear infinite;
+}
+
+@keyframes frame-rotate {
+    to {
+        --frame-angle: 360deg;
+    }
+}
+
+.question-frame::before {
+    content: '';
+    position: absolute;
+    inset: -18px 15% auto 15%;
+    height: 30px;
+    border-radius: 9999px;
+    background: radial-gradient(50% 100% at 50% 0%, rgba(246, 215, 137, 0.3), transparent 75%);
+    filter: blur(6px);
+    pointer-events: none;
+}
+
+.question-body {
+    border-radius: calc(2rem - 2px);
+    background:
+        radial-gradient(140% 120% at 50% -20%, rgba(133, 119, 201, 0.25), transparent 55%),
+        linear-gradient(165deg, #1a2148 0%, #131839 45%, #0d1229 100%);
+    padding: clamp(1.5rem, 4vw, 2.75rem);
+    overflow: hidden;
+    position: relative;
+}
+
+.question-text {
+    font-size: clamp(1.25rem, 2.6vw, 1.65rem);
+    line-height: 1.55;
+    font-weight: 500;
+    color: var(--color-mist-100);
+    text-wrap: pretty;
+}
+
+.question-divider {
+    margin-top: 1.5rem;
+    height: 2px;
+    border-radius: 9999px;
+    background: linear-gradient(90deg, transparent, rgba(239, 196, 94, 0.55) 30%, rgba(133, 119, 201, 0.55) 70%, transparent);
+}
+
+.category-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-gold-300);
+    background: linear-gradient(160deg, rgba(185, 131, 36, 0.4) 0%, #2e2712 70%);
+    border: 1px solid rgba(239, 196, 94, 0.5);
+    border-radius: 9999px;
+    padding: 0.35rem 0.9rem;
+    box-shadow:
+        inset 0 1px 0 rgba(239, 196, 94, 0.2),
+        0 0 18px -6px rgba(239, 196, 94, 0.4);
+}
+
+.progress-track {
+    height: 10px;
+    border-radius: 9999px;
+    background: #1c2454;
+    border: 1px solid #2a3368;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 9999px;
+    background: linear-gradient(90deg, #b98324, #efc45e, #f6d789);
+    box-shadow: 0 0 12px rgba(239, 196, 94, 0.55);
+    transition: width 620ms var(--ease-smooth);
+}
+
+.progress-star {
+    color: #3d4783;
+    transition: color 520ms var(--ease-smooth);
+}
+
+.progress-star.is-done {
+    color: var(--color-gold-400);
+    transform: scale(1.15);
+    animation: star-pop 460ms var(--ease-smooth) both;
+}
+
+.progress-star.is-current {
+    color: var(--color-iris-300);
+}
+
+@keyframes star-pop {
+    0% {
+        transform: scale(0.5);
+    }
+    100% {
+        transform: scale(1.15);
+    }
+}
+
+/* ============================================================
+   Botones de opción
+   ============================================================ */
+.option-btn {
+    --btn-edge: #8f641a;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 1.25rem;
+    padding: 1.1rem 1.35rem;
+    font-size: clamp(1rem, 2vw, 1.1rem);
+    line-height: 1.45;
+    font-weight: 500;
+    color: #231703;
+    background: linear-gradient(180deg, #f8dd94 0%, #efc45e 55%, #dda83f 100%);
+    border: 2px solid rgba(255, 244, 214, 0.55);
+    box-shadow:
+        0 6px 0 var(--btn-edge),
+        0 18px 30px -14px rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+    /* 'backwards' (no 'both'): la animación solo gobierna durante la entrada;
+       al terminar, el transform del hover vuelve a tener efecto. */
+    animation: option-in 440ms var(--ease-smooth) backwards;
+    transition:
+        transform 500ms var(--ease-smooth),
+        box-shadow 500ms var(--ease-smooth),
+        filter 500ms var(--ease-smooth),
+        border-color 500ms var(--ease-smooth),
+        background 550ms var(--ease-smooth);
+}
+
+@keyframes option-in {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.option-btn:hover:not(:disabled),
+.option-btn:focus-visible {
+    transform: translateY(-3px);
+    filter: brightness(1.07);
+    border-color: rgba(255, 250, 225, 0.95);
+    box-shadow:
+        0 9px 0 var(--btn-edge),
+        0 26px 38px -14px rgba(0, 0, 0, 0.6),
+        0 0 28px -2px rgba(239, 196, 94, 0.55);
+    outline: none;
+}
+
+.option-btn:hover:not(:disabled) .option-letter,
+.option-btn:focus-visible .option-letter {
+    transform: scale(1.1);
+    background: rgba(255, 253, 245, 0.98);
+}
+
+.option-btn:focus-visible {
+    outline: 3px solid var(--color-iris-300);
+    outline-offset: 3px;
+}
+
+.option-btn:active:not(:disabled) {
+    transform: translateY(2px);
+    transition-duration: 120ms;
+    box-shadow:
+        0 3px 0 var(--btn-edge),
+        0 12px 22px -12px rgba(0, 0, 0, 0.6);
+}
+
+.option-btn:disabled {
+    cursor: default;
+    animation: none;
+}
+
+.option-letter {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 9999px;
+    font-weight: 700;
+    color: var(--color-gold-600);
+    background: rgba(255, 251, 235, 0.85);
+    border: 2px solid rgba(185, 131, 36, 0.5);
+    transition:
+        transform 500ms var(--ease-smooth),
+        background 500ms var(--ease-smooth);
+}
+
+/* Correcto: verde suave (significado consistente en toda la app) */
+.option-btn.is-correct {
+    --btn-edge: #1f5c40;
+    color: #06281a;
+    background: linear-gradient(180deg, #8ed8ae 0%, #4caf7d 60%, #37936a 100%);
+    border-color: rgba(214, 255, 229, 0.7);
+    box-shadow:
+        0 6px 0 var(--btn-edge),
+        0 0 34px -4px rgba(76, 175, 125, 0.65);
+}
+
+.option-btn.is-correct .option-letter {
+    color: #1f5c40;
+    background: rgba(240, 255, 246, 0.92);
+    border-color: rgba(31, 92, 64, 0.5);
+}
+
+/* Incorrecto elegido: ámbar apagado, cálido, nada alarmante */
+.option-btn.is-wrong {
+    --btn-edge: #7a5a33;
+    color: #2e2110;
+    background: linear-gradient(180deg, #d9c39a 0%, #c2a06c 60%, #a88752 100%);
+    border-color: rgba(240, 226, 198, 0.5);
+}
+
+.option-btn.is-wrong .option-letter {
+    color: #7a5a33;
+    background: rgba(250, 244, 230, 0.85);
+    border-color: rgba(122, 90, 51, 0.5);
+}
+
+.option-btn.is-muted {
+    filter: saturate(0.55) brightness(0.8);
+    opacity: 0.75;
+}
+
+/* ============================================================
+   Panel de feedback
+   ============================================================ */
+.feedback-panel {
+    border-radius: 1.5rem;
+    padding: 1.5rem 1.75rem;
+    line-height: 1.6;
+    animation: feedback-in 680ms var(--ease-smooth) both;
+}
+
+@keyframes feedback-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.feedback-panel.is-good {
+    background: linear-gradient(160deg, rgba(55, 147, 106, 0.35) 0%, #10281f 70%);
+    border: 1px solid rgba(142, 216, 174, 0.6);
+    box-shadow:
+        inset 0 1px 0 rgba(142, 216, 174, 0.2),
+        0 12px 32px -14px rgba(0, 0, 0, 0.7),
+        0 0 28px -10px rgba(55, 147, 106, 0.5);
+}
+
+.feedback-panel.is-kind {
+    background: linear-gradient(160deg, rgba(185, 131, 36, 0.4) 0%, #241d0b 70%);
+    border: 1px solid rgba(239, 196, 94, 0.55);
+    box-shadow:
+        inset 0 1px 0 rgba(239, 196, 94, 0.22),
+        0 12px 32px -14px rgba(0, 0, 0, 0.7),
+        0 0 28px -10px rgba(239, 196, 94, 0.45);
+}
+
+.feedback-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.feedback-panel.is-good .feedback-title {
+    color: #8ed8ae;
+}
+
+.feedback-panel.is-kind .feedback-title {
+    color: var(--color-gold-300);
+}
+
+/* ============================================================
+   Botones generales
+   ============================================================ */
+.btn-gold {
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    border-radius: 9999px;
+    padding: 1rem 2.4rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #231703;
+    background: linear-gradient(180deg, #f8dd94 0%, #efc45e 55%, #dda83f 100%);
+    border: 2px solid rgba(255, 244, 214, 0.55);
+    box-shadow:
+        0 6px 0 #8f641a,
+        0 18px 34px -12px rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+    transition:
+        transform 500ms var(--ease-smooth),
+        box-shadow 500ms var(--ease-smooth),
+        filter 500ms var(--ease-smooth),
+        border-color 500ms var(--ease-smooth);
+}
+
+.btn-gold:hover,
+.btn-gold:focus-visible {
+    transform: translateY(-3px);
+    filter: brightness(1.08);
+    border-color: rgba(255, 250, 225, 0.95);
+    box-shadow:
+        0 9px 0 #8f641a,
+        0 26px 42px -12px rgba(0, 0, 0, 0.6),
+        0 0 32px -2px rgba(239, 196, 94, 0.6);
+    outline: none;
+}
+
+.btn-gold:focus-visible {
+    outline: 3px solid var(--color-iris-300);
+    outline-offset: 3px;
+}
+
+.btn-gold:active {
+    transform: translateY(2px);
+    transition-duration: 120ms;
+    box-shadow:
+        0 3px 0 #8f641a,
+        0 12px 24px -12px rgba(0, 0, 0, 0.6);
+}
+
+.btn-ghost {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    padding: 0.7rem 1.5rem;
+    font-weight: 600;
+    color: var(--color-mist-200);
+    background: linear-gradient(160deg, rgba(61, 71, 131, 0.55) 0%, #1c2454 70%);
+    border: 1px solid #55639f;
+    box-shadow:
+        inset 0 1px 0 rgba(169, 155, 224, 0.28),
+        0 6px 16px -8px rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+    transition:
+        background 500ms var(--ease-smooth),
+        border-color 500ms var(--ease-smooth),
+        color 500ms var(--ease-smooth),
+        transform 500ms var(--ease-smooth),
+        box-shadow 500ms var(--ease-smooth);
+}
+
+.btn-ghost:hover,
+.btn-ghost:focus-visible {
+    background: linear-gradient(160deg, rgba(109, 91, 168, 0.55) 0%, #27316b 70%);
+    border-color: #a99be0;
+    color: var(--color-mist-100);
+    transform: translateY(-2px);
+    box-shadow:
+        inset 0 1px 0 rgba(195, 186, 245, 0.35),
+        0 12px 26px -12px rgba(0, 0, 0, 0.55),
+        0 0 22px -6px rgba(133, 119, 201, 0.55);
+    outline: none;
+}
+
+.btn-ghost:focus-visible {
+    outline: 3px solid var(--color-iris-300);
+    outline-offset: 3px;
+}
+
+.btn-ghost:active {
+    transform: translateY(0);
+    transition-duration: 120ms;
+}
+
+/* ============================================================
+   Tarjetas sólidas (sin transparencias)
+   ============================================================ */
+.glass-card {
+    border-radius: 1.75rem;
+    background: linear-gradient(165deg, #1c2454 0%, #11173a 100%);
+    border: 1px solid #3d4783;
+    box-shadow:
+        0 24px 60px -24px rgba(0, 0, 0, 0.75),
+        inset 0 1px 0 #2a3368;
+}
+
+/* ============================================================
+   Pasos numerados (pantalla "Cómo funciona")
+   ============================================================ */
+.step-number {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 1rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-gold-300);
+    background: #2e2712;
+    border: 1px solid #8f6f2a;
+    box-shadow: 0 0 18px -6px rgba(239, 196, 94, 0.4);
+}
+
+/* ============================================================
+   Aviso de modo práctica (violeta = informativo)
+   ============================================================ */
+.practice-banner {
+    margin: -1rem auto 1.75rem;
+    width: fit-content;
+    max-width: 100%;
+    border-radius: 9999px;
+    padding: 0.55rem 1.35rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: center;
+    color: var(--color-iris-300);
+    background: linear-gradient(135deg, rgba(109, 91, 168, 0.45), rgba(37, 44, 92, 0.85) 60%);
+    border: 1px solid rgba(169, 155, 224, 0.55);
+    box-shadow:
+        inset 0 1px 0 rgba(195, 186, 245, 0.25),
+        0 4px 18px -6px rgba(133, 119, 201, 0.45);
+    backdrop-filter: blur(6px);
+}
+
+.practice-banner::before {
+    content: "";
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-right: 0.55rem;
+    border-radius: 9999px;
+    background: var(--color-iris-400);
+    box-shadow: 0 0 8px 1px rgba(169, 155, 224, 0.7);
+    vertical-align: middle;
+}
+
+.info-card {
+    border: 1px solid #4a549a;
+    background: #1a2148;
+    border-radius: 1rem;
+}
+
+/* ============================================================
+   Navbar temporal (navegación entre juegos)
+   ============================================================ */
+.temp-nav {
+    position: relative;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.6rem 1rem;
+    margin: 0 auto 1.5rem;
+    width: fit-content;
+    max-width: 100%;
+    border-radius: 9999px;
+    background: linear-gradient(160deg, rgba(61, 71, 131, 0.55) 0%, #1c2454 70%);
+    border: 1px solid #55639f;
+    box-shadow:
+        inset 0 1px 0 rgba(169, 155, 224, 0.28),
+        0 6px 16px -8px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(6px);
+}
+
+.temp-nav-link {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-mist-200);
+    text-decoration: none;
+    padding: 0.35rem 0.9rem;
+    border-radius: 9999px;
+    transition: color 300ms var(--ease-smooth), background 300ms var(--ease-smooth);
+}
+
+.temp-nav-link:hover {
+    color: var(--color-mist-100);
+    background: rgba(109, 91, 168, 0.35);
+}
+
+.temp-nav-link--active {
+    color: var(--color-gold-300);
+    background: rgba(185, 131, 36, 0.25);
+}
+
+.temp-nav-sep {
+    color: var(--color-mist-200);
+    opacity: 0.5;
+}
+
+/* ============================================================
+   Tarjetas de selección de continente
+   ============================================================ */
+.continent-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.75rem 1.5rem;
+    border-radius: 1.5rem;
+    background: linear-gradient(165deg, #1c2454 0%, #11173a 100%);
+    border: 1px solid #3d4783;
+    box-shadow:
+        0 12px 32px -16px rgba(0, 0, 0, 0.7),
+        inset 0 1px 0 #2a3368;
+    cursor: pointer;
+    transition:
+        transform 400ms var(--ease-smooth),
+        border-color 400ms var(--ease-smooth),
+        box-shadow 400ms var(--ease-smooth);
+}
+
+.continent-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-gold-400);
+    box-shadow:
+        0 20px 40px -16px rgba(0, 0, 0, 0.7),
+        inset 0 1px 0 #2a3368,
+        0 0 28px -8px rgba(239, 196, 94, 0.4);
+}
+
+.continent-card:focus-visible {
+    outline: 3px solid var(--color-iris-300);
+    outline-offset: 3px;
+}
+
+.continent-card:active {
+    transform: translateY(-1px);
+    transition-duration: 120ms;
+}
+
+.continent-card-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-mist-100);
+}
+
+.continent-card-count {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-gold-300);
+}
+
+/* ============================================================
+   Mapa SVG del juego de países
+   ============================================================ */
+.map-container {
+    border-radius: 1.5rem;
+    background: linear-gradient(165deg, #0d1229 0%, #0a0f26 100%);
+    border: 1px solid #2a3368;
+    padding: 1rem;
+    box-shadow:
+        0 24px 60px -24px rgba(0, 0, 0, 0.75),
+        inset 0 1px 0 #1c2454;
+    overflow: hidden;
+}
+
+.map-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 55vh;
+}
+
+/* País por defecto: azul oscuro, discreto */
+.map-country {
+    fill: #27316b;
+    stroke: #0d1229;
+    stroke-width: 0.5;
+    cursor: pointer;
+    transition: fill 300ms var(--ease-smooth);
+}
+
+/* Hover: verde (el usuario "explora" el mapa) */
+.map-country:hover {
+    fill: var(--color-leaf-400);
+}
+
+.map-country:focus-visible {
+    outline: none;
+    fill: var(--color-leaf-400);
+}
+
+/* Correcto: verde */
+.map-country.is-correct {
+    fill: var(--color-leaf-500);
+    pointer-events: none;
+    animation: map-pulse-good 600ms var(--ease-smooth);
+}
+
+@keyframes map-pulse-good {
+    0% { fill: var(--color-leaf-400); }
+    50% { fill: #8ed8ae; }
+    100% { fill: var(--color-leaf-500); }
+}
+
+/* Incorrecto (elegido): naranja */
+.map-country.is-wrong {
+    fill: var(--color-gold-400);
+    pointer-events: none;
+    animation: map-pulse-wrong 600ms var(--ease-smooth);
+}
+
+@keyframes map-pulse-wrong {
+    0% { fill: var(--color-gold-300); }
+    50% { fill: #f8dd94; }
+    100% { fill: var(--color-gold-400); }
+}
+
+/* Deshabilitado (tras responder) */
+.map-country.is-disabled {
+    pointer-events: none;
+    opacity: 0.85;
+}
+
+/* ============================================================
+   Accesibilidad: reducir movimiento si el usuario lo pide
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+    .float-gentle,
+    .question-frame,
+    .progress-star.is-done,
+    .option-btn,
+    .screen.is-active,
+    .feedback-panel {
+        animation: none !important;
+    }
+
+    * {
+        transition-duration: 1ms !important;
+    }
+}

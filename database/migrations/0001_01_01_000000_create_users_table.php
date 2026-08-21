@@ -15,12 +15,29 @@ return new class extends Migration
             $table->id();
             $table->string('name'); // Nombre completo
             $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
             $table->date('birthdate');
             $table->string('role')->default('ally_no_tea'); // tutor, adult_tea, ally_no_tea, teen, minor
             $table->string('password');
             // Columna para guardar el ID del adulto supervisor (opcional / nullable)
             $table->foreignId('supervisor_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->rememberToken();
             $table->timestamps();
+        });
+
+        Schema::create('password_reset_tokens', function (Blueprint $table) {
+            $table->string('email')->primary();
+            $table->string('token');
+            $table->timestamp('created_at')->nullable();
+        });
+
+        Schema::create('sessions', function (Blueprint $table) {
+            $table->string('id')->primary();
+            $table->foreignId('user_id')->nullable()->index();
+            $table->string('ip_address', 45)->nullable();
+            $table->text('user_agent')->nullable();
+            $table->longText('payload');
+            $table->integer('last_activity')->index();
         });
     }
 
@@ -30,5 +47,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('users');
+        Schema::dropIfExists('password_reset_tokens');
+        Schema::dropIfExists('sessions');
     }
 };

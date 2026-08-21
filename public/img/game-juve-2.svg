@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#37936a"/>
+      <stop offset="50%" stop-color="#1f5c40"/>
+      <stop offset="100%" stop-color="#0d2a1f"/>
+    </linearGradient>
+    <radialGradient id="glow2" cx="50%" cy="45%" r="50%">
+      <stop offset="0%" stop-color="#8ed8ae" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#8ed8ae" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow2" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feOffset dx="0" dy="6" result="offsetBlur"/>
+      <feMerge>
+        <feMergeNode in="offsetBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <clipPath id="globeClip">
+      <circle cx="400" cy="260" r="170"/>
+    </clipPath>
+  </defs>
+
+  <!-- Fondo -->
+  <rect width="800" height="600" fill="url(#bg2)"/>
+  <ellipse cx="400" cy="260" rx="360" ry="280" fill="url(#glow2)"/>
+
+  <!-- Estrellas -->
+  <g fill="#f6d789" opacity="0.5">
+    <circle cx="100" cy="90" r="2.5"/>
+    <circle cx="160" cy="150" r="2"/>
+    <circle cx="680" cy="80" r="2.5"/>
+    <circle cx="730" cy="150" r="2"/>
+    <circle cx="80" cy="220" r="2"/>
+    <circle cx="740" cy="240" r="2.5"/>
+    <circle cx="250" cy="70" r="2"/>
+    <circle cx="560" cy="60" r="2"/>
+  </g>
+
+  <!-- Globo terráqueo estilizado -->
+  <g filter="url(#shadow2)">
+    <circle cx="400" cy="260" r="170" fill="#27316b" stroke="#8ed8ae" stroke-width="4"/>
+
+    <!-- Continentes estilizados (América, África, Europa, Asia, Oceanía) -->
+    <g clip-path="url(#globeClip)" fill="#8ed8ae" opacity="0.9">
+      <!-- América -->
+      <path d="M 280 160 Q 320 180 310 230 Q 300 280 260 300 Q 240 250 250 200 Q 260 170 280 160 Z"/>
+      <path d="M 260 320 Q 300 340 290 380 Q 280 420 250 430 Q 240 390 250 360 Q 255 340 260 320 Z"/>
+      <!-- África -->
+      <path d="M 390 230 Q 430 210 470 240 Q 490 280 470 330 Q 450 380 410 400 Q 390 360 380 320 Q 370 270 390 230 Z"/>
+      <!-- Europa -->
+      <path d="M 420 140 Q 460 130 490 160 Q 500 190 470 210 Q 440 200 420 180 Q 410 160 420 140 Z"/>
+      <!-- Asia -->
+      <path d="M 500 140 Q 560 130 610 160 Q 640 200 620 250 Q 590 280 540 270 Q 500 250 490 210 Q 480 170 500 140 Z"/>
+      <!-- Oceanía -->
+      <path d="M 560 380 Q 600 370 630 400 Q 640 430 610 450 Q 580 460 560 440 Q 550 410 560 380 Z"/>
+    </g>
+
+    <!-- Líneas de longitud -->
+    <ellipse cx="400" cy="260" rx="170" ry="170" fill="none" stroke="#8ed8ae" stroke-width="1.5" opacity="0.4"/>
+    <ellipse cx="400" cy="260" rx="120" ry="170" fill="none" stroke="#8ed8ae" stroke-width="1.5" opacity="0.4"/>
+    <ellipse cx="400" cy="260" rx="60" ry="170" fill="none" stroke="#8ed8ae" stroke-width="1.5" opacity="0.4"/>
+    <ellipse cx="400" cy="260" rx="170" ry="120" fill="none" stroke="#8ed8ae" stroke-width="1.5" opacity="0.4"/>
+    <ellipse cx="400" cy="260" rx="170" ry="60" fill="none" stroke="#8ed8ae" stroke-width="1.5" opacity="0.4"/>
+    <line x1="230" y1="260" x2="570" y2="260" stroke="#8ed8ae" stroke-width="1.5" opacity="0.4"/>
+  </g>
+
+  <!-- Brújula decorativa -->
+  <g transform="translate(660, 80)" filter="url(#shadow2)">
+    <circle cx="0" cy="0" r="45" fill="#f8dd94" stroke="#b98324" stroke-width="3"/>
+    <path d="M 0 -35 L 8 0 L 0 35 L -8 0 Z" fill="#8b1538"/>
+    <path d="M -35 0 L 0 -8 L 35 0 L 0 8 Z" fill="#27316b"/>
+    <circle cx="0" cy="0" r="8" fill="#b98324"/>
+  </g>
+
+  <!-- Mascota mirando el globo -->
+  <image x="240" y="300" width="320" height="320" href="mascota.png" preserveAspectRatio="xMidYMid meet"/>
+
+  <!-- Sombra del suelo -->
+  <ellipse cx="400" cy="520" rx="220" ry="40" fill="#000" opacity="0.35"/>
+</svg>

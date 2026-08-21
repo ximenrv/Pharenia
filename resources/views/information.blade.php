@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pharenia - {{ __('Información') }}</title>
     
-    <!-- Script síncrono para evitar parpadeo de tema -->
     <script>
         (function () {
             const savedTheme = localStorage.getItem('theme') || 'light';
@@ -19,9 +18,6 @@
 
     @vite(['resources/css/information.css', 'resources/css/navbar.css', 'resources/css/footer.css', 'resources/css/settings-menu.css', 'resources/js/settings-menu.js', 'resources/js/information.js', 'resources/css/dark-theme.css'])
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Georgia&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="info-body">
 
@@ -474,7 +470,6 @@
 
     <x-footer/>
 
-    <!-- Componente del Menú Flotante -->
     <x-settings-menu />
 
     <script>
