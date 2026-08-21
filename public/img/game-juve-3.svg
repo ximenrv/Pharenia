@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0d1330"/>
+      <stop offset="50%" stop-color="#0a0f26"/>
+      <stop offset="100%" stop-color="#060917"/>
+    </linearGradient>
+    <radialGradient id="glow3" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#f6d789" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#f6d789" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow3" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feOffset dx="0" dy="6" result="offsetBlur"/>
+      <feMerge>
+        <feMergeNode in="offsetBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Fondo -->
+  <rect width="800" height="600" fill="url(#bg3)"/>
+  <ellipse cx="400" cy="240" rx="360" ry="260" fill="url(#glow3)"/>
+
+  <!-- Estrellas decorativas -->
+  <g fill="#f6d789" opacity="0.55">
+    <circle cx="100" cy="80" r="3"/>
+    <circle cx="170" cy="130" r="2"/>
+    <circle cx="690" cy="90" r="3"/>
+    <circle cx="730" cy="170" r="2"/>
+    <circle cx="60" cy="210" r="2"/>
+    <circle cx="750" cy="230" r="2.5"/>
+    <circle cx="260" cy="60" r="2"/>
+    <circle cx="560" cy="70" r="2"/>
+  </g>
+
+  <!-- Escudo / insignia de Centinela -->
+  <g transform="translate(400, 260)" filter="url(#shadow3)">
+    <path d="M0 -140 C70 -110 110 -50 110 30 C110 110 40 170 0 200 C-40 170 -110 110 -110 30 C-110 -50 -70 -110 0 -140 Z"
+          fill="#1c2454" stroke="#f6d789" stroke-width="5"/>
+    <path d="M0 -115 C55 -90 85 -40 85 28 C85 95 30 145 0 170 C-30 145 -85 95 -85 28 C-85 -40 -55 -90 0 -115 Z"
+          fill="#131a42" stroke="#b98324" stroke-width="2"/>
+    <path d="M-30 -10 L-8 14 L30 -30" fill="none" stroke="#8ed8ae" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M-30 50 L30 50" fill="none" stroke="#f6d789" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="0" cy="-60" r="12" fill="#f6d789"/>
+  </g>
+
+  <!-- Mascota centrada en la base -->
+  <image x="240" y="300" width="320" height="320" href="mascota.png" preserveAspectRatio="xMidYMid meet"/>
+
+  <!-- Sombra del suelo -->
+  <ellipse cx="400" cy="520" rx="220" ry="40" fill="#000" opacity="0.35"/>
+</svg>

@@ -12,6 +12,8 @@ export default defineConfig({
                 'resources/css/quizzsense/quizzsense.css',
                 'resources/js/quizzsense/app.js',
                 'resources/js/paises/paises.js',
+                'resources/css/centinela/centinela.css',
+                'resources/js/centinela/app.js',
             ],
             refresh: true,
             fonts: [

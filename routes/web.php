@@ -75,6 +75,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/juegos/juventud/paises', function () {
         return view('games.youth.paises');
     })->name('games.youth.paises');
+
+    Route::get('/juegos/juventud/centinela', function () {
+        return view('games.youth.centinela');
+    })->name('games.youth.centinela');
 });
 
 

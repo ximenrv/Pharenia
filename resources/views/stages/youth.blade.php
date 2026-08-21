@@ -59,16 +59,16 @@
                     </div>
                 </a>
 
-                <a href="#" class="game-card" data-game-url="/juegos/juventud/mapa" data-game-name="Descifra el Mapa">
+                <a href="#" class="game-card" data-game-url="{{ route('games.youth.centinela') }}" data-game-name="Centinela">
                     <div class="game-card__image-wrapper">
-                        <img src="{{ asset('img/game-juve-3.png') }}" alt="Descifra el Mapa" class="game-card__img">
+                        <img src="{{ asset('img/game-juve-3.svg') }}" alt="Centinela" class="game-card__img">
                         <div class="game-card__overlay" style="background-color: #bfa12b;">
                             <span class="game-card__play-btn">¡JUGAR AHORA!</span>
                         </div>
                     </div>
                     <div class="game-card__info">
-                        <h3 class="game-card__title">Descifra el Mapa</h3>
-                        <p class="game-card__description">Juego de lógica para orientarse en la ciudad.</p>
+                        <h3 class="game-card__title">Centinela</h3>
+                        <p class="game-card__description">Aprende a distinguir antes de actuar en una patrulla serena.</p>
                     </div>
                 </a>
             </div>
