@@ -1,0 +1,92 @@
+/* --- KEYFRAMES --- */
+
+@keyframes lumenEntrance {
+    0%   { transform: translateY(220px); opacity: 0; }
+    70%  { transform: translateY(-12px); opacity: 1; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes lumenExit {
+    0%   { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(300px); opacity: 0; }
+}
+
+@keyframes lumenTalk {
+    0%   { transform: translateY(0); }
+    25%  { transform: translateY(-10px); }
+    50%  { transform: translateY(0); }
+    75%  { transform: translateY(-4px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes bubbleAppear {
+    0%   { opacity: 0; transform: translateY(50px) scale(0.5); }
+    70%  { opacity: 1; transform: translateY(-5px) scale(1.02); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes bubbleDisappear {
+    0%   { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(40px) scale(0.5); }
+}
+
+@keyframes assistantZoneEntrance {
+    0% { opacity: 0; transform: translateY(-50%) translateX(200px) scale(0.8); }
+    70% { opacity: 1; transform: translateY(-50%) translateX(-15px) scale(1.03); }
+    100% { opacity: 1; transform: translateY(-50%) translateX(0) scale(1); }
+}
+
+@keyframes panelSlideRightIn { 
+    0% { transform: translateX(120vw); } 
+    100% { transform: translateX(0); } 
+}
+
+@keyframes panelSlideRightOut { 
+    0% { transform: translateX(0); } 
+    100% { transform: translateX(120vw); } 
+}
+
+@keyframes bubblePopIn {
+    0% { transform: scale(0); opacity: 0; }
+    70% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes titleAppear { 
+    from { opacity: 0; transform: translateY(-20px); } 
+    to { opacity: 1; transform: translateY(0); } 
+}
+
+@keyframes messageAppear { 
+    from { opacity: 0; transform: translateY(-15px); } 
+    to { opacity: 1; transform: translateY(0); } 
+}
+
+@keyframes showStat { 
+    from { opacity: 0; transform: translateY(20px); } 
+    to { opacity: 1; transform: translateY(0); } 
+}
+
+@keyframes returnAppear { 
+    0% { opacity: 0; transform: scale(0.3) translateY(20px); } 
+    70% { opacity: 1; transform: scale(1.1) translateY(-4px); } 
+    100% { opacity: 1; transform: scale(1) translateY(0); } 
+}
+
+@keyframes retryAppear { 
+    0% { opacity: 0; transform: scale(0.3) translateY(20px); } 
+    70% { opacity: 1; transform: scale(1.1) translateY(-4px); } 
+    100% { opacity: 1; transform: scale(1) translateY(0); } 
+}
+
+@keyframes starAppear { 
+    0% { opacity: 0; transform: scale(0) rotate(-90deg); } 
+    70% { opacity: 1; transform: scale(1.2) rotate(10deg); } 
+    100% { opacity: 1; transform: scale(1) rotate(0deg); } 
+}
+
+@keyframes lumenRiseLeft { 
+    0% { opacity: 0; transform: translate(60px, 80px); } 
+    70% { opacity: 1; transform: translate(-10px, -5px); } 
+    100% { opacity: 1; transform: translate(0, 0); } 
+}

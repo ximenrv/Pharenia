@@ -21,6 +21,10 @@ use App\Http\Controllers\InformationController;
 | Vistas Públicas Principales (Raíz)
 |--------------------------------------------------------------------------
 */
+Route::get('/', function () {
+    return view('home');
+})->name('home');
+
 Route::get('/home', function () {
     return view('home');
 })->name('home');
