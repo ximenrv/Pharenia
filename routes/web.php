@@ -91,6 +91,10 @@ Route::middleware(['auth', 'role:admin,adult_tea,teen,ally_no_tea'])->group(func
     Route::get('/juegos/juventud/paises', function () { 
         return view('games.youth.paises'); 
     })->name('games.youth.paises');
+
+    Route::get('/juegos/juventud/centinela', function () { 
+        return view('games.youth.centinela'); 
+    })->name('games.youth.centinela');
 });
 
 /*
