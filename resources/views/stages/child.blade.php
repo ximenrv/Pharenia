@@ -43,21 +43,21 @@
                 <!-- Cazador de Burbujas -->
                 <div class="game-card" data-name="Cazador de Burbujas" data-url="{{ route('games.cazador') }}">
                     <div class="game-card__image-wrapper">
-                        <img src="{{ asset('img/game-ninez-1.png') }}" alt="Rompecabezas de Emociones" class="game-card__img">
+                        <img src="{{ asset('img/game-ninez-1.png') }}" alt="Cazador de Burbujas" class="game-card__img">
                         <div class="game-card__overlay" style="background-color: #2c525a;">
                             <span class="game-card__play-btn">¡JUGAR AHORA!</span>
                         </div>
                     </div>
                     <div class="game-card__info">
                         <h3 class="game-card__title">Cazador de Burbujas</h3>
-                        <p class="game-card__description">Atrapa las burbujas con la forma que te pida Lumen. (En desarrollo)</p>
+                        <p class="game-card__description">Atrapa las burbujas con la forma que te pida Lumen.</p>
                     </div>
                 </div>
 
                 <!-- Guardianes del Planeta -->
                 <div class="game-card" data-name="Guardianes del Planeta" data-url="{{ route('games.guardianes') }}">
                     <div class="game-card__image-wrapper">
-                        <img src="{{ asset('img/game-ninez-2.png') }}" alt="El Limpiador del Océano" class="game-card__img">
+                        <img src="{{ asset('img/game-ninez-2.png') }}" alt="Guardianes del Planeta" class="game-card__img">
                         <div class="game-card__overlay" style="background-color: #2c525a;">
                             <span class="game-card__play-btn">¡JUGAR AHORA!</span>
                         </div>
@@ -71,7 +71,7 @@
                 <!-- Eco de los Colores -->
                 <div class="game-card" data-name="Eco de los Colores" data-url="{{ route('games.eco') }}">
                     <div class="game-card__image-wrapper">
-                        <img src="{{ asset('img/game-ninez-3.png') }}" alt="Sonidos Sagrados" class="game-card__img">
+                        <img src="{{ asset('img/game-ninez-3.png') }}" alt="Eco de los Colores" class="game-card__img">
                         <div class="game-card__overlay" style="background-color: #2c525a;">
                             <span class="game-card__play-btn">¡JUGAR AHORA!</span>
                         </div>
