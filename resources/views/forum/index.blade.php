@@ -669,7 +669,7 @@
                 drop-shadow(0 2px 8px rgba(0,0,0,0.35))
                 drop-shadow(0 0 12px rgba(191, 161, 43, 0.4))
                 drop-shadow(0 0 25px rgba(124, 77, 255, 0.2));
-            animation: lumenAura 2.5s ease-in-out infinite alternate;
+            animation: lumenAura 2.5s ease-in-out infinite alternate, lumenFloat 3s ease-in-out infinite;
         }
 
         @keyframes lumenAura {
@@ -682,10 +682,8 @@
             width: 100%;
             height: auto;
             pointer-events: none;
-            animation: lumenFloat 3s ease-in-out infinite;
         }
 
-        /* Lumen flota suavemente */
         @keyframes lumenFloat {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-6px); }
@@ -1080,7 +1078,7 @@
                 <div class="gallery-grid">
                     @foreach($photos as $photo)
                         <div class="photo-card" id="photo-{{ $photo->id }}">
-                            <div class="photo-card__img-wrap" onclick="openLightbox('{{ asset('storage/' . $photo->image_path) }}', '{{ $photo->username }}', '{{ addslashes($photo->caption ?? '') }}')">
+                            <div class="photo-card__img-wrap" data-lb-src="{{ asset('storage/' . $photo->image_path) }}" data-lb-user="{{ $photo->username }}" data-lb-caption="{{ $photo->caption ?? '' }}" onclick="openLightbox(this.dataset.lbSrc, this.dataset.lbUser, this.dataset.lbCaption)">
                                 <img class="photo-card__img" src="{{ asset('storage/' . $photo->image_path) }}" alt="Foto de {{ $photo->username }}" loading="lazy">
                             </div>
                             <div class="photo-card__body">
@@ -1331,6 +1329,8 @@
                     var card = document.getElementById('photo-' + id);
                     if (card) card.remove();
                 }
+            }).catch(function() {
+                alert('Error al eliminar. Intenta de nuevo.');
             });
         }
 
@@ -1391,6 +1391,16 @@
             var content = document.getElementById('camContent');
             var btn = document.getElementById('camPowerBtn');
             var label = document.getElementById('camPowerLabel');
+
+            // Resetear estado de preview por si quedó abierto
+            document.getElementById('camPreview').classList.remove('cam-preview--active');
+            document.getElementById('camActions').style.display = 'flex';
+            document.querySelector('.cam-box-wrap').style.display = '';
+            document.querySelector('.cam-toolbar').style.display = '';
+            document.querySelectorAll('.cam-dropdown').forEach(function(d) { d.style.display = ''; });
+            capturedImageData = null;
+            var captionEl = document.getElementById('captionInput');
+            if (captionEl) captionEl.value = '';
 
             if (currentStream) currentStream.getTracks().forEach(function(t) { t.stop(); });
             navigator.mediaDevices.getUserMedia({
