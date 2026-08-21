@@ -565,34 +565,6 @@ body{
     transform:translateY(0) rotate(-5deg);
 }
 
-/*--- Puntos / Efectos flotantes ---*/
-
-#effectsLayer{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    pointer-events:none;
-    z-index:200;
-}
-
-.floatingScore{
-    position:absolute;
-    font-family:'Nunito',sans-serif;
-    font-size:40px;
-    font-weight:bold;
-    color:#fdd50f;
-    text-shadow:0 0 8px rgba(236, 195, 13, 0.897), 2px 2px 4px rgba(0,0,0,.35);
-    pointer-events:none;
-    animation:scoreFloat 1.2s ease forwards;
-}
-
-.floatingScore.special{
-    font-size:46px;
-    color:#fcdb71;
-    text-shadow: 0 0 16px rgb(180, 154, 2), 2px 2px 5px rgba(0,0,0,.35);
-}
-
 /*--- Game Over Screen---*/
 #gameOverScreen {
     position: fixed;

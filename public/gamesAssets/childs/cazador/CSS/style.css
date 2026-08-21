@@ -1,0 +1,752 @@
+:root{
+    --game-width:100vw;
+    --game-height:100vh;
+    --transition:.3s;
+    --lumen-size:320px;
+    --dialog-speed:.35s;
+}
+
+#game{
+    position:relative;
+    width:100vw;
+    height:100vh;
+    overflow:hidden;
+}
+
+/*--- Estructura Base del Mapa/Fondo ---*/
+
+#world{
+    position:absolute;
+    overflow:hidden;
+    inset:0;
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+    padding-left: 6vw;
+}
+
+#background{
+    position:absolute;
+    inset:0;
+    z-index:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center;
+    user-select:none;
+    pointer-events:none;
+}
+
+/*--- PANELES DE PUNTOS Y RÉCORD ---*/
+
+.panel {
+    position: absolute;
+    height: 110px;
+    z-index: 100;
+    pointer-events: none;
+}
+
+.panel img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.panelContent {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    font-family: 'Nunito', sans-serif;
+    color: white;
+    text-shadow: 3px 3px 6px rgba(0,0,0,.6);
+}
+
+/* --- PANEL DE RÉCORD --- */
+#recordPanel {
+    width: 380px;
+    top: 25px;
+    left: 30px;
+    right: auto;
+}
+
+#recordPanel img {
+    transform: translate(-50%, -50%) scale(1.6);
+}
+
+#recordPanel .panelContent {
+    flex-direction: column;         
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    transform: translate(-2px, 32px); 
+}
+
+#recordPanel .hudLabel {
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    line-height: 1;
+    color: #ffffff;
+}
+
+#recordPanel .hudValue {
+    font-size: 34px;
+    font-weight: 900;
+    line-height: 1;
+    color: #FFD65A;
+}
+
+/* --- PANEL DE PUNTOS --- */
+#scorePanel {
+    width: 420px;
+    top: -80px;
+    right: -290px;
+    left: auto;
+}
+
+#scorePanel img {
+    transform: translate(-50%, -50%) scale(2.7) rotate(-2deg);
+}
+
+#scorePanel .panelContent {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transform: translate(-5px, -5px) rotate(-12deg);
+    font-size: 30px;
+    font-weight: 800;
+}
+
+/*--- CONTENEDOR Y TABLERO CENTRAL ---*/
+
+#boardContainer {
+    position: relative;
+    z-index: 50;
+    margin-top: 20px;
+}
+
+#memoryBoard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 25px;
+    padding: 35px 40px;
+    width: 58vw;
+    max-width: 880px;
+    height: 65vh;           
+    max-height: 620px;
+    background: rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(12px);
+    border-radius: 40px;
+    border: 4px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.1);
+    justify-items: center;
+    align-items: center;
+}
+
+.boardSlot {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/*--- ESTILOS BURBUJAS ---*/
+
+.colorBubble {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    min-width: 150px;
+    min-height: 150px;
+    z-index: 60;
+    cursor: pointer;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: transform 0.2s cubic-bezier(.2, 1.4, .4, 1), filter 0.2s ease;
+    user-select: none;
+    animation: floatIdle 3.2s ease-in-out infinite;
+}
+
+.colorBubble:hover {
+    transform: scale(1.15) !important;
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
+}
+
+.colorBubble:active {
+    transform: scale(0.9) !important;
+}
+
+.colorBubble.circle { background-image: url('/gamesAssets/childs/cazador/ASSETS/bubbles/bubbleCircle.png'); }
+.colorBubble.square { background-image: url('/gamesAssets/childs/cazador/ASSETS/bubbles/bubbleSqr.png'); }
+.colorBubble.triangle { background-image: url('/gamesAssets/childs/cazador/ASSETS/bubbles/bubbleTri.png'); }
+.colorBubble.star { background-image: url('/gamesAssets/childs/cazador/ASSETS/bubbles/bubbleStar.png'); }
+.colorBubble.heart { background-image: url('/gamesAssets/childs/cazador/ASSETS/bubbles/bubbleHeart.png'); }
+
+@keyframes floatIdle {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(2deg); }
+}
+
+.colorBubble.popping {
+    animation: bubblePop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards !important;
+    pointer-events: none;
+}
+
+@keyframes bubblePop {
+    0% { transform: scale(1); opacity: 1; filter: brightness(1); }
+    50% { transform: scale(1.4); opacity: 0.8; filter: brightness(1.8) drop-shadow(0 0 20px #fff); }
+    100% { transform: scale(0); opacity: 0; filter: brightness(2); }
+}
+
+/*--- ASSISTANT ZONE ---*/
+
+#assistantZone {
+    position: absolute;
+    right: 3vw;
+    top: 52%;
+    transform: translateY(-50%);
+    z-index: 250;
+    display: none;          
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+#assistantZone.active {
+    display: flex !important;
+    animation: assistantZoneEntrance 0.8s cubic-bezier(0.18, 1.4, 0.45, 1) forwards;
+}
+
+#assistant {
+    position: relative;
+    width: 360px;
+    height: 320px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+#assistantBubble {
+    position: absolute;
+    width: 620px;
+    bottom: -15px;
+    z-index: 1;
+    filter: drop-shadow(0 8px 14px rgba(0,0,0,0.6));
+}
+
+#assistantHead {
+    position: absolute;
+    width: 250px;
+    height: auto;
+    bottom: 53px;
+    z-index: 2;
+    transform: scaleX(-1) scale(1);  
+    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.4));
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#assistantHead.changeSign {
+    transform: scaleX(-1) scale(0.5) rotate(2deg);
+    opacity: 0.5;
+}
+
+#assistantHead.signActive {
+    transform: scaleX(-1) scale(1.1) !important;
+    bottom: 59px; 
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#assistantText {
+    position: absolute;
+    width: 420px;
+    left: -380px;
+    top: 170px;             
+    z-index: 300;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translateY(15px) scale(0.8) !important;
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.18, 1.4, 0.45, 1);
+}
+
+#assistantText img {
+    width: 100%;
+    height: auto;
+    transform: scaleX(-1);
+    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.4));
+}
+
+#assistantText p {
+    position: absolute;
+    top: 30px;
+    left: 5px;
+    right: 45px;
+    bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    font-size: 20px;
+    line-height: 1.2;
+    color: white;
+    font-weight: 800;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+}
+
+
+#assistantText.showBubble {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: translateY(0px) scale(1.25) !important;
+}
+
+#assistantText.hideBubble {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translateY(15px) scale(0.8) !important;
+}
+
+/*--- BARRA DE VIDAS ---*/
+
+#healthBarContainer {
+    width: 280px;
+    height: 40px;
+    background: linear-gradient(180deg, #1f2937 0%, #111827 100%);
+    border: 4px solid #f59e0b;
+    border-radius: 20px;
+    display: flex;
+    padding: 4px;
+    gap: 6px;
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.4), inset 0 2px 6px rgba(0,0,0,0.8);
+    position: relative;
+}
+
+.healthSegment {
+    flex: 1;
+    height: 100%;
+    background: linear-gradient(180deg, #34d399 0%, #059669 50%, #047857 100%);
+    border-radius: 10px;
+    box-shadow: inset 0 2px 2px rgba(255,255,255,0.6), 0 0 8px rgba(52, 211, 153, 0.8);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.healthSegment::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 40%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 100%);
+}
+
+.healthSegment.lost {
+    background: linear-gradient(180deg, #4b5563 0%, #1f2937 100%);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.9);
+    opacity: 0.25;
+    transform: scale(0.95);
+}
+
+#healthBarContainer.critical .healthSegment:not(.lost) {
+    background: linear-gradient(180deg, #f87171 0%, #dc2626 50%, #991b1b 100%);
+    box-shadow: inset 0 2px 2px rgba(255,255,255,0.6), 0 0 12px rgba(239, 68, 68, 0.9);
+    animation: healthPulse 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes healthPulse {
+    0% { filter: brightness(1); }
+    100% { filter: brightness(1.3); }
+}
+
+/*--- TUTORIAL ---*/
+
+body{
+    background:#1d1d1d;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    overflow:hidden;
+    font-family:'Nunito', sans-serif;
+}
+
+#bottomUI {
+    background: transparent;
+    position: absolute;
+    left: 0; 
+    bottom: 0;
+    width: 100%; 
+    height: 180px;
+    z-index: 150;
+    pointer-events: none;
+}
+/*---Lumen Tutorial---*/
+
+#lumenContainer{
+    position:absolute;
+    left:-15px;
+    bottom:-90px;
+    opacity:0;
+}
+
+#lumen{
+    display: block;
+    height:380px;
+    transition:transform .25s ease;
+    transform-origin:center bottom;
+}
+
+/*---Tutorial Panel---*/
+
+#tutorialLayer{
+    position:absolute;
+    inset:0;
+    z-index:200;
+    pointer-events:none;
+}
+
+#tutorialPanel{
+    position:absolute;
+    left:225px;
+    bottom:-15px;
+    width:1025px;
+    opacity:0;
+    transform: translateY(40px) rotate(8deg) scale(.15);
+    transform-origin:10% 88%;
+}
+
+#tutorialPanel.show{
+    opacity:1;
+    transform: translateY(0) rotate(0deg) scale(1);
+    transition: transform .6s cubic-bezier(.18,1.4,.45,1), opacity .4s;
+    pointer-events:auto;
+}
+
+#tutorialPanel.hide-animation {
+    animation: bubbleDisappear 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+#tutorialPanel.hidden,
+#tutorialLayer.hidden {
+    display: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+#tutorialContent{
+    position:absolute;
+    inset:0;
+}
+
+#tutorialBubble{
+    width:100%;
+    display:block;
+}
+
+#tutorialText{
+    position:absolute;
+    top:140px;
+    left:210px;
+    width:560px;
+    color:white;
+    font-size:28px;
+    font-family:'Nunito';
+    font-weight:800;
+    line-height:1.3;
+}
+
+#tutorialButtons{
+    position:absolute;
+    right:45px;
+    bottom:35px;
+    width:170px;
+    height:90px;
+    display:flex;
+    justify-content:flex-end;
+    gap:15px;
+}
+
+/*--- Botones UI Tutorial ---*/
+
+.uiButton {
+    position: absolute;
+    right: -85px;
+    bottom: 0px;
+    width: 270px;
+    transform-origin: 12% 50%;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(40px) rotate(25deg) scale(.2);
+    transition: transform .35s ease, opacity .35s, filter .25s;
+}
+
+.uiButton.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0) rotate(0deg) scale(1);
+    transition: transform .55s cubic-bezier(.18,1.4,.45,1), opacity .55s, filter .25s;
+}
+
+.uiButton.show:hover {
+    transform: translateY(-4px) rotate(-6deg) scale(1.08);
+    filter: brightness(1.15);
+}
+
+.uiButton.hide {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(40px) rotate(25deg) scale(.2);
+    transition: transform .35s ease, opacity .35s;
+}
+
+#nextButton, #playButton {
+    right: -85px;
+    bottom: 0px;
+    width: 270px;
+}
+
+/*---Nombre del personaje---*/
+
+#speakerName{
+    position:absolute;
+    left:190px;
+    top:53px;
+    width:165px;
+    opacity:0;
+    text-align:center;
+    font-size:36px;
+    font-weight:900;
+    font-family:'Nunito',sans-serif;
+    color:#13254b;
+    letter-spacing:2px;
+    transform:rotate(-5deg) translateY(-8px);
+    transition: opacity .25s ease, transform .25s ease;
+}
+
+#speakerName.show{
+    opacity:1;
+    transform:translateY(0) rotate(-5deg);
+}
+
+#effectsLayer{
+    position:absolute;
+    inset:0; width:100%; height:100%;
+    pointer-events:none;
+    z-index:200;
+}
+
+/* --- GAME OVER (PANEL LATERAL EN FRANJA) --- */
+
+#gameOverScreen {
+    position: fixed; 
+    inset: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(5px);
+    opacity: 0; 
+    visibility: hidden;
+    transition: opacity .35s ease;
+    z-index: 9999;
+}
+
+#gameOverScreen.show {
+    opacity: 1; 
+    visibility: visible;
+}
+
+#gameOverContainer {
+    position: relative;
+    width: 580px;
+    height: 100vh;
+    max-height: 100vh;
+    background: url('/gamesAssets/childs/cazador/ASSETS/ui/gameOverMenu.png') no-repeat center center;
+    background-size: 100% 100%;
+    display: flex; 
+    flex-direction: column;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 60px 45px; 
+    box-sizing: border-box;
+    transform: translateX(120vw); 
+    z-index: 5;
+}
+
+#gameOverLumen {
+    position: absolute;
+    right: 405px;
+    bottom: -40px; 
+    z-index: 3;
+    pointer-events: none; 
+    opacity: 0;
+}
+
+#gameOverLumen img {
+    width: 520px;
+    height: auto;
+    transform: scaleX(-1) rotate(8deg); 
+    filter: drop-shadow(-8px 10px 18px rgba(0,0,0,0.6));
+}
+
+#gameOverTitle {
+    font-size: 50px;
+    font-weight: 900; 
+    color: white;
+    text-shadow: 4px 4px 0 black, 0 0 15px rgba(255, 255, 255, 0.4);
+    margin-top: 10px; 
+    text-align: center;
+}
+
+#gameOverMessage { 
+    text-align: center; 
+    color: white; 
+    max-width: 440px; 
+}
+
+#messageTitle { 
+    font-size: 30px; 
+    color: #e7c739; 
+    text-shadow: 2px 2px 0 black; 
+    margin-bottom: 6px; 
+}
+
+#messageText { 
+    font-size: 25px; 
+    line-height: 1.3; 
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.9); 
+}
+
+#gameOverStats {
+    width: 100%; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 4px;
+}
+
+.gameOverBlock { 
+    text-align: center; 
+}
+
+.statTitle { 
+    color: white; 
+    font-size: 22px; 
+    letter-spacing: 1.5px; 
+    text-shadow: 2px 2px 0 black; 
+}
+
+.statValue { 
+    display: block; 
+    color: #FFD65A; 
+    font-size: 48px;
+    font-weight: 900; 
+    text-shadow: 3px 3px 0 black; 
+}
+
+.divider {
+    width: 260px; 
+    height: 3px; 
+    margin: 6px auto;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.85) 50%, transparent);
+}
+
+#gameOverActions {
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    gap: 2px; 
+    margin-bottom: 10px; 
+    width: 100%;
+}
+
+#returnButton img, #retryButton img {
+    width: 270px;
+    height: auto; 
+    cursor: pointer;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+#returnButton:hover img, #retryButton:hover img {
+    transform: scale(1.12) rotate(-6deg); 
+    filter: brightness(1.15);
+}
+
+#gameOverStar img {
+    width: 75px; 
+    height: 75px;
+    filter: drop-shadow(0 0 15px #ffd700);
+}
+/* --- CLASES ÚTILES DE ANIMACIÓN Y ESTADOS --- */
+
+.colorBubble.popIn {
+    animation: bubblePopIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.showContainer { 
+    animation: panelSlideRightIn 0.6s cubic-bezier(.18, 1.25, .4, 1) forwards; 
+}
+
+.hideContainer { 
+    animation: panelSlideRightOut 0.4s ease-in forwards; 
+}
+
+.showGameOverTitle { 
+    animation: titleAppear 0.5s ease forwards 0.2s; 
+}
+
+.showMessage { 
+    animation: messageAppear 0.5s ease forwards 0.3s; 
+}
+
+.showStat { 
+    animation: showStat 0.45s ease forwards 0.4s; 
+}
+
+.showReturn { 
+    animation: returnAppear 0.5s cubic-bezier(.2, 1.4, .4, 1) forwards 0.5s; 
+}
+
+.showStar { 
+    animation: starAppear 0.5s cubic-bezier(.2, 1.4, .4, 1) forwards 0.55s;
+}
+
+.showRetry { 
+    animation: retryAppear 0.5s cubic-bezier(.2, 1.4, .4, 1) forwards 0.6s; 
+}
+
+.showLumen { 
+    animation: lumenRiseLeft 0.7s cubic-bezier(.2, 1.4, .4, 1) forwards 0.3s;
+}
+
+.lumenEntrance {
+    animation: lumenEntrance .6s ease-out forwards;
+}
+
+.lumenExit {
+    animation: lumenExit .6s ease-in forwards;
+}
+
+.lumenTalking {
+    animation: lumenTalk .45s ease;
+}
+
+.bubbleAppear {
+    animation: bubbleAppear .55s cubic-bezier(.2,1.35,.35,1) forwards;
+}
+
+.bubbleDisappear {
+    animation: bubbleDisappear .45s ease-in forwards;
+}
