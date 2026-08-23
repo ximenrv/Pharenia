@@ -20,6 +20,7 @@ import {
 import { loadState, todayKey } from './storage.js';
 import { pickMessage } from './messages.js';
 import { initSky } from './sky.js';
+import { saveQuizzsenseResult } from '../utils/teen-records.js';
 
 const $ = (id) => document.getElementById(id);
 
@@ -316,6 +317,13 @@ function finishQuiz() {
     lastMessageIndex = index;
 
     const result = completeSession(session, index);
+
+    // Persistir el resultado oficial del día en la base de datos.
+    saveQuizzsenseResult({
+        correctAnswers: result.correct,
+        totalQuestions: result.total,
+        categorySummary: result.categories || null,
+    });
 
     renderResults({
         practice: false,

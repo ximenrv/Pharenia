@@ -25,6 +25,9 @@
                     </ul>
                 </li>
                 <li class="navbar__item">
+                    <a href="{{ route('forum.index') }}" class="navbar__link {{ Request::is('foro*') ? 'navbar__link--active' : '' }}">{{ __('Foro') }}</a>
+                </li>
+                <li class="navbar__item">
                     <a href="{{ route('admin.dashboard') }}" class="navbar__link {{ Request::is('admin*') ? 'navbar__link--active' : '' }}">{{ __('Panel Admin') }}</a>
                 </li>
 
@@ -38,6 +41,9 @@
                         <li><a href="{{ route('activities.adultez') }}" class="dropdown-link">{{ __('Adultez') }}</a></li>
                     </ul>
                 </li>
+                <li class="navbar__item">
+                    <a href="{{ route('forum.index') }}" class="navbar__link {{ Request::is('foro*') ? 'navbar__link--active' : '' }}">{{ __('Foro') }}</a>
+                </li>
 
             {{-- Si es Tutor / Aliado --}}
             @elseif(auth()->user()->role === 'ally_no_tea')
@@ -48,6 +54,9 @@
                         <li><a href="{{ route('activities.youth') }}" class="dropdown-link">{{ __('Juventud') }}</a></li>
                         <li><a href="{{ route('activities.adultez') }}" class="dropdown-link">{{ __('Adultez') }}</a></li>
                     </ul>
+                </li>
+                <li class="navbar__item">
+                    <a href="{{ route('forum.index') }}" class="navbar__link {{ Request::is('foro*') ? 'navbar__link--active' : '' }}">{{ __('Foro') }}</a>
                 </li>
                 <li class="navbar__item">
                     <a href="{{ route('family-panel') }}" class="navbar__link {{ Request::is('family*') ? 'navbar__link--active' : '' }}">{{ __('Panel Familiar') }}</a>
@@ -62,6 +71,9 @@
                     </ul>
                 </li>
                 <li class="navbar__item">
+                    <a href="{{ route('forum.index') }}" class="navbar__link {{ Request::is('foro*') ? 'navbar__link--active' : '' }}">{{ __('Foro') }}</a>
+                </li>
+                <li class="navbar__item">
                     <a href="{{ route('supervisor.vincular') }}" class="navbar__link {{ Request::is('vincular-adulto*') ? 'navbar__link--active' : '' }}">{{ __('Adulto Supervisor') }}</a>
                 </li>
             @endif
@@ -73,6 +85,9 @@
                     <li><a href="{{ route('activities.youth') }}" class="dropdown-link">{{ __('Juventud') }}</a></li>
                     <li><a href="{{ route('activities.adultez') }}" class="dropdown-link">{{ __('Adultez') }}</a></li>
                 </ul>
+            </li>
+            <li class="navbar__item">
+                <a href="{{ route('forum.index') }}" class="navbar__link {{ Request::is('foro*') ? 'navbar__link--active' : '' }}">{{ __('Foro') }}</a>
             </li>
         @endauth
     </ul>

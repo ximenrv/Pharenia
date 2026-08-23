@@ -7,6 +7,7 @@
  * - Sin temporizador ni penalización: feedback cálido y se aprende del error.
  */
 import { initSky } from '../quizzsense/sky.js';
+import { savePaisesResult } from '../utils/teen-records.js';
 import america from './data/america.json';
 import europa from './data/europa.json';
 import asia from './data/asia.json';
@@ -26,6 +27,7 @@ const CONTINENTS = {
 const ROUND_SIZE = 10;
 
 let currentContinent = null;
+let currentContinentKey = null;
 let roundCountries = [];
 let currentIndex = 0;
 let correctCount = 0;
@@ -116,6 +118,7 @@ function renderContinents() {
  * Juego
  * ------------------------------------------------------------ */
 function startGame(key) {
+    currentContinentKey = key;
     currentContinent = CONTINENTS[key];
     const entries = Object.entries(currentContinent.data.paths).map(([code, info]) => ({
         code,
@@ -235,6 +238,15 @@ function finishGame() {
     ];
     const messageIndex = Math.floor(Math.random() * messages.length);
     $('results-message').textContent = messages[messageIndex];
+
+    // Persistir el resultado de esta sesión por continente.
+    if (currentContinentKey) {
+        savePaisesResult({
+            continent: currentContinentKey,
+            correctAnswers: correctCount,
+            totalQuestions: total,
+        });
+    }
 
     showScreen('results');
 }

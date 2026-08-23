@@ -11,11 +11,13 @@ use App\Http\Controllers\MythChallengeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\TeenController;
+use App\Http\Controllers\TeenGameRecordController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GameRecordController;
 use App\Http\Controllers\ChildGamesController;
 use App\Http\Controllers\InformationController;
 use App\Http\Controllers\AdultGameRecordController;
+use App\Http\Controllers\ForumController;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,6 +93,15 @@ Route::middleware(['auth', 'role:admin,adult_tea,teen,ally_no_tea'])->group(func
     Route::get('/juegos/juventud/paises', function () { 
         return view('games.youth.paises'); 
     })->name('games.youth.paises');
+
+    Route::get('/juegos/juventud/centinela', function () { 
+        return view('games.youth.centinela'); 
+    })->name('games.youth.centinela');
+
+    Route::post('/games/youth/quizzsense/record', [TeenGameRecordController::class, 'saveQuizzsenseResult'])->name('games.youth.quizzsense.record');
+    Route::post('/games/youth/paises/record', [TeenGameRecordController::class, 'savePaisesResult'])->name('games.youth.paises.record');
+    Route::post('/games/youth/centinela/record', [TeenGameRecordController::class, 'saveCentinelaResult'])->name('games.youth.centinela.record');
+    Route::get('/games/youth/record/get', [TeenGameRecordController::class, 'getRecords'])->name('games.youth.record.get');
 });
 
 /*
@@ -193,6 +204,18 @@ Route::middleware(['auth', 'role:admin,adult_tea,teen,ally_no_tea'])->group(func
     Route::post('/challenges/mitos/save-progress', [MythChallengeController::class, 'saveProgress']);
     Route::post('/challenges/mitos/submit', [MythChallengeController::class, 'submitChallenge']);
     Route::post('/challenges/mitos/reset', [MythChallengeController::class, 'resetChallenge']);
+});
+
+/*
+|--------------------------------------------------------------------------
+| Foro (Galería pública + Cámara con autenticación)
+|--------------------------------------------------------------------------
+*/
+Route::get('/foro', [ForumController::class, 'index'])->name('forum.index');
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/foro', [ForumController::class, 'store'])->name('forum.store');
+    Route::delete('/foro/{photo}', [ForumController::class, 'destroy'])->name('forum.destroy');
 });
 
 Route::get('/information/{module}', [InformationController::class, 'index'])->name('information.module');
