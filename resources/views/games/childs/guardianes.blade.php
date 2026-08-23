@@ -4,6 +4,14 @@
         : 0;
 @endphp
 
+@php
+    $locale = app()->getLocale();
+    $path1 = lang_path($locale . '.json');
+    $path2 = resource_path('lang/' . $locale . '.json');
+
+    $jsonPath = file_exists($path1) ? $path1 : (file_exists($path2) ? $path2 : null);
+    $translations = $jsonPath ? json_decode(file_get_contents($jsonPath), true) : [];
+@endphp
 <!DOCTYPE html>
 <html lang="es">
 
@@ -12,7 +20,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Guardianes del Planeta - Pharenia</title>
+    <title> {{ __('Guardianes del Planeta') }} - Pharenia</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect"href="https://fonts.gstatic.com"crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&display=swap"rel="stylesheet">
@@ -27,6 +35,9 @@
       window.CSRF_TOKEN = "{{ csrf_token() }}";
       window.UPDATE_RECORD_URL = "{{ route('games.childs.record.update') }}";
       window.INITIAL_HIGH_SCORE = parseInt("{{ $userRecord ?? 0 }}", 10) || 0;
+
+      //Translation
+      window.translations = @json($translations, JSON_FORCE_OBJECT);
     </script>
 </head>
 
@@ -41,7 +52,7 @@
         <img src="{{ asset('gamesAssets/childs/guardianes/ASSETS/ui/pointsbox.png') }}" alt="Panel de puntos">
         <div class="panelContent">
         <span class="label">
-            Puntos
+            {{ __('Puntos') }}
         </span>
         <span id="score">
             0
@@ -53,7 +64,7 @@
             <div id="waveBox" class="hudBox">
                 <img src="{{ asset('gamesAssets/childs/guardianes/ASSETS/ui/hudPanel.png') }}" alt="Wave Panel">
                 <div class="hudContent">
-                    <span class="hudTitle">OLA</span>
+                    <span class="hudTitle">{{ __('OLA') }}</span>
                     <span id="waveValue" class="hudValue">1</span>
                 </div>
             </div>
@@ -70,7 +81,7 @@
         <img src="{{ asset('gamesAssets/childs/guardianes/ASSETS/ui/pointsbox.png') }}" alt="Panel de puntos">
         <div class="panelContent">
         <span class="label">
-            Record
+            {{ __('Récord') }}
         </span>
         <span id="record">
             0
@@ -148,7 +159,7 @@
     </footer>
 
     <div id="gameOverScreen">
-        <h1 id="gameOverTitle">¡SE ACABÓ EL TIEMPO!</h1>
+        <h1 id="gameOverTitle">{{ __('¡SE ACABÓ EL TIEMPO!') }}</h1>
       <div id="gameOverContainer">
         <img id="gameOverPanel" src="{{ asset('gamesAssets/childs/guardianes/ASSETS/ui/TimeUpMenu.png') }}">
         <img id="returnButton" src="{{ asset('gamesAssets/childs/guardianes/ASSETS/ui/returnbutton.png') }}">
@@ -158,17 +169,17 @@
         </div>
         <div id="gameOverStats">
             <div class="gameOverBlock" id="scoreBlock">
-                <h2 class="statTitle">PUNTOS</h2>
+                <h2 class="statTitle">{{ __('PUNTOS') }}</h2>
                 <span class="statValue" id="finalScore">0</span>
                 <div class="divider"></div>
             </div>
             <div class="gameOverBlock" id="recordBlock">
-                <h2 class="statTitle">RÉCORD</h2>
+                <h2 class="statTitle">{{ __('RÉCORD') }}</h2>
                 <span class="statValue" id="finalRecord">0</span>
                 <div class="divider"></div>
             </div>
             <div class="gameOverBlock" id="waveBlock">
-                <h2 class="statTitle">OLA</h2>
+                <h2 class="statTitle">{{ __('OLA') }}</h2>
                 <span class="statValue" id="finalWave">1</span>
             </div>
         </div>

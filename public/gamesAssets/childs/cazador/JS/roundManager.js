@@ -3,6 +3,11 @@ const ScoreManager = {
     highScore: window.INITIAL_HIGH_SCORE || 0
 };
 
+
+function __(key) {
+    return (window.translations && window.translations[key]) ? window.translations[key] : key;
+}
+
 updateRecordHUD();
 
 async function saveScoreToDatabase(newScore) {
@@ -53,17 +58,17 @@ function setGameOverMessage() {
     if (!title || !text) return;
 
     if (currentScore < 100) {
-        title.textContent = "¡Buen intento!";
-        text.textContent = "Sigue practicando para cazar más figuras.";
+        title.textContent = __("¡Buen intento!");
+        text.textContent = __("Sigue practicando para cazar más figuras.");
     } else if (currentScore < 300) {
-        title.textContent = "¡Muy bien!";
-        text.textContent = "Demostraste una habilidad increible.";
+        title.textContent = __("¡Muy bien!");
+        text.textContent = __("Demostraste una habilidad increible.");
     } else if (currentScore < 600) {
-        title.textContent = "¡Increíble!";
-        text.textContent = "¡Tienes el talento para ser un Cazador de Burbujas!";
+        title.textContent = __("¡Increíble!");
+        text.textContent = __("¡Tienes el talento para ser un Cazador de Burbujas!");
     } else {
-        title.textContent = "¡Asombroso!";
-        text.textContent = "¡Haz batido tu récord!";
+        title.textContent = __("¡Asombroso!");
+        text.textContent = __("¡Haz batido tu récord!");
     }
 };
 

@@ -6,39 +6,44 @@ const tutorialPanel = document.getElementById("tutorialPanel");
 const speakerName = document.getElementById("speakerName");
 const characterContainer = document.getElementById("lumenContainer");
 
+
+function __(key) {
+    return (window.translations && window.translations[key]) ? window.translations[key] : key;
+}
+
 const tutorialDialogs = [
     {
         speaker: "LUMEN",
         emotion: "cheering",
-        text: "¡Bienvenido a Cazador de Burbujas!, mi nombre es Lumen.",
+        text: __("¡Bienvenido a Cazador de Burbujas!, mi nombre es Lumen."),
         button: "next",
         action: "explain"
     },
     {
         speaker: "LUMEN",
         emotion: "cheering",
-        text: "En este desafío pondremos a prueba tus habilidades cazando formas geométricas.",
+        text: __("En este desafío pondremos a prueba tus habilidades cazando formas geométricas."),
         button: "next",
         action: "explain"
     },
     {
         speaker: "LUMEN",
         emotion: "cheering",
-        text: "Yo te mostraré un cartel con la figura que debes buscar en el tablero.",
+        text: __("Yo te mostraré un cartel con la figura que debes buscar en el tablero."),
         button: "next",
         action: "explain"
     },
     {
         speaker: "LUMEN",
         emotion: "surprised",
-        text: "Explotas todas las burbujas que tengan esa misma figura.",
+        text: __("Explotas todas las burbujas que tengan esa misma figura."),
         button: "next",
         action: "explain"
     },
     {
         speaker: "LUMEN",
         emotion: "surprised",
-        text: "¡Cuidado con equivocarte o perderás vidas!.. ¿Listo?",
+        text: __("¡Cuidado con equivocarte o perderás vidas!.. ¿Listo?"),
         button: "play",
         action: "startGame"
     }

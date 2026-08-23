@@ -6,36 +6,42 @@ const tutorialPanel = document.getElementById("tutorialPanel");
 const speakerName = document.getElementById("speakerName");
 const characterContainer = document.getElementById("lumenContainer");
 
-const tutorialDialogs = [
-    {
-        speaker:"LUMEN",
-        emotion:"cheering",
-        text: "¡Bienvenido a Guardianes del Planeta!, me llamo Lumen.",
-        button: "next",
-        action:"explain"
-    },
-    {
-        speaker:"LUMEN",
-        emotion:"cheering",
-        text: "Este día necesito de tu ayuda para limpiar la playa.",
-        button: "next",
-        action:"explain"
-    },
-    {
-        speaker:"LUMEN",
-        emotion:"cheering",
-        text: "Veras la marea trae basura a la costa, entonces necesito depositarla en su lugar.",
-        button: "next",
-        action:"explain"
-    },
-    {
-        speaker:"LUMEN",
-        emotion:"cheering",
-        text: "¿Me puedes ayudar?..... parece que, ahí viene una OLA.",
-        button: "play",
-        action:"prepareWave"
-    }
-];
+function __(key) {
+    return (window.translations && window.translations[key]) ? window.translations[key] : key;
+}
+
+function getTutorialDialogs() {
+    return [
+        {
+            speaker: "LUMEN",
+            emotion: "cheering",
+            text: __('¡Bienvenido a Guardianes del Planeta!, me llamo Lumen.'),
+            button: "next",
+            action: "explain"
+        },
+        {
+            speaker: "LUMEN",
+            emotion: "cheering",
+            text: __('Este día necesito de tu ayuda para limpiar la playa.'),
+            button: "next",
+            action: "explain"
+        },
+        {
+            speaker: "LUMEN",
+            emotion: "cheering",
+            text: __('Veras la marea trae basura a la costa, entonces necesito depositarla en su lugar.'),
+            button: "next",
+            action: "explain"
+        },
+        {
+            speaker: "LUMEN",
+            emotion: "cheering",
+            text: __('¿Me puedes ayudar?..... parece que, ahí viene una OLA.'),
+            button: "play",
+            action: "prepareWave"
+        }
+    ];
+};
 
 const emotions = {
     happy: `${window.GAME_ASSETS_PATH}/lumen/tutorial/lumenVictory.png`,
@@ -69,7 +75,8 @@ function stopTalking(){
 }
 
 function typeText(text){
-    startTalking(tutorialDialogs[DialogueManager.currentDialog].emotion);
+    const dialogs = getTutorialDialogs();
+    startTalking(dialogs[DialogueManager.currentDialog].emotion);
     tutorialText.textContent = "";
     DialogueManager.currentIndex = 0;
     function write(){
@@ -105,7 +112,8 @@ function nextDialogue(){
         return;
     }
 
-    if(DialogueManager.currentDialog < tutorialDialogs.length - 1){
+    const dialogs = getTutorialDialogs();
+    if(DialogueManager.currentDialog < dialogs.length - 1){
         showDialog(DialogueManager.currentDialog + 1);
     }
 }
@@ -117,7 +125,8 @@ function animateCharacter(character){
 }
 
 function showDialog(index){
-    const dialog = tutorialDialogs[index];
+    const dialogs = getTutorialDialogs();
+    const dialog = dialogs[index];
     DialogueManager.currentDialog = index;
     DialogueManager.fullText = dialog.text;
     DialogueManager.currentIndex = 0;
@@ -132,7 +141,8 @@ function showDialog(index){
 }
 
 function showCurrentButton(){
-    const dialog = tutorialDialogs[DialogueManager.currentDialog];
+    const dialogs = getTutorialDialogs();
+    const dialog = dialogs[DialogueManager.currentDialog];
     if(dialog.button === "next"){
         if(!nextButton.classList.contains("show")){
             UIManager.showButton(nextButton);

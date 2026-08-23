@@ -3,13 +3,22 @@
         ? \App\Models\RecordGamesChild::where('email', auth()->user()->email)->value('record_Cazador') ?? 0 
         : 0;
 @endphp
+
+@php
+    $locale = app()->getLocale();
+    $path1 = lang_path($locale . '.json');
+    $path2 = resource_path('lang/' . $locale . '.json');
+
+    $jsonPath = file_exists($path1) ? $path1 : (file_exists($path2) ? $path2 : null);
+    $translations = $jsonPath ? json_decode(file_get_contents($jsonPath), true) : [];
+@endphp
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Cazador de Burbujas - Pharenia</title>
+    <title> {{ __('Cazador de Burbujas') }} - Pharenia</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&display=swap" rel="stylesheet">
@@ -25,6 +34,9 @@
       window.CSRF_TOKEN = "{{ csrf_token() }}";
       window.UPDATE_RECORD_URL = "{{ route('games.childs.record.update') }}";
       window.INITIAL_HIGH_SCORE = parseInt("{{ $userRecord ?? 0 }}", 10) || 0;
+
+      //Translation
+      window.translations = @json($translations, JSON_FORCE_OBJECT);
     </script>
 </head>
 
@@ -37,7 +49,7 @@
     <div id="recordPanel" class="panel">
         <img src="{{ asset('gamesAssets/childs/cazador/ASSETS/ui/hudPanel.png') }}" alt="Panel Récord"> 
         <div class="panelContent">
-            <span class="hudLabel">RÉCORD</span>
+            <span class="hudLabel"> {{ __('RÉCORD') }}</span>
             <span id="record" class="hudValue">0</span>
         </div>
     </div>
@@ -49,7 +61,7 @@
             <div id="scorePanel" class="panel">
                 <img src="{{ asset('gamesAssets/childs/cazador/ASSETS/ui/pointsbox.png') }}" alt="Panel Puntos">
                 <div class="panelContent">
-                    <span class="hudLabel">PUNTOS</span>
+                    <span class="hudLabel"> {{ __('PUNTOS') }}</span>
                     <span id="score" class="hudValue">0</span>
                 </div>
             </div>
@@ -72,7 +84,7 @@
         <aside id="assistantZone" class="show">
               <div id="assistantText" class="showBubble">
                 <img src="{{ asset('gamesAssets/childs/eco/ASSETS/lumen/txtbubbles/assistText.png') }}" alt="Diálogo">
-                <p id="assistantDialogue">¡Explota esta figura!</p>
+                <p id="assistantDialogue">¡-</p>
             </div>
             <!-- Contenedor del Asistente Lumen -->
             <div id="assistant">
@@ -81,7 +93,7 @@
                 <!-- Lumen que cambia de imagen (Base / Cartel con Estrella, Corazón, etc.) -->
                 <img id="assistantHead" src="{{ asset('gamesAssets/childs/eco/ASSETS/lumen/assistent/lumenStar.png') }}" alt="Lumen Asistente">
             </div>
-            <!-- Barra de Vidas (PvZ Style) -->
+            <!-- Barra de Vidas -->
              <div id="healthBarContainer">
                 <div id="life1" class="healthSegment"></div>
                 <div id="life2" class="healthSegment"></div>
@@ -115,27 +127,27 @@
     <!--- PANTALLA DE GAME OVER --->
     <div id="gameOverScreen">
         <div id="gameOverContainer">
-            <h1 id="gameOverTitle">¡BUEN INTENTO!</h1>
+            <h1 id="gameOverTitle"> {{ __('¡BUEN INTENTO!') }}</h1>
             <div id="gameOverMessage">
-                <h2 id="messageTitle">- ¡Casi lo logras! -</h2>
-                <p id="messageText">Sigue entrenando tu memoria para llegar más lejos.</p>
+                <h2 id="messageTitle">--</h2>
+                <p id="messageText">--</p>
             </div>
             <!-- Bloque de stats -->
             <div id="gameOverStats">
                 <div class="gameOverBlock" id="scoreBlock">
-                    <h2 class="statTitle">PUNTOS</h2>
+                    <h2 class="statTitle"> {{ __('PUNTOS') }}</h2>
                     <span class="statValue" id="finalScore">0</span>
                     <div class="divider"></div>
                 </div>
         
                 <div class="gameOverBlock" id="recordBlock">
-                    <h2 class="statTitle">RÉCORD</h2>
+                    <h2 class="statTitle"> {{ __('RÉCORD') }}</h2>
                     <span class="statValue" id="finalRecord">450</span>
                     <div class="divider"></div>
                 </div>
            
                 <div class="gameOverBlock" id="waveBlock">
-                    <h2 class="statTitle">RONDA</h2>
+                    <h2 class="statTitle"> {{ __('RONDA') }}</h2>
                     <span class="statValue" id="finalWave">1</span>
                 </div>
             </div>

@@ -3,6 +3,10 @@ const ScoreManager = {
     highScore: window.INITIAL_HIGH_SCORE || 0
 };
 
+function __(key) {
+    return (window.translations && window.translations[key]) ? window.translations[key] : key;
+}
+
 updateRecordHUD();
 
 async function saveScoreToDatabase(newScore) {
@@ -37,17 +41,17 @@ function setGameOverMessage(){
     const title = document.getElementById("messageTitle");
     const text = document.getElementById("messageText");
     if(score < 30){
-        title.textContent = "¡No te rindas!";
-        text.textContent = "Estoy seguro de que superaras tu record";
+        title.textContent = __('¡No te rindas!');
+        text.textContent = __('Estoy seguro de que superaras tu record');
     }else if(score < 80){
-        title.textContent = "¡Buen trabajo!";
-        text.textContent = "Cada basura reciclada te hace más rapido";
+        title.textContent = __('¡Buen trabajo!');
+        text.textContent = __('Cada basura reciclada te hace más rapido');
     }else if(score < 150){
-        title.textContent = "¡Increíble!";
-        text.textContent = "¡Eres un auténtico Guardián del Planeta!";
+        title.textContent = __('¡Increíble!');
+        text.textContent = __('¡Eres un auténtico Guardián del Planeta!');
     }else{
-        title.textContent = "¡Fantástico!";
-        text.textContent = "¡Haz batido tu récord!";
+        title.textContent = __('¡Fantástico!');
+        text.textContent = __('¡Haz batido tu récord!');
     }
 };
 

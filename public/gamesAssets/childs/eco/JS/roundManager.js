@@ -3,6 +3,11 @@ const ScoreManager = {
     highScore: window.INITIAL_HIGH_SCORE || 0
 };
 
+
+function __(key) {
+    return (window.translations && window.translations[key]) ? window.translations[key] : key;
+}
+
 updateRecordHUD();
 
 async function saveScoreToDatabase(newScore) {
@@ -63,17 +68,17 @@ function setGameOverMessage() {
     if (!title || !text) return;
 
     if (score < 300) {
-        title.textContent = "¡Bien hecho!";
-        text.textContent = "Sigue entrenando tu memoria para llegar más lejos.";
+        title.textContent = __("¡Bien hecho!");
+        text.textContent = __("Sigue entrenando tu memoria para llegar más lejos.");
     } else if (score < 800) {
-        title.textContent = "¡Muy bien!";
-        text.textContent = "Demostraste una increible gran memoria.";
+        title.textContent = __("¡Muy bien!");
+        text.textContent = __("Demostraste una increible gran memoria.");
     } else if (score < 1100) {
-        title.textContent = "¡Increíble!";
-        text.textContent = "¡Tu memoria escucha el Eco de los Colores!";
+        title.textContent = __("¡Increíble!");
+        text.textContent = __("¡Tu memoria escucha el Eco de los Colores!");
     } else {
-        title.textContent = "¡Asombroso!";
-        text.textContent = "¡Haz batido tu record";
+        title.textContent = __("¡Asombroso!");
+        text.textContent = __("¡Haz batido tu record");
     }
 };
 
