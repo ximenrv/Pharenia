@@ -9,6 +9,7 @@ import { createGame } from './engine.js';
 import { DIFFICULTIES, START_INTEGRITY, closingMessage } from './figures.js';
 import { initSky } from './sky.js';
 import { soundEnabled, toggleSound } from './audio.js';
+import { saveCentinelaResult } from '../utils/teen-records.js';
 
 const $ = (id) => document.getElementById(id);
 
@@ -208,6 +209,16 @@ function onEnd(result) {
         best[result.difficulty.key] = result.score;
         saveBest(best);
     }
+
+    // Persistir el resultado de esta partida en la base de datos.
+    saveCentinelaResult({
+        difficulty: result.difficulty.key,
+        score: result.score,
+        precision: result.precision,
+        protectedCount: result.protectedCount,
+        threats: result.threats,
+        integrityRemaining: result.integrity,
+    });
 
     closeCurtain(() => {
         renderResults(result);

@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="QuizzSense: práctica diaria de habilidades sociales para adolescentes, con calma y a tu propio ritmo.">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>QuizzSense · Habilidades sociales</title>
     @vite(['resources/css/quizzsense/quizzsense.css', 'resources/js/quizzsense/app.js'])
 </head>

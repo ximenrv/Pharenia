@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="QuizzSense Países: explora los países del mundo, un continente a la vez, con calma y a tu propio ritmo.">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>QuizzSense · Países del mundo</title>
     @vite(['resources/css/quizzsense/quizzsense.css', 'resources/js/paises/paises.js'])
 </head>

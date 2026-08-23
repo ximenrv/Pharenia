@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Centinela: una patrulla serena para aprender a distinguir. No todo lo que parece diferente es una amenaza.">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Centinela · Aprende a distinguir</title>
     @vite(['resources/css/centinela/centinela.css', 'resources/js/centinela/app.js'])
 </head>
