@@ -25,16 +25,23 @@
     padding-left: 6vw;
 }
 
-#background{
-    position:absolute;
-    inset:0;
-    z-index:0;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    object-position:center;
-    user-select:none;
-    pointer-events:none;
+.game-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    user-select: none;
+    pointer-events: none;
+}
+
+.bg-night {
+    display: none;
+}
+
+.bg-day {
+    display: block;
 }
 
 /*--- PANELES DE PUNTOS Y RÉCORD ---*/
@@ -97,6 +104,52 @@
     font-weight: 900;
     line-height: 1;
     color: #FFD65A;
+}
+
+/*--- Temporizador HUD ---*/
+
+#gameStatus {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    z-index: 100;
+}
+
+.hudBox {
+    position: relative;
+    width: 180px;
+    height: 80px;
+}
+
+.hudBox img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.hudContent {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+}
+
+.hudTitle {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.hudValue {
+    font-size: 32px;
+    font-weight: bold;
+    color: #f7f475;
+    margin-bottom: 6px;
 }
 
 /* --- PANEL DE PUNTOS --- */
@@ -519,25 +572,27 @@ body{
 
 /*---Nombre del personaje---*/
 
-#speakerName{
-    position:absolute;
-    left:190px;
-    top:53px;
-    width:165px;
-    opacity:0;
-    text-align:center;
-    font-size:36px;
-    font-weight:900;
-    font-family:'Nunito',sans-serif;
-    color:#13254b;
-    letter-spacing:2px;
-    transform:rotate(-5deg) translateY(-8px);
+#speakerName {
+    position: absolute;
+    left: 190px;
+    top: 53px;
+    width: 165px;
+    opacity: 0;
+    text-align: center;
+    font-size: 34px;
+    font-weight: 900;
+    font-family: 'Nunito', sans-serif;
+    color: #1a2a4a;
+    letter-spacing: 2px;
+    transform: rotate(-5deg) translateY(-8px);
     transition: opacity .25s ease, transform .25s ease;
+    z-index: 300 !important;
+    pointer-events: none;
 }
 
-#speakerName.show{
-    opacity:1;
-    transform:translateY(0) rotate(-5deg);
+#speakerName.show {
+    opacity: 1 !important;
+    transform: translateY(0) rotate(-5deg);
 }
 
 #effectsLayer{
@@ -547,7 +602,84 @@ body{
     z-index:200;
 }
 
-/* --- GAME OVER (PANEL LATERAL EN FRANJA) --- */
+/* --- BOTÓN DE RETORNO GLOBAL --- */
+
+#globalReturnBtn {
+    position: fixed;
+    left: 0;
+    bottom: 25px;
+    z-index: 180;
+    cursor: pointer;
+    transform: translateX(-204px) rotate(8deg); 
+    transform-origin: left center;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
+}
+
+#globalReturnBtn img {
+    width: 280px;
+    height: auto;
+    display: block;
+    filter: drop-shadow(4px 6px 10px rgba(0, 0, 0, 0.5));
+    transition: filter 0.3s ease;
+}
+
+#globalReturnBtn:hover {
+    transform: translateX(-15px) rotate(0deg);   
+}
+
+#globalReturnBtn:hover img {
+    filter: drop-shadow(6px 8px 14px rgba(0, 0, 0, 0.7)) brightness(1.1);
+}
+
+#globalReturnBtn.hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translateX(-260px) rotate(8deg) !important;
+}
+
+/* --- GAME OVER (PANEL LATERAL FRANJA) --- */
+
+#timeUpOverlay {
+    position: fixed !important;
+    inset: 0 !important;
+    background: rgba(0, 0, 0, 0.65) !important;
+    backdrop-filter: blur(4px) !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    z-index: 100000 !important;
+    transition: opacity 0.5s ease, visibility 0.5s ease !important;
+}
+
+#timeUpOverlay.active {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+#timeUpBanner {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) scale(0.85) !important;
+    font-size: 72px !important;
+    font-weight: 900 !important;
+    color: #ffffff !important;
+    text-shadow: 4px 4px 0 #000, 0 0 35px rgba(255, 255, 255, 0.9) !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    z-index: 100001 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    margin: 0 !important;
+    transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s ease !important;
+}
+
+#timeUpBanner.active {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translate(-50%, -50%) scale(1) !important;
+}
 
 #gameOverScreen {
     position: fixed; 

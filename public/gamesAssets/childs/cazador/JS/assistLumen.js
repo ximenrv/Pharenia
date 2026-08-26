@@ -23,6 +23,11 @@ const AssistantManager = {
     blinkTimeout: null
 };
 
+
+function __(key) {
+    return (window.translations && window.translations[key]) ? window.translations[key] : key;
+}
+
 function getLumenElements() {
     return {
         zone: document.getElementById("assistantZone"),
@@ -174,7 +179,7 @@ const AssistLumen = {
         if (this.hasStarted) return;
         this.hasStarted = true;
 
-        await this.sayDialogue("¡Comencemos la caza!", 1800);
+        await this.sayDialogue( __("¡Comencemos la caza!"), 1800);
 
         if (window.FiguresGameEngine && typeof FiguresGameEngine.startGame === "function") {
             FiguresGameEngine.startGame();

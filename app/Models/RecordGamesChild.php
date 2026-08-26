@@ -10,7 +10,8 @@ class RecordGamesChild extends Model
     protected $table = 'record_games_children';
 
     protected $fillable = [
-        'email',
+        'user_id',
+        'child_profile_id',
         'record_Eco',
         'record_Guardianes',
         'record_Cazador',

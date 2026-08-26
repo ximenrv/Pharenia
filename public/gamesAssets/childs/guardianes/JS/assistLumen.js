@@ -5,6 +5,10 @@ const assistantText = document.getElementById("assistantText");
 const assistantAvatar = document.getElementById("assistantAvatar");
 const assistantDialogue = document.getElementById("assistantDialogue");
 
+function __(key) {
+    return (window.translations && window.translations[key]) ? window.translations[key] : key;
+}
+
 const AssistantManager = {
     state:"idle",
     current:0,
@@ -43,47 +47,47 @@ AssistantManager.tryCheer = function(points){
 
 const assistantDialogs = [
 {
-    text:"¡Hola de nuevo amigo!",
+    text: __('¡Hola de nuevo amigo!'),
     target: null
 },
 
 {
-    text:"Ahora te explicare los contenedores",
+    text: __('Ahora te explicare los contenedores'),
     target: null
 },
 
 {
-    text:"El contenedor ROJO es para los metales",
+    text: __('El contenedor ROJO es para los metales'),
     target:"metal"
 },
 
 {
-    text:"El AZUL es para los vidrios",
+    text: __('El AZUL es para los vidrios'),
     target:"glass"
 },
 
 {
-    text:"Y el VERDE es para los plásticos",
+    text: __('Y el VERDE es para los plásticos'),
     target:"plastic"
 },
 
 {
-    text:"¡Ahora es tu turno!",
+    text: __('¡Ahora es tu turno!'),
     target: null
 },
 
 {
-    text:"¡Recoge tanta basura como puedas!",
+    text: __('¡Recoge tanta basura como puedas!'),
     target: null
 },
 
 {
-    text:"¡Pero asegurate que no se te acabe el tiempo!",
+    text: __('¡Pero asegurate que no se te acabe el tiempo!'),
     target: null
 },
 
 {
-    text:"¿Listo? 3.... 2.... 1.... ¡Comencemos!",
+    text: __('¿Listo? 3.... 2.... 1.... ¡Comencemos!'),
     target: null
 }
 ];

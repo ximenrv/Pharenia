@@ -2,6 +2,11 @@ function memorySleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+
+function __(key) {
+    return (window.translations && window.translations[key]) ? window.translations[key] : key;
+}
+
 const MemoryManager = {
     sequence: [],
     playerSequence: [],
@@ -99,13 +104,13 @@ const MemoryManager = {
         let dialogueText = "";
 
         if (this.sequence.length === 3) {
-            dialogueText = "¡Observa la secuencia\ncon atención!";
+            dialogueText = __("¡Observa la secuencia\ncon atención!");
         } else if (this.sequence.length === 8) {
-            dialogueText = "Una ultima y probemos\ncon otro patrón.";
+            dialogueText = __("Una ultima y probemos\ncon otro patrón.");
             if (window.AssistLumen) AssistLumen.react("cheer", 2000);
             this.mustResetSequence = true;
         } else {
-            dialogueText = "¿Ahora que tal una más?";
+            dialogueText = __("¿Ahora que tal una más?");
             if (window.AssistLumen) AssistLumen.react("cheer", 1000);
         }
 
@@ -131,7 +136,7 @@ const MemoryManager = {
         }
 
         if (window.AssistLumen && typeof AssistLumen.sayDialogue === "function") {
-            await AssistLumen.sayDialogue("¡Tu turno!", 1200);
+            await AssistLumen.sayDialogue( __("¡Tu turno!"), 1200);
         }
         this.isPlayingSequence = false;
         this.canPlayerInput = true;
@@ -153,19 +158,21 @@ const MemoryManager = {
 
     handleBubbleClick(color) {
         if (!this.canPlayerInput || this.isPlayingSequence) return;
+
+        if (window.SoundManager && typeof SoundManager.playColorSound === "function") {
+            SoundManager.playColorSound(color);
+        }
+
         this.activateBubble(color, 250);
         this.playerSequence.push(color);
         const currentIndex = this.playerSequence.length - 1;
         this.addMiniBubbleToBar(color);
-    
+
         if (this.playerSequence[currentIndex] !== this.sequence[currentIndex]) {
             this.handleError();
             return;
         }
 
-        if (window.SoundManager && typeof SoundManager.playColorSound === "function") {
-            SoundManager.playColorSound(color);
-        }
         if (this.playerSequence.length === this.sequence.length) {
             this.handleRoundSuccess();
         }
@@ -182,7 +189,7 @@ const MemoryManager = {
         this.round++;
     
         if (window.AssistLumen && typeof AssistLumen.sayDialogue === "function") {
-            await AssistLumen.sayDialogue("¡Buen trabajo!", 1200, "cheer");
+            await AssistLumen.sayDialogue( __("¡Buen trabajo!"), 1200, "cheer");
         }
 
         await memorySleep(300);
@@ -202,7 +209,7 @@ const MemoryManager = {
 
         if (this.lives > 0) {
             if (window.AssistLumen && typeof AssistLumen.sayDialogue === "function") {
-                await AssistLumen.sayDialogue("¡Ups! Inténtalo de nuevo.", 1600, "wrong");
+                await AssistLumen.sayDialogue( __("¡Uhu! Inténtalo de nuevo."), 1600, "wrong");
             }
             this.playerSequence = [];
             this.clearSequenceBar();
@@ -284,7 +291,7 @@ const MemoryManager = {
 
     async gameOver() {
         if (window.AssistLumen && typeof AssistLumen.sayDialogue === "function") {
-            await AssistLumen.sayDialogue("¡Buen intento!", 2000, "wrong");
+            await AssistLumen.sayDialogue( __("¡Buen intento!"), 2000, "wrong");
         }
 
         if (typeof showGameOver === "function") {

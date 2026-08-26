@@ -2,6 +2,10 @@ function engineSleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+function __(key) {
+    return (window.translations && window.translations[key]) ? window.translations[key] : key;
+}
+
 const FiguresGameEngine = {
     targetFigure: null,
     round: 1,
@@ -69,7 +73,7 @@ const FiguresGameEngine = {
         if (remainingFigures.length === 0) {
             if (window.AssistLumen) {
                 AssistLumen.clearFigure();
-                await AssistLumen.sayDialogue("¡Parece que las\nburbujas volvieron!", 1800, "cheer");
+                await AssistLumen.sayDialogue( __("¡Parece que las\nburbujas volvieron!"), 1800, "cheer");
             }
 
             this.round++;
@@ -89,7 +93,7 @@ const FiguresGameEngine = {
         if (window.AssistLumen) {
             await AssistLumen.setFigure(this.targetFigure);
             await engineSleep(400); 
-            await AssistLumen.sayDialogue("¡Caza todas las figuras\nque tienen esta forma!", 1400);
+            await AssistLumen.sayDialogue( __("¡Caza todas las figuras\nque tienen esta forma!"), 1400);
     
         }
         this.canPlayerInput = true;
@@ -123,7 +127,7 @@ const FiguresGameEngine = {
                 if (window.FiguresManager) FiguresManager.disableBoard();
 
                 if (window.AssistLumen) {
-                    await AssistLumen.sayDialogue("¡Excelente!, ahora...", 1200, "cheer");
+                    await AssistLumen.sayDialogue( __("¡Excelente!, ahora..."), 1200, "cheer");
                 }
                 
                 await engineSleep(300);
@@ -149,7 +153,7 @@ const FiguresGameEngine = {
 
         if (this.lives > 0) {
             if (window.AssistLumen && typeof AssistLumen.sayDialogue === "function") {
-                await AssistLumen.sayDialogue("¡Hay una presa mejor!\nInténtalo de nuevo.", 1500, "wrong");
+                await AssistLumen.sayDialogue( __("¡Hay una presa mejor!\nInténtalo de nuevo."), 1500, "wrong");
             }
             this.canPlayerInput = true;
             if (window.FiguresManager) FiguresManager.enableBoard();
@@ -201,7 +205,7 @@ const FiguresGameEngine = {
         if (window.AssistLumen) {
             AssistLumen.clearFigure();
             if (typeof AssistLumen.sayDialogue === "function") {
-                await AssistLumen.sayDialogue("¡Oh no! Te has\nquedado sin vidas.", 2000, "wrong");
+                await AssistLumen.sayDialogue( __("¡Gran trabajo! pero te\nhas quedado sin vidas."), 2000, "wrong");
             }
         }
 

@@ -84,16 +84,23 @@
     z-index:40;
 }
 
-#background{
-    position:absolute;
-    inset:0;
-    z-index:0;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    object-position:center;
-    user-select:none;
-    pointer-events:none;
+.game-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    user-select: none;
+    pointer-events: none;
+}
+
+.bg-night {
+    display: none;
+}
+
+.bg-day {
+    display: block;
 }
 
 /*---Paneles---*/
@@ -571,26 +578,27 @@ body{
 }
 
 /*---Nombre del personaje---*/
-#speakerName{
-    position:absolute;
-    left:190px;
-    top:53px;
-    width:165px;
-    opacity:0;
-    text-align:center;
-    font-size:36px;
-    font-weight:900;
-    font-family:'Nunito',sans-serif;
-    color:#13254b;
-    letter-spacing:2px;
-    transform:rotate(-5deg);
-    transform:translateY(-8px);
+#speakerName {
+    position: absolute;
+    left: 190px;
+    top: 53px;
+    width: 165px;
+    opacity: 0;
+    text-align: center;
+    font-size: 34px;
+    font-weight: 900;
+    font-family: 'Nunito', sans-serif;
+    color: #1a2a4a;
+    letter-spacing: 2px;
+    transform: rotate(-5deg) translateY(-8px);
     transition: opacity .25s ease, transform .25s ease;
+    z-index: 300 !important;
+    pointer-events: none;
 }
 
-#speakerName.show{
-    opacity:1;
-    transform:translateY(0) rotate(-5deg);
+#speakerName.show {
+    opacity: 1 !important;
+    transform: translateY(0) rotate(-5deg);
 }
 /*--- Puntos/ Efectos ---*/
 
@@ -618,6 +626,41 @@ body{
     font-size:46px;
     color:#fcdb71;
     text-shadow: 0 0 16px rgb(180, 154, 2), 2px 2px 5px rgba(0,0,0,.35);
+}
+
+/* --- BOTÓN DE RETORNO GLOBAL --- */
+
+#globalReturnBtn {
+    position: fixed;
+    left: 0;
+    bottom: 25px;
+    z-index: 180;
+    cursor: pointer;
+    transform: translateX(-204px) rotate(8deg); 
+    transform-origin: left center;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
+}
+
+#globalReturnBtn img {
+    width: 280px;
+    height: auto;
+    display: block;
+    filter: drop-shadow(4px 6px 10px rgba(0, 0, 0, 0.5));
+    transition: filter 0.3s ease;
+}
+
+#globalReturnBtn:hover {
+    transform: translateX(-15px) rotate(0deg);   
+}
+
+#globalReturnBtn:hover img {
+    filter: drop-shadow(6px 8px 14px rgba(0, 0, 0, 0.7)) brightness(1.1);
+}
+
+#globalReturnBtn.hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translateX(-260px) rotate(8deg) !important;
 }
 
 /*--- Game Over---*/

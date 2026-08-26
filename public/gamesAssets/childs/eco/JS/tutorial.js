@@ -6,32 +6,36 @@ const tutorialPanel = document.getElementById("tutorialPanel");
 const speakerName = document.getElementById("speakerName");
 const characterContainer = document.getElementById("lumenContainer");
 
+function __(key) {
+    return (window.translations && window.translations[key]) ? window.translations[key] : key;
+}
+
 const tutorialDialogs = [
     {
         speaker: "LUMEN",
         emotion: "cheering",
-        text: "¡Bienvenido a Eco de los Colores!, me llamo Lumen.",
+        text: __("¡Bienvenido a Eco de los Colores!, me llamo Lumen."),
         button: "next",
         action: "explain"
     },
     {
         speaker: "LUMEN",
         emotion: "cheering",
-        text: "En este desafío pondremos a prueba tu memoria con la energía de las burbujas.",
+        text: __("En este desafío pondremos a prueba tu memoria con la energía de las burbujas."),
         button: "next",
         action: "explain"
     },
     {
         speaker: "LUMEN",
         emotion: "cheering",
-        text: "Observa atentamente el patrón de luces que iluminaré en el tablero central.",
+        text: __("Observa atentamente el patrón de luces que iluminaré en el tablero central."),
         button: "next",
         action: "explain"
     },
     {
         speaker: "LUMEN",
         emotion: "surprised",
-        text: "Repite la misma secuencia en orden. Si fallas, perderás una de tus 3 vidas. ¿Listo?",
+        text: __("Repite la misma secuencia en orden. Si fallas, perderás una de tus 3 vidas. ¿Listo?"),
         button: "play",
         action: "startGame"
     }
@@ -210,6 +214,10 @@ async function finishTutorial() {
 
     await sleep(600);
     if (tutorialPanel) tutorialPanel.classList.add("hidden");
+
+    if (globalReturnBtn) {
+        globalReturnBtn.classList.remove('hidden');
+    }
 
     const assistantZone = document.getElementById("assistantZone");
     if (assistantZone) {
