@@ -239,3 +239,4 @@ Route::middleware(['child.auth'])->prefix('games/childs')->group(function () {
     Route::get('/eco-child', [ChildGamesController::class, 'eco'])->name('child.games.eco');
     Route::get('/cazador-child', [ChildGamesController::class, 'cazador'])->name('child.games.cazador');
 });
+
