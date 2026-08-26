@@ -195,6 +195,9 @@ async function finishTutorial(){
     await sleep(350);
     await hideBubble();
     await hideLumen();
+    if (globalReturnBtn) {
+        globalReturnBtn.classList.remove('hidden');
+    }
     resetTimer();
     startTimer();
     startFirstWave();

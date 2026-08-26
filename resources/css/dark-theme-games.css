@@ -1,0 +1,145 @@
+/* ==========================================================================
+   MODO OSCURO Y FILTROS NOCTURNOS (CAZADOR DE BURBUJAS)
+   ========================================================================== */
+
+/* 1. MODO CLARO (Default / Light) */
+body #bgDay,
+html[data-theme="light"] body #bgDay {
+    display: block !important;
+    z-index: 1 !important;
+}
+
+body #bgNight,
+html[data-theme="light"] body #bgNight {
+    display: none !important;
+    z-index: 0 !important;
+}
+
+/* 2. MODO OSCURO (Dark) */
+html[data-theme="dark"] body #bgDay {
+    display: none !important;
+    z-index: 0 !important;
+}
+
+html[data-theme="dark"] body #bgNight {
+    display: block !important;
+    z-index: 1 !important;
+}
+
+[data-theme="dark"] .colorBubble {
+    filter: brightness(0.85) contrast(1.1) drop-shadow(0 0 8px rgba(0, 180, 216, 0.4));
+}
+
+[data-theme="dark"] .colorBubble:hover {
+    filter: brightness(1.1) drop-shadow(0 0 18px rgba(0, 220, 255, 0.9)) !important;
+}
+
+[data-theme="dark"] #memoryBoard {
+    background: rgba(10, 20, 30, 0.65) !important;
+    border-color: rgba(127, 179, 189, 0.3) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), inset 0 0 25px rgba(0, 180, 216, 0.15) !important;
+}
+
+[data-theme="dark"] .panel img {
+    filter: brightness(0.82) hue-rotate(-10deg);
+}
+
+[data-theme="dark"] #assistantHead,
+[data-theme="dark"] #assistantBubble,
+[data-theme="dark"] #lumen {
+    filter: brightness(0.85) contrast(1.05) drop-shadow(0 6px 12px rgba(0, 0, 0, 0.7));
+}
+
+[data-theme="dark"] #tutorialBubble,
+[data-theme="dark"] #assistantText img {
+    filter: brightness(0.8) contrast(1.1);
+}
+
+html[data-theme="dark"] #speakerName {
+    color: #00183b !important;
+    text-shadow: none !important;
+}
+
+[data-theme="dark"] #gameOverScreen {
+    background: rgba(4, 10, 15, 0.82) !important;
+}
+
+[data-theme="dark"] #gameOverContainer {
+    filter: brightness(0.9) contrast(1.05);
+}
+
+/* =========================================================
+   MODO OSCURO - GUARDIANES DEL PLANETA
+   ========================================================= */
+
+html[data-theme="dark"] #backgroundDay {
+    display: none !important;
+}
+
+html[data-theme="dark"] #backgroundNight {
+    display: block !important;
+}
+
+html[data-theme="dark"] #ocean {
+    filter: brightness(0.65) contrast(1.15) hue-rotate(-15deg);
+}
+
+html[data-theme="dark"] #waveBackPath {
+    fill: #113f67 !important;
+}
+
+html[data-theme="dark"] #waveFrontPath {
+    fill: #1d5c8d !important;
+}
+
+html[data-theme="dark"] #waveFoamPath {
+    opacity: 0.35 !important;
+}
+
+html[data-theme="dark"] .bin {
+    filter: brightness(0.85) drop-shadow(0 6px 12px rgba(0, 0, 0, 0.7));
+}
+
+html[data-theme="dark"] #speakerName {
+    color: #00183b !important;
+    text-shadow: none !important;
+    z-index: 300 !important;
+}
+
+html[data-theme="dark"] .hudBox img,
+html[data-theme="dark"] .panel img {
+    filter: brightness(0.9) contrast(1.1);
+}
+
+/* =========================================================
+   MODO OSCURO - ECO DE LOS COLORES
+   ========================================================= */
+
+html[data-theme="dark"] #backgroundDay {
+    display: none !important;
+}
+
+html[data-theme="dark"] #backgroundNight {
+    display: block !important;
+}
+
+html[data-theme="dark"] #speakerName {
+    color: #13254b !important;
+    text-shadow: none !important;
+    z-index: 300 !important;
+}
+
+html[data-theme="dark"] #memoryBoard {
+    background: rgba(10, 16, 32, 0.55);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.85);
+}
+
+html[data-theme="dark"] .colorBubble.active {
+    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.9)) brightness(1.2);
+}
+
+html[data-theme="dark"] .panel img,
+html[data-theme="dark"] #assistantBubble {
+    filter: brightness(0.85) contrast(1.1);
+}

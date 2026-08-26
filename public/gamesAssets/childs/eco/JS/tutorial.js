@@ -215,6 +215,10 @@ async function finishTutorial() {
     await sleep(600);
     if (tutorialPanel) tutorialPanel.classList.add("hidden");
 
+    if (globalReturnBtn) {
+        globalReturnBtn.classList.remove('hidden');
+    }
+
     const assistantZone = document.getElementById("assistantZone");
     if (assistantZone) {
         assistantZone.classList.add("show");

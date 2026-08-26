@@ -21,20 +21,23 @@ async function saveScoreToDatabase(newScore) {
                 'Accept': 'application/json'
             },
             body: JSON.stringify({
-                game: 'record_Guardianes', // Nombre de la columna en la BD
-                score: newScore
+                game: 'record_Guardianes',
+                score: newScore,
+                child_id: window.ACTIVE_CHILD_ID || null
             })
         });
 
         const data = await response.json();
-        if (data.success && data.updated) {
+        if (data.success && data.highScore !== undefined) {
             ScoreManager.highScore = data.highScore;
+            window.INITIAL_HIGH_SCORE = data.highScore;
             updateRecordHUD();
         }
     } catch (error) {
         console.error("Error al guardar el récord en la BD:", error);
     }
 };
+
 
 function setGameOverMessage(){
     const score = ScoreManager.score;

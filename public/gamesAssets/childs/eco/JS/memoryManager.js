@@ -158,19 +158,21 @@ const MemoryManager = {
 
     handleBubbleClick(color) {
         if (!this.canPlayerInput || this.isPlayingSequence) return;
+
+        if (window.SoundManager && typeof SoundManager.playColorSound === "function") {
+            SoundManager.playColorSound(color);
+        }
+
         this.activateBubble(color, 250);
         this.playerSequence.push(color);
         const currentIndex = this.playerSequence.length - 1;
         this.addMiniBubbleToBar(color);
-    
+
         if (this.playerSequence[currentIndex] !== this.sequence[currentIndex]) {
             this.handleError();
             return;
         }
 
-        if (window.SoundManager && typeof SoundManager.playColorSound === "function") {
-            SoundManager.playColorSound(color);
-        }
         if (this.playerSequence.length === this.sequence.length) {
             this.handleRoundSuccess();
         }

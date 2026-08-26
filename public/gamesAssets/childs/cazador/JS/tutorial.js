@@ -238,6 +238,9 @@ async function finishTutorial() {
     }
 
     await sleep(300);
+    if (globalReturnBtn) {
+        globalReturnBtn.classList.remove('hidden');
+    }
 
     if (window.AssistLumen) {
         AssistLumen.activate();

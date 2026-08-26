@@ -4,7 +4,7 @@ const AudioManager = {
     wrong: new Audio(`${window.GAME_ASSETS_PATH}/sounds/liveLost.mp3`),
     score: new Audio(`${window.GAME_ASSETS_PATH}/sounds/bubble_pop.mp3`),
     bgsound: new Audio(`${window.GAME_ASSETS_PATH}/sounds/underWater.mp3`),
-    
+    timeOver: new Audio(`${window.GAME_ASSETS_PATH}/sounds/timeup.mp3`)
 };
 
 // Configuración de volúmenes
@@ -13,6 +13,7 @@ AudioManager.bgsound.loop = true;
 AudioManager.button.volume = 0.25;
 AudioManager.wrong.volume = 0.35;
 AudioManager.score.volume = 0.25;
+AudioManager.timeOver.volume = 0.15;
 
 AudioManager.playScore = function() {
     this.score.currentTime = 0;
@@ -41,6 +42,11 @@ AudioManager.playWrong = function() {
 
 AudioManager.playErrorSound = function() {
     this.playWrong();
+};
+
+AudioManager.playTimeOver = function(){
+    this.timeOver.currentTime = 0;
+    this.timeOver.play();
 };
 
 // Exponer globalmente con ambos nombres por compatibilidad

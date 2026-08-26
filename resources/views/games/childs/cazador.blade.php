@@ -1,7 +1,16 @@
 @php
-    $userRecord = auth()->check() 
-        ? \App\Models\RecordGamesChild::where('email', auth()->user()->email)->value('record_Cazador') ?? 0 
-        : 0;
+    $activeChildId = session('active_child_id'); // ID del niño seleccionado
+    $userId = auth()->id();
+
+    // Consulta el récord según si hay un niño seleccionado o juega el usuario directo
+    $query = \App\Models\RecordGamesChild::query();
+    if ($activeChildId) {
+        $query->where('child_profile_id', $activeChildId);
+    } else {
+        $query->where('user_id', $userId);
+    }
+
+    $userRecord = auth()->check() ? ($query->value('record_Cazador') ?? 0) : 0;
 @endphp
 
 @php
@@ -13,7 +22,7 @@
     $translations = $jsonPath ? json_decode(file_get_contents($jsonPath), true) : [];
 @endphp
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,13 +36,22 @@
     <link rel="stylesheet" href="{{ asset('gamesAssets/childs/cazador/CSS/style.css') }}">
     <link rel="stylesheet" href="{{ asset('gamesAssets/childs/cazador/CSS/animations.css') }}">
 
+    <!-- ================ Night  Mode ================ -->
+    @vite(['resources/css/dark-theme-games.css'])
+
     <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+        
       // Ruta base específica
       window.GAME_ASSETS_PATH = "{{ asset('gamesAssets/childs/cazador/ASSETS') }}";
       window.GAME_MENU_URL = "{{ url('/activities/ninez') }}";
       window.CSRF_TOKEN = "{{ csrf_token() }}";
       window.UPDATE_RECORD_URL = "{{ route('games.childs.record.update') }}";
       window.INITIAL_HIGH_SCORE = parseInt("{{ $userRecord ?? 0 }}", 10) || 0;
+      window.ACTIVE_CHILD_ID = {{ session('active_child_id') ?? 'null' }};
 
       //Translation
       window.translations = @json($translations, JSON_FORCE_OBJECT);
@@ -45,7 +63,7 @@
 <div id="game">
     @include('components.loader')
 
-    <!-- ================= BANNER DE PUNTOS ================= -->
+    <!-- ================= BANNER SUPERIOR ================= -->
     <div id="recordPanel" class="panel">
         <img src="{{ asset('gamesAssets/childs/cazador/ASSETS/ui/hudPanel.png') }}" alt="Panel Récord"> 
         <div class="panelContent">
@@ -54,9 +72,20 @@
         </div>
     </div>
 
+    <div id="gameStatus">
+            <div id="timerBox" class="hudBox">
+                <img src="{{ asset('gamesAssets/childs/cazador/ASSETS/ui/hudPanel.png') }}" alt="Timer Panel">
+                <div class="hudContent">
+                    <span class="hudTitle">⏱</span>
+                    <span id="timerValue" class="hudValue">02:00</span>
+                </div>
+            </div>
+        </div>
+
     <!-- ================ PARTE CENTRAL Y DERECHA ================ -->
     <main id="world">
-        <img id="background" src="{{ asset('gamesAssets/childs/cazador/ASSETS/background/background.png') }}" alt="Fondo">
+        <img id="bgDay" class="game-bg bg-day" src="{{ asset('gamesAssets/childs/cazador/ASSETS/background/background.png') }}" alt="Fondo Día">
+        <img id="bgNight" class="game-bg bg-night" src="{{ asset('gamesAssets/childs/cazador/ASSETS/background/background_night.png') }}" alt="Fondo Noche">
         <div id="boardContainer">
             <div id="scorePanel" class="panel">
                 <img src="{{ asset('gamesAssets/childs/cazador/ASSETS/ui/pointsbox.png') }}" alt="Panel Puntos">
@@ -121,10 +150,18 @@
             </div>
         </div>
     </footer>
+    <div id="globalReturnBtn" class="hidden">
+        <a href="{{ url('/activities/ninez') }}">
+            <img src="{{ asset('gamesAssets/childs/cazador/ASSETS/ui/globalReturn.png') }}" alt="{{ __('Volver') }}">
+        </a>
+    </div>
 
     <div id="effectsLayer"></div>
 
     <!--- PANTALLA DE GAME OVER --->
+    <div id="timeUpOverlay"></div>
+    <h1 id="timeUpBanner">{{ __('¡SE ACABÓ EL TIEMPO!') }}</h1>
+
     <div id="gameOverScreen">
         <div id="gameOverContainer">
             <h1 id="gameOverTitle"> {{ __('¡BUEN INTENTO!') }}</h1>

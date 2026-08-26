@@ -23,16 +23,15 @@ async function saveScoreToDatabase(newScore) {
             },
             body: JSON.stringify({
                 game: 'record_Eco',
-                score: newScore
+                score: newScore,
+                child_id: window.ACTIVE_CHILD_ID || null
             })
         });
 
         const data = await response.json();
-        if (data.success) {
-            if (data.highScore !== undefined) {
-                ScoreManager.highScore = data.highScore;
-                window.INITIAL_HIGH_SCORE = data.highScore;
-            }
+        if (data.success && data.highScore !== undefined) {
+            ScoreManager.highScore = data.highScore;
+            window.INITIAL_HIGH_SCORE = data.highScore;
             updateRecordHUD();
         }
     } catch (error) {

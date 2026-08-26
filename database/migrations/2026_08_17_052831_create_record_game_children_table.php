@@ -7,23 +7,24 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     public function up(): void {
-    Schema::create('record_games_children', function (Blueprint $table) {
-        $table->id();
-        // Relación con el email del usuario (único)
-        $table->string('email')->unique();
-        $table->foreign('email')->references('email')->on('users')->onDelete('cascade');
-        
-        // Columnas para los récords de los juegos
-        $table->integer('record_Eco')->default(0);
-        $table->integer('record_Guardianes')->default(0);
-        $table->integer('record_Cazador')->default(0);
-        
-        $table->timestamps();
-    });
+        Schema::create('record_games_children', function (Blueprint $table) {
+            $table->id();
+            
+            // Permite vincular a un usuario adulto/normal o a un perfil infantil
+            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
+            $table->foreignId('child_profile_id')->nullable()->constrained('child_profile')->onDelete('cascade');
+            
+            // Columnas para los récords de los juegos
+            $table->integer('record_Eco')->default(0);
+            $table->integer('record_Guardianes')->default(0);
+            $table->integer('record_Cazador')->default(0);
+            
+            $table->timestamps();
+        });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('record_games_childs');
+        Schema::dropIfExists('record_games_children');
     }
 };
