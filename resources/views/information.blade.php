@@ -25,8 +25,6 @@
 
     <x-navbar />
 
-    @include('components.transition-waves')
-
     <div class="info-container" id="section01">
         
         <header class="info-header" id="trigger-start">

@@ -238,3 +238,15 @@ body {
     background-color: #e2e8f0;
     color: #4a5568;
 }
+
+/* ==========================================================================
+   05. RESPONSIVE — SOLO PÁGINA DE JUVENTUD (stage-page--youth)
+   Las tres cartas de juegos se apilan una encima de otra en móvil
+   ========================================================================== */
+
+@media (max-width: 900px) {
+    .stage-page--youth .games-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}

@@ -28,7 +28,7 @@
         @include('components.navbar')
     @endif
 
-    <div class="stage-page">
+    <div class="stage-page stage-page--youth">
         <div class="stage-container">
             <header class="stage-header" style="padding-top: 20px;">
                 <span class="stage-header__subtitle" style="color: #bfa12b">{{ __('youth.subtitle') }}</span>

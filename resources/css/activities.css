@@ -252,3 +252,67 @@
     font-size: 1rem;
     margin-bottom: 1rem;
 }
+
+/* ==========================================================================
+   06. RESPONSIVE (TABLET Y MÓVIL)
+   En móvil el título pasa a vertical: letras arriba, faro en medio, letras abajo
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+    .act-header__word {
+        font-size: 3.5rem;
+        letter-spacing: 5px;
+    }
+
+    .act-header__lighthouse {
+        height: 270px;
+    }
+}
+
+@media (max-width: 768px) {
+    .act-body {
+        margin-top: 5.5rem;
+    }
+
+    .act-container {
+        padding: 0 1.25rem 3rem 1.25rem;
+    }
+
+    .act-header {
+        margin-bottom: 3.5rem;
+    }
+
+    .act-header__title-wrapper {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .act-header__word {
+        font-size: 2.6rem;
+        letter-spacing: 6px;
+    }
+
+    .act-header__lighthouse {
+        height: 210px;
+    }
+
+    .act-header__actions {
+        flex-direction: column;
+        gap: 1.75rem;
+        margin-top: 2.5rem;
+    }
+
+    .act-modal__content {
+        padding: 1.75rem 1.5rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .act-header__word {
+        font-size: 2.1rem;
+    }
+
+    .act-header__lighthouse {
+        height: 180px;
+    }
+}

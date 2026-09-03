@@ -1933,3 +1933,394 @@ body {
         border-color: rgba(194, 89, 83, 0.2);
     }
 }
+
+/* ==========================================================================
+   12. RESPONSIVE (TABLET Y MÓVIL)
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+    .info-container {
+        padding: 3rem 1.5rem 4rem 1.5rem;
+    }
+
+    .info-header {
+        gap: 2.5rem;
+    }
+
+    .info-header::before {
+        width: 360px;
+        height: 360px;
+        right: 1rem;
+    }
+
+    .info-header__quote {
+        font-size: 2.1rem;
+    }
+
+    .tea-section {
+        gap: 2.5rem;
+        margin-top: 7rem;
+        padding-top: 6rem;
+    }
+
+    .levels-cloud-path {
+        gap: 1.5rem;
+    }
+
+    .level-cloud-card {
+        padding: 3rem 1.75rem;
+        min-height: 0;
+    }
+
+    .stages-header__right {
+        margin-left: 4rem;
+    }
+
+    .stages-header__title {
+        font-size: 2.5rem;
+    }
+
+    .treatments-section {
+        gap: 2.5rem;
+    }
+
+    .treatments-section__char-img {
+        width: 420px;
+    }
+
+    .challenges-container {
+        padding: 3rem 2rem;
+    }
+
+    .mchat-question {
+        gap: 1.5rem;
+    }
+
+    .mchat-option__btn {
+        padding: 0.8rem 2rem;
+    }
+}
+
+@media (max-width: 900px) {
+    /* Sección 02 (TEA): las dos columnas se apilan */
+    .tea-section {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 3rem;
+        margin-top: 5rem;
+        padding-top: 4rem;
+    }
+
+    .tea-section__left {
+        max-width: 100%;
+    }
+
+    .tea-section__right {
+        justify-content: center;
+    }
+
+    /* Sección 03 (Niveles): tarjetas de nubes una debajo de otra */
+    .levels-cloud-path {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .levels-cloud-header {
+        align-items: flex-start;
+        margin-bottom: 3rem;
+    }
+
+    .levels-cloud-header__content {
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .level-cloud-card--1,
+    .level-cloud-card--2,
+    .level-cloud-card--3 {
+        margin-top: 0;
+    }
+
+    /* Sección 04 (Etapas): tarjetas apiladas y cabecera en columna */
+    .stages-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 3rem;
+    }
+
+    .stages-header__right {
+        margin-left: 0;
+        text-align: left;
+    }
+
+    .stages-header__subtitle {
+        text-align: left;
+    }
+
+    .stages-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    /* Sección 05 (Tratamientos): columnas apiladas */
+    .treatments-section {
+        flex-direction: column;
+        gap: 2.5rem;
+    }
+
+    .treatments-section__left {
+        width: 100%;
+    }
+
+    .treatments-section__header {
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .treatments-section__char-img {
+        width: 100%;
+        max-width: 420px;
+        margin: 2rem auto 0;
+    }
+
+    .treatments-section__right {
+        margin-top: 0;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .info-body {
+        margin-top: 4.5rem;
+    }
+
+    .info-container {
+        padding: 2.5rem 1.25rem 3.5rem 1.25rem;
+    }
+
+    /* Cabecera 01: en columna y decoración reducida */
+    .info-header {
+        flex-direction: column;
+        gap: 1.25rem;
+        margin-bottom: 3.5rem;
+    }
+
+    .info-header::before {
+        width: 280px;
+        height: 280px;
+        top: -1.5rem;
+        right: -1rem;
+        opacity: 0.55;
+    }
+
+    /* Números grandes de sección (01-05) */
+    .info-header__title,
+    .tea-section__number,
+    .levels-cloud-header__number,
+    .stages-header__number,
+    .treatments-section__number,
+    .challenges-header__number {
+        font-size: 3.5rem;
+    }
+
+    .info-header__quote {
+        font-size: 1.45rem;
+    }
+
+    .tea-section__title,
+    .levels-cloud-header__title {
+        font-size: 1.6rem;
+    }
+
+    .stages-header__title {
+        font-size: 2rem;
+    }
+
+    .treatments-section__title,
+    .challenges-header__title {
+        font-size: 1.2rem;
+    }
+
+    /* Tarjetas de nubes (¿Para qué nace...?) apiladas */
+    .info-cards {
+        grid-template-columns: 1fr;
+        gap: 2.75rem;
+        margin-top: 3rem;
+    }
+
+    .tea-section__alert-box {
+        padding: 1.5rem;
+    }
+
+    /* Decorados marinos más discretos en móvil */
+    .tea-section::before {
+        height: 320px;
+        opacity: 0.12;
+    }
+
+    .levels-cloud-section::before {
+        width: 420px;
+        height: 420px;
+        left: 80%;
+        top: 5%;
+        opacity: 0.08;
+    }
+
+    .stages-section::before {
+        width: 420px;
+        height: 380px;
+        opacity: 0.1;
+    }
+
+    /* Tarjetas de niveles: forma de nube suavizada */
+    .level-cloud-card {
+        padding: 3rem 1.5rem;
+    }
+
+    .level-cloud-card--1,
+    .level-cloud-card--2,
+    .level-cloud-card--3 {
+        border-radius: 32px;
+    }
+
+    .level-cloud-badge {
+        margin-left: 0;
+    }
+
+    .stage-card {
+        padding: 3.2rem 1.5rem 1.5rem 1.5rem;
+        min-height: 0;
+        border-radius: 28px;
+    }
+
+    .treatments-section__box {
+        padding: 1.75rem 1.25rem;
+        border-radius: 24px;
+    }
+
+    /* Centro de desafíos */
+    .challenges-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.25rem;
+        margin-bottom: 2rem;
+    }
+
+    .challenges-header__right {
+        text-align: left;
+        max-width: 100%;
+    }
+
+    .challenges-container {
+        padding: 2rem 1.25rem;
+        border-radius: 24px;
+    }
+
+    .challenge-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .challenges-auth-card {
+        padding: 2.25rem 1.5rem;
+    }
+
+    /* Cuestionario M-CHAT: pregunta y opciones en columna */
+    .mchat-quiz-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .mchat-question {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.2rem;
+    }
+
+    .mchat-options {
+        width: 100%;
+    }
+
+    .mchat-option {
+        flex: 1;
+    }
+
+    .mchat-option__btn {
+        width: 100%;
+        text-align: center;
+        padding: 0.8rem 1rem;
+    }
+
+    .quiz-nav-buttons {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    .mchat-result__badge {
+        padding: 0.7rem 2rem;
+        font-size: 1.1rem;
+    }
+
+    .mchat-result__feedback {
+        font-size: 1.05rem;
+    }
+
+    .challenges-reset-btn {
+        padding: 0.75rem 2rem;
+    }
+
+    /* Simulador y mitos */
+    .simulator-card {
+        padding: 1.5rem;
+    }
+
+    .simulator-card__back {
+        padding: 1.5rem;
+    }
+
+    .myth-card__face {
+        padding: 1.5rem;
+    }
+
+    .challenges-modal-card {
+        width: 90%;
+        padding: 1.75rem 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .info-container {
+        padding: 2rem 1rem 3rem 1rem;
+    }
+
+    .info-header__title,
+    .tea-section__number,
+    .levels-cloud-header__number,
+    .stages-header__number,
+    .treatments-section__number,
+    .challenges-header__number {
+        font-size: 3rem;
+    }
+
+    .info-header__quote {
+        font-size: 1.25rem;
+    }
+
+    .challenges-container {
+        padding: 1.5rem 1rem;
+    }
+
+    .mchat-question__text {
+        font-size: 1.05rem;
+    }
+
+    .mchat-option__btn {
+        font-size: 0.9rem;
+        padding: 0.75rem 0.75rem;
+    }
+
+    .challenges-primary-btn {
+        padding: 0.75rem 1.5rem;
+    }
+}

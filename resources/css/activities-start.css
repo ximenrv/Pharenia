@@ -304,3 +304,92 @@ body {
     visibility: visible;
     transform: translateY(0);
 }
+
+/* ==========================================================================
+   07. RESPONSIVE: LÍNEA DE TIEMPO VERTICAL TIPO INFOGRAFÍA (MÓVIL)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    body {
+        margin-top: 7rem;
+    }
+
+    .timeline-wrapper {
+        padding: 0 24px;
+        gap: 28px;
+    }
+
+    /* La línea de tiempo pasa a vertical: nodos apilados uno debajo de otro */
+    .timeline-container {
+        height: auto;
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+        padding: 14px 0;
+    }
+
+    /* Se oculta el trazado horizontal SVG y se dibuja la línea vertical */
+    .timeline-svg {
+        display: none;
+    }
+
+    .timeline-container::before {
+        content: "";
+        position: absolute;
+        top: 10px;
+        bottom: 10px;
+        left: 50%;
+        width: 4px;
+        transform: translateX(-50%);
+        background-color: #dfb13b;
+        border-radius: 999px;
+        z-index: 1;
+    }
+
+    /* Se anula el posicionamiento absoluto horizontal del escritorio */
+    .timeline-node,
+    .node-child,
+    .node-youth,
+    .node-adult {
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+        transform: none;
+    }
+
+    /* Etiqueta al lado del punto, como en una infografía */
+    .node-label {
+        position: absolute;
+        left: calc(50% + 28px);
+        top: 50%;
+        margin-top: 0;
+        transform: translateY(-50%);
+        font-size: 1.1rem;
+        white-space: nowrap;
+    }
+
+    /* Panel de información más compacto */
+    .info-panel-container {
+        min-height: 300px;
+        padding: 24px 20px;
+    }
+
+    .info-card,
+    .info-card.card-default {
+        left: 20px;
+        right: 20px;
+    }
+
+    .info-card.card-default {
+        top: 40px;
+    }
+
+    .info-card h3 {
+        font-size: 1.2rem;
+    }
+
+    .stage-desc {
+        font-size: 0.95rem;
+    }
+}
