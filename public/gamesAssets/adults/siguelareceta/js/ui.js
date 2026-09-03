@@ -129,6 +129,7 @@ export function renderTutorial(tutorial, contenedor, { onSiguiente, onAnterior }
     botonSiguiente.className = 'btn-siguiente';
     botonSiguiente.type = 'button';
     botonSiguiente.setAttribute('aria-label', 'Siguiente');
+    botonSiguiente.innerHTML = 'Siguiente <span class="btn-flecha">▶</span>';
     botonSiguiente.addEventListener('click', onSiguiente);
     acciones.appendChild(botonSiguiente);
 
@@ -136,7 +137,7 @@ export function renderTutorial(tutorial, contenedor, { onSiguiente, onAnterior }
         const botonRegresar = document.createElement('button');
         botonRegresar.className = 'btn-regresar';
         botonRegresar.type = 'button';
-        botonRegresar.textContent = 'Regresar';
+        botonRegresar.innerHTML = '<span class="btn-flecha">◀</span> Regresar';
         botonRegresar.addEventListener('click', onAnterior);
         acciones.appendChild(botonRegresar);
     }
@@ -183,7 +184,7 @@ export function renderSeleccionRecetas(recetas, contenedor, { onSeleccionar, onA
     const botonRegresar = document.createElement('button');
     botonRegresar.className = 'btn-regresar btn-regresar--suelto';
     botonRegresar.type = 'button';
-    botonRegresar.textContent = 'Regresar';
+    botonRegresar.innerHTML = '<span class="btn-flecha">◀</span> Regresar';
     botonRegresar.addEventListener('click', onAnterior);
 
     pantalla.appendChild(titulo);

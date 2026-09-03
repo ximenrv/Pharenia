@@ -7,8 +7,46 @@
     <link rel="stylesheet" href="{{ asset('gamesAssets/adults/ofertaoengano/CSS/intro.css') }}">
     <link rel="stylesheet" href="{{ asset('gamesAssets/adults/ofertaoengano/CSS/game.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Botón fijo para salir a Actividades (siempre visible, discreto) */
+        .btn-volver-actividades {
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 9999;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 9px 16px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: #e6ddf7;
+            background: rgba(30, 20, 60, 0.72);
+            border: 1.5px solid rgba(212, 175, 55, 0.55);
+            border-radius: 12px;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+            opacity: 0.72;
+            transition: opacity 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+        }
+        .btn-volver-actividades:hover {
+            opacity: 1;
+            transform: translateY(-1px);
+            border-color: #d4af37;
+        }
+        .btn-volver-actividades .bva-flecha { font-size: 0.9em; }
+        /* El botón "Regresar" interno baja para no encimarse con el de salir */
+        .btn-game-back { top: 62px !important; }
+    </style>
 </head>
 <body>
+    <a href="{{ route('activities.adultez') }}" class="btn-volver-actividades" title="Regresar a Actividades">
+        <span class="bva-flecha">◀</span> Regresar a Actividades
+    </a>
+
     {{-- ============ PANTALLA 1: INTRO ============ --}}
     <div id="screen-intro" class="screen active">
         <div class="background-layer" style="background-image: url('{{ asset('gamesAssets/adults/ofertaoengano/ASSETS/backgrounds/fondodia.png') }}')"></div>

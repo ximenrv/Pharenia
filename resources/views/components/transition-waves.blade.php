@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const totalHeight = window.innerHeight;
 
         // 🎯 CONFIGURACIÓN: En cuántos píxeles de scroll ocurre todo el efecto
-        const distanciaTotalEfecto = 800; 
+        const distanciaTotalEfecto = 800;
 
         if (rect.top < totalHeight && rect.bottom > 0) {
             contOlas.style.opacity = "1";
@@ -111,19 +111,19 @@ document.addEventListener("DOMContentLoaded", () => {
             // ─── PARTE 1: ESCALA SUBE HASTA 3 (0% al 50% del mini-scroll) ───
             if (progresoClamp <= 0.5) {
                 const progresoNormalizado = progresoClamp / 0.5;
-                const factorSubida = progresoNormalizado * 3; 
-                
+                const factorSubida = progresoNormalizado * 3;
+
                 contOlas.style.transform = `scaleY(${factorSubida}) translateY(0%)`;
-            } 
+            }
             // ─── PARTE 2: SE MANTIENE GIGANTE Y SUBE AL TECHO (50% al 100% del mini-scroll) ───
             else {
                 const progresoRestante = (progresoClamp - 0.5) / 0.5;
-                
+
                 // 🔒 Cambiado: Mantenemos la escala fija en 3 para que no se haga pequeño
-                const factorFijo = 3; 
-                
+                const factorFijo = 3;
+
                 // Se desplaza hacia arriba manteniendo su tamaño completo
-                const desplazamientoArriba = progresoRestante * -250; 
+                const desplazamientoArriba = progresoRestante * -250;
 
                 contOlas.style.transform = `scaleY(${factorFijo}) translateY(${desplazamientoArriba}%)`;
             }

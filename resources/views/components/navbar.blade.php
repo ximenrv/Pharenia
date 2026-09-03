@@ -25,7 +25,7 @@
                     </ul>
                 </li>
                 <li class="navbar__item">
-                    <a href="{{ route('forum.index') }}" class="navbar__link {{ Request::is('foro*') ? 'navbar__link--active' : '' }}">{{ __('Foro') }}</a>
+                    <a href="{{ route('forum.index') }}" class="navbar__link {{ Request::is('lumenia*') ? 'navbar__link--active' : '' }}">{{ __('Lumenia') }}</a>
                 </li>
                 <li class="navbar__item">
                     <a href="{{ route('admin.dashboard') }}" class="navbar__link {{ Request::is('admin*') ? 'navbar__link--active' : '' }}">{{ __('Panel Admin') }}</a>
@@ -42,7 +42,7 @@
                     </ul>
                 </li>
                 <li class="navbar__item">
-                    <a href="{{ route('forum.index') }}" class="navbar__link {{ Request::is('foro*') ? 'navbar__link--active' : '' }}">{{ __('Foro') }}</a>
+                    <a href="{{ route('forum.index') }}" class="navbar__link {{ Request::is('lumenia*') ? 'navbar__link--active' : '' }}">{{ __('Lumenia') }}</a>
                 </li>
 
             {{-- Si es Tutor / Aliado --}}
@@ -56,7 +56,7 @@
                     </ul>
                 </li>
                 <li class="navbar__item">
-                    <a href="{{ route('forum.index') }}" class="navbar__link {{ Request::is('foro*') ? 'navbar__link--active' : '' }}">{{ __('Foro') }}</a>
+                    <a href="{{ route('forum.index') }}" class="navbar__link {{ Request::is('lumenia*') ? 'navbar__link--active' : '' }}">{{ __('Lumenia') }}</a>
                 </li>
                 <li class="navbar__item">
                     <a href="{{ route('family-panel') }}" class="navbar__link {{ Request::is('family*') ? 'navbar__link--active' : '' }}">{{ __('Panel Familiar') }}</a>
@@ -71,7 +71,7 @@
                     </ul>
                 </li>
                 <li class="navbar__item">
-                    <a href="{{ route('forum.index') }}" class="navbar__link {{ Request::is('foro*') ? 'navbar__link--active' : '' }}">{{ __('Foro') }}</a>
+                    <a href="{{ route('forum.index') }}" class="navbar__link {{ Request::is('lumenia*') ? 'navbar__link--active' : '' }}">{{ __('Lumenia') }}</a>
                 </li>
                 <li class="navbar__item">
                     <a href="{{ route('supervisor.vincular') }}" class="navbar__link {{ Request::is('vincular-adulto*') ? 'navbar__link--active' : '' }}">{{ __('Adulto Supervisor') }}</a>
@@ -87,7 +87,7 @@
                 </ul>
             </li>
             <li class="navbar__item">
-                <a href="{{ route('forum.index') }}" class="navbar__link {{ Request::is('foro*') ? 'navbar__link--active' : '' }}">{{ __('Foro') }}</a>
+                <a href="{{ route('forum.index') }}" class="navbar__link {{ Request::is('lumenia*') ? 'navbar__link--active' : '' }}">{{ __('Lumenia') }}</a>
             </li>
         @endauth
     </ul>
