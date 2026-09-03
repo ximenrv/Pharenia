@@ -309,6 +309,211 @@ body {
 }
 
 /* ==========================================================================
+   10. DISEÑO RESPONSIVE (PANEL FAMILIAR / ADMINISTRACIÓN / SUPERVISOR)
+       Breakpoints estándar del proyecto:
+       - Tablets:                max-width: 1024px
+       - Móviles:                max-width: 768px
+       - Móviles pequeños:       max-width: 480px
+   ========================================================================== */
+
+/* --- 10.1 Métricas rápidas: utilidad base (5 columnas en escritorio) --- */
+.pharenia-metrics {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+/* Tarjeta ancha que ocupa la grilla completa (2 columnas del grid base) */
+.pharenia-card--wide {
+    grid-column: span 2;
+}
+
+/* --- Tablets (<= 1024px): métricas 5 → 3 columnas, respiro lateral --- */
+@media (max-width: 1024px) {
+    .family-panel-container {
+        padding: 0 24px 80px;
+        box-sizing: border-box;
+    }
+
+    .pharenia-metrics {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+    }
+}
+
+/* --- Móviles (<= 768px): apilado de rejillas y card-ificación de tablas --- */
+@media (max-width: 768px) {
+    .family-panel-container {
+        margin-top: 5rem;
+        padding: 0 16px 70px;
+        box-sizing: border-box;
+    }
+
+    .family-panel__header h1 {
+        font-size: 26px;
+    }
+
+    /* Métricas: 3 → 2 columnas */
+    .pharenia-metrics {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    /* Tarjetas: menos padding interno sin desbordar el ancho */
+    .pharenia-card {
+        padding: 20px 16px;
+    }
+
+    /* Grilla general de paneles (2 columnas) → 1 columna apilada */
+    .family-panel__grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .pharenia-card--wide {
+        grid-column: span 1;
+    }
+
+    /* --- Cabecera de tabla: título + botón apilados, botón a ancho completo --- */
+    .pharenia-table-action-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        text-align: center;
+    }
+
+    .pharenia-table-action-header .pharenia-btn-primary {
+        width: 100%;
+    }
+
+    /* --- Tablas de datos → tarjetas flexibles --- */
+    .pharenia-data-table thead {
+        display: none;
+    }
+
+    .pharenia-data-table,
+    .pharenia-data-table tbody,
+    .pharenia-data-table tr,
+    .pharenia-data-table td {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .pharenia-data-table {
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    /* Cada fila se convierte en una tarjeta independiente */
+    .pharenia-data-table tr {
+        margin-bottom: 14px;
+        border: 1px solid #e3dec9;
+        border-radius: 12px;
+        overflow: hidden;
+        background: #ffffff;
+        padding: 4px 0;
+    }
+
+    /* Celdas: valor a la derecha y etiqueta (data-label) a la izquierda */
+    .pharenia-data-table td {
+        padding: 9px 12px 9px 42%;
+        text-align: right;
+        border-bottom: 1px solid #edf2f7;
+        position: relative;
+        min-height: 24px;
+    }
+
+    .pharenia-data-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 12px;
+        font-weight: 700;
+        color: #718096;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+    }
+
+    /* Celda de acciones: ancho completo, sin etiqueta y botones centrados */
+    .pharenia-data-table td:last-child {
+        padding: 12px;
+        text-align: center;
+        border-bottom: none;
+    }
+
+    .pharenia-data-table td:last-child::before {
+        display: none;
+    }
+
+    .pharenia-data-table td:last-child > div {
+        justify-content: center;
+    }
+
+    /* Botones de acción con área táctil amplia */
+    .pharenia-data-table td:last-child .pharenia-btn-primary,
+    .pharenia-data-table td:last-child .pharenia-btn-danger {
+        flex: 1;
+        padding: 10px 12px;
+    }
+
+    /* Fila vacía (colspan): centrada y sin etiqueta lateral */
+    .pharenia-data-table td[colspan] {
+        padding: 20px 12px;
+        text-align: center;
+    }
+
+    .pharenia-data-table td[colspan]::before {
+        display: none;
+    }
+
+    /* --- Listas (panel familiar / supervisor): apilado sin desbordes --- */
+    .pharenia-list__item {
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 14px 12px;
+    }
+
+    .pharenia-list__action-link {
+        width: 100% !important;
+        text-align: center !important;
+    }
+
+    /* Inputs con tamaño estable para evitar el zoom automático en iOS */
+    .pharenia-form__group input,
+    .pharenia-form-group input,
+    .pharenia-form-group select {
+        font-size: 16px;
+    }
+}
+
+/* --- Móviles pequeños (<= 480px): métricas 2 → 1 columna --- */
+@media (max-width: 480px) {
+    .pharenia-metrics {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .family-panel__header h1 {
+        font-size: 22px;
+    }
+
+    .family-panel__header p {
+        font-size: 14px;
+    }
+
+    /* Modales: aprovechamiento máximo del ancho disponible.
+       Selector con mayor especificidad (0,2,0) para garantizar que
+       prevalezca sobre la regla base .pharenia-modal-content (0,1,0). */
+    .pharenia-modal-overlay .pharenia-modal-content {
+        margin: 0 12px;
+        padding: 24px 18px;
+        max-width: calc(100vw - 24px);
+    }
+}
+/* ==========================================================================
    08. ALERTAS
    ========================================================================== */
 

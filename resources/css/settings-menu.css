@@ -86,3 +86,13 @@
     --menu-bg: #1a202c;
     --menu-color: #f7fafc;
 }
+/* ==========================================================================
+   05. COMPORTAMIENTO RESPONSIVE DEL MENÚ FLOTANTE
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+    .settings-menu {
+        bottom: max(2rem, env(safe-area-inset-bottom, 0px));
+        right: max(2rem, calc(env(safe-area-inset-right, 0px) + 1rem));
+    }
+}

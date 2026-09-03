@@ -5,7 +5,17 @@
         </a>
     </div>
 
-    <ul class="navbar__menu">
+    {{-- Botón hamburguesa: solo visible en el breakpoint móvil --}}
+    <button type="button" class="navbar__toggle" id="navbarToggle" aria-label="{{ __('Abrir menú de navegación') }}" aria-expanded="false" aria-controls="navbarCollapse">
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+    </button>
+
+    {{-- Contenedor colapsable: fila en escritorio / drawer (overlay) en móvil --}}
+    <div class="navbar__collapse" id="navbarCollapse">
+
+        <ul class="navbar__menu">
         <li class="navbar__item">
             <a href="/home" class="navbar__link {{ Request::is('/') ? 'navbar__link--active' : '' }}">{{ __('Inicio') }}</a>
         </li>
@@ -105,5 +115,6 @@
         @else
             <a href="{{ route('login') }}" class="navbar__login-link">{{ __('Iniciar sesión') }}</a>
         @endauth
+        </div>
     </div>
 </nav>

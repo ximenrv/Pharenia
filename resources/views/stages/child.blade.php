@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ __('Mundo de la Niñez') }} - Pharenia</title>
-    @vite(['resources/css/stages.css', 'resources/css/navbar.css', 'resources/css/settings-menu.css', 'resources/js/settings-menu.js', 'resources/css/footer.css', 'resources/css/dark-theme.css'])
+    @vite(['resources/css/stages.css', 'resources/css/navbar.css', 'resources/js/navbar.js', 'resources/css/settings-menu.css', 'resources/js/settings-menu.js', 'resources/css/footer.css', 'resources/css/dark-theme.css'])
     <script>
         (function () {
             const savedTheme = localStorage.getItem('theme') || 'light';

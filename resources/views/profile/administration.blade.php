@@ -12,7 +12,7 @@
         })();
     </script>
 
-    @vite(['resources/css/family-panel.css', 'resources/css/navbar.css', 'resources/css/footer.css', 'resources/css/settings-menu.css', 'resources/js/settings-menu.js', 'resources/css/dark-theme.css'])
+    @vite(['resources/css/family-panel.css', 'resources/css/navbar.css', 'resources/js/navbar.js', 'resources/css/footer.css', 'resources/css/settings-menu.css', 'resources/js/settings-menu.js', 'resources/css/dark-theme.css'])
 
 </head>
 <body>
@@ -28,7 +28,7 @@
         </header>
 
         <!-- Métricas Rápidas -->
-        <div class="family-panel__grid" style="grid-template-columns: repeat(5, 1fr); gap: 15px; margin-bottom: 30px;">            <div class="pharenia-card" style="text-align: center; padding: 15px;">
+        <div class="family-panel__grid pharenia-metrics">            <div class="pharenia-card" style="text-align: center; padding: 15px;">
                 <h3>{{ __('Total General') }}</h3>
                 <p style="font-size: 24px; font-weight: bold; color: #2f4f4f; margin-top: 5px;">{{ $totalUsers }}</p>
             </div>
@@ -86,12 +86,12 @@
                     <tbody>
                         @forelse($adults as $user)
                             <tr>
-                                <td style="font-weight: bold; color: #718096; text-align: center;">{{ $user->id }}</td>
-                                <td style="font-weight: 600;">{{ $user->name }}</td>
-                                <td style="color: #4a5568;">{{ $user->email }}</td>
-                                <td>{{ $user->birthdate ? \Carbon\Carbon::parse($user->birthdate)->toDateString() : 'N/D' }}</td>
-                                <td><span class="pharenia-role-badge">{{ $user->role }}</span></td>
-                                <td style="text-align: center;">
+                                <td data-label="{{ __('ID') }}" style="font-weight: bold; color: #718096; text-align: center;">{{ $user->id }}</td>
+                                <td data-label="{{ __('Nombre') }}" style="font-weight: 600;">{{ $user->name }}</td>
+                                <td data-label="{{ __('Correo') }}" style="color: #4a5568;">{{ $user->email }}</td>
+                                <td data-label="{{ __('Fecha Nac.') }}">{{ $user->birthdate ? \Carbon\Carbon::parse($user->birthdate)->toDateString() : 'N/D' }}</td>
+                                <td data-label="{{ __('Rol') }}"><span class="pharenia-role-badge">{{ $user->role }}</span></td>
+                                <td data-label="{{ __('Acciones') }}" style="text-align: center;">
                                     <div style="display: flex; gap: 8px; justify-content: center;">
                                         <button type="button" class="pharenia-btn-primary" 
                                                 onclick="openEditAdultModal('{{ $user->id }}', '{{ $user->name }}', '{{ $user->email }}')"
@@ -130,12 +130,12 @@
                     <tbody>
                         @forelse($teens as $user)
                             <tr>
-                                <td style="font-weight: bold; color: #718096; text-align: center;">{{ $user->id }}</td>
-                                <td style="font-weight: 600;">{{ $user->name }}</td>
-                                <td style="color: #4a5568;">{{ $user->email }}</td>
-                                <td>{{ $user->birthdate ? \Carbon\Carbon::parse($user->birthdate)->toDateString() : 'N/D' }}</td>
-                                <td style="font-family: monospace;">{{ $user->supervisor_id ?? '---' }}</td>
-                                <td style="text-align: center;">
+                                <td data-label="{{ __('ID') }}" style="font-weight: bold; color: #718096; text-align: center;">{{ $user->id }}</td>
+                                <td data-label="{{ __('Nombre') }}" style="font-weight: 600;">{{ $user->name }}</td>
+                                <td data-label="{{ __('Correo') }}" style="color: #4a5568;">{{ $user->email }}</td>
+                                <td data-label="{{ __('Fecha Nac.') }}">{{ $user->birthdate ? \Carbon\Carbon::parse($user->birthdate)->toDateString() : 'N/D' }}</td>
+                                <td data-label="{{ __('Supervisor ID') }}" style="font-family: monospace;">{{ $user->supervisor_id ?? '---' }}</td>
+                                <td data-label="{{ __('Acciones') }}" style="text-align: center;">
                                     <div style="display: flex; gap: 8px; justify-content: center;">
                                         <button type="button" class="pharenia-btn-primary" 
                                                 onclick="openEditTeenModal('{{ $user->id }}', '{{ $user->name }}', '{{ $user->email }}', '{{ $user->supervisor_id }}')"
@@ -174,12 +174,12 @@
                     <tbody>
                         @forelse($minors as $minor)
                             <tr>
-                                <td style="font-weight: bold; color: #718096; text-align: center;">{{ $minor->id }}</td>
-                                <td style="font-weight: 600;">{{ $minor->name }}</td>
-                                <td>{{ $minor->birthdate ? \Carbon\Carbon::parse($minor->birthdate)->toDateString() : 'N/D' }}</td>
-                                <td style="font-family: monospace; font-weight: bold; color: #d69e2e;">{{ $minor->parent_pin }}</td>
-                                <td>{{ $minor->user_id }}</td>
-                                <td style="text-align: center;">
+                                <td data-label="{{ __('ID') }}" style="font-weight: bold; color: #718096; text-align: center;">{{ $minor->id }}</td>
+                                <td data-label="{{ __('Nombre') }}" style="font-weight: 600;">{{ $minor->name }}</td>
+                                <td data-label="{{ __('Fecha Nac.') }}">{{ $minor->birthdate ? \Carbon\Carbon::parse($minor->birthdate)->toDateString() : 'N/D' }}</td>
+                                <td data-label="{{ __('PIN Parental') }}" style="font-family: monospace; font-weight: bold; color: #d69e2e;">{{ $minor->parent_pin }}</td>
+                                <td data-label="{{ __('Supervisor ID') }}">{{ $minor->user_id }}</td>
+                                <td data-label="{{ __('Acciones') }}" style="text-align: center;">
                                     <div style="display: flex; gap: 8px; justify-content: center;">
                                         <button type="button" class="pharenia-btn-primary" 
                                                 onclick="openEditMinorModal('{{ $minor->id }}', '{{ $minor->name }}', '{{ $minor->parent_pin }}', '{{ $minor->user_id }}')"

@@ -174,3 +174,191 @@ nav img[alt="Perfil"],
 .navbar__item--dropdown:hover .dropdown-menu {
     display: block;
 }
+
+/* ==========================================================================
+   04. BOTÓN HAMBURGUESA Y CONTENEDOR COLAPSABLE (BASE / ESCRITORIO)
+   ========================================================================== */
+
+/* Oculto por defecto: solo se renderiza en el breakpoint móvil */
+.navbar__toggle {
+    display: none;
+}
+
+/* En escritorio el contenedor colapsable restaura el flujo en línea:
+   menú + perfil como fila dentro de la barra de navegación. */
+.navbar__collapse {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+/* ==========================================================================
+   05. DISEÑO RESPONSIVE (MOBILE)
+       Breakpoint estándar usado en todo el proyecto: 768px (max-width).
+       - Se ocultan los enlaces lineales y se muestra el menú hamburguesa.
+       - Al activarse, despliega un menú colapsable tipo drawer/overlay
+         con los enlaces a todas las secciones indexadas.
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .navbar {
+        width: 92%;
+        max-width: 100%;
+        top: 12px;
+        padding: 0.5rem 0.75rem;
+        border-radius: 26px;
+    }
+
+    .navbar__logo-img {
+        height: 40px;
+    }
+
+    /* --- Botón hamburguesa --- */
+    .navbar__toggle {
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        width: 42px;
+        height: 42px;
+        padding: 0.7rem;
+        box-sizing: border-box;
+        border: none;
+        border-radius: 50%;
+        background-color: transparent;
+        cursor: pointer;
+        z-index: 110;
+    }
+
+    .navbar__toggle-bar {
+        display: block;
+        width: 100%;
+        height: 2.5px;
+        border-radius: 3px;
+        background-color: #2c525a;
+        transition:
+            transform 0.28s ease,
+            opacity 0.28s ease;
+    }
+
+    /* Animación hamburguesa → X cuando el menú está abierto */
+    .navbar__toggle[aria-expanded="true"] .navbar__toggle-bar:nth-child(1) {
+        transform: translateY(7.5px) rotate(45deg);
+    }
+
+    .navbar__toggle[aria-expanded="true"] .navbar__toggle-bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .navbar__toggle[aria-expanded="true"] .navbar__toggle-bar:nth-child(3) {
+        transform: translateY(-7.5px) rotate(-45deg);
+    }
+
+    /* --- Menú colapsable (drawer / overlay) --- */
+    .navbar__collapse {
+        display: none;
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 1rem 1.4rem 1.3rem;
+        background-color: rgba(255, 255, 255, 0.97);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(44, 82, 90, 0.08);
+        border-radius: 22px;
+        box-shadow: 0 16px 40px rgba(44, 82, 90, 0.14);
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        z-index: 105;
+    }
+
+    .navbar__collapse.is-open {
+        display: flex;
+        animation: navbar-drawer-in 0.28s ease;
+    }
+
+    @keyframes navbar-drawer-in {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* --- Enlaces de navegación en columna --- */
+    .navbar__menu {
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+    }
+
+    .navbar__item {
+        width: 100%;
+    }
+
+    .navbar__item--dropdown {
+        position: static;
+    }
+
+    .navbar__link {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 1.1rem;
+        padding: 0.85rem 0.5rem;
+        border-bottom: 1px solid rgba(44, 82, 90, 0.08);
+    }
+
+    .navbar__link--active {
+        border-bottom-color: rgba(44, 82, 90, 0.08);
+        border-left: 3px solid #2c525a;
+        padding-left: calc(0.5rem + 3px);
+    }
+
+    /* Submenú "Actividades" desplegado como lista estática dentro del drawer */
+    .navbar__collapse .navbar__item--dropdown .dropdown-menu {
+        position: static;
+        transform: none;
+        display: block;
+        margin: 0;
+        padding: 0 0 0.5rem 1.25rem;
+        min-width: 0;
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+        text-align: left;
+    }
+
+    .navbar__collapse .dropdown-link {
+        padding: 0.6rem 0.5rem;
+        font-size: 1rem;
+    }
+
+    /* --- Perfil / acciones dentro del drawer --- */
+    .navbar__profile {
+        width: 100%;
+        margin-top: 0.9rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(44, 82, 90, 0.12);
+        gap: 0.85rem;
+    }
+
+    .navbar__logout-form,
+    .navbar__login-link {
+        flex: 1;
+        margin: 0;
+    }
+
+    .navbar__logout-btn,
+    .navbar__login-link {
+        width: 100%;
+        text-align: center;
+    }
+}

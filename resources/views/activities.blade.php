@@ -13,7 +13,7 @@
         })();
     </script>
     
-    @vite(['resources/css/activities.css', 'resources/css/navbar.css', 'resources/css/settings-menu.css', 'resources/js/settings-menu.js', 'resources/css/dark-theme.css' ])
+    @vite(['resources/css/activities.css', 'resources/css/navbar.css', 'resources/js/navbar.js', 'resources/css/settings-menu.css', 'resources/js/settings-menu.js', 'resources/css/dark-theme.css' ])
 </head>
 <body class="act-body">
 

@@ -11,7 +11,7 @@
             document.documentElement.dataset.theme = savedTheme;
         })();
     </script>
-    @vite(['resources/css/family-panel.css', 'resources/css/navbar.css', 'resources/css/footer.css', 'resources/css/settings-menu.css', 'resources/js/settings-menu.js', 'resources/css/dark-theme.css'])
+    @vite(['resources/css/family-panel.css', 'resources/css/navbar.css', 'resources/js/navbar.js', 'resources/css/footer.css', 'resources/css/settings-menu.css', 'resources/js/settings-menu.js', 'resources/css/dark-theme.css'])
 </head>
 <body>
 
@@ -76,13 +76,13 @@
 
                 <ul class="pharenia-list">
                     @forelse($children as $child)
-                        <li class="pharenia-list__item" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 5p10; margin-top: 15px; ">
+                        <li class="pharenia-list__item" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 10px; margin-top: 15px; ">
                             <div class="pharenia-list__info">
                                 <strong>{{ $child->name }}</strong>
                                 <span style="font-size: 12px; color: #616f7a; display: block;">{{ __('Nacimiento:') }} {{ $child->birthdate }}</span>
                             </div>
                             
-                            <a href="{{ route('child.login.form', $child->id) }}" style="background-color: #2f4f4f; color: #ffffff; padding: 6px 14px; border-radius: 6px; text-decoration: none; font-size: 13px; font-weight: 500;">
+                            <a href="{{ route('child.login.form', $child->id) }}" class="pharenia-list__action-link" style="background-color: #2f4f4f; color: #ffffff; padding: 6px 14px; border-radius: 6px; text-decoration: none; font-size: 13px; font-weight: 500;">
                                 {{ __('Ingresar') }} →
                             </a>
                         </li>
@@ -94,7 +94,7 @@
                 </ul>
             </div>
 
-            <div class="pharenia-card" style="grid-column: span 2;">
+            <div class="pharenia-card pharenia-card--wide">
                 <div class="pharenia-card__header">
                     <h3>{{ __('Jóvenes a tu cargo') }}</h3>
                 </div>

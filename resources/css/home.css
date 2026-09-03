@@ -281,3 +281,204 @@
         box-shadow: 0 4px 20px rgba(191, 161, 43, 0.6);
     }
 }
+/* ==========================================================================
+   06. DISEÑO RESPONSIVE (HOME)
+       Puntos de quiebre estándar del proyecto:
+       - Pantallas medianas / mitades de ventana:  max-width: 1024px
+       - Laptops grandes:                          min-width: 1440px
+   ========================================================================== */
+
+/* --- Pantallas medianas y menores (< 1024px): apilado en columna --- */
+@media (max-width: 1024px) {
+    .home-body {
+        height: auto;
+
+        min-height: 100vh;
+
+        overflow-y: auto;
+    }
+
+    .hero {
+        padding-top: 6rem;
+
+        padding-bottom: 3rem;
+    }
+
+    .hero__container {
+        flex-direction: column;
+
+        align-items: center;
+
+        text-align: center;
+
+        width: 100%;
+
+        box-sizing: border-box;
+
+        padding: 0 1rem;
+    }
+
+    .hero__content {
+        max-width: 100%;
+
+        width: 100%;
+
+        padding-left: 0;
+
+        margin-top: 0;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+    }
+
+    .hero__description {
+        max-width: 100%;
+
+        word-wrap: break-word;
+
+        overflow-wrap: break-word;
+
+        padding: 0 1rem;
+
+        box-sizing: border-box;
+    }
+
+    /* Apilamos los botones para que no se salgan del ancho estrecho */
+
+    .hero__actions {
+        flex-direction: column;
+
+        justify-content: center;
+
+        gap: 1rem;
+
+        width: 100%;
+
+        margin-bottom: 1rem;
+    }
+
+    .hero__character-container {
+        position: relative;
+
+        width: 100%;
+
+        max-width: 420px;
+
+        height: 300px;
+
+        margin-top: 1rem;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: flex-end;
+
+        transform: none !important;
+
+        overflow: visible;
+    }
+
+    .hero__layer {
+        position: absolute;
+
+        object-fit: contain;
+    }
+
+    .hero__layer--glow {
+        display: none;
+    }
+
+    .hero__layer--cloud {
+        width: 110%;
+
+        bottom: -20%;
+
+        left: 70%;
+
+        transform: translateX(-50%) !important;
+    }
+
+    .hero__layer--lumen {
+        width: 85%;
+
+        bottom: -20%;
+
+        left: 20%;
+
+        transform: translateX(-50%);
+    }
+
+    .hero__layer--feather-1 {
+        width: 30%;
+
+        bottom: 100%;
+
+        right: 90%;
+    }
+
+    .hero__layer--feather-2 {
+        width: 50%;
+
+        top: 8%;
+
+        right: 60%;
+    }
+
+    .hero__layer--feather-3 {
+        width: 60%;
+
+        bottom: 200%;
+
+        left: 75%;
+    }
+}
+
+/* --- Ajuste fino entre breakpoints (1025px – 1439px) --- */
+@media (min-width: 1025px) and (max-width: 1439px) {
+    .hero__content {
+        padding-left: 4rem;
+    }
+
+    .hero__character-container {
+        width: 44vw;
+    }
+}
+
+/* --- Laptops grandes (>= 1440px): composición expandida --- */
+@media (min-width: 1440px) {
+    /* Centra la línea de contenido con un ancho máximo armónico. */
+    .hero__container {
+        max-width: 1380px;
+        margin: 0 auto;
+        padding-top: 5rem;
+        box-sizing: border-box;
+    }
+
+    .hero__content {
+        padding-left: 7rem;
+        max-width: 640px;
+    }
+
+    .hero__title {
+        font-size: 4.6rem;
+    }
+
+    .hero__character-container {
+        width: 46vw;
+        height: 78vh;
+    }
+
+    .hero__layer--glow {
+        width: 124%;
+        right: -12%;
+        bottom: -12%;
+    }
+
+    .hero__layer--cloud {
+        bottom: -120px;
+    }
+}

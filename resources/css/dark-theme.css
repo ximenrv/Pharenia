@@ -137,6 +137,16 @@
     [data-theme="dark"] .navbar__profile {
         border-top-color: rgba(127, 179, 189, 0.15);
     }
+
+    [data-theme="dark"] .navbar__collapse .navbar__item--dropdown .dropdown-menu {
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+    }
+
+    [data-theme="dark"] .navbar__link--active {
+        border-left-color: #7fb3bd;
+    }
 }
 
 /* ==========================================================================
@@ -835,6 +845,23 @@
 [data-theme="dark"] td.email,
 [data-theme="dark"] .email-text {
     color: #dbe7ea !important;
+}
+
+/* Tablas convertidas en tarjetas (<= 768px): coherencia con el modo oscuro */
+@media (max-width: 768px) {
+    [data-theme="dark"] .pharenia-data-table tr {
+        background: #1a2429;
+        border-color: rgba(127, 179, 189, 0.15);
+    }
+
+    [data-theme="dark"] .pharenia-data-table td {
+        border-bottom-color: rgba(127, 179, 189, 0.1);
+        color: #dbe7ea;
+    }
+
+    [data-theme="dark"] .pharenia-data-table td::before {
+        color: #8fa6ad;
+    }
 }
 
 /* ==========================================================================

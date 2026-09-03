@@ -16,7 +16,7 @@
         window.translations = @json($translations);
     </script>
 
-    @vite(['resources/css/information.css', 'resources/css/navbar.css', 'resources/css/footer.css', 'resources/css/settings-menu.css', 'resources/js/settings-menu.js', 'resources/js/information.js', 'resources/css/dark-theme.css', 'resources/css/lumen-chat.css', 'resources/js/lumen-chat.js'])
+    @vite(['resources/css/information.css', 'resources/css/navbar.css', 'resources/js/navbar.js', 'resources/css/footer.css', 'resources/css/settings-menu.css', 'resources/js/settings-menu.js', 'resources/js/information.js', 'resources/css/dark-theme.css'])
     
 </head>
 <body class="info-body">
