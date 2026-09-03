@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Traducción: devuelve la versión traducida de la clave (o la clave si no existe)
+    const t = (key) => (window.translations && window.translations[key]) ? window.translations[key] : key;
+
     // ===== DIÁLOGOS =====
     const dialogues = [
         {
@@ -123,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
             btnPlay.classList.remove('visible');
         }
 
-        typeText(d.text);
+        typeText(t(d.text));
     }
 
     // ===== EVENTOS =====

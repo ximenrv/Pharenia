@@ -1391,7 +1391,7 @@
 [data-theme="dark"] .auth-body {
     background:
         linear-gradient(rgba(18, 25, 29, 0.75), rgba(18, 25, 29, 0.75)),
-        url("/public/img/background-auth.png") !important;
+        url("/public/img/background-auth.webp") !important;
     background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
@@ -1700,102 +1700,64 @@
 }
 
 /* ==========================================================================
-   19. MUNDO DE LA NIÑEZ
+   YOUTH GAME SELECTION PAGE
    ========================================================================== */
 
-/* Subtítulo, títulos y textos de la cabecera */
+[data-theme="dark"] .stage-page {
+    background-color: #12191d;
+}
+
 [data-theme="dark"] .stage-header__subtitle {
-    color: #7fb3bd !important;
+    color: #d9bc45;
 }
 
 [data-theme="dark"] .stage-header__title {
-    color: #e6f0f2;
+    color: #7fb3bd;
 }
 
 [data-theme="dark"] .stage-header__intro {
-    color: #b9c9ce;
+    color: #c3d3d8;
 }
 
-/* Tarjetas de Juegos */
 [data-theme="dark"] .game-card {
-    background-color: #1a2429;
+    background: #1a2429;
     border: 1px solid rgba(127, 179, 189, 0.15);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
-}
-
-[data-theme="dark"] .game-card:hover {
-    border-color: rgba(217, 188, 69, 0.35);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 [data-theme="dark"] .game-card__title {
-    color: #7fb3bd;
+    color: #e6f0f2;
 }
 
 [data-theme="dark"] .game-card__description {
     color: #a8bcc2;
 }
 
-[data-theme="dark"] .game-card__overlay {
-    background-color: rgba(26, 36, 41, 0.88) !important;
+[data-theme="dark"] .game-card:hover {
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.45);
+    border-color: rgba(217, 188, 69, 0.35);
 }
 
 [data-theme="dark"] .game-card__play-btn {
-    background-color: #d9bc45;
-    color: #12191d;
-    font-weight: bold;
-}
-
-/* Modal Pop-up de Confirmación para Jugar */
-[data-theme="dark"] .modal-overlay {
-    background-color: rgba(9, 14, 16, 0.8);
+    border: 1px solid #ffffff;
+    color: #ffffff;
 }
 
 [data-theme="dark"] .modal-box {
-    background-color: #1a2429;
-    border: 1px solid rgba(127, 179, 189, 0.2);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    background: #1a2429;
+    color: #dbe7ea;
 }
 
 [data-theme="dark"] .modal-title {
     color: #e6f0f2;
 }
 
-[data-theme="dark"] .modal-btn--cancel {
-    background-color: #222e35;
-    color: #a8bcc2;
-    border: 1px solid rgba(127, 179, 189, 0.2);
-}
-
-[data-theme="dark"] .modal-btn--cancel:hover {
-    background-color: #3a4f56;
-    color: #ffffff;
-}
-
 [data-theme="dark"] .modal-btn--confirm {
-    background-color: #2c525a;
-    color: #ffffff;
+    background: #2c525a;
+    color: #fff;
 }
 
-[data-theme="dark"] .modal-btn--confirm:hover {
-    background-color: #bfa12b;
-    color: #ffffff;
-}
-
-/* Banner superior para sesión de niño activa */
-[data-theme="dark"] body > div h1[style*="color: #2c525a"] {
-    color: #7fb3bd !important;
-}
-
-[data-theme="dark"] body > div p[style*="color: #4a5568"] {
-    color: #a8bcc2 !important;
-}
-
-[data-theme="dark"] body > div a[style*="color: #e53e3e"] {
-    color: #fc8181 !important;
-    border-bottom-color: #fc8181 !important;
-}
-
-[data-theme="dark"] body > div div[style*="background: linear-gradient"] {
-    background: linear-gradient(90deg, transparent, #7fb3bd, transparent) !important;
+[data-theme="dark"] .modal-btn--cancel {
+    background: #3a4f56;
+    color: #dbe7ea;
 }

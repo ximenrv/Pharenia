@@ -1,5 +1,8 @@
 import { INGREDIENTES } from './data.js';
 
+// Traducción: devuelve la versión traducida de la clave (o la clave si no existe)
+const t = (key) => (window.translations && window.translations[key]) ? window.translations[key] : key;
+
 let totalStarsReceta = 0;
 
 function saveStarsToServer(stars) {
@@ -27,7 +30,7 @@ const MODO_NIVEL = {
 };
 
 function textoModoNivel(numero) {
-    return MODO_NIVEL[numero] ?? 'SIGUE LOS PASOS';
+    return t(MODO_NIVEL[numero] ?? 'SIGUE LOS PASOS');
 }
 
 function resolverCapaPlato(info, numeroPaso, totalPasos) {
@@ -45,12 +48,12 @@ function textoPaso(ingredienteId, index, pasos) {
     const yaUsado = pasos.slice(0, index).includes(ingredienteId);
 
     if (yaUsado) {
-        return `Coloca la segunda porción de ${info.nombre.toLowerCase()}.`;
+        return t('Coloca la segunda porción de :ing.').replace(':ing', t(info.nombre).toLowerCase());
     }
     if (index === 0) {
-        return `Coloca ${info.genero} ${info.nombre.toLowerCase()} en el plato.`;
+        return t('Coloca :art:ing en el plato.').replace(':art', info.genero + ' ').replace(':ing', t(info.nombre).toLowerCase());
     }
-    return `Agrega ${info.genero} ${info.nombre.toLowerCase()}.`;
+    return t('Agrega :art:ing.').replace(':art', info.genero + ' ').replace(':ing', t(info.nombre).toLowerCase());
 }
 
 function crearTarjetaReceta(recipe, pasos) {
@@ -59,7 +62,7 @@ function crearTarjetaReceta(recipe, pasos) {
 
     const etiqueta = document.createElement('div');
     etiqueta.className = 'tarjeta-receta__etiqueta';
-    etiqueta.textContent = `${recipe.emoji ?? '🍳'} RECETA`;
+    etiqueta.textContent = `${recipe.emoji ?? '🍳'} ${t('RECETA')}`;
     tarjeta.appendChild(etiqueta);
 
     if (recipe.imagenMenu) {
@@ -72,7 +75,7 @@ function crearTarjetaReceta(recipe, pasos) {
 
     const nombre = document.createElement('h3');
     nombre.className = 'tarjeta-receta__nombre';
-    nombre.textContent = recipe.nombre;
+    nombre.textContent = t(recipe.nombre);
     tarjeta.appendChild(nombre);
 
     const lista = document.createElement('ol');
@@ -93,11 +96,11 @@ function mostrarCompletado(pantalla, nombreReceta) {
 
     const titulo = document.createElement('p');
     titulo.className = 'nivel-completado__titulo';
-    titulo.textContent = '🎉 ¡Receta completada!';
+    titulo.textContent = '🎉 ' + t('¡Receta completada!');
 
     const subtitulo = document.createElement('p');
     subtitulo.className = 'nivel-completado__subtitulo';
-    subtitulo.textContent = `¡Seguiste todos los pasos correctamente para tu ${nombreReceta.toLowerCase()}!`;
+    subtitulo.textContent = t('¡Seguiste todos los pasos correctamente para tu :receta!').replace(':receta', t(nombreReceta).toLowerCase());
 
     overlay.appendChild(titulo);
     overlay.appendChild(subtitulo);
@@ -117,7 +120,7 @@ export function renderTutorial(tutorial, contenedor, { onSiguiente, onAnterior }
 
     const dialogo = document.createElement('div');
     dialogo.className = 'dialogo';
-    dialogo.textContent = tutorial.actual().texto;
+    dialogo.textContent = t(tutorial.actual().texto);
 
     pantalla.appendChild(personaje);
     pantalla.appendChild(dialogo);
@@ -129,6 +132,7 @@ export function renderTutorial(tutorial, contenedor, { onSiguiente, onAnterior }
     botonSiguiente.className = 'btn-siguiente';
     botonSiguiente.type = 'button';
     botonSiguiente.setAttribute('aria-label', 'Siguiente');
+    botonSiguiente.innerHTML = t('Siguiente') + ' <span class="btn-flecha">▶</span>';
     botonSiguiente.addEventListener('click', onSiguiente);
     acciones.appendChild(botonSiguiente);
 
@@ -136,7 +140,7 @@ export function renderTutorial(tutorial, contenedor, { onSiguiente, onAnterior }
         const botonRegresar = document.createElement('button');
         botonRegresar.className = 'btn-regresar';
         botonRegresar.type = 'button';
-        botonRegresar.textContent = 'Regresar';
+        botonRegresar.innerHTML = '<span class="btn-flecha">◀</span> ' + t('Regresar');
         botonRegresar.addEventListener('click', onAnterior);
         acciones.appendChild(botonRegresar);
     }
@@ -154,7 +158,7 @@ export function renderSeleccionRecetas(recetas, contenedor, { onSeleccionar, onA
 
     const titulo = document.createElement('h1');
     titulo.className = 'titulo-seleccion';
-    titulo.textContent = '¿Qué vamos a cocinar hoy?';
+    titulo.textContent = t('¿Qué vamos a cocinar hoy?');
 
     const grid = document.createElement('div');
     grid.className = 'recetas-grid';
@@ -165,7 +169,7 @@ export function renderSeleccionRecetas(recetas, contenedor, { onSeleccionar, onA
 
         const nombre = document.createElement('span');
         nombre.className = 'receta-card__nombre';
-        nombre.textContent = receta.nombre;
+        nombre.textContent = t(receta.nombre);
         card.appendChild(nombre);
 
         if (receta.imagenMenu) {
@@ -183,7 +187,7 @@ export function renderSeleccionRecetas(recetas, contenedor, { onSeleccionar, onA
     const botonRegresar = document.createElement('button');
     botonRegresar.className = 'btn-regresar btn-regresar--suelto';
     botonRegresar.type = 'button';
-    botonRegresar.textContent = 'Regresar';
+    botonRegresar.innerHTML = '<span class="btn-flecha">◀</span> ' + t('Regresar');
     botonRegresar.addEventListener('click', onAnterior);
 
     pantalla.appendChild(titulo);
@@ -207,7 +211,7 @@ export function renderIntroNivel(numero, recipe, contenedor) {
 
     const titulo = document.createElement('h1');
     titulo.className = 'nivel-intro__titulo';
-    titulo.textContent = `NIVEL ${numero}`;
+    titulo.textContent = `${t('NIVEL')} ${numero}`;
 
     const subtitulo = document.createElement('h2');
     subtitulo.className = 'nivel-intro__subtitulo';
@@ -247,7 +251,7 @@ export function renderNivel(nivel, contenedor, { onSeleccionarIngrediente, onRei
 
     const badge = document.createElement('div');
     badge.className = 'nivel-badge';
-    badge.textContent = `NIVEL ${nivel.numero}: ${textoModoNivel(nivel.numero)}`;
+    badge.textContent = `${t('NIVEL')} ${nivel.numero}: ${textoModoNivel(nivel.numero)}`;
     header.appendChild(badge);
 
     const statsBox = document.createElement('div');
@@ -261,8 +265,8 @@ export function renderNivel(nivel, contenedor, { onSeleccionarIngrediente, onRei
     estrellas.textContent = `⭐ ${nivel.recipe.estrellas}/5`;
     contadores.appendChild(estrellas);
 
-    const textoHintNormal = `💡 Sigue los pasos en el orden correcto para completar tu ${nivel.recipe.nombre.toLowerCase()}.`;
-    const textoHintRecuerda = '💡 Recuerda el orden que memorizaste.';
+    const textoHintNormal = '💡 ' + t('Sigue los pasos en el orden correcto para completar tu :receta.').replace(':receta', t(nivel.recipe.nombre).toLowerCase());
+    const textoHintRecuerda = '💡 ' + t('Recuerda el orden que memorizaste.');
     let hintActual = nivel.ocultaTrasTiempo ? '' : textoHintNormal;
 
     const hint = document.createElement('div');
@@ -283,7 +287,7 @@ export function renderNivel(nivel, contenedor, { onSeleccionarIngrediente, onRei
 
         const tituloMemoriza = document.createElement('div');
         tituloMemoriza.className = 'memoriza-overlay__titulo';
-        tituloMemoriza.textContent = '¡Memoriza la receta!';
+        tituloMemoriza.textContent = t('¡Memoriza la receta!');
 
         const tarjetaGrande = crearTarjetaReceta(nivel.recipe, nivel.pasos);
         tarjetaGrande.classList.add('tarjeta-receta--grande');
@@ -374,7 +378,7 @@ export function renderNivel(nivel, contenedor, { onSeleccionarIngrediente, onRei
                 }, 700);
 
                 clearTimeout(hint.dataset.avisoTimeoutId);
-                hint.textContent = '⚠️ ¡Casi! Recuerda el orden de la receta.';
+                hint.textContent = '⚠️ ' + t('¡Casi! Recuerda el orden de la receta.');
                 hint.dataset.avisoTimeoutId = setTimeout(() => {
                     hint.textContent = hintActual;
                 }, 1600);
@@ -400,7 +404,7 @@ export function renderNivel(nivel, contenedor, { onSeleccionarIngrediente, onRei
     const btnReiniciar = document.createElement('button');
     btnReiniciar.type = 'button';
     btnReiniciar.className = 'btn-reiniciar';
-    btnReiniciar.textContent = '↺ REINICIAR';
+    btnReiniciar.textContent = '↺ ' + t('REINICIAR');
     btnReiniciar.addEventListener('click', onReiniciar);
 
     controles.appendChild(btnInicio);

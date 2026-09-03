@@ -10,12 +10,41 @@
  *   respuesta correcta no cae siempre en la misma posición/letra y el
  *   usuario no puede memorizar patrones.
  */
-import questions from './data/questions.json';
+import i18n from './i18n.json';
+import questionsEs from './data/questions.json';
+import questionsEn from './data/questions-en.json';
 import { loadState, saveState, todayKey } from './storage.js';
 
 export const SESSION_SIZE = 10;
 
-export const CATEGORY_LABELS = {
+const locale = window.APP_LOCALE || 'es';
+
+function t(key) {
+    const parts = key.split('.');
+    let value = i18n[locale];
+    for (const part of parts) {
+        if (value && typeof value === 'object' && part in value) {
+            value = value[part];
+        } else {
+            value = undefined;
+            break;
+        }
+    }
+    if (value === undefined) {
+        value = i18n['es'];
+        for (const part of parts) {
+            if (value && typeof value === 'object' && part in value) {
+                value = value[part];
+            } else {
+                value = key;
+                break;
+            }
+        }
+    }
+    return value ?? key;
+}
+
+export const CATEGORY_LABELS = t('categories') || {
     sobrecarga_sensorial: 'Sobrecarga sensorial',
     lenguaje_figurado: 'Lenguaje figurado y sarcasmo',
     intereses_especiales: 'Intereses y señales sociales',
@@ -28,7 +57,7 @@ export const CATEGORY_LABELS = {
     espacios_publicos: 'Espacios públicos',
 };
 
-const BANK = questions;
+const BANK = locale === 'en' ? questionsEn : questionsEs;
 
 /** Barajado Fisher–Yates con crypto.getRandomValues (mejor azar que Math.random). */
 export function shuffle(array) {

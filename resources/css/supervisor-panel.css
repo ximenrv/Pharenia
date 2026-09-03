@@ -1,0 +1,368 @@
+/* ==========================================================================
+   PHARENIA - ADULTO SUPERVISOR (scoped: body.supervisor-body)
+   Paleta: marina (teal/aqua) + cálida (dorado/ámbar/arena)
+   Este archivo se carga DESPUÉS de family-panel.css y solo aplica
+   a la página de Adulto Supervisor.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   01. FONDO Y LAYOUT
+   -------------------------------------------------------------------------- */
+
+body.supervisor-body {
+    background:
+        radial-gradient(900px 500px at 88% -5%, rgba(95, 168, 173, 0.16), transparent 60%),
+        radial-gradient(750px 500px at 8% 0%, rgba(217, 164, 65, 0.10), transparent 55%),
+        radial-gradient(700px 600px at 50% 115%, rgba(44, 82, 90, 0.08), transparent 60%),
+        #f6f5f0;
+}
+
+body.supervisor-body .family-panel-container {
+    max-width: 1150px;
+    margin-top: 6.5rem;
+    padding: 0 1.5rem 90px 1.5rem;
+    box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------------------
+   02. CABECERA
+   -------------------------------------------------------------------------- */
+
+body.supervisor-body .family-panel__header {
+    margin-bottom: 48px;
+}
+
+body.supervisor-body .family-panel__badge {
+    background: linear-gradient(90deg, rgba(217, 164, 65, 0.16), rgba(95, 168, 173, 0.14));
+    color: #a8823a;
+    border: 1px solid rgba(217, 164, 65, 0.35);
+    font-size: 12px;
+    letter-spacing: 2px;
+    padding: 7px 18px;
+    border-radius: 999px;
+}
+
+body.supervisor-body .family-panel__header h1 {
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    background: linear-gradient(92deg, #1e3b41 15%, #3e7c85 60%, #5fa8ad 95%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 14px 0 10px 0;
+}
+
+body.supervisor-body .family-panel__header p {
+    font-size: 17px;
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   03. TARJETAS
+   -------------------------------------------------------------------------- */
+
+body.supervisor-body .family-panel__grid {
+    gap: 34px;
+}
+
+body.supervisor-body .pharenia-card {
+    position: relative;
+    background: #ffffff;
+    border: 1px solid rgba(95, 168, 173, 0.18);
+    border-radius: 24px;
+    padding: 38px 36px;
+    box-shadow:
+        0 22px 50px rgba(44, 82, 90, 0.10),
+        0 4px 12px rgba(217, 164, 65, 0.05);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.supervisor-body .pharenia-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #2c525a, #5fa8ad, #d9a441);
+}
+
+body.supervisor-body .pharenia-card:hover {
+    transform: translateY(-5px);
+    box-shadow:
+        0 32px 65px rgba(44, 82, 90, 0.14),
+        0 6px 16px rgba(217, 164, 65, 0.08);
+}
+
+body.supervisor-body .pharenia-card__header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 10px;
+}
+
+body.supervisor-body .pharenia-card__header h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #2c525a;
+    margin: 0;
+}
+
+.supervisor-card-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, rgba(95, 168, 173, 0.16), rgba(44, 82, 90, 0.10));
+    color: #3e7c85;
+}
+
+.supervisor-card-icon--warm {
+    background: linear-gradient(135deg, rgba(217, 164, 65, 0.18), rgba(191, 161, 43, 0.10));
+    color: #b08a2e;
+}
+
+.supervisor-card-icon svg {
+    width: 23px;
+    height: 23px;
+}
+
+body.supervisor-body .pharenia-card__desc {
+    font-size: 15px;
+    margin-bottom: 28px;
+}
+
+/* --------------------------------------------------------------------------
+   04. SUPERVISOR VINCULADO
+   -------------------------------------------------------------------------- */
+
+body.supervisor-body .pharenia-list__item.supervisor-item {
+    background: linear-gradient(120deg, #f4faf9, #fdf8ec);
+    border: 1px solid rgba(95, 168, 173, 0.25);
+    border-radius: 18px;
+    padding: 20px 22px;
+    gap: 16px;
+}
+
+.supervisor-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3e7c85, #5fa8ad);
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 800;
+    font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 8px 18px rgba(62, 124, 133, 0.30);
+    text-transform: uppercase;
+}
+
+body.supervisor-body .supervisor-name {
+    font-size: 17px;
+    color: #1e3b41;
+}
+
+body.supervisor-body .supervisor-email {
+    font-size: 13.5px;
+}
+
+.supervisor-badge {
+    background: linear-gradient(90deg, #d9a441, #bfa12b);
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 999px;
+    box-shadow: 0 6px 14px rgba(191, 161, 43, 0.30);
+    flex-shrink: 0;
+}
+
+body.supervisor-body .pharenia-list__item.supervisor-empty {
+    border-radius: 18px;
+    line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   05. FORMULARIO DE VINCULACIÓN
+   -------------------------------------------------------------------------- */
+
+body.supervisor-body .pharenia-form__group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #2c525a;
+}
+
+.supervisor-label-icon {
+    width: 16px;
+    height: 16px;
+    color: #c9973f;
+    flex-shrink: 0;
+}
+
+body.supervisor-body .pharenia-form__group input {
+    padding: 14px 18px;
+    border-radius: 14px;
+    border: 1.5px solid rgba(44, 82, 90, 0.18);
+    font-size: 15.5px;
+    background-color: #f7fafa;
+}
+
+body.supervisor-body .pharenia-form__group input:hover {
+    border-color: rgba(95, 168, 173, 0.5);
+}
+
+body.supervisor-body .pharenia-form__group input:focus {
+    border-color: #3e7c85;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(95, 168, 173, 0.18);
+}
+
+.supervisor-help-text {
+    display: block;
+    margin-top: 8px;
+    font-size: 12.5px;
+    color: #7d8f96;
+    line-height: 1.5;
+}
+
+body.supervisor-body .pharenia-btn {
+    background: linear-gradient(92deg, #2c525a 10%, #3e7c85 55%, #5fa8ad 100%);
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    border-radius: 14px;
+    box-shadow: 0 14px 28px rgba(44, 82, 90, 0.28);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+}
+
+body.supervisor-body .pharenia-btn:hover {
+    background: linear-gradient(92deg, #2c525a 10%, #3e7c85 55%, #5fa8ad 100%);
+    transform: translateY(-3px);
+    filter: brightness(1.08);
+    box-shadow: 0 20px 38px rgba(44, 82, 90, 0.36);
+}
+
+body.supervisor-body .pharenia-btn:active {
+    transform: translateY(-1px);
+}
+
+/* --------------------------------------------------------------------------
+   06. ALERTAS
+   -------------------------------------------------------------------------- */
+
+.supervisor-alert-success {
+    background: linear-gradient(90deg, #e2f2ec, #d4ece4);
+    color: #256d5f;
+    border: 1px solid #a9d4c6;
+    padding: 13px 18px;
+    border-radius: 14px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.supervisor-alert-error {
+    background: linear-gradient(90deg, #fbe9e4, #f8ded6);
+    color: #a34a33;
+    border: 1px solid #eec0b2;
+    padding: 13px 18px;
+    border-radius: 14px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.supervisor-alert-error ul {
+    margin: 0;
+    padding-left: 18px;
+}
+
+/* --------------------------------------------------------------------------
+   07. MODO OSCURO (complementa dark-theme.css)
+   -------------------------------------------------------------------------- */
+
+[data-theme="dark"] body.supervisor-body {
+    background:
+        radial-gradient(900px 500px at 88% -5%, rgba(95, 168, 173, 0.08), transparent 60%),
+        radial-gradient(750px 500px at 8% 0%, rgba(217, 164, 65, 0.05), transparent 55%),
+        #12191d;
+}
+
+[data-theme="dark"] body.supervisor-body .family-panel__header h1 {
+    background: linear-gradient(92deg, #a8d5da 10%, #7fb3bd 60%, #d9bc45 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+[data-theme="dark"] body.supervisor-body .pharenia-card {
+    background: #1a2429;
+    border-color: rgba(127, 179, 189, 0.15);
+    box-shadow: 0 22px 50px rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="dark"] body.supervisor-body .pharenia-card:hover {
+    box-shadow: 0 32px 65px rgba(0, 0, 0, 0.55);
+}
+
+[data-theme="dark"] body.supervisor-body .pharenia-card__header h3 {
+    color: #a8d5da;
+}
+
+[data-theme="dark"] .supervisor-card-icon {
+    background: rgba(127, 179, 189, 0.12);
+    color: #7fb3bd;
+}
+
+[data-theme="dark"] .supervisor-card-icon--warm {
+    background: rgba(217, 188, 69, 0.12);
+    color: #d9bc45;
+}
+
+[data-theme="dark"] body.supervisor-body .pharenia-list__item.supervisor-item {
+    background: #162025;
+    border-color: rgba(127, 179, 189, 0.2);
+}
+
+[data-theme="dark"] body.supervisor-body .pharenia-form__group input {
+    background-color: #12191d;
+}
+
+[data-theme="dark"] .supervisor-help-text {
+    color: #8fa6ad;
+}
+
+/* --------------------------------------------------------------------------
+   08. RESPONSIVE
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 900px) {
+    body.supervisor-body .family-panel__grid {
+        grid-template-columns: 1fr;
+    }
+
+    body.supervisor-body .family-panel__header h1 {
+        font-size: 32px;
+    }
+
+    body.supervisor-body .pharenia-card {
+        padding: 28px 22px;
+    }
+}

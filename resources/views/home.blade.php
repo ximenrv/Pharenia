@@ -13,7 +13,7 @@
         })();
     </script>
 
-    @vite(['resources/css/home.css', 'resources/css/navbar.css', 'resources/css/settings-menu.css', 'resources/js/settings-menu.js', 'resources/css/dark-theme.css'])
+    @vite(['resources/css/home.css', 'resources/css/navbar.css', 'resources/css/settings-menu.css', 'resources/js/settings-menu.js', 'resources/css/dark-theme.css', 'resources/css/lumen-chat.css', 'resources/js/lumen-chat.js'])
 </head>
 <body class="home-body">
 
@@ -56,6 +56,9 @@
 
     <!-- Componente del Menú Flotante -->
     <x-settings-menu />
+
+    <!-- Lumen: compañero virtual con IA -->
+    <x-lumen-chat />
 
     @if(session('error'))
     <!-- Importar la fuente Nunito desde Google Fonts -->

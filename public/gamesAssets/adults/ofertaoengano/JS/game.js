@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Traducción: devuelve la versión traducida de la clave (o la clave si no existe)
+    const t = (key) => (window.translations && window.translations[key]) ? window.translations[key] : key;
+
     // ===== MAPA BASE (niveles 1-3): 19×15 =====
     const mazeSmall = [
         [1,1,1,1,1,1,1,3,3,3,3,3,1,1,1,1,1,1,1],
@@ -367,14 +370,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const active = getActiveData();
 
         // Actualizar cartel
-        levelLabel.textContent = 'Nivel ' + data.level;
-        levelTitle.textContent = data.theme;
+        levelLabel.textContent = t('Nivel') + ' ' + data.level;
+        levelTitle.textContent = t(data.theme);
 
         // Etiqueta de situación
         if (data.subLevels) {
-            situationLabel.textContent = data.subLevels[currentSubLevel].label;
+            situationLabel.textContent = t(data.subLevels[currentSubLevel].label);
         } else {
-            situationLabel.textContent = 'Situación ' + data.level;
+            situationLabel.textContent = t('Situación') + ' ' + data.level;
         }
 
         // Clonar mapa del nivel
@@ -471,13 +474,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function showSituation() {
         const active = getActiveData();
-        const text = active.situation;
+        const text = t(active.situation);
         situationText.textContent = '';
         timerBar.style.width = '100%';
 
         // Actualizar label para sub-niveles
         if (levels[currentLevel].subLevels) {
-            situationLabel.textContent = levels[currentLevel].subLevels[currentSubLevel].label;
+            situationLabel.textContent = t(levels[currentLevel].subLevels[currentSubLevel].label);
         }
 
         let i = 0;
@@ -507,7 +510,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                     phaseSituation.style.display = 'none';
                     phaseMaze.style.display = 'flex';
-                    situationMiniText.textContent = active.situation;
+                    situationMiniText.textContent = t(active.situation);
                     startMaze();
                 }, 400);
             }
@@ -732,13 +735,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 '<div class="result-header">' +
                     '<img src="' + window.GAME_ASSETS.lumen + '" class="result-lumen" alt="Lumen">' +
                     '<div class="result-title-area">' +
-                        '<h2 class="result-title" style="color: #c9a84c;">¡Necesitamos recargar energías!</h2>' +
+                        '<h2 class="result-title" style="color: #c9a84c;">' + t('¡Necesitamos recargar energías!') + '</h2>' +
                     '</div>' +
                 '</div>' +
                 buildStarsHTML(0) +
-                '<p class="result-explanation">Los enemigos eran muchos esta vez, pero cada intento nos enseña algo nuevo. ' +
-                'Lumen sabe que puedes lograrlo. ¿Vamos de nuevo? ¡Ya conoces mejor el camino!</p>' +
-                '<button class="result-btn" id="btn-gameover-retry">¡Vamos de nuevo!</button>' +
+                '<p class="result-explanation">' + t('Los enemigos eran muchos esta vez, pero cada intento nos enseña algo nuevo. Lumen sabe que puedes lograrlo. ¿Vamos de nuevo? ¡Ya conoces mejor el camino!') + '</p>' +
+                '<button class="result-btn" id="btn-gameover-retry">' + t('¡Vamos de nuevo!') + '</button>' +
             '</div>';
 
         document.body.appendChild(ov);
@@ -780,19 +782,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 '<div class="result-header">' +
                     '<img src="' + window.GAME_ASSETS.lumen + '" class="result-lumen" alt="Lumen">' +
                     '<div class="result-title-area">' +
-                        '<h2 class="result-title" style="color: #4ade80; font-size: 1.6rem;">¡Misión Completada!</h2>' +
+                        '<h2 class="result-title" style="color: #4ade80; font-size: 1.6rem;">' + t('¡Misión Completada!') + '</h2>' +
                         '<span class="result-badge" style="background: rgba(74,222,128,0.15); color: #4ade80; border-color: rgba(74,222,128,0.3);">' +
-                            'Has completado Oferta o Engaño' +
+                            t('Has completado Oferta o Engaño') +
                         '</span>' +
                     '</div>' +
                 '</div>' +
                 buildStarsHTML(stars) +
                 '<p class="result-explanation" style="font-size: 0.95rem;">' +
-                    'Demostraste que puedes identificar situaciones del día a día y tomar buenas decisiones. ' +
-                    'Recuerda siempre: observa las señales, no te apresures y, si algo parece demasiado bueno, ¡investiga antes de actuar!<br><br>' +
-                    '<strong style="color: #c9a84c;">Lumen está muy orgulloso de ti.</strong>' +
+                    t('Demostraste que puedes identificar situaciones del día a día y tomar buenas decisiones. Recuerda siempre: observa las señales, no te apresures y, si algo parece demasiado bueno, ¡investiga antes de actuar!') + '<br><br>' +
+                    '<strong style="color: #c9a84c;">' + t('Lumen está muy orgulloso de ti.') + '</strong>' +
                 '</p>' +
-                '<button class="result-btn" id="btn-final-home">Volver al inicio</button>' +
+                '<button class="result-btn" id="btn-final-home">' + t('Volver al inicio') + '</button>' +
             '</div>';
 
         document.body.appendChild(ov);
@@ -874,7 +875,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.textBaseline = 'middle';
         ctx.shadowColor = '#4ade8060';
         ctx.shadowBlur = 10;
-        ctx.fillText('OFERTA', centerX, TILE / 2);
+        ctx.fillText(t('OFERTA'), centerX, TILE / 2);
         ctx.restore();
 
         ctx.save();
@@ -884,7 +885,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.textBaseline = 'middle';
         ctx.shadowColor = '#f0a05060';
         ctx.shadowBlur = 10;
-        ctx.fillText('ENGAÑO', centerX, (ROWS - 1) * TILE + TILE / 2);
+        ctx.fillText(t('ENGAÑO'), centerX, (ROWS - 1) * TILE + TILE / 2);
         ctx.restore();
 
         drawArrow(centerX, TILE - 4, 'up', '#4ade80');
@@ -1192,10 +1193,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const iconColor = correct ? '#4ade80' : '#f0a050';
         const borderColor = correct ? 'rgba(74,222,128,0.35)' : 'rgba(240,160,80,0.35)';
 
-        const answerLabel = active.answer === 'engano' ? 'Engaño' : 'Oferta';
+        const answerLabel = active.answer === 'engano' ? t('Engaño') : t('Oferta');
         const resultData = correct ? active.resultCorrect : active.resultIncorrect;
-        const title = resultData.title;
-        const explanation = resultData.explanation;
+        const title = t(resultData.title);
+        const explanation = t(resultData.explanation);
 
         // Estrellas: solo en niveles regulares completos (no sub-niveles intermedios)
         const isSubLevel = !!levelData.subLevels;
@@ -1212,13 +1213,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // Texto del botón
         let btnText;
         if (!correct) {
-            btnText = 'Volver al laberinto';
+            btnText = t('Volver al laberinto');
         } else if (isSubLevel && !isLastSub) {
-            btnText = 'Siguiente reto ▶';
+            btnText = t('Siguiente reto ▶');
         } else if (isSubLevel && isLastSub) {
-            btnText = 'Ver resultado final';
+            btnText = t('Ver resultado final');
         } else {
-            btnText = 'Continuar';
+            btnText = t('Continuar');
         }
 
         const ov = document.createElement('div');
@@ -1231,7 +1232,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     '<div class="result-title-area">' +
                         '<h2 class="result-title" style="color: ' + iconColor + ';">' + title + '</h2>' +
                         '<span class="result-badge" style="background: ' + iconColor + '15; color: ' + iconColor + '; border-color: ' + iconColor + '30;">' +
-                            'La respuesta era: ' + answerLabel +
+                            t('La respuesta era:') + ' ' + answerLabel +
                         '</span>' +
                     '</div>' +
                 '</div>' +

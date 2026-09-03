@@ -10,13 +10,16 @@ use Illuminate\Support\Str;
 
 class ForumController extends Controller
 {
+    // Máximo de fotos por usuario
+    const MAX_PHOTOS_PER_USER = 10;
+
     /**
      * Página principal del foro (galería + cámara).
      * Cualquier visitante puede ver la galería.
      */
     public function index()
     {
-        $photos = ForumPhoto::orderBy('created_at', 'desc')->get();
+        $photos = ForumPhoto::orderBy('created_at', 'desc')->paginate(20);
 
         $lumenImages = collect(glob(public_path('img/lumen/*.png')))
             ->map(fn($path) => basename($path))
@@ -41,14 +44,23 @@ class ForumController extends Controller
             return response()->json(['message' => 'Unauthenticated'], 401);
         }
 
-        // Decodificar la imagen base64
+        // Verificar límite de fotos por usuario
+        $photoCount = ForumPhoto::where('user_id', $user->id)->count();
+        if ($photoCount >= self::MAX_PHOTOS_PER_USER) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Has alcanzado el limite de ' . self::MAX_PHOTOS_PER_USER . ' fotos. Elimina alguna para subir más.',
+            ], 422);
+        }
+
+        // Decodificar la imagen base64 (soporta JPEG y PNG)
         $imageData = $request->input('image');
-        $imageData = str_replace('data:image/png;base64,', '', $imageData);
+        $imageData = preg_replace('/^data:image\/\w+;base64,/', '', $imageData);
         $imageData = str_replace(' ', '+', $imageData);
         $imageBytes = base64_decode($imageData);
 
         // Generar nombre único
-        $filename = 'lumen_' . Str::random(16) . '.png';
+        $filename = 'lumen_' . Str::random(16) . '.jpg';
         $path = 'forum/' . $filename;
 
         // Guardar en storage/app/public/forum

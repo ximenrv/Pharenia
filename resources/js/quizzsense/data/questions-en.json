@@ -1,0 +1,1402 @@
+[
+  {
+    "id": "q001",
+    "category": "sobrecarga_sensorial",
+    "situation": "You're in the school cafeteria and there's so much noise (plates, conversations, music) that you feel like your head is going to explode. What's the best thing to do?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Put up with it silently until the discomfort goes away on its own.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Put on your headphones or step out for a moment to a quiet place, letting someone you trust know.",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "Yell 'Quiet everyone!' so they lower the noise.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Throw your tray on the floor so people notice you're struggling.",
+        "correct": false
+      }
+    ],
+    "explanation": "Taking care of your ears and your calm comes first: using headphones or stepping away to a quiet place is a healthy way to self-regulate, and telling someone you trust lets them know where you are. Staying silent only builds up discomfort, and yelling or throwing things can scare others and make things worse."
+  },
+  {
+    "id": "q002",
+    "category": "sobrecarga_sensorial",
+    "situation": "At a birthday party the flashing lights and loud music start making you dizzy. What's the best reaction?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Stay next to the speakers to 'get used to' the noise.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Tell the host you need a while in a quiet room or to step outside for some fresh air.",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "Turn off the party music without asking.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Go home without saying goodbye or telling anyone.",
+        "correct": false
+      }
+    ],
+    "explanation": "Asking for a quiet space or going outside for fresh air lets you recover without missing the whole plan, and the host will understand your need if you tell them. Forcing yourself to stay by the speakers increases the discomfort, turning off the music without permission bothers others, and leaving without saying goodbye can worry people who care about you."
+  },
+  {
+    "id": "q003",
+    "category": "sobrecarga_sensorial",
+    "situation": "Your new T-shirt has a label that scratches your neck all day and won't let you concentrate in class. What's the most appropriate thing to do?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Cut the label or change your T-shirt when you get home, and tell your family what clothes feel comfortable to you.",
+        "correct": true
+      },
+      {
+        "id": "b",
+        "text": "Scratch your neck hard to make it stop bothering you.",
+        "correct": false
+      },
+      {
+        "id": "c",
+        "text": "Take off your T-shirt in the middle of class.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Put up with it without saying anything because 'it's just a label'.",
+        "correct": false
+      }
+    ],
+    "explanation": "Clothing sensory discomfort is real and important: removing the label or choosing comfortable clothes is a simple solution, and telling your family helps them buy clothes that feel good on you. Scratching yourself can hurt you, taking off your clothes in class exposes you unnecessarily, and staying silent wears you out for no reason."
+  },
+  {
+    "id": "q004",
+    "category": "sobrecarga_sensorial",
+    "situation": "At the shopping mall there are lots of people, strong smells, and lights everywhere. You feel overwhelmed. What's the best thing to do?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Find a quieter corner or sit down for a few minutes, breathe slowly, and decide whether to continue or go home.",
+        "correct": true
+      },
+      {
+        "id": "b",
+        "text": "Run through the crowd to get out as fast as possible.",
+        "correct": false
+      },
+      {
+        "id": "c",
+        "text": "Close your eyes and cover your ears in the middle of the aisle until someone helps you.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Force yourself to keep shopping as if nothing is happening.",
+        "correct": false
+      }
+    ],
+    "explanation": "Stopping in a calmer place and breathing slowly gives your body the rest it needs, and deciding calmly gives you back control. Running through the crowd could cause an accident, staying frozen in the middle of the aisle exposes you more, and forcing yourself to continue only multiplies the overload."
+  },
+  {
+    "id": "q005",
+    "category": "sobrecarga_sensorial",
+    "situation": "In PE class the teacher's whistle hurts your ears every time it sounds. What's the best option?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Cover your ears and yell every time the whistle blows.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Talk privately with the teacher and explain that the whistle hurts, then look for an alternative together, like a hand signal.",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "Stop going to PE without explaining why.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Hide the teacher's whistle before class.",
+        "correct": false
+      }
+    ],
+    "explanation": "Explaining your sensory need privately lets the teacher understand and adapt their signal, so you can keep participating in class. Yelling or hiding the whistle creates conflict, and missing class without explaining means no one knows how to help you."
+  },
+  {
+    "id": "q006",
+    "category": "lenguaje_figurado",
+    "situation": "You arrive late to class and a classmate says, 'Wow, you're so punctual today.' Everyone laughs a little. What's the most likely meaning?",
+    "options": [
+      {
+        "id": "a",
+        "text": "That they really admire your punctuality.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "That they're being sarcastic: they're actually pointing out that you're late by saying the opposite.",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "That they want to be your best friend.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "That they don't know what time it is.",
+        "correct": false
+      }
+    ],
+    "explanation": "Sarcasm means saying the opposite of what you think, and tone and laughter are the clues. Most likely your classmate was pointing out your lateness ironically. It wasn't a real compliment or an invitation to friendship; recognizing sarcasm helps you interpret these situations better."
+  },
+  {
+    "id": "q007",
+    "category": "lenguaje_figurado",
+    "situation": "Your teacher says, 'I'm swamped with work this week.' What does that most likely mean?",
+    "options": [
+      {
+        "id": "a",
+        "text": "That she is physically on top of a pile of papers.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "That she wants you to bring her more homework.",
+        "correct": false
+      },
+      {
+        "id": "c",
+        "text": "That she has a ton of work and may be busy or tired.",
+        "correct": true
+      },
+      {
+        "id": "d",
+        "text": "That she's going to change careers.",
+        "correct": false
+      }
+    ],
+    "explanation": "To be 'swamped with something' is a figurative expression meaning to have a lot of it—in this case, work. It isn't literal (no one is standing on papers) nor a request for more homework. Understanding it helps you know it's probably a good moment to be brief if you need to talk to her."
+  },
+  {
+    "id": "q008",
+    "category": "lenguaje_figurado",
+    "situation": "A friend tries the cafeteria food, makes a face, and says, 'Mmm... delicious.' What's most likely?",
+    "options": [
+      {
+        "id": "a",
+        "text": "That he really loves the food.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "That he's being ironic: the face shows he doesn't like it at all.",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "That he wants a second helping.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "That he hasn't tried the food yet.",
+        "correct": false
+      }
+    ],
+    "explanation": "When words don't match the face or tone, it's usually irony. The disgusted face reveals that 'delicious' means the exact opposite. Paying attention to facial expressions along with words is a great tool for understanding figurative language."
+  },
+  {
+    "id": "q009",
+    "category": "lenguaje_figurado",
+    "situation": "Your sibling says, 'You're driving me crazy with that topic.' What do they probably mean?",
+    "options": [
+      {
+        "id": "a",
+        "text": "That they're literally going crazy and need a doctor.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "That they're super excited about the topic.",
+        "correct": false
+      },
+      {
+        "id": "c",
+        "text": "That they're somewhat saturated or tired of talking about it and could use a change of subject.",
+        "correct": true
+      },
+      {
+        "id": "d",
+        "text": "That they want you to tell them more details.",
+        "correct": false
+      }
+    ],
+    "explanation": "'You're driving me crazy' is a figurative way to say something is overwhelming or tiring. It's a gentle signal that they might need a break from the topic. It's not literal or medical, and it doesn't mean enthusiasm. Noticing these phrases helps you adjust the conversation."
+  },
+  {
+    "id": "q010",
+    "category": "lenguaje_figurado",
+    "situation": "A classmate says, 'That exam was a gift.' What does it almost certainly mean?",
+    "options": [
+      {
+        "id": "a",
+        "text": "That the exam came wrapped in gift paper.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "That the exam was very easy, as if it had been given to her.",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "That the exam was impossible to do.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "That someone paid her to take the exam.",
+        "correct": false
+      }
+    ],
+    "explanation": "Saying something 'was a gift' is a metaphor for saying it turned out very easy or pleasant. It has nothing to do with real gifts or payments. Recognizing these comparisons helps you understand the general tone of what others are saying."
+  },
+  {
+    "id": "q011",
+    "category": "intereses_especiales",
+    "situation": "You love talking about astronomy, but you notice your friend keeps looking at the clock, yawning, and only answering 'uh-huh.' What's the best thing to do?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Keep talking faster to tell them everything before they leave.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Pause and ask if they want to keep talking about this or would prefer another topic or time.",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "Get mad at them for not being interested in what you like.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Never talk to them about any topic again.",
+        "correct": false
+      }
+    ],
+    "explanation": "Signals like looking at the clock or answering 'uh-huh' usually mean the other person is tired of the topic. Asking kindly shows you care about them and keeps the friendship strong. Speeding up the chat or getting mad pushes people away, and never talking to them again is too extreme a solution."
+  },
+  {
+    "id": "q012",
+    "category": "intereses_especiales",
+    "situation": "In a group project you've been talking for ten minutes straight about your favorite video game. The others are quiet. What's the best thing to do?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Pause and ask them what they think or what they like.",
+        "correct": true
+      },
+      {
+        "id": "b",
+        "text": "Interpret their silence as wanting you to keep talking.",
+        "correct": false
+      },
+      {
+        "id": "c",
+        "text": "Raise your voice to make sure they can hear you.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Leave the group angry because no one is talking.",
+        "correct": false
+      }
+    ],
+    "explanation": "A good conversation is like a ball game: it goes back and forth. Inviting others to share their opinions takes turns and lets everyone participate. Silence doesn't always mean interest, and yelling or storming off makes group work harder."
+  },
+  {
+    "id": "q013",
+    "category": "intereses_especiales",
+    "situation": "You want to tell your classmate all about your mineral collection, but she just told you her grandmother is sick. What's the most appropriate thing to do?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Tell her about your collection anyway to cheer her up.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Listen to her first, ask how her grandmother is, and save your topic for another time.",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "Tell her her topic is boring and switch to yours.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Walk away without saying anything because you don't know what to do.",
+        "correct": false
+      }
+    ],
+    "explanation": "When someone shares something that worries them, the first thing is to listen and show interest in their situation. Your collection is important to you and will have its moment, but right then she needs support. Ignoring her topic or belittling it can hurt her, and walking away leaves her alone."
+  },
+  {
+    "id": "q014",
+    "category": "intereses_especiales",
+    "situation": "You find out a new kid also collects cards like you. You're really excited. What's the best way to approach them?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Recite from memory all 300 cards you have without stopping.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Introduce yourself, mention that you like cards, and ask a question about theirs so you take turns talking.",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "Take the cards out of their hands to look at them.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Watch them from afar for weeks without ever talking.",
+        "correct": false
+      }
+    ],
+    "explanation": "Sharing a common interest is a great friendship opportunity, and the key is taking turns: you share a little, ask, and listen. Reciting everything at once overwhelms them, touching their things without permission invades their space, and never talking to them makes you miss the chance."
+  },
+  {
+    "id": "q015",
+    "category": "intereses_especiales",
+    "situation": "Your friend says, 'You've already told me about the Titanic's engine three times.' What's the best response?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Tell it a fourth time in case it wasn't clear.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "'You're right, sorry. It's just that I'm really into it. Do you want to talk about something else, or is there a specific part you're interested in?'",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "'Well, I can't stand you,' and walk away.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Promise you'll never talk about your favorite topics again.",
+        "correct": false
+      }
+    ],
+    "explanation": "Acknowledging the comment with humor and kindness ('I'm really into it, sorry') fixes the moment without drama, and offering to change the topic or focus on what interests them balances the conversation. Your favorite topics are valuable: you don't have to give them up, just pace them. Repeating it or getting mad makes the moment worse."
+  },
+  {
+    "id": "q016",
+    "category": "instrucciones_ambiguas",
+    "situation": "The teacher says, 'Finish the work when you can.' You don't know if it's for today or next month. What's the best thing to do?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Assume it's in a month and not worry.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Raise your hand and ask: 'What's the exact due date for this?'",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "Turn it in empty in case it was for today.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Wait for a classmate to ask, even though maybe no one will.",
+        "correct": false
+      }
+    ],
+    "explanation": "Asking for a specific date turns a vague instruction into a clear one, and asking is a very valuable skill, not a nuisance: you often help the whole class. Guessing dates or handing in a blank assignment can backfire, and waiting for someone else to ask leaves you without an answer if no one does."
+  },
+  {
+    "id": "q017",
+    "category": "instrucciones_ambiguas",
+    "situation": "Your mom says, 'Tidy up your room a bit.' You don't know what 'a bit' means. What's most useful?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Move just one pencil, because 'a bit' is very little.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Ask: 'What exactly would you like me to tidy? The bed, the clothes, the desk?'",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "Throw everything on the floor into the closet all at once.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Do nothing because the instruction isn't clear.",
+        "correct": false
+      }
+    ],
+    "explanation": "Breaking 'a bit' into concrete tasks (bed, clothes, desk) gives you a clear, achievable list, and your mom will see you're taking it seriously. Doing almost nothing or hiding the mess doesn't solve the problem, and doing nothing because of a lack of clarity only postpones the conflict."
+  },
+  {
+    "id": "q018",
+    "category": "instrucciones_ambiguas",
+    "situation": "On your first day of work experience they tell you, 'Take care of the reception for a while.' No one explained what to do there. What's best?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Sit down and look at your phone until someone says something.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Improvise by answering the first thing that comes to mind when someone arrives.",
+        "correct": false
+      },
+      {
+        "id": "c",
+        "text": "Ask a supervisor: 'What specific tasks does reception involve? Is there anything I should know before starting?'",
+        "correct": true
+      },
+      {
+        "id": "d",
+        "text": "Go home because no one explained anything.",
+        "correct": false
+      }
+    ],
+    "explanation": "In a new place, asking for concrete tasks before starting is professional and safe: no one expects you to guess the job. Improvising can cause mistakes with the public, looking at your phone gives a bad impression, and leaving without explanation closes an opportunity to learn."
+  },
+  {
+    "id": "q019",
+    "category": "instrucciones_ambiguas",
+    "situation": "The coach yells, 'Get in position!' and the whole team runs to different spots. You don't know where to stand. What do you do?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Quickly ask the coach or a teammate, 'Where do I go?'",
+        "correct": true
+      },
+      {
+        "id": "b",
+        "text": "Stay still in the middle of the field without moving.",
+        "correct": false
+      },
+      {
+        "id": "c",
+        "text": "Copy another player even though you don't know if it's your position.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Sit on the bench angry.",
+        "correct": false
+      }
+    ],
+    "explanation": "Asking your specific position takes two seconds and avoids confusion on the team; coaches like it when you ask about what you don't know. Standing still or copying randomly disorganizes the play, and sitting down angry takes you out of the game unnecessarily."
+  },
+  {
+    "id": "q020",
+    "category": "instrucciones_ambiguas",
+    "situation": "A classmate asks you, 'Pass me that from there,' vaguely pointing at a table full of objects. What's most practical?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Give them whichever object is closest, no matter what.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Ask: 'Which one exactly? The blue notebook?' while pointing at the objects.",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "Ignore them because they didn't explain well.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Throw all the objects on the table at them so they can choose.",
+        "correct": false
+      }
+    ],
+    "explanation": "Asking them to be specific ('the blue notebook?') while pointing at the objects resolves the ambiguity in seconds, and it's something everyone does, not just you. Guessing can lead to mistakes, ignoring them is rude, and throwing things is chaotic and could break something."
+  },
+  {
+    "id": "q021",
+    "category": "fatiga_social",
+    "situation": "You've been around people at school all day and your 'social battery' is at zero. Some friends invite you to grab a snack. What's the healthiest thing?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Go even though you're exhausted, because saying no is rude.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Say kindly: 'Thanks, I need to rest for a while today. Can we meet tomorrow?'",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "Don't reply to the message and disappear without explanation.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Go and spend the whole snack time angry and silent.",
+        "correct": false
+      }
+    ],
+    "explanation": "Taking care of your social energy is legitimate and necessary. Saying it kindly and suggesting another day shows you value your friends while also taking care of yourself. Going exhausted wears you out more and shows in your mood, and disappearing without answering can make them feel rejected."
+  },
+  {
+    "id": "q022",
+    "category": "fatiga_social",
+    "situation": "At recess you need to be alone for a while to recharge, but a classmate keeps talking to you nonstop. What can you say?",
+    "options": [
+      {
+        "id": "a",
+        "text": "'Leave me alone already, you're annoying.'",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Nothing; put up with it until the bell rings.",
+        "correct": false
+      },
+      {
+        "id": "c",
+        "text": "'I like you, but right now I need a quiet moment for myself. Let's talk later, okay?'",
+        "correct": true
+      },
+      {
+        "id": "d",
+        "text": "Hide in the bathroom without telling them.",
+        "correct": false
+      }
+    ],
+    "explanation": "Asking for space with care ('I like you, but I need a moment') protects your energy without hurting your classmate, who will understand it's not personal. Responding rudely damages the relationship, putting up with it in silence exhausts you, and hiding without explaining can make them think they did something wrong."
+  },
+  {
+    "id": "q023",
+    "category": "fatiga_social",
+    "situation": "After a week of exams and lots of group activities, you feel like even talking is hard. What's the best thing to do on the weekend?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Plan some alone or calm time to recharge, and let your family know you need that rest.",
+        "correct": true
+      },
+      {
+        "id": "b",
+        "text": "Fill the weekend with more plans with people to 'not think.'",
+        "correct": false
+      },
+      {
+        "id": "c",
+        "text": "Punish yourself for not having energy like everyone else.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Answer everyone at home rudely.",
+        "correct": false
+      }
+    ],
+    "explanation": "Rest after social effort is like charging your phone: necessary and normal. Planning calm time and communicating it at home helps everyone respect it. Filling the weekend with more plans exhausts you further, punishing yourself is unfair, and answering rudely hurts the people around you without them understanding why."
+  },
+  {
+    "id": "q024",
+    "category": "fatiga_social",
+    "situation": "On an all-day field trip, by mid-afternoon you feel you can't take any more people and noise. What's the best option?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Move away from the group without telling anyone to be alone.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Tell the teacher or monitor: 'I need a few minutes of rest in a quiet place, may I?'",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "Start a fight so you'll be sent back to the bus.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Force yourself to keep going at maximum until you get home and explode there.",
+        "correct": false
+      }
+    ],
+    "explanation": "Asking the adult in charge for a break gives you the breathing room you need without risks: they know where you are and can help you. Moving away without telling anyone scares them and can be dangerous, starting a fight has consequences, and holding on until you explode makes the day end much worse."
+  },
+  {
+    "id": "q025",
+    "category": "fatiga_social",
+    "situation": "Your family is organizing a big get-together at home and you know it's going to tire you out a lot. What's the smartest thing?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Lock yourself in your room all day without greeting anyone.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Talk to your family beforehand and agree on a plan: say hello, spend some time, and be able to retreat to your space when you need it.",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "Pretend you're sick so you don't have to take part.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Force yourself to participate in everything and end up having a meltdown in front of everyone.",
+        "correct": false
+      }
+    ],
+    "explanation": "Planning ahead gives you the best of both worlds: you take part in what's important and have permission to rest when you need it. Locking yourself in without warning worries your family, pretending to be sick creates uncomfortable lies, and forcing yourself until a meltdown is exactly what the plan prevents."
+  },
+  {
+    "id": "q026",
+    "category": "cambios_rutina",
+    "situation": "You arrive at school and they announce that your math class has changed classroom and time without warning. You feel anxious. What's the best thing to do?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Take a deep breath, ask for the new classroom and time, and write it down so it's clear.",
+        "correct": true
+      },
+      {
+        "id": "b",
+        "text": "Go home because the day isn't what you expected.",
+        "correct": false
+      },
+      {
+        "id": "c",
+        "text": "Cry and yell in the hallway until everything goes back to the way it was.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Go to your usual classroom and refuse to move.",
+        "correct": false
+      }
+    ],
+    "explanation": "Unexpected changes are annoying, and it's okay to feel that way. Breathing and making the new information concrete (where, when) brings order back to the day: uncertainty is what causes the most anxiety. Going home or staying in the old classroom doesn't change the schedule, and distress without information only grows."
+  },
+  {
+    "id": "q027",
+    "category": "cambios_rutina",
+    "situation": "Your family had planned a museum visit on Saturday, but it rains a lot that day and they decide to change the plan. You feel disappointed. What's the best reaction?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Be angry all weekend because the plan changed.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Express your disappointment calmly and suggest or ask about an alternative plan, leaving the museum for another day.",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "Go to the museum alone in the rain without telling anyone.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Decide you'll never make plans with your family again.",
+        "correct": false
+      }
+    ],
+    "explanation": "Saying 'I'm sad, I was really looking forward to it' is honest and healthy, and suggesting an alternative keeps the plan moving. The museum will still be there another day. Being angry all weekend makes you bitter, going alone in the rain is dangerous, and giving up on plans forever robs you of future good moments."
+  },
+  {
+    "id": "q028",
+    "category": "cambios_rutina",
+    "situation": "Your usual teacher is sick and a substitute comes who runs class in a totally different way. You find it hard to adapt. What's most useful?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Refuse to participate until your teacher comes back.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Remind yourself it's temporary, focus on the concrete instructions given, and ask for clarification if you need it.",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "Tell the substitute your teacher does it much better.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Walk out of class without permission.",
+        "correct": false
+      }
+    ],
+    "explanation": "Thinking 'this is temporary' really helps tolerate change, and focusing on concrete instructions gives you solid points to hold onto. Refusing to participate makes you miss content, comparing out loud is rude to the substitute, and leaving without permission causes problems."
+  },
+  {
+    "id": "q029",
+    "category": "cambios_rutina",
+    "situation": "The bus you take every day changes its route and no longer stops at your usual stop. What's the best thing to do?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Get on anyway and hope the driver makes an exception for you.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Find out about the new route, locate your new stop in advance, and if possible practice the journey beforehand with an adult.",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "Stop going to school until the old route returns.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Blame the driver for the change every morning.",
+        "correct": false
+      }
+    ],
+    "explanation": "Turning the unknown into known is the best medicine for change anxiety: finding out, locating the stop, and practicing the route gives you security. The driver doesn't decide the routes, so exceptions or blame won't work, and skipping school harms you."
+  },
+  {
+    "id": "q030",
+    "category": "cambios_rutina",
+    "situation": "You planned to do homework at 5 as always, but your mom asks for urgent help right at that time. You find it hard to change plans. What's most balanced?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Help your mom first if it's urgent, then get back to homework adjusting your schedule that evening.",
+        "correct": true
+      },
+      {
+        "id": "b",
+        "text": "Refuse flatly because 5 is your time and nothing can change it.",
+        "correct": false
+      },
+      {
+        "id": "c",
+        "text": "Help her, but angry and in a bad mood all afternoon.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Don't do your homework that day because the schedule is already broken.",
+        "correct": false
+      }
+    ],
+    "explanation": "Flexibility is a muscle you train: helping with something urgent and then adjusting your schedule keeps both things under control. Refusing all change creates constant conflict, helping angrily poisons the mood, and abandoning homework because the plan changed hurts you twice."
+  },
+  {
+    "id": "q031",
+    "category": "conflictos_pares",
+    "situation": "A group of classmates laughs at the way you talk when you get nervous. What's the best way to act?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Laugh back at them with worse insults.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Tell them firmly and calmly: 'I don't like you making fun of me,' and tell a trusted adult if it continues.",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "Put up with it silently so they won't get worse.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Stop talking in public forever.",
+        "correct": false
+      }
+    ],
+    "explanation": "Setting a calm, firm limit shows you respect yourself, and telling an adult if it continues is asking for support, not being a 'snitch': repeated teasing is bullying and you shouldn't carry it alone. Returning insults escalates the conflict, staying silent feeds it, and stopping talking punishes you for something others are doing."
+  },
+  {
+    "id": "q032",
+    "category": "conflictos_pares",
+    "situation": "In your class group they're organizing an outing and you notice you haven't been included in the chat. You feel left out. What's the best thing to do?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Post publicly that everyone is fake.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Casually ask someone in the group: 'Hey, is the outing for the class group? I'd like to join.' Maybe it was an oversight.",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "Say nothing and keep the hurt to yourself forever.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Organize a secret outing to exclude them in return.",
+        "correct": false
+      }
+    ],
+    "explanation": "Many exclusions are oversights, not malice: asking casually clears things up and usually ends with 'sorry, I'll add you now!' If it was on purpose, it also gives you information to talk to an adult. Accusing in public or getting revenge poisons the group, and staying silent only hurts you."
+  },
+  {
+    "id": "q033",
+    "category": "conflictos_pares",
+    "situation": "Your friend asks to copy your homework again. You already sent it to him three times this week. What's the most appropriate thing?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Send it again so he won't get mad at you.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Tell him you can't keep sending it, but offer to explain how to do it.",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "Snitch on him by shouting it in front of the whole class.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Stop talking to him without explaining why.",
+        "correct": false
+      }
+    ],
+    "explanation": "Saying no with an alternative ('I won't send it, but I'll explain') sets a limit and helps at the same time: you do him more good by teaching than by copying. Sending it always harms him and uses you, humiliating him in public cruelly breaks the friendship, and stopping talking to him without reason confuses him."
+  },
+  {
+    "id": "q034",
+    "category": "conflictos_pares",
+    "situation": "A classmate says something that bothers you, but from their tone you can't tell if they're joking or serious. What's the smartest thing?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Answer with an insult just in case they were serious.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Laugh along even though it hurt you.",
+        "correct": false
+      },
+      {
+        "id": "c",
+        "text": "Ask them directly and calmly: 'Are you joking or serious? Because it bothered me a little.'",
+        "correct": true
+      },
+      {
+        "id": "d",
+        "text": "Keep it to yourself and throw it back in their face months later.",
+        "correct": false
+      }
+    ],
+    "explanation": "Asking clears up the intention and expresses how you felt: two problems solved at once. Most people adjust their behavior when you tell them calmly. Insulting 'just in case' creates a conflict out of nowhere, laughing along hurts you, and holding a grudge poisons the friendship."
+  },
+  {
+    "id": "q035",
+    "category": "conflictos_pares",
+    "situation": "Two of your friends have argued with each other and each one asks you to take their side. What's the most sensible thing?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Choose the one you like best and attack the other.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Tell each of them the other's secrets so they understand.",
+        "correct": false
+      },
+      {
+        "id": "c",
+        "text": "Explain that you won't take sides, but you can listen to both and maybe a mediator (an adult) can help.",
+        "correct": true
+      },
+      {
+        "id": "d",
+        "text": "Cut off both of them to avoid complications.",
+        "correct": false
+      }
+    ],
+    "explanation": "Not taking sides but offering to listen protects both friendships and your peace; suggesting a mediator is mature and practical. Attacking one makes you part of the conflict, revealing secrets destroys trust in you, and cutting off both leaves you without friends over a fight that wasn't yours."
+  },
+  {
+    "id": "q036",
+    "category": "autodefensa_comunicacion",
+    "situation": "You didn't understand the teacher's explanation and feel embarrassed to ask in front of everyone. What's the best thing to do?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Stay with the doubt and copy a classmate's notes without understanding them.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Raise your hand and ask, or approach the teacher after class if that's more comfortable.",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "Pretend you understood everything perfectly.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Give up and decide that subject isn't for you.",
+        "correct": false
+      }
+    ],
+    "explanation": "Asking is a strength, not a weakness: a teacher's job is to help you understand. If speaking in front of everyone is hard, approaching after class works just as well. Copying without understanding or pretending only piles up gaps that grow, and giving up closes doors over a doubt that had a solution."
+  },
+  {
+    "id": "q037",
+    "category": "autodefensa_comunicacion",
+    "situation": "In the cafeteria, someone sits in the chair you always use and it throws you off. What's the best way to handle it?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Push the chair so they get up.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Say calmly: 'Hey, I usually sit here, would you mind moving to the one next to me?' and, if it can't be, accept another chair that day.",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "Leave without eating.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Stand next to the chair staring at them until they leave.",
+        "correct": false
+      }
+    ],
+    "explanation": "Asking calmly for what you need is fair and usually works; and if that day it can't be, accepting a different chair is a flexibility victory that makes you stronger. Pushing or intimidating with a stare creates conflict, and leaving without eating only harms you."
+  },
+  {
+    "id": "q038",
+    "category": "autodefensa_comunicacion",
+    "situation": "You have a doctor's appointment and would like them to explain things more clearly and slowly, but you feel awkward asking. What's most recommended?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Nod to everything even though you don't understand anything.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Say at the start of the appointment: 'Sometimes I need things explained step by step and slowly, is that okay?'",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "Not go to any more doctor's appointments to avoid discomfort.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Wait for the doctor to guess you didn't understand.",
+        "correct": false
+      }
+    ],
+    "explanation": "Communicating how you need to receive information at the start of the appointment is your right as a patient, and healthcare professionals appreciate it: that way they can help you better. Nodding without understanding can affect your health, missing appointments is even worse, and no one can guess what you don't say."
+  },
+  {
+    "id": "q039",
+    "category": "autodefensa_comunicacion",
+    "situation": "A relative hugs you tightly every time they see you and that physical contact makes you very uncomfortable. What's the best thing to do?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Put up with the hug every time even though it makes you feel bad.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Explain with care: 'I love you a lot, but tight hugs make me uncomfortable. Can we greet each other with a wave or a gesture instead?'",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "Push them roughly next time.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Avoid that relative forever without explaining anything.",
+        "correct": false
+      }
+    ],
+    "explanation": "Your bodily comfort matters, and you can ask for a different greeting with care ('I love you, but...') without hurting anyone. Most relatives understand and adapt. Putting up with it harms you, pushing scares and hurts them, and avoiding them forever breaks a relationship that could be fixed with one sentence."
+  },
+  {
+    "id": "q040",
+    "category": "autodefensa_comunicacion",
+    "situation": "You're invited to sleep over at a friend's house, but you know sleeping away is very hard for you. What's the healthiest answer?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Accept and spend a horrible night without saying anything.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Make up a complicated excuse you'll then have to keep up.",
+        "correct": false
+      },
+      {
+        "id": "c",
+        "text": "Say the truth calmly: 'Thanks for inviting me. Sleeping away is hard for me, so I'll pass on sleeping over, but I'd love to come over until the evening.'",
+        "correct": true
+      },
+      {
+        "id": "d",
+        "text": "Accept and then not show up without warning.",
+        "correct": false
+      }
+    ],
+    "explanation": "Telling the truth with an alternative ('I'd love to come over until the evening') is honest, cares for your well-being, and keeps plans with your friend. Accepting by force makes you have a bad time, made-up excuses get complicated and are found out, and not showing up without warning disappoints and creates distrust."
+  },
+  {
+    "id": "q041",
+    "category": "senales_peligro",
+    "situation": "A stranger online asks you for photos of yourself and says it will be 'our secret.' What should you do?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Send photos only if they seem nice in their profile.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Don't send anything, block that account, and tell a trusted adult right away.",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "Ask for their photos first to see who they are.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Keep chatting out of curiosity, without sending anything.",
+        "correct": false
+      }
+    ],
+    "explanation": "An adult or stranger asking a teenager for photos and secrets is a clear warning sign: don't send anything, block, and tell a trusted adult to protect yourself and maybe others. No 'secret' like that is good, and continuing the conversation or asking for photos in return keeps you exposed to risk."
+  },
+  {
+    "id": "q042",
+    "category": "senales_peligro",
+    "situation": "A group of older people invite you to go with them to an empty lot to 'have a good time.' Something inside tells you it's not a good idea. What's best?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Go with them so you don't look scared.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Trust that feeling, say no, go to a place with more people, and tell someone you trust.",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "Go but just for a little while to see what happens.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Ask them if what they're planning is dangerous, and trust their answer.",
+        "correct": false
+      }
+    ],
+    "explanation": "That 'something doesn't feel right' feeling is your inner alarm and deserves to be listened to: saying no, getting to safety among people, and telling a trusted adult is the right thing. Looking scared is a thousand times better than being in danger, and someone planning something bad won't admit it if you ask."
+  },
+  {
+    "id": "q043",
+    "category": "senales_peligro",
+    "situation": "On the street, an adult you don't know tells you your mom sent them to pick you up. You know nothing about this. What should you do?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Go with them, because adults don't lie about those things.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Don't go with them, find a known adult (teacher, school staff), and call your mom to check.",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "Go with them only if they know your name.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Run home alone through the streets.",
+        "correct": false
+      }
+    ],
+    "explanation": "For an unexpected pickup, the rule is always to check with your family or known school staff before going with anyone; knowing your name doesn't prove anything (they might see it on your backpack or social media). Running alone through the street also exposes you: the safe thing is to find a known adult and verify."
+  },
+  {
+    "id": "q044",
+    "category": "senales_peligro",
+    "situation": "An 'online friend' you've never met in person suggests meeting alone in a park at night. What's the safest thing?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Go, because you've been talking for weeks and they seem like a good person.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Tell a trusted adult; if you ever meet, do it during the day, in a public and busy place, and with someone with you.",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "Go without telling anyone so you don't worry them.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Send another friend of yours in your place to spy.",
+        "correct": false
+      }
+    ],
+    "explanation": "On the internet people aren't always who they say they are, even after weeks of chatting. Telling an adult and setting safety conditions (daytime, public place, accompanied) is responsible. Going alone at night or in secret leaves you totally vulnerable, and sending someone else puts another person at risk."
+  },
+  {
+    "id": "q045",
+    "category": "senales_peligro",
+    "situation": "At a friend's house, their older sibling pulls out some pills and encourages you to try them 'to see how it feels.' What's the best thing to do?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Try just one so you don't look bad in front of everyone.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Refuse, leave if they insist, and tell a trusted adult.",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "Record it with your phone and post it on social media.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Stay watching to see what happens to the others.",
+        "correct": false
+      }
+    ],
+    "explanation": "Taking pills not prescribed by a doctor is genuinely dangerous: refusing and leaving protects you, and telling an adult can keep someone from ending up in the hospital. Staying as a spectator keeps you in a risky and pressured situation, and recording it for social media turns danger into entertainment."
+  },
+  {
+    "id": "q046",
+    "category": "espacios_publicos",
+    "situation": "You're on a crowded bus and notice someone is pressing against you too much and making you uncomfortable. What's the best thing to do?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Do nothing; on a crowded bus that's normal and you have to put up with it.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Move to another area of the bus, get closer to the driver or other passengers, and if it continues, speak up or tell an adult.",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "Get off at the next stop even if it's not yours, without telling anyone.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Give them a hard shove without saying anything.",
+        "correct": false
+      }
+    ],
+    "explanation": "Your discomfort is valid information: moving, staying near people, and telling the driver or an adult protects you. You don't have to put up with what makes you feel bad. Getting off at an unknown stop puts you in another risk, and shoving without warning can escalate the situation against you."
+  },
+  {
+    "id": "q047",
+    "category": "espacios_publicos",
+    "situation": "At a shop you can't find what you're looking for and don't know if you should bother the shop assistant by asking. What's most appropriate?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Wander around for 40 minutes until you find it on your own.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Approach and say: 'Hello, could you tell me where the... are?' That's what they're there for.",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "Open several boxes until you find what you're looking for.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Leave without buying anything even though you needed it.",
+        "correct": false
+      }
+    ],
+    "explanation": "Helping customers is literally the shop assistant's job: asking isn't a bother, it's normal, and a brief, polite sentence is enough. Wandering endlessly exhausts you, opening boxes is frowned upon and can cause trouble, and leaving without what you needed wastes your time for nothing."
+  },
+  {
+    "id": "q048",
+    "category": "espacios_publicos",
+    "situation": "You get lost in a large train station and don't know where your platform is. You start getting nervous. What's best?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Walk fast in any direction hoping it appears.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Stop for a moment, breathe, look at the information boards, and if you're still unsure, ask at the information desk or a staff member.",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "Get on the first train that arrives, no matter which.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Sit on the floor crying until someone comes to help you.",
+        "correct": false
+      }
+    ],
+    "explanation": "Stopping and breathing first prevents your nerves from deciding for you; then the boards and station staff exist exactly for that. Walking blindly or getting on the wrong train takes you farther from your destination, and waiting for someone to guess you need help prolongs the distress unnecessarily."
+  },
+  {
+    "id": "q049",
+    "category": "espacios_publicos",
+    "situation": "At the doctor's office they call you over the speaker but you can't tell if they said your name. What's most practical?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Rush into the first open consultation room you see.",
+        "correct": false
+      },
+      {
+        "id": "b",
+        "text": "Go to reception and say: 'I think someone was called but I didn't catch the name. I'm... and I have an appointment at...'",
+        "correct": true
+      },
+      {
+        "id": "c",
+        "text": "Stay seated waiting for them to call again, even if it's someone else.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Go home in case they already called you.",
+        "correct": false
+      }
+    ],
+    "explanation": "Reception is there to solve exactly these doubts: giving your name and appointment time clears everything up in a moment and you don't lose your turn. Bursting into random rooms interrupts other patients, waiting passively might make you miss your appointment, and going home delays your health over a misunderstanding."
+  },
+  {
+    "id": "q050",
+    "category": "espacios_publicos",
+    "situation": "At the cinema, the movie has scenes with very loud sounds that startle you and make you nervous. What's the best thing to do?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Bring earplugs or noise-reducing headphones in case you need them, and give yourself permission to step out to the hallway if a scene overwhelms you.",
+        "correct": true
+      },
+      {
+        "id": "b",
+        "text": "Cover your ears tightly and close your eyes through the whole movie.",
+        "correct": false
+      },
+      {
+        "id": "c",
+        "text": "Yell 'Turn it down!' at the projection booth.",
+        "correct": false
+      },
+      {
+        "id": "d",
+        "text": "Never go to the cinema again.",
+        "correct": false
+      }
+    ],
+    "explanation": "Planning ahead (bring attenuators) and giving yourself permission to step out lets you enjoy the cinema in your own way, without drama. Many cinemas even have adapted screenings. Covering your ears the whole movie keeps you from enjoying it, yelling at the theater doesn't change the volume, and giving up on the cinema forever means giving in when there are alternatives."
+  }
+]

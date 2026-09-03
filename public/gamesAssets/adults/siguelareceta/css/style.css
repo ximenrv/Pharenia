@@ -120,31 +120,49 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0px;
+    gap: 14px;
 }
 
 .btn-siguiente {
-    width: 220px;
-    height: 94px;
-    border: none;
-    background-color: transparent;
-    background-image: url('../assets/ui/next.png');
-    background-size: 418px auto;
-    background-position: -99px -69px;
-    background-repeat: no-repeat;
-    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 11px 24px;
+    border: 2.5px solid #d4af37;
+    border-radius: 16px;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0) 45%),
+        linear-gradient(160deg, #e8c65a, #d4af37);
+    color: #101c33;
+    font-family: var(--fuente-principal);
+    font-weight: 800;
+    font-size: 0.95rem;
     cursor: pointer;
-    transform: rotate(-14deg);
-    transition: transform 0.2s ease, filter 0.2s ease;
+    box-shadow:
+        0 8px 18px rgba(0, 0, 0, 0.28),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+    transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
 }
 
 .btn-siguiente:hover {
-    transform: rotate(-14deg) scale(1.08);
-    filter: brightness(1.08);
+    transform: translateY(-3px) scale(1.06);
+    filter: brightness(1.06);
+    box-shadow:
+        0 12px 24px rgba(0, 0, 0, 0.32),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+}
+
+/* Flecha de los botones de navegación */
+.btn-flecha {
+    font-size: 0.9em;
+    line-height: 1;
 }
 
 .btn-regresar {
-    padding: 16px 32px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 24px;
     background:
         linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0) 45%),
         linear-gradient(160deg, #1f3358, #101c33);
@@ -153,7 +171,7 @@ body {
     color: #fff;
     font-family: var(--fuente-principal);
     font-weight: 700;
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     cursor: pointer;
     box-shadow:
         0 8px 18px rgba(0, 0, 0, 0.3),

@@ -7,6 +7,7 @@
  * - Feedback cálido y nunca punitivo.
  * - Movimiento suave y predecible; se respeta prefers-reduced-motion (CSS).
  */
+import i18n from './i18n.json';
 import {
     SESSION_SIZE,
     getTodaySession,
@@ -23,6 +24,33 @@ import { initSky } from './sky.js';
 import { saveQuizzsenseResult } from '../utils/teen-records.js';
 
 const $ = (id) => document.getElementById(id);
+
+const locale = window.APP_LOCALE || 'es';
+
+function t(key) {
+    const parts = key.split('.');
+    let value = i18n[locale];
+    for (const part of parts) {
+        if (value && typeof value === 'object' && part in value) {
+            value = value[part];
+        } else {
+            value = undefined;
+            break;
+        }
+    }
+    if (value === undefined) {
+        value = i18n['es'];
+        for (const part of parts) {
+            if (value && typeof value === 'object' && part in value) {
+                value = value[part];
+            } else {
+                value = key;
+                break;
+            }
+        }
+    }
+    return value ?? key;
+}
 
 const els = {
     streakBadge: $('streak-badge'),
@@ -90,10 +118,8 @@ function renderHome() {
     const state = loadState();
 
     if (state.streak > 0) {
-        els.streakBadge.textContent =
-            state.streak === 1
-                ? '1 día seguido practicando'
-                : `${state.streak} días seguidos practicando`;
+        const template = state.streak === 1 ? t('streak_one') : t('streak_many');
+        els.streakBadge.textContent = template.replace('{count}', String(state.streak));
         els.streakBadge.classList.remove('hidden');
     } else {
         els.streakBadge.classList.add('hidden');
@@ -104,8 +130,9 @@ function renderHome() {
     els.homeCompleted.classList.toggle('hidden', !completedToday);
 
     if (completedToday && state.lastResult) {
-        els.homeResultSummary.textContent =
-            `Acertaste ${state.lastResult.correct} de ${state.lastResult.total} situaciones.`;
+        els.homeResultSummary.textContent = t('completed_summary')
+            .replace('{correct}', String(state.lastResult.correct))
+            .replace('{total}', String(state.lastResult.total));
     }
 
     // El botón de repetir solo aparece si hay un set del día disponible.
@@ -161,9 +188,10 @@ function renderQuestion() {
     const index = session.currentIndex;
 
     // Progreso
-    els.progressLabel.textContent = practiceMode
-        ? `Práctica · Pregunta ${index + 1} de ${SESSION_SIZE}`
-        : `Pregunta ${index + 1} de ${SESSION_SIZE}`;
+    const progressTemplate = practiceMode ? t('practice_counter') : t('question_counter');
+    els.progressLabel.textContent = progressTemplate
+        .replace('{current}', String(index + 1))
+        .replace('{total}', String(SESSION_SIZE));
     els.progressBar.setAttribute('aria-valuenow', String(index + 1));
     els.progressFill.style.width = `${(index / SESSION_SIZE) * 100}%`;
     renderStars(index);
@@ -194,6 +222,7 @@ function renderQuestion() {
         els.optionsGrid.appendChild(btn);
     });
 
+    els.practiceBanner.textContent = t('practice_banner');
     els.feedbackWrap.classList.add('hidden');
     // Volver suavemente arriba: tras el feedback el usuario queda abajo.
     slowScrollTo(document.getElementById('screen-quiz'));
@@ -272,12 +301,9 @@ function onAnswer(btn, option) {
     // Feedback cálido
     els.feedbackPanel.classList.toggle('is-good', wasCorrect);
     els.feedbackPanel.classList.toggle('is-kind', !wasCorrect);
-    els.feedbackTitle.textContent = wasCorrect
-        ? 'Muy bien pensado.'
-        : 'Esa es una opción posible, pero hay una mejor manera. Veamos por qué.';
+    els.feedbackTitle.textContent = wasCorrect ? t('feedback_correct') : t('feedback_wrong');
     els.feedbackText.textContent = question.explanation;
-    els.btnNext.textContent =
-        session.currentIndex >= SESSION_SIZE ? 'Ver mis resultados' : 'Siguiente →';
+    els.btnNext.textContent = session.currentIndex >= SESSION_SIZE ? t('view_results') : t('next');
 
     els.feedbackWrap.classList.remove('hidden');
     els.progressFill.style.width = `${(session.currentIndex / SESSION_SIZE) * 100}%`;
@@ -338,22 +364,19 @@ function finishQuiz() {
 
 /** Pinta la pantalla de resultados, tanto del quiz oficial como de la práctica. */
 function renderResults({ practice, correct, total, message }) {
-    els.resultsTitle.textContent = practice ? 'Fin de la práctica' : 'Resultados de hoy';
+    els.resultsTitle.textContent = practice ? t('results_practice_title') : t('results_title');
     els.resultsScore.textContent = String(correct);
     els.resultsTotal.textContent = String(total);
 
     if (practice) {
-        els.resultsMessage.textContent =
-            'Repasar las mismas situaciones refuerza lo aprendido. Esta ronda fue solo práctica.';
+        els.resultsMessage.textContent = t('results_practice_message');
     } else {
         els.resultsMessage.textContent = message;
     }
 
     // Aviso claro de que el modo práctica no deja registro
     els.resultsPracticeNote.classList.toggle('hidden', !practice);
-    els.btnReplay.textContent = practice
-        ? 'Repetir otra vez (sigue sin guardarse)'
-        : 'Jugar de nuevo (modo práctica)';
+    els.btnReplay.textContent = practice ? t('repeat_again') : t('replay_practice');
 
     const categories = summarizeCategories(session.answers);
     const strong = categories.filter((c) => c.correct === c.total);
@@ -364,12 +387,12 @@ function renderResults({ practice, correct, total, message }) {
 
     if (strong.length > 0) {
         els.resultsStrong.appendChild(
-            buildCategoryBlock('Te fue muy bien en…', strong)
+            buildCategoryBlock(t('strong_title'), strong)
         );
     }
     if (practiceList.length > 0) {
         els.resultsPractice.appendChild(
-            buildCategoryBlock('Conviene seguir practicando', practiceList)
+            buildCategoryBlock(t('practice_title'), practiceList)
         );
     }
 }

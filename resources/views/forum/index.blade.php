@@ -4,8 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Foro - Pharenia</title>
-    @vite(['resources/css/navbar.css', 'resources/css/footer.css', 'resources/css/dark-theme.css'])
+    <title>Lumenia - Pharenia</title>
+    @vite(['resources/css/navbar.css', 'resources/css/settings-menu.css', 'resources/js/settings-menu.js', 'resources/css/footer.css', 'resources/css/dark-theme.css'])
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.dataset.theme = savedTheme;
+        })();
+    </script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -117,6 +123,161 @@
 
         .forum-panel { display: none; }
         .forum-panel--active { display: block; }
+
+        /* ============================================
+           LUMENIA HERO — Lumen grande + galería (modo claro por defecto)
+           ============================================ */
+        .lg-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            align-items: start;
+            margin-bottom: 2rem;
+        }
+
+        .lg-scene {
+            position: sticky;
+            top: 90px;
+            overflow: hidden;
+            border-radius: 26px;
+            min-height: 560px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.6rem;
+            perspective: 1000px;
+            background:
+                radial-gradient(120% 80% at 50% 18%, rgba(124,77,255,.16), transparent 60%),
+                linear-gradient(180deg, #ffffff, #e9f1f3);
+            border: 1px solid rgba(255,255,255,.8);
+            box-shadow: 0 20px 50px rgba(44,82,90,.14);
+        }
+
+        .lg-orbs { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+        .lg-orb {
+            position: absolute; bottom: -20px; width: 10px; height: 10px; border-radius: 50%;
+            background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.7), rgba(191,161,43,.35));
+            opacity: .5; animation: lgRise 9s linear infinite; animation-delay: var(--d);
+        }
+        @keyframes lgRise {
+            0% { transform: translateY(40px) scale(.8); opacity: 0; }
+            20% { opacity: .6; }
+            100% { transform: translateY(-460px) scale(1.1); opacity: 0; }
+        }
+
+        .lg-stage { position: relative; z-index: 2; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; }
+        .lg-zone {
+            position: relative; width: 100%; height: 400px;
+            display: flex; align-items: flex-end; justify-content: center;
+            transform-style: preserve-3d; transition: transform .2s ease-out;
+        }
+        .lg-glow {
+            position: absolute; bottom: 44px; width: 320px; height: 320px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(191,161,43,.30), rgba(124,77,255,.16) 55%, transparent 72%);
+            filter: blur(9px); animation: lgAura 2.8s ease-in-out infinite alternate;
+        }
+        @keyframes lgAura { 0% { transform: scale(.9); opacity: .75; } 100% { transform: scale(1.08); opacity: 1; } }
+
+        .lg-lumen {
+            position: relative; width: 360px; height: 400px;
+            animation: lgFloat 3.2s ease-in-out infinite; transform-origin: center bottom;
+        }
+        .lg-lumen .lg-pose {
+            position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 350px; height: auto;
+            filter: drop-shadow(0 14px 22px rgba(44,82,90,.3)) drop-shadow(0 0 22px rgba(191,161,43,.35));
+            transition: opacity .6s ease;
+        }
+        .lg-lumen .lg-pose--b { opacity: 0; }
+        .lg-lumen.lg-gesture .lg-pose--a { opacity: 0; }
+        .lg-lumen.lg-gesture .lg-pose--b { opacity: 1; }
+        .lg-lumen.lg-blink { animation: lgFloat 3.2s ease-in-out infinite, lgBlink .16s ease; }
+        @keyframes lgFloat { 0%,100% { transform: translateY(0) rotate(-1.4deg); } 50% { transform: translateY(-16px) rotate(1.4deg); } }
+        @keyframes lgBlink { 0%,100% { transform: scaleY(1); } 50% { transform: scaleY(.9); } }
+
+        .lg-bubble {
+            position: absolute; top: 10px; left: 50%; margin-left: -105px; width: 210px; text-align: center;
+            background: #fff; color: #2c525a; font-weight: 600; font-size: .95rem;
+            padding: .6rem 1rem; border-radius: 18px; box-shadow: 0 8px 24px rgba(0,0,0,.18);
+            transform: scale(0); transform-origin: bottom center;
+            transition: transform .35s cubic-bezier(.2,1.3,.5,1); z-index: 6;
+        }
+        .lg-bubble.show { transform: scale(1); }
+        .lg-bubble::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 9px solid transparent; border-top-color: #fff; }
+
+        .lg-cta { margin-top: 1.3rem; z-index: 5; }
+        .lg-cta button {
+            display: inline-flex; align-items: center; gap: .6rem;
+            padding: .95rem 2.3rem; border: none; border-radius: 50px;
+            background: linear-gradient(135deg, #2c525a, #3c6f79); color: #fff;
+            font-size: 1.05rem; font-weight: 700; cursor: pointer; font-family: inherit;
+            box-shadow: 0 10px 30px rgba(124,77,255,.32);
+            animation: lgCtaPulse 2.2s ease-in-out infinite; transition: transform .2s;
+        }
+        .lg-cta button:hover { transform: translateY(-3px) scale(1.03); }
+        .lg-cta button svg { width: 20px; height: 20px; }
+        @keyframes lgCtaPulse { 0%,100% { box-shadow: 0 10px 26px rgba(124,77,255,.28); } 50% { box-shadow: 0 12px 40px rgba(124,77,255,.45); } }
+
+        /* Columna de galería */
+        .lg-gallery { display: flex; flex-direction: column; }
+        .lg-gallery__title { font-size: 1.2rem; margin-bottom: 1rem; color: #2c525a; }
+        .lg-gallery .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+
+        /* Fotos estilo polaroid */
+        .lg-gallery .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1.6rem 1.1rem; }
+        .lg-gallery .photo-card {
+            position: relative;
+            background: linear-gradient(#ffffff, #fbfaf5);
+            border-radius: 4px;
+            overflow: visible;
+            padding: .55rem .55rem .35rem;
+            border: 1px solid rgba(44,82,90,.06);
+            box-shadow: 0 12px 26px rgba(44,82,90,.18), 0 2px 5px rgba(44,82,90,.1);
+            transition: transform .28s ease, box-shadow .28s ease;
+        }
+        .lg-gallery .photo-card:nth-child(odd) { transform: rotate(-1.8deg); }
+        .lg-gallery .photo-card:nth-child(even) { transform: rotate(1.6deg); }
+        .lg-gallery .photo-card:nth-child(3n) { transform: rotate(.7deg); }
+        .lg-gallery .photo-card:hover { transform: rotate(0) translateY(-6px) scale(1.03); box-shadow: 0 22px 42px rgba(44,82,90,.26); z-index: 4; }
+        /* cinta decorativa arriba */
+        .lg-gallery .photo-card::before {
+            content: ''; position: absolute; top: -8px; left: 50%;
+            transform: translateX(-50%) rotate(-3deg);
+            width: 56px; height: 18px;
+            background: rgba(191,161,43,.32); border: 1px dashed rgba(191,161,43,.55);
+            border-radius: 2px; z-index: 3;
+        }
+        .lg-gallery .photo-card__img-wrap { border-radius: 2px; box-shadow: inset 0 0 0 1px rgba(0,0,0,.06); }
+        .lg-gallery .photo-card__img { border-radius: 2px; aspect-ratio: 1 / 1; }
+        .lg-gallery .photo-card__body { padding: .6rem .35rem .2rem; }
+        /* fila usuario: el nombre largo NO empuja el botón fuera ni rompe la polaroid */
+        .lg-gallery .photo-card__user { flex-wrap: nowrap; }
+        .lg-gallery .photo-card__name { flex: 1 1 auto; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .lg-gallery .photo-card__delete { flex-shrink: 0; margin-left: .25rem; }
+        /* caption estilo escrito a mano */
+        .lg-gallery .photo-card__caption {
+            font-family: "Segoe Script", "Bradley Hand", "Comic Sans MS", cursive;
+            font-size: .98rem; color: #4a6b73; text-align: center;
+            margin: .15rem 0 .35rem; overflow-wrap: anywhere;
+        }
+        .lg-gallery .photo-card__date { display: block; text-align: center; }
+
+        /* Barra superior del panel de cámara: botón volver alineado con la cámara */
+        .lg-cam-topbar { max-width: 750px; margin: 0 auto 1.2rem; display: flex; }
+        .lg-back {
+            display: inline-flex; align-items: center; gap: .4rem;
+            background: rgba(255,255,255,.85); border: 1px solid rgba(44,82,90,.15);
+            color: #2c525a; border-radius: 50px; padding: .55rem 1.2rem; font-weight: 600;
+            font-family: inherit; cursor: pointer; box-shadow: 0 4px 14px rgba(44,82,90,.08);
+            transition: all .2s ease;
+        }
+        .lg-back:hover { background: #fff; transform: translateX(-3px); box-shadow: 0 6px 18px rgba(44,82,90,.14); }
+
+        @media (max-width: 900px) {
+            .lg-hero { grid-template-columns: 1fr; }
+            .lg-scene { position: relative; top: 0; }
+        }
 
         /* ============================================
            GALERÍA
@@ -443,6 +604,30 @@
         .cam-lumen-opt:hover { border-color: #7c4dff; transform: scale(1.1); }
         .cam-lumen-opt--active { border-color: #2c525a; box-shadow: 0 0 0 2px rgba(44, 82, 90, 0.12); background: #fff; }
         .cam-lumen-opt img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+        /* Navegación de Lumen (6 visibles + flechas) */
+        .cam-lumen-nav { display: flex; align-items: center; gap: 0.35rem; flex-shrink: 0; }
+        .cam-lumen-viewport { overflow: hidden; }
+        .cam-lumen-track { display: flex; gap: 0.4rem; }
+        .cam-lumen-arrow {
+            width: 30px;
+            height: 44px;
+            border-radius: 10px;
+            flex-shrink: 0;
+            border: 2px solid rgba(44, 82, 90, 0.12);
+            background: rgba(255, 255, 255, 0.7);
+            color: #2c525a;
+            font-size: 1.25rem;
+            font-weight: 700;
+            line-height: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        .cam-lumen-arrow:hover:not(:disabled) { border-color: #7c4dff; color: #7c4dff; background: #fff; }
+        .cam-lumen-arrow:disabled { opacity: 0.3; cursor: default; }
 
         /* Botones de herramienta (stickers / filtros) */
         .cam-tool-btn {
@@ -1023,6 +1208,59 @@
         .cam-toast--active { transform: translateX(-50%) translateY(0); }
 
         /* ============================================
+           PAGINACIÓN
+           ============================================ */
+        .gallery-pagination {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .gallery-pagination nav { width: 100%; }
+
+        .gallery-pagination .flex { display: none; }
+
+        .gallery-pagination svg { width: 16px; height: 16px; }
+
+        .gallery-pagination span[aria-current="page"] > span,
+        .gallery-pagination a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 36px;
+            height: 36px;
+            padding: 0 0.5rem;
+            margin: 0 3px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: inherit;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .gallery-pagination a {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            color: #2c525a;
+            border: 1px solid rgba(44, 82, 90, 0.12);
+        }
+
+        .gallery-pagination a:hover {
+            background: #2c525a;
+            color: #fff;
+            border-color: #2c525a;
+        }
+
+        .gallery-pagination span[aria-current="page"] > span {
+            background: #2c525a;
+            color: #fff;
+            border: 1px solid #2c525a;
+        }
+
+        .gallery-pagination p { font-size: 0.85rem; color: #5a7a82; text-align: center; }
+
+        /* ============================================
            RESPONSIVE
            ============================================ */
         @media (max-width: 768px) {
@@ -1045,7 +1283,7 @@
         }
     </style>
 </head>
-<body>
+<body class="lumenia-body">
 
     @include('components.loader')
     @include('components.navbar')
@@ -1054,29 +1292,55 @@
         <header class="forum-header">
             <img class="forum-header__deco forum-header__deco--left" src="{{ asset('img/coral.png') }}" alt="">
             <img class="forum-header__deco forum-header__deco--right" src="{{ asset('img/coral-2.png') }}" alt="">
-            <span class="forum-header__subtitle">Comunidad Pharenia</span>
-            <h1 class="forum-header__title">Foro</h1>
-            <p class="forum-header__intro">Comparte tus mejores momentos con Lumen. Toma una foto, agrega stickers y comparte con la comunidad.</p>
+            <span class="forum-header__subtitle">{{ __('Comunidad Pharenia') }}</span>
+            <h1 class="forum-header__title">Lumenia</h1>
+            <p class="forum-header__intro">{{ __('Comparte tus mejores momentos con Lumen. Toma una foto, agrega stickers y comparte con la comunidad.') }}</p>
         </header>
 
-        <div class="forum-tabs">
-            <button class="forum-tab forum-tab--active" data-tab="gallery">Galeria</button>
-            <button class="forum-tab" data-tab="camera">Camara</button>
-        </div>
-
-        {{-- ============ PANEL: GALERÍA ============ --}}
+        {{-- ============ PANEL: GALERÍA (Hero Lumen + fotos) ============ --}}
         <div class="forum-panel forum-panel--active" id="panel-gallery">
-            @if($photos->isEmpty())
-                <div class="gallery-empty">
-                    <div class="gallery-empty__icon">
-                        <img src="{{ asset('img/lumen.png') }}" alt="Lumen" style="width: 80px; opacity: 0.4;">
-                    </div>
-                    <p style="font-size: 1.1rem; color: #5a7a82;">Aun no hay fotos en el foro.</p>
-                    <p style="font-size: 0.9rem; color: #a0aec0;">Se el primero en compartir un momento con Lumen.</p>
+          <div class="lg-hero">
+
+            {{-- Lumen protagonista --}}
+            <div class="lg-scene">
+                <div class="lg-orbs" aria-hidden="true">
+                    <span class="lg-orb" style="left:16%;--d:0s"></span>
+                    <span class="lg-orb" style="left:30%;--d:2.5s"></span>
+                    <span class="lg-orb" style="left:9%;--d:5s"></span>
+                    <span class="lg-orb" style="left:42%;--d:7s"></span>
                 </div>
-            @else
-                <div class="gallery-grid">
-                    @foreach($photos as $photo)
+                <div class="lg-stage">
+                    <div class="lg-zone" id="lgZone">
+                        <div class="lg-glow"></div>
+                        <div class="lg-lumen" id="lgLumen">
+                            <div class="lg-bubble" id="lgBubble">{{ __('Hola, soy Lumen') }}</div>
+                            <img class="lg-pose lg-pose--a" src="{{ asset('img/lumen/lumen-01.png') }}" alt="Lumen saludando">
+                            <img class="lg-pose lg-pose--b" src="{{ asset('img/lumen/lumen-11.png') }}" alt="Lumen">
+                        </div>
+                    </div>
+                    <div class="lg-cta">
+                        <button type="button" onclick="goToPanel('camera')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                            {{ __('Entrar a la cámara') }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Galería de fotos --}}
+            <div class="lg-gallery">
+                <h3 class="lg-gallery__title">{{ __('Fotos de la comunidad') }}</h3>
+                @if($photos->isEmpty())
+                    <div class="gallery-empty">
+                        <div class="gallery-empty__icon">
+                            <img src="{{ asset('img/lumen.png') }}" alt="Lumen" style="width: 80px; opacity: 0.4;">
+                        </div>
+                        <p style="font-size: 1.1rem; color: #5a7a82;">{{ __('Aun no hay fotos en Lumenia.') }}</p>
+                        <p style="font-size: 0.9rem; color: #a0aec0;">{{ __('Se el primero en compartir un momento en Lumenia.') }}</p>
+                    </div>
+                @else
+                    <div class="gallery-grid">
+                        @foreach($photos as $photo)
                         <div class="photo-card" id="photo-{{ $photo->id }}">
                             <div class="photo-card__img-wrap" data-lb-src="{{ asset('storage/' . $photo->image_path) }}" data-lb-user="{{ $photo->username }}" data-lb-caption="{{ $photo->caption ?? '' }}" onclick="openLightbox(this.dataset.lbSrc, this.dataset.lbUser, this.dataset.lbCaption)">
                                 <img class="photo-card__img" src="{{ asset('storage/' . $photo->image_path) }}" alt="Foto de {{ $photo->username }}" loading="lazy">
@@ -1088,7 +1352,7 @@
 
                                     @auth
                                         @if(auth()->user()->id === $photo->user_id || auth()->user()->role === 'admin')
-                                            <button class="photo-card__delete" onclick="deletePhoto({{ $photo->id }})" title="Eliminar">Eliminar</button>
+                                            <button class="photo-card__delete" onclick="deletePhoto({{ $photo->id }})" title="{{ __('Eliminar') }}">{{ __('Eliminar') }}</button>
                                         @endif
                                     @endauth
                                 </div>
@@ -1100,16 +1364,27 @@
                         </div>
                     @endforeach
                 </div>
+
+                @if($photos->hasPages())
+                    <div class="gallery-pagination">
+                        {{ $photos->links() }}
+                    </div>
+                @endif
             @endif
+            </div>{{-- .lg-gallery --}}
+          </div>{{-- .lg-hero --}}
         </div>
 
         {{-- ============ PANEL: CÁMARA ============ --}}
         <div class="forum-panel" id="panel-camera">
+            <div class="lg-cam-topbar">
+                <button type="button" class="lg-back" onclick="goToPanel('gallery')">‹ {{ __('Volver a la galería') }}</button>
+            </div>
             @guest
                 <div class="camera-section">
                     <div class="camera-login-msg">
-                        <p>Inicia sesion para tomar fotos con Lumen y compartirlas en el foro.</p>
-                        <a href="{{ route('login') }}">Iniciar sesion</a>
+                        <p>{{ __('Inicia sesion para tomar fotos con Lumen y compartirlas en Lumenia.') }}</p>
+                        <a href="{{ route('login') }}">{{ __('Iniciar sesion') }}</a>
                     </div>
                 </div>
             @else
@@ -1119,7 +1394,7 @@
                     <div class="cam-power-area">
                         <button class="cam-power-btn" id="camPowerBtn" onclick="toggleCamera()">
                             <span class="cam-power-dot"></span>
-                            <span id="camPowerLabel">Encender camara</span>
+                            <span id="camPowerLabel">{{ __('Encender camara') }}</span>
                         </button>
                     </div>
 
@@ -1128,91 +1403,99 @@
 
                         {{-- Barra de herramientas: Lumens + iconos stickers/filtros --}}
                         <div class="cam-toolbar">
-                            <button class="cam-tool-btn" id="btnFilters" onclick="toggleDropdown('filters')" title="Filtros">
+                            <button class="cam-tool-btn" id="btnFilters" onclick="toggleDropdown('filters')" title="{{ __('Filtros') }}">
                                 📸
-                                <span class="cam-tool-btn__label">Filtros</span>
+                                <span class="cam-tool-btn__label">{{ __('Filtros') }}</span>
                             </button>
 
                             <div class="cam-toolbar__divider"></div>
 
                             @if($lumenImages->isNotEmpty())
-                                @foreach($lumenImages as $index => $img)
-                                    <div class="cam-lumen-opt {{ $index === 0 ? 'cam-lumen-opt--active' : '' }}"
-                                         onclick="changeLumen('{{ $img }}', this)">
-                                        <img src="{{ asset('img/lumen/' . $img) }}" alt="Lumen {{ $index + 1 }}">
+                                <div class="cam-lumen-nav">
+                                    <button type="button" class="cam-lumen-arrow" id="lumenPrev" onclick="pageLumen(-1)" title="Anteriores" aria-label="Lumen anteriores">‹</button>
+                                    <div class="cam-lumen-viewport">
+                                        <div class="cam-lumen-track" id="lumenTrack">
+                                            @foreach($lumenImages as $index => $img)
+                                                <div class="cam-lumen-opt {{ $index === 0 ? 'cam-lumen-opt--active' : '' }}"
+                                                     onclick="changeLumen('{{ $img }}', this)">
+                                                    <img src="{{ asset('img/lumen/' . $img) }}" alt="Lumen {{ $index + 1 }}">
+                                                </div>
+                                            @endforeach
+                                        </div>
                                     </div>
-                                @endforeach
+                                    <button type="button" class="cam-lumen-arrow" id="lumenNext" onclick="pageLumen(1)" title="Siguientes" aria-label="Lumen siguientes">›</button>
+                                </div>
                             @endif
 
                             <div class="cam-toolbar__divider"></div>
 
-                            <button class="cam-tool-btn" id="btnStickers" onclick="toggleDropdown('stickers')" title="Stickers">
+                            <button class="cam-tool-btn" id="btnStickers" onclick="toggleDropdown('stickers')" title="{{ __('Stickers') }}">
                                 ⭐
-                                <span class="cam-tool-btn__label">Stickers</span>
+                                <span class="cam-tool-btn__label">{{ __('Stickers') }}</span>
                                 <span class="cam-sticker-badge" id="stickerBadge">0</span>
                             </button>
                         </div>
 
                         {{-- Dropdown de filtros --}}
                         <div class="cam-dropdown" id="dropFilters">
-                            <div class="cam-dropdown__title">Filtros</div>
+                            <div class="cam-dropdown__title">{{ __('Filtros') }}</div>
                             <div class="cam-dropdown__grid">
                                 <div class="cam-filter-item cam-filter-item--active" onclick="applyFilter('none', this)">
                                     <div class="cam-filter-circle"><div class="cam-filter-circle__inner"></div></div>
-                                    <span class="cam-filter-label">Normal</span>
+                                    <span class="cam-filter-label">{{ __('Normal') }}</span>
                                 </div>
                                 <div class="cam-filter-item" onclick="applyFilter('warm', this)">
                                     <div class="cam-filter-circle"><div class="cam-filter-circle__inner" style="filter: saturate(1.4) sepia(0.3) brightness(1.1);"></div></div>
-                                    <span class="cam-filter-label">Calido</span>
+                                    <span class="cam-filter-label">{{ __('Calido') }}</span>
                                 </div>
                                 <div class="cam-filter-item" onclick="applyFilter('cool', this)">
                                     <div class="cam-filter-circle"><div class="cam-filter-circle__inner" style="filter: saturate(1.2) hue-rotate(20deg) brightness(1.05);"></div></div>
-                                    <span class="cam-filter-label">Frio</span>
+                                    <span class="cam-filter-label">{{ __('Frio') }}</span>
                                 </div>
                                 <div class="cam-filter-item" onclick="applyFilter('vintage', this)">
                                     <div class="cam-filter-circle"><div class="cam-filter-circle__inner" style="filter: sepia(0.6) contrast(1.1) brightness(0.95);"></div></div>
-                                    <span class="cam-filter-label">Vintage</span>
+                                    <span class="cam-filter-label">{{ __('Vintage') }}</span>
                                 </div>
                                 <div class="cam-filter-item" onclick="applyFilter('bw', this)">
                                     <div class="cam-filter-circle"><div class="cam-filter-circle__inner" style="filter: grayscale(1) contrast(1.1);"></div></div>
-                                    <span class="cam-filter-label">B/N</span>
+                                    <span class="cam-filter-label">{{ __('B/N') }}</span>
                                 </div>
                                 <div class="cam-filter-item" onclick="applyFilter('dreamy', this)">
                                     <div class="cam-filter-circle"><div class="cam-filter-circle__inner" style="filter: brightness(1.15) contrast(0.9) saturate(1.3);"></div></div>
-                                    <span class="cam-filter-label">Suave</span>
+                                    <span class="cam-filter-label">{{ __('Suave') }}</span>
                                 </div>
                             </div>
                         </div>
 
                         {{-- Dropdown de stickers --}}
                         <div class="cam-dropdown" id="dropStickers">
-                            <div class="cam-dropdown__title">Stickers — toca para agregar</div>
+                            <div class="cam-dropdown__title">{{ __('Stickers — toca para agregar') }}</div>
                             <div class="cam-dropdown__grid">
-                                <div class="cam-sticker-opt" onclick="addSticker('crown')" title="Corona">
+                                <div class="cam-sticker-opt" onclick="addSticker('crown')" title="{{ __('Corona') }}">
                                     <svg viewBox="0 0 120 80"><polygon points="10,70 20,25 35,50 60,10 85,50 100,25 110,70" fill="#bfa12b" stroke="#8a7a1d" stroke-width="2"/><rect x="10" y="65" width="100" height="12" rx="3" fill="#bfa12b" stroke="#8a7a1d" stroke-width="2"/></svg>
                                 </div>
-                                <div class="cam-sticker-opt" onclick="addSticker('glasses')" title="Lentes">
+                                <div class="cam-sticker-opt" onclick="addSticker('glasses')" title="{{ __('Lentes') }}">
                                     <svg viewBox="0 0 120 50"><rect x="5" y="10" width="45" height="30" rx="8" fill="#2c525a" stroke="#bfa12b" stroke-width="3"/><rect x="70" y="10" width="45" height="30" rx="8" fill="#2c525a" stroke="#bfa12b" stroke-width="3"/><path d="M50 25 L70 25" stroke="#bfa12b" stroke-width="3" fill="none"/></svg>
                                 </div>
-                                <div class="cam-sticker-opt" onclick="addSticker('heart-glasses')" title="Lentes corazon">
+                                <div class="cam-sticker-opt" onclick="addSticker('heart-glasses')" title="{{ __('Lentes corazon') }}">
                                     <svg viewBox="0 0 120 55"><path d="M5 22 C5 10,28 5,28 20 C28 5,50 10,50 22 C50 35,28 45,28 45 C28 45,5 35,5 22Z" fill="#7c4dff" opacity="0.9"/><path d="M70 22 C70 10,93 5,93 20 C93 5,115 10,115 22 C115 35,93 45,93 45 C93 45,70 35,70 22Z" fill="#7c4dff" opacity="0.9"/><path d="M50 25 L70 25" stroke="#7c4dff" stroke-width="3" fill="none"/></svg>
                                 </div>
-                                <div class="cam-sticker-opt" onclick="addSticker('party-hat')" title="Gorro">
+                                <div class="cam-sticker-opt" onclick="addSticker('party-hat')" title="{{ __('Gorro') }}">
                                     <svg viewBox="0 0 100 110"><polygon points="50,5 15,95 85,95" fill="#7c4dff" stroke="#5b38c9" stroke-width="2"/><circle cx="50" cy="5" r="8" fill="#bfa12b"/><ellipse cx="50" cy="95" rx="40" ry="8" fill="#5b38c9"/></svg>
                                 </div>
-                                <div class="cam-sticker-opt" onclick="addSticker('mustache')" title="Bigote">
+                                <div class="cam-sticker-opt" onclick="addSticker('mustache')" title="{{ __('Bigote') }}">
                                     <svg viewBox="0 0 140 60"><path d="M70 45 C55 45,40 55,20 50 C5 46,0 30,15 25 C30 20,45 35,70 30 C95 35,110 20,125 25 C140 30,135 46,120 50 C100 55,85 45,70 45Z" fill="#2c525a"/></svg>
                                 </div>
-                                <div class="cam-sticker-opt" onclick="addSticker('cowboy')" title="Sombrero vaquero">
+                                <div class="cam-sticker-opt" onclick="addSticker('cowboy')" title="{{ __('Sombrero vaquero') }}">
                                     <svg viewBox="0 0 140 90"><ellipse cx="70" cy="75" rx="68" ry="12" fill="#8B4513" stroke="#654321" stroke-width="2"/><path d="M30,75 C30,30 50,15 70,15 C90,15 110,30 110,75" fill="#A0522D" stroke="#654321" stroke-width="2"/><rect x="30" y="65" width="80" height="8" rx="2" fill="#bfa12b"/></svg>
                                 </div>
-                                <div class="cam-sticker-opt" onclick="addSticker('cat-ears')" title="Orejas de gato">
+                                <div class="cam-sticker-opt" onclick="addSticker('cat-ears')" title="{{ __('Orejas de gato') }}">
                                     <svg viewBox="0 0 140 80"><polygon points="15,75 5,10 50,55" fill="#e9d5ff" stroke="#7c4dff" stroke-width="2"/><polygon points="125,75 135,10 90,55" fill="#e9d5ff" stroke="#7c4dff" stroke-width="2"/></svg>
                                 </div>
-                                <div class="cam-sticker-opt" onclick="addSticker('halo')" title="Aureola">
+                                <div class="cam-sticker-opt" onclick="addSticker('halo')" title="{{ __('Aureola') }}">
                                     <svg viewBox="0 0 120 50"><ellipse cx="60" cy="30" rx="50" ry="15" fill="none" stroke="#bfa12b" stroke-width="5" opacity="0.9"/></svg>
                                 </div>
-                                <div class="cam-sticker-opt" onclick="addSticker('stars')" title="Estrellas">
+                                <div class="cam-sticker-opt" onclick="addSticker('stars')" title="{{ __('Estrellas') }}">
                                     <svg viewBox="0 0 100 100"><polygon points="50,5 61,35 95,35 68,55 78,90 50,70 22,90 32,55 5,35 39,35" fill="#bfa12b" opacity="0.9"/></svg>
                                 </div>
                             </div>
@@ -1242,20 +1525,20 @@
 
                         {{-- Botones --}}
                         <div class="cam-actions" id="camActions">
-                            <button class="cam-btn cam-btn--secondary" onclick="flipLumen()">↔ Voltear</button>
-                            <button class="cam-btn cam-btn--capture" onclick="capturePhoto()" title="Capturar foto"></button>
-                            <button class="cam-btn cam-btn--secondary" onclick="switchCamera()">🔄 Camara</button>
+                            <button class="cam-btn cam-btn--secondary" onclick="flipLumen()">↔ {{ __('Voltear') }}</button>
+                            <button class="cam-btn cam-btn--capture" onclick="capturePhoto()" title="{{ __('Capturar foto') }}"></button>
+                            <button class="cam-btn cam-btn--secondary" onclick="switchCamera()">🔄 {{ __('Camara') }}</button>
                         </div>
 
                         {{-- Preview --}}
                         <div class="cam-preview" id="camPreview">
                             <img class="cam-preview__img" id="previewImg" src="" alt="Vista previa">
                             <div class="cam-preview__form">
-                                <textarea id="captionInput" placeholder="Agrega una descripcion... (opcional)" maxlength="200"></textarea>
+                                <textarea id="captionInput" placeholder="{{ __('Agrega una descripcion... (opcional)') }}" maxlength="200"></textarea>
                             </div>
                             <div class="cam-preview__actions">
-                                <button class="cam-btn cam-btn--retake" onclick="retakePhoto()">Otra vez</button>
-                                <button class="cam-btn cam-btn--save" onclick="savePhoto()">Publicar en el foro</button>
+                                <button class="cam-btn cam-btn--retake" onclick="retakePhoto()">{{ __('Otra vez') }}</button>
+                                <button class="cam-btn cam-btn--save" onclick="savePhoto()">{{ __('Publicar en Lumenia') }}</button>
                             </div>
                         </div>
 
@@ -1278,20 +1561,59 @@
         </div>
     </div>
 
-    <div class="cam-toast" id="camToast">Foto publicada en el foro</div>
+    <div class="cam-toast" id="camToast">{{ __('Foto publicada en Lumenia') }}</div>
 
     <script>
         // ==========================================
-        // TABS
+        // NAVEGACIÓN ENTRE PANELES (galería <-> cámara)
         // ==========================================
-        document.querySelectorAll('.forum-tab').forEach(function(tab) {
-            tab.addEventListener('click', function() {
-                document.querySelectorAll('.forum-tab').forEach(function(t) { t.classList.remove('forum-tab--active'); });
-                document.querySelectorAll('.forum-panel').forEach(function(p) { p.classList.remove('forum-panel--active'); });
-                tab.classList.add('forum-tab--active');
-                document.getElementById('panel-' + tab.dataset.tab).classList.add('forum-panel--active');
-            });
-        });
+        function goToPanel(name) {
+            // Seguridad: al salir de la cámara, apagarla automáticamente
+            // aunque no se haya presionado "Apagar".
+            if (name !== 'camera' && typeof cameraIsOn !== 'undefined' && cameraIsOn && typeof stopCamera === 'function') {
+                stopCamera();
+            }
+            document.querySelectorAll('.forum-panel').forEach(function(p) { p.classList.remove('forum-panel--active'); });
+            var panel = document.getElementById('panel-' + name);
+            if (panel) panel.classList.add('forum-panel--active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ==========================================
+        // VIDA DEL LUMEN DEL HERO (galería)
+        // ==========================================
+        (function() {
+            var lumen = document.getElementById('lgLumen');
+            var bubble = document.getElementById('lgBubble');
+            if (!lumen) return;
+            var frases = [@json(__('Hola, soy Lumen')), @json(__('¿Te tomas una foto conmigo?')), @json(__('Ven, entra a la cámara')), @json(__('Capturemos el momento juntos'))];
+            var fi = 0;
+            function cycle() {
+                if (bubble) {
+                    bubble.textContent = frases[fi];
+                    bubble.classList.add('show');
+                    setTimeout(function() { bubble.classList.remove('show'); }, 2900);
+                }
+                fi = (fi + 1) % frases.length;
+            }
+            setTimeout(cycle, 600);
+            setInterval(cycle, 4200);
+            // parpadeo (simulado) + gestos (alterna poses)
+            setInterval(function() { lumen.classList.add('lg-blink'); setTimeout(function() { lumen.classList.remove('lg-blink'); }, 170); }, 3800);
+            setInterval(function() { lumen.classList.toggle('lg-gesture'); }, 3400);
+            // parallax pseudo-3D con el mouse
+            var zone = document.getElementById('lgZone');
+            var scene = lumen.closest('.lg-scene');
+            if (scene && zone) {
+                scene.addEventListener('mousemove', function(e) {
+                    var r = scene.getBoundingClientRect();
+                    var px = (e.clientX - r.left) / r.width - 0.5;
+                    var py = (e.clientY - r.top) / r.height - 0.5;
+                    zone.style.transform = 'rotateY(' + (px * 14) + 'deg) rotateX(' + (-py * 10) + 'deg)';
+                });
+                scene.addEventListener('mouseleave', function() { zone.style.transform = 'rotateY(0) rotateX(0)'; });
+            }
+        })();
 
         // ==========================================
         // LIGHTBOX
@@ -1317,8 +1639,8 @@
         // ELIMINAR FOTO
         // ==========================================
         function deletePhoto(id) {
-            if (!confirm('¿Eliminar esta foto?')) return;
-            fetch('/foro/' + id, {
+            if (!confirm(@json(__('¿Eliminar esta foto?')))) return;
+            fetch('/lumenia/' + id, {
                 method: 'DELETE',
                 headers: {
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
@@ -1330,7 +1652,7 @@
                     if (card) card.remove();
                 }
             }).catch(function() {
-                alert('Error al eliminar. Intenta de nuevo.');
+                alert(@json(__('Error al eliminar. Intenta de nuevo.')));
             });
         }
 
@@ -1411,7 +1733,7 @@
                 video.style.display = 'block';
                 content.classList.add('cam-content--active');
                 btn.classList.add('cam-power-btn--on');
-                label.textContent = 'Apagar camara';
+                label.textContent = @json(__('Apagar camara'));
                 cameraIsOn = true;
                 startIdlePhrases();
                 // Ajustar tamaño de Lumen ahora que la cámara es visible
@@ -1421,7 +1743,7 @@
                 camBox.innerHTML = '<div class="cam-no-camera" style="padding:3rem;text-align:center;color:#5a7a82;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.5rem;"><p>No se pudo acceder a la camara.</p><p style="font-size:0.85rem;">Asegurate de dar permiso al navegador.</p></div>';
                 content.classList.add('cam-content--active');
                 btn.classList.add('cam-power-btn--on');
-                label.textContent = 'Apagar camara';
+                label.textContent = @json(__('Apagar camara'));
                 cameraIsOn = true;
             });
         }
@@ -1439,7 +1761,7 @@
 
             content.classList.remove('cam-content--active');
             btn.classList.remove('cam-power-btn--on');
-            label.textContent = 'Encender camara';
+            label.textContent = @json(__('Encender camara'));
             cameraIsOn = false;
             stopIdlePhrases();
 
@@ -1601,51 +1923,78 @@
         }
 
         // ==========================================
+        // PAGINADO DE LUMEN — 6 visibles con flechas
+        // ==========================================
+        var LUMEN_PER_PAGE = 6;
+        var lumenPage = 0;
+        function renderLumenPage() {
+            var track = document.getElementById('lumenTrack');
+            if (!track) return;
+            var opts = track.querySelectorAll('.cam-lumen-opt');
+            var pages = Math.max(1, Math.ceil(opts.length / LUMEN_PER_PAGE));
+            if (lumenPage > pages - 1) lumenPage = pages - 1;
+            if (lumenPage < 0) lumenPage = 0;
+            opts.forEach(function(o, i) {
+                o.style.display = (Math.floor(i / LUMEN_PER_PAGE) === lumenPage) ? '' : 'none';
+            });
+            var prev = document.getElementById('lumenPrev');
+            var next = document.getElementById('lumenNext');
+            var multi = opts.length > LUMEN_PER_PAGE;
+            if (prev) { prev.style.display = multi ? '' : 'none'; prev.disabled = (lumenPage === 0); }
+            if (next) { next.style.display = multi ? '' : 'none'; next.disabled = (lumenPage >= pages - 1); }
+        }
+        function pageLumen(dir) {
+            lumenPage += dir;
+            renderLumenPage();
+        }
+        renderLumenPage();
+
+        // ==========================================
         // LUMEN HABLA — Globos de diálogo
         // ==========================================
         var LUMEN_PHRASES = {
             greeting: [
-                '¡Hola! 📸',
-                '¡Sonrie!',
-                '¿Listos?',
-                '¡Vamos!',
-                '¡Que bien te ves!'
+                @json(__('¡Hola! 📸')),
+                @json(__('¡Sonrie!')),
+                @json(__('¿Listos?')),
+                @json(__('¡Vamos!')),
+                @json(__('¡Que bien te ves!'))
             ],
             changeLumen: [
-                '¡Nuevo look!',
-                '¡Me gusta este!',
-                '¡Mira, soy yo!',
-                '¡Genial!',
-                '¡Cambio de estilo!'
+                @json(__('¡Nuevo look!')),
+                @json(__('¡Me gusta este!')),
+                @json(__('¡Mira, soy yo!')),
+                @json(__('¡Genial!')),
+                @json(__('¡Cambio de estilo!'))
             ],
             capture: [
-                '¡Perfecta! ⭐',
-                '¡Quedo genial!',
-                '¡Hermosa foto!',
-                '¡Increible!',
-                '¡Me encanta!'
+                @json(__('¡Perfecta! ⭐')),
+                @json(__('¡Quedo genial!')),
+                @json(__('¡Hermosa foto!')),
+                @json(__('¡Increible!')),
+                @json(__('¡Me encanta!'))
             ],
             sticker: [
-                '¡Que bonito!',
-                '¡Mas stickers!',
-                '¡Me queda bien!',
-                '¡Eso, eso!'
+                @json(__('¡Que bonito!')),
+                @json(__('¡Mas stickers!')),
+                @json(__('¡Me queda bien!')),
+                @json(__('¡Eso, eso!'))
             ],
             filter: [
-                '¡Ese filtro queda bien!',
-                '¡Wow, que cambio!',
-                '¡Me gusta como se ve!',
-                '¡Queda diferente!',
-                '¡Buena eleccion!'
+                @json(__('¡Ese filtro queda bien!')),
+                @json(__('¡Wow, que cambio!')),
+                @json(__('¡Me gusta como se ve!')),
+                @json(__('¡Queda diferente!')),
+                @json(__('¡Buena eleccion!'))
             ],
             idle: [
-                '¡Toma una foto!',
-                'Arrastra los stickers',
-                '¡Prueba un filtro!',
-                '¿Y si cambias de Lumen?',
-                '¡Comparte con todos!',
-                '¡Mueve los stickers!',
-                '¡Hazme mas grande! +'
+                @json(__('¡Toma una foto!')),
+                @json(__('Arrastra los stickers')),
+                @json(__('¡Prueba un filtro!')),
+                @json(__('¿Y si cambias de Lumen?')),
+                @json(__('¡Comparte con todos!')),
+                @json(__('¡Mueve los stickers!')),
+                @json(__('¡Hazme mas grande! +'))
             ]
         };
 
@@ -1847,7 +2196,7 @@
 
         function drawStks(stks, i) {
             if (i >= stks.length) {
-                capturedImageData = canvas.toDataURL('image/png');
+                capturedImageData = canvas.toDataURL('image/jpeg', 0.7);
                 // Esperar a que se vea la celebración antes de mostrar preview
                 setTimeout(showPreview, 1200);
                 return;
@@ -1892,8 +2241,8 @@
                     image: capturedImageData,
                     caption: document.getElementById('captionInput').value.trim(),
                 }),
-            }).then(function(r) { return r.json(); }).then(function(data) {
-                if (data.success) {
+            }).then(function(r) { return r.json().then(function(data) { return { ok: r.ok, data: data }; }); }).then(function(res) {
+                if (res.ok && res.data.success) {
                     stopCamera();
                     var toast = document.getElementById('camToast');
                     toast.classList.add('cam-toast--active');
@@ -1901,9 +2250,11 @@
                         toast.classList.remove('cam-toast--active');
                         window.location.href = '{{ route("forum.index") }}';
                     }, 1500);
+                } else {
+                    alert(res.data.message || @json(__('Error al guardar.')));
                 }
             }).catch(function() {
-                alert('Error al guardar. Intenta de nuevo.');
+                alert(@json(__('Error de conexion. Intenta de nuevo.')));
             });
         }
 
@@ -1928,5 +2279,7 @@
     </script>
 
     @include('components.footer')
+
+    <x-settings-menu />
 </body>
 </html>

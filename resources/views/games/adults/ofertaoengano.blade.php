@@ -7,8 +7,46 @@
     <link rel="stylesheet" href="{{ asset('gamesAssets/adults/ofertaoengano/CSS/intro.css') }}">
     <link rel="stylesheet" href="{{ asset('gamesAssets/adults/ofertaoengano/CSS/game.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Botón fijo para salir a Actividades (siempre visible, discreto) */
+        .btn-volver-actividades {
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 9999;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 9px 16px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: #e6ddf7;
+            background: rgba(30, 20, 60, 0.72);
+            border: 1.5px solid rgba(212, 175, 55, 0.55);
+            border-radius: 12px;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+            opacity: 0.72;
+            transition: opacity 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+        }
+        .btn-volver-actividades:hover {
+            opacity: 1;
+            transform: translateY(-1px);
+            border-color: #d4af37;
+        }
+        .btn-volver-actividades .bva-flecha { font-size: 0.9em; }
+        /* El botón "Regresar" interno baja para no encimarse con el de salir */
+        .btn-game-back { top: 62px !important; }
+    </style>
 </head>
 <body>
+    <a href="{{ route('activities.adultez') }}" class="btn-volver-actividades" title="{{ __('Regresar a Actividades') }}">
+        <span class="bva-flecha">◀</span> {{ __('Regresar a Actividades') }}
+    </a>
+
     {{-- ============ PANTALLA 1: INTRO ============ --}}
     <div id="screen-intro" class="screen active">
         <div class="background-layer" style="background-image: url('{{ asset('gamesAssets/adults/ofertaoengano/ASSETS/backgrounds/fondodia.png') }}')"></div>
@@ -26,13 +64,13 @@
             <div class="nav-buttons" id="nav-buttons">
                 <button class="btn-game btn-back" id="btn-back">
                     <span class="btn-icon">◀</span>
-                    Regresar
+                    {{ __('Regresar') }}
                 </button>
                 <button class="btn-game btn-next" id="btn-next">
-                    Siguiente
+                    {{ __('Siguiente') }}
                     <span class="btn-icon">▶</span>
                 </button>
-                <button class="btn-play" id="btn-play">Jugar</button>
+                <button class="btn-play" id="btn-play">{{ __('Jugar') }}</button>
             </div>
         </div>
     </div>
@@ -44,7 +82,7 @@
         {{-- Botón regresar --}}
         <button class="btn-game-back" id="btn-game-back">
             <span>◀</span>
-            Regresar
+            {{ __('Regresar') }}
         </button>
 
         {{-- FASE 1: Cartel del nivel --}}
@@ -58,7 +96,7 @@
                 <h1 class="level-title" id="level-title">Compras</h1>
             </div>
             <button class="btn-game btn-next level-next" id="btn-level-next">
-                Siguiente
+                {{ __('Siguiente') }}
                 <span class="btn-icon">▶</span>
             </button>
         </div>
@@ -94,6 +132,13 @@
     {{-- Transición --}}
     <div id="transition-overlay" class="transition-overlay"></div>
 
+    @php
+        $locale = app()->getLocale();
+        $p1 = lang_path($locale . '.json');
+        $p2 = resource_path('lang/' . $locale . '.json');
+        $jsonPath = file_exists($p1) ? $p1 : (file_exists($p2) ? $p2 : null);
+        $translations = $jsonPath ? json_decode(file_get_contents($jsonPath), true) : [];
+    @endphp
     <script>
         window.GAME_ASSETS = {
             lumen: '{{ asset('gamesAssets/adults/ofertaoengano/ASSETS/Lumen/lumen1.png') }}'
@@ -101,6 +146,7 @@
         window.GAME_MENU_URL = '{{ route('activities.adultez') }}';
         window.CSRF_TOKEN = '{{ csrf_token() }}';
         window.SAVE_RECORD_URL = '{{ route('games.adults.record.update') }}';
+        window.translations = @json($translations, JSON_FORCE_OBJECT);
     </script>
     <script src="{{ asset('gamesAssets/adults/ofertaoengano/JS/intro.js') }}"></script>
     <script src="{{ asset('gamesAssets/adults/ofertaoengano/JS/game.js') }}"></script>

@@ -9,30 +9,50 @@
  * Cada entrada referencia un <symbol> SVG definido en el Blade
  * (contorno sin relleno, stroke="currentColor").
  */
+import i18n from './i18n.json';
+
+const locale = typeof window !== 'undefined' && window.APP_LOCALE ? window.APP_LOCALE : 'es';
+
+function t(key, vars = {}) {
+    const parts = key.split('.');
+    let value = i18n[locale];
+    for (const part of parts) {
+        value = value?.[part];
+    }
+    if (typeof value !== 'string') {
+        value = i18n['es'];
+        for (const part of parts) {
+            value = value?.[part];
+        }
+    }
+    if (typeof value !== 'string') return key;
+    return value.replace(/\{(\w+)\}/g, (_, k) => (vars[k] !== undefined ? vars[k] : `{${k}}`));
+}
+
 export const PROTECT_FIGURES = [
-    { id: 'fig-nino', label: 'un niño' },
-    { id: 'fig-perro', label: 'un perro' },
-    { id: 'fig-gato', label: 'un gato' },
-    { id: 'fig-serpiente', label: 'una serpiente' },
-    { id: 'fig-arbol', label: 'un árbol' },
-    { id: 'fig-familia', label: 'una familia' },
-    { id: 'fig-amigos', label: 'dos amigos' },
+    { id: 'fig-nino', label: t('figures.nino') },
+    { id: 'fig-perro', label: t('figures.perro') },
+    { id: 'fig-gato', label: t('figures.gato') },
+    { id: 'fig-serpiente', label: t('figures.serpiente') },
+    { id: 'fig-arbol', label: t('figures.arbol') },
+    { id: 'fig-familia', label: t('figures.familia') },
+    { id: 'fig-amigos', label: t('figures.amigos') },
 ];
 
 export const THREAT_FIGURES = [
-    { id: 'fig-encapuchado', label: 'una figura encapuchada' },
-    { id: 'fig-monstruo', label: 'un monstruo' },
-    { id: 'fig-mascara', label: 'una máscara amenazante' },
-    { id: 'fig-espectro', label: 'un espectro' },
+    { id: 'fig-encapuchado', label: t('threats.encapuchado') },
+    { id: 'fig-monstruo', label: t('threats.monstruo') },
+    { id: 'fig-mascara', label: t('threats.mascara') },
+    { id: 'fig-espectro', label: t('threats.espectro') },
 ];
 
 /** Dificultades de la patrulla. */
 export const DIFFICULTIES = {
     facil: {
         key: 'facil',
-        name: 'Primer paso',
-        level: 'Fácil',
-        desc: 'Pocas figuras, movimiento lento y mucho espacio entre ellas.',
+        name: t('difficulty.facil.name'),
+        level: t('difficulty.facil.level'),
+        desc: t('difficulty.facil.desc'),
         total: 26,
         spawnEvery: 1.5,      // segundos entre apariciones
         speed: [30, 46],      // px/s de descenso
@@ -43,9 +63,9 @@ export const DIFFICULTIES = {
     },
     normal: {
         key: 'normal',
-        name: 'Mantente alerta',
-        level: 'Normal',
-        desc: 'Más figuras verdes y rojas, más velocidad y trayectorias variadas.',
+        name: t('difficulty.normal.name'),
+        level: t('difficulty.normal.level'),
+        desc: t('difficulty.normal.desc'),
         total: 40,
         spawnEvery: 1.1,
         speed: [46, 66],
@@ -56,9 +76,9 @@ export const DIFFICULTIES = {
     },
     dificil: {
         key: 'dificil',
-        name: 'No pierdas el control',
-        level: 'Difícil',
-        desc: 'Figuras rápidas, cambios de dirección y mezclas constantes.',
+        name: t('difficulty.dificil.name'),
+        level: t('difficulty.dificil.level'),
+        desc: t('difficulty.dificil.desc'),
         total: 56,
         spawnEvery: 0.8,
         speed: [60, 88],
@@ -78,25 +98,25 @@ export const START_INTEGRITY = 10;
  * - double: dos disparos en paralelo
  */
 export const POWERUPS = {
-    rapid: { id: 'fig-pow-rapida', label: 'Disparo veloz' },
-    double: { id: 'fig-pow-doble', label: 'Doble disparo' },
+    rapid: { id: 'fig-pow-rapida', label: t('powerups.rapid') },
+    double: { id: 'fig-pow-doble', label: t('powerups.double') },
 };
 export const POWERUP_DURATION = 8;      // segundos de efecto
 export const POWERUP_EVERY = [9, 14];   // rango de aparición (segundos)
 
 /** Mensajes de cierre según cómo fue la patrulla. Tono cálido, nunca punitivo. */
 export function closingMessage({ score, precision, protectedCount, integrity, earlyEnd }) {
-    let text;
     if (earlyEnd) {
-        text = 'La patrulla se detiene aquí. Distinguir bajo presión es difícil, y cada intento afina la mirada.';
-    } else if (precision >= 90 && score >= 15) {
-        text = 'Mirada fina y pulso sereno: distinguiste con calma casi siempre.';
-    } else if (precision >= 75) {
-        text = 'Buen ojo. Cada patrulla entrena la pausa entre ver y actuar.';
-    } else if (protectedCount > 0 && score === 0) {
-        text = 'Protegiste sin disparar: a veces la mejor acción es no actuar. Cuando quieras, practica también la puntería.';
-    } else {
-        text = 'No todo lo que parece diferente es una amenaza. Aprender a distinguir lleva práctica, y hoy has practicado.';
+        return t('closing.early');
     }
-    return text;
+    if (precision >= 90 && score >= 15) {
+        return t('closing.precise');
+    }
+    if (precision >= 75) {
+        return t('closing.good');
+    }
+    if (protectedCount > 0 && score === 0) {
+        return t('closing.nonviolent');
+    }
+    return t('closing.default');
 }
