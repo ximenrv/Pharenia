@@ -41,7 +41,7 @@
         @include('components.navbar')
     @endif
 
-    <div class="stage-page">
+    <div class="stage-page stage-page--child">
         <div class="stage-container">
             <header class="stage-header" style="padding-top: 20px;">
                 <span class="stage-header__subtitle" style="color: #2c525a">{{ __('Nivel 1 — Explorando figuras y colores') }}</span>
