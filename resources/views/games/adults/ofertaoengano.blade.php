@@ -43,8 +43,8 @@
     </style>
 </head>
 <body>
-    <a href="{{ route('activities.adultez') }}" class="btn-volver-actividades" title="Regresar a Actividades">
-        <span class="bva-flecha">◀</span> Regresar a Actividades
+    <a href="{{ route('activities.adultez') }}" class="btn-volver-actividades" title="{{ __('Regresar a Actividades') }}">
+        <span class="bva-flecha">◀</span> {{ __('Regresar a Actividades') }}
     </a>
 
     {{-- ============ PANTALLA 1: INTRO ============ --}}
@@ -64,13 +64,13 @@
             <div class="nav-buttons" id="nav-buttons">
                 <button class="btn-game btn-back" id="btn-back">
                     <span class="btn-icon">◀</span>
-                    Regresar
+                    {{ __('Regresar') }}
                 </button>
                 <button class="btn-game btn-next" id="btn-next">
-                    Siguiente
+                    {{ __('Siguiente') }}
                     <span class="btn-icon">▶</span>
                 </button>
-                <button class="btn-play" id="btn-play">Jugar</button>
+                <button class="btn-play" id="btn-play">{{ __('Jugar') }}</button>
             </div>
         </div>
     </div>
@@ -82,7 +82,7 @@
         {{-- Botón regresar --}}
         <button class="btn-game-back" id="btn-game-back">
             <span>◀</span>
-            Regresar
+            {{ __('Regresar') }}
         </button>
 
         {{-- FASE 1: Cartel del nivel --}}
@@ -96,7 +96,7 @@
                 <h1 class="level-title" id="level-title">Compras</h1>
             </div>
             <button class="btn-game btn-next level-next" id="btn-level-next">
-                Siguiente
+                {{ __('Siguiente') }}
                 <span class="btn-icon">▶</span>
             </button>
         </div>
@@ -132,6 +132,13 @@
     {{-- Transición --}}
     <div id="transition-overlay" class="transition-overlay"></div>
 
+    @php
+        $locale = app()->getLocale();
+        $p1 = lang_path($locale . '.json');
+        $p2 = resource_path('lang/' . $locale . '.json');
+        $jsonPath = file_exists($p1) ? $p1 : (file_exists($p2) ? $p2 : null);
+        $translations = $jsonPath ? json_decode(file_get_contents($jsonPath), true) : [];
+    @endphp
     <script>
         window.GAME_ASSETS = {
             lumen: '{{ asset('gamesAssets/adults/ofertaoengano/ASSETS/Lumen/lumen1.png') }}'
@@ -139,6 +146,7 @@
         window.GAME_MENU_URL = '{{ route('activities.adultez') }}';
         window.CSRF_TOKEN = '{{ csrf_token() }}';
         window.SAVE_RECORD_URL = '{{ route('games.adults.record.update') }}';
+        window.translations = @json($translations, JSON_FORCE_OBJECT);
     </script>
     <script src="{{ asset('gamesAssets/adults/ofertaoengano/JS/intro.js') }}"></script>
     <script src="{{ asset('gamesAssets/adults/ofertaoengano/JS/game.js') }}"></script>
