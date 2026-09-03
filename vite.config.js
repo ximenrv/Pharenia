@@ -9,6 +9,8 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
+                'resources/css/lumen-chat.css',
+                'resources/js/lumen-chat.js',
                 'resources/css/quizzsense/quizzsense.css',
                 'resources/js/quizzsense/app.js',
                 'resources/js/paises/paises.js',

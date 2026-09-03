@@ -18,6 +18,7 @@ use App\Http\Controllers\ChildGamesController;
 use App\Http\Controllers\InformationController;
 use App\Http\Controllers\AdultGameRecordController;
 use App\Http\Controllers\ForumController;
+use App\Http\Controllers\LumenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -219,6 +220,17 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('/information/{module}', [InformationController::class, 'index'])->name('information.module');
+
+/*
+|--------------------------------------------------------------------------
+| Lumen (compañero virtual con IA)
+|--------------------------------------------------------------------------
+| El muro de acceso lo aplica el controlador: invitados reciben el aviso
+| amable (401), usuarios y niños con sesión PIN pueden conversar.
+*/
+Route::post('/lumen/chat', [LumenController::class, 'chat'])
+    ->middleware('throttle:20,1')
+    ->name('lumen.chat');
 
 /*
 |--------------------------------------------------------------------------

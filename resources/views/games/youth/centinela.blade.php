@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Centinela: una patrulla serena para aprender a distinguir. No todo lo que parece diferente es una amenaza.">
+    <meta name="description" content="{{ __('youth.centinela.meta.description') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Centinela · Aprende a distinguir</title>
+    <title>{{ __('youth.centinela.meta.title') }}</title>
+    <script>window.APP_LOCALE = "{{ app()->getLocale() }}";</script>
     @vite(['resources/css/centinela/centinela.css', 'resources/js/centinela/app.js'])
 </head>
 <body class="min-h-screen antialiased">
@@ -165,13 +166,13 @@
         {{-- Cabecera --}}
         <header class="mb-8 flex items-center justify-between gap-4">
             <div class="flex items-center gap-3">
-                <img src="{{ asset('img/mascota.png') }}" alt="Mascota de Centinela" class="h-12 w-auto drop-shadow-[0_6px_12px_rgba(0,0,0,0.5)]">
+                <img src="{{ asset('img/mascota.png') }}" alt="{{ __('youth.centinela.header.brand') }}" class="h-12 w-auto drop-shadow-[0_6px_12px_rgba(0,0,0,0.5)]">
                 <div>
-                    <p class="text-xl font-bold tracking-wide text-gold-300">Centinela</p>
-                    <p class="text-sm text-mist-200/80">Aprende a distinguir antes de actuar</p>
+                    <p class="text-xl font-bold tracking-wide text-gold-300">{{ __('youth.centinela.header.brand') }}</p>
+                    <p class="text-sm text-mist-200/80">{{ __('youth.centinela.header.slogan') }}</p>
                 </div>
             </div>
-            <a href="{{ route('activities.youth') }}" class="btn-ghost !px-4 !py-2 text-sm">&larr; Volver a actividades</a>
+            <a href="{{ route('activities.youth') }}" class="btn-ghost !px-4 !py-2 text-sm">&larr; {{ __('youth.centinela.header.back') }}</a>
         </header>
 
         <main class="flex flex-1 flex-col">
@@ -186,25 +187,23 @@
 
                 <div class="glass-card p-8 text-center sm:p-10">
                     <h1 id="home-title" class="mb-3 text-3xl font-bold text-mist-100 sm:text-4xl">
-                        La patrulla de esta noche te espera
+                        {{ __('youth.centinela.home.title') }}
                     </h1>
                     <p class="mx-auto mb-3 max-w-md text-lg leading-relaxed text-mist-200/90">
-                        Tu nave dispara sola. Tú solo eliges dónde estar:
-                        protege el contorno <span class="font-semibold text-leaf-300">verde</span>
-                        y neutraliza el <span class="font-semibold text-ember-300">rojo</span>.
+                        {!! __('youth.centinela.home.intro_line1') !!}
                     </p>
                     <p class="mx-auto mb-8 max-w-md text-base italic leading-relaxed text-gold-300/90">
-                        &laquo;No todo lo que parece diferente es una amenaza.&raquo;
+                        {{ __('youth.centinela.home.intro_line2') }}
                     </p>
 
                     <p class="mb-4 text-sm font-semibold uppercase tracking-wider text-mist-200/70">
-                        Elige tu patrulla
+                        {{ __('youth.centinela.home.choose_patrol') }}
                     </p>
                     <div id="difficulty-grid" class="grid gap-4 sm:grid-cols-3"></div>
 
                     <div class="mt-8">
                         <button type="button" class="btn-ghost" id="btn-howto">
-                            ¿Cómo funciona?
+                            {{ __('youth.centinela.home.howto_button') }}
                         </button>
                     </div>
                 </div>
@@ -215,54 +214,26 @@
                  ============================================ --}}
             <section class="screen" id="screen-howto" data-screen="howto" aria-labelledby="howto-title">
                 <div class="glass-card p-8 sm:p-10">
-                    <h1 id="howto-title" class="mb-8 text-center text-3xl font-bold text-mist-100">¿Cómo funciona?</h1>
+                    <h1 id="howto-title" class="mb-8 text-center text-3xl font-bold text-mist-100">{{ __('youth.centinela.howto.title') }}</h1>
 
                     <ol class="mx-auto flex max-w-lg flex-col gap-6">
-                        <li class="flex items-start gap-4">
-                            <span class="step-number" aria-hidden="true">1</span>
-                            <div>
-                                <p class="font-semibold text-gold-300">Observa el contorno</p>
-                                <p class="leading-relaxed text-mist-200/90">
-                                    <span class="font-semibold text-leaf-300">Verde</span> = proteger.
-                                    <span class="font-semibold text-ember-300">Rojo</span> = amenaza.
-                                    El color marca la acción, no la naturaleza: una serpiente también puede llevar contorno verde.
-                                </p>
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-4">
-                            <span class="step-number" aria-hidden="true">2</span>
-                            <div>
-                                <p class="font-semibold text-gold-300">La nave dispara sola</p>
-                                <p class="leading-relaxed text-mist-200/90">Tú solo mueves: usa las flechas &larr; &rarr; (o A y D), o arrastra el dedo o el ratón por el cielo.</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-4">
-                            <span class="step-number" aria-hidden="true">3</span>
-                            <div>
-                                <p class="font-semibold text-gold-300">Elige tu línea de fuego</p>
-                                <p class="leading-relaxed text-mist-200/90">Colócate bajo las figuras rojas y apártate cuando pase una verde. Destruir una roja suma 1 punto; alcanzar una verde resta 1 de integridad.</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-4">
-                            <span class="step-number" aria-hidden="true">4</span>
-                            <div>
-                                <p class="font-semibold text-gold-300">Sin castigos ocultos</p>
-                                <p class="leading-relaxed text-mist-200/90">Dejar pasar una roja no resta nada: es solo una oportunidad que se va. Si tu integridad llega a 0, la patrulla termina.</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-4">
-                            <span class="step-number" aria-hidden="true">5</span>
-                            <div>
-                                <p class="font-semibold text-gold-300">Atrapa las tarjetas doradas</p>
-                                <p class="leading-relaxed text-mist-200/90">De vez en cuando cae una tarjeta dorada: pasa por ella con la nave para recogerla. El rayo te da <strong>disparo veloz</strong> y las flechas dobles, <strong>doble disparo</strong>, durante unos segundos. No hace falta dispararles: solo hay que atraparlas.</p>
-                            </div>
-                        </li>
+                        @foreach (__('youth.centinela.howto.steps') as $step)
+                            <li class="flex items-start gap-4">
+                                <span class="step-number" aria-hidden="true">{{ $loop->iteration }}</span>
+                                <div>
+                                    <p class="font-semibold text-gold-300">{{ $step['title'] }}</p>
+                                    <p class="leading-relaxed text-mist-200/90">
+                                        {!! $step['text'] !!}
+                                    </p>
+                                </div>
+                            </li>
+                        @endforeach
                     </ol>
 
                     {{-- Leyenda de figuras --}}
                     <div class="mx-auto mt-10 flex max-w-lg flex-col gap-5">
                         <div class="info-card p-5">
-                            <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-leaf-300">Proteger · contorno verde</p>
+                            <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-leaf-300">{{ __('youth.centinela.howto.legend_protect') }}</p>
                             <div class="flex flex-wrap items-center gap-3">
                                 <span class="legend-figure fig-color-protect"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#fig-nino"/></svg></span>
                                 <span class="legend-figure fig-color-protect"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#fig-perro"/></svg></span>
@@ -274,7 +245,7 @@
                             </div>
                         </div>
                         <div class="info-card p-5">
-                            <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-ember-300">Amenazas · contorno rojo</p>
+                            <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-ember-300">{{ __('youth.centinela.howto.legend_threat') }}</p>
                             <div class="flex flex-wrap items-center gap-3">
                                 <span class="legend-figure fig-color-threat"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#fig-encapuchado"/></svg></span>
                                 <span class="legend-figure fig-color-threat"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#fig-monstruo"/></svg></span>
@@ -283,7 +254,7 @@
                             </div>
                         </div>
                         <div class="info-card p-5">
-                            <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-gold-300">Ayudas · tarjetas doradas (recoger con la nave)</p>
+                            <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-gold-300">{{ __('youth.centinela.howto.legend_help') }}</p>
                             <div class="flex flex-wrap items-center gap-3">
                                 <span class="legend-figure fig-color-gold"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#fig-pow-rapida"/></svg></span>
                                 <span class="legend-figure fig-color-gold"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#fig-pow-doble"/></svg></span>
@@ -292,7 +263,7 @@
                     </div>
 
                     <div class="mt-10 text-center">
-                        <button type="button" class="btn-ghost" id="btn-howto-back">&larr; Volver al inicio</button>
+                        <button type="button" class="btn-ghost" id="btn-howto-back">&larr; {{ __('youth.centinela.howto.back_button') }}</button>
                     </div>
                 </div>
             </section>
@@ -301,19 +272,19 @@
                  PANTALLA: PATRULLA (juego)
                  ============================================ --}}
             <section class="screen" id="screen-game" data-screen="game" aria-labelledby="game-heading">
-                <h1 id="game-heading" class="sr-only">Patrulla en curso</h1>
+                <h1 id="game-heading" class="sr-only">{{ __('youth.centinela.game.heading') }}</h1>
 
                 {{-- Barra superior: salir + opciones --}}
                 <div class="mb-4 flex items-center justify-between gap-3">
                     <button type="button" class="btn-ghost !px-4 !py-2 text-sm" id="btn-exit">
-                        &larr; Salir
+                        &larr; {{ __('youth.centinela.game.exit') }}
                     </button>
                     <div class="flex items-center gap-2">
                         <button type="button" class="btn-ghost !px-4 !py-2 text-sm" id="btn-sound" aria-pressed="false">
-                            Sonido: no
+                            {{ __('youth.centinela.game.sound_off') }}
                         </button>
                         <button type="button" class="btn-ghost !px-4 !py-2 text-sm" id="btn-pause">
-                            Pausa
+                            {{ __('youth.centinela.game.pause') }}
                         </button>
                     </div>
                 </div>
@@ -321,12 +292,12 @@
                 {{-- HUD: integridad + puntuación --}}
                 <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
                     <div class="hud-panel" id="hud-integrity">
-                        <span class="hud-label">Integridad</span>
+                        <span class="hud-label">{{ __('youth.centinela.game.integrity') }}</span>
                         <span class="hud-pips" id="integrity-pips" aria-hidden="true"></span>
                         <span class="hud-value hud-value--integrity" id="integrity-value" aria-live="polite">10</span>
                     </div>
                     <div class="hud-panel" id="hud-score">
-                        <span class="hud-label">Puntuación</span>
+                        <span class="hud-label">{{ __('youth.centinela.game.score') }}</span>
                         <span class="hud-value" id="score-value" aria-live="polite">0</span>
                     </div>
                 </div>
@@ -339,42 +310,42 @@
                     </p>
                 </div>
                 <div class="mb-4 flex items-center gap-3">
-                    <div class="progress-track flex-1" role="progressbar" aria-label="Progreso de la patrulla" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-bar">
+                    <div class="progress-track flex-1" role="progressbar" aria-label="{{ __('youth.centinela.game.progress') }}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-bar">
                         <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
                     </div>
                 </div>
 
                 {{-- Arena --}}
                 <div class="arena-wrap">
-                    <div class="arena" id="arena" aria-label="Cielo de la patrulla: zona de juego"></div>
+                    <div class="arena" id="arena" aria-label="{{ __('youth.centinela.game.arena_label') }}"></div>
 
                     {{-- Insignias de tarjeta activa --}}
                     <div class="powerup-badge" id="badge-rapid" aria-hidden="true">
                         <svg viewBox="0 0 48 48"><use href="#fig-pow-rapida"/></svg>
-                        <span>Disparo veloz</span>
+                        <span>{{ __('youth.centinela.game.rapid_label') }}</span>
                         <span class="powerup-badge-track"><span class="powerup-badge-fill"></span></span>
                     </div>
                     <div class="powerup-badge powerup-badge--double" id="badge-double" aria-hidden="true">
                         <svg viewBox="0 0 48 48"><use href="#fig-pow-doble"/></svg>
-                        <span>Doble disparo</span>
+                        <span>{{ __('youth.centinela.game.double_label') }}</span>
                         <span class="powerup-badge-track"><span class="powerup-badge-fill"></span></span>
                     </div>
 
                     {{-- Pausa --}}
                     <div class="arena-overlay" id="pause-overlay">
                         <div class="glass-card mx-4 p-8 text-center">
-                            <p class="mb-2 text-2xl font-bold text-mist-100">Pausa</p>
-                            <p class="mb-6 text-mist-200/90">La patrulla espera. Tú marcas el ritmo.</p>
+                            <p class="mb-2 text-2xl font-bold text-mist-100">{{ __('youth.centinela.game.pause_title') }}</p>
+                            <p class="mb-6 text-mist-200/90">{{ __('youth.centinela.game.pause_text') }}</p>
                             <div class="flex flex-wrap items-center justify-center gap-3">
-                                <button type="button" class="btn-gold !py-3 !text-base" id="btn-resume">Reanudar</button>
-                                <button type="button" class="btn-ghost" id="btn-quit-pause">Salir al menú</button>
+                                <button type="button" class="btn-gold !py-3 !text-base" id="btn-resume">{{ __('youth.centinela.game.resume') }}</button>
+                                <button type="button" class="btn-ghost" id="btn-quit-pause">{{ __('youth.centinela.game.quit') }}</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <p class="mt-4 text-center text-sm text-mist-200/70">
-                    Muévete con &larr; &rarr; o arrastra el puntero &middot; la nave dispara sola
+                    {{ __('youth.centinela.game.controls') }}
                 </p>
             </section>
 
@@ -385,35 +356,35 @@
                 <div class="question-frame">
                     <div class="question-body text-center">
                         <h1 id="results-title" class="mb-1 text-2xl font-bold uppercase tracking-[0.22em] text-gold-300 sm:text-3xl">
-                            Fin de la partida
+                            {{ __('youth.centinela.results.title') }}
                         </h1>
-                        <p class="mb-8 text-sm text-mist-200/70" id="results-subtitle">La patrulla ha terminado</p>
+                        <p class="mb-8 text-sm text-mist-200/70" id="results-subtitle">{{ __('youth.centinela.results.subtitle') }}</p>
 
                         <div class="mx-auto mb-8 max-w-md text-left">
                             <div class="stat-row">
-                                <span class="stat-label"><span aria-hidden="true">⭐</span> Puntuación</span>
+                                <span class="stat-label"><span aria-hidden="true">⭐</span> {{ __('youth.centinela.results.score') }}</span>
                                 <span class="stat-value stat-value--gold" id="stat-score">0</span>
                             </div>
                             <div class="stat-row">
-                                <span class="stat-label"><span aria-hidden="true">🎯</span> Precisión</span>
+                                <span class="stat-label"><span aria-hidden="true">🎯</span> {{ __('youth.centinela.results.precision') }}</span>
                                 <span class="stat-value" id="stat-precision">100%</span>
                             </div>
                             <div class="stat-row">
-                                <span class="stat-label"><span aria-hidden="true">🟢</span> Elementos protegidos</span>
+                                <span class="stat-label"><span aria-hidden="true">🟢</span> {{ __('youth.centinela.results.protected') }}</span>
                                 <span class="stat-value stat-value--leaf" id="stat-protected">0</span>
                             </div>
                             <div class="stat-row">
-                                <span class="stat-label"><span aria-hidden="true">🔴</span> Amenazas eliminadas</span>
+                                <span class="stat-label"><span aria-hidden="true">🔴</span> {{ __('youth.centinela.results.threats') }}</span>
                                 <span class="stat-value stat-value--ember" id="stat-threats">0</span>
                             </div>
                         </div>
 
                         <p class="mx-auto mb-3 max-w-md leading-relaxed text-mist-200/95" id="results-message"></p>
-                        <p class="results-quote mb-9">&laquo;Sigue adelante.&raquo;</p>
+                        <p class="results-quote mb-9">{{ __('youth.centinela.results.quote') }}</p>
 
                         <div class="flex flex-wrap items-center justify-center gap-4">
-                            <button type="button" class="btn-gold" id="btn-replay">Jugar de nuevo</button>
-                            <button type="button" class="btn-ghost" id="btn-home">Volver al menú</button>
+                            <button type="button" class="btn-gold" id="btn-replay">{{ __('youth.centinela.results.replay') }}</button>
+                            <button type="button" class="btn-ghost" id="btn-home">{{ __('youth.centinela.results.home') }}</button>
                         </div>
                     </div>
                 </div>

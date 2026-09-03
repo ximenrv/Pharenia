@@ -238,3 +238,51 @@ body {
     background-color: #e2e8f0;
     color: #4a5568;
 }
+
+/* ==========================================================================
+   05. RESPONSIVE — PÁGINAS DE ETAPAS (stage-page--youth / --child / --adult)
+   Las tres cartas de juegos se apilan una encima de otra en móvil
+   ========================================================================== */
+
+@media (max-width: 900px) {
+    .stage-page--youth .games-grid,
+    .stage-page--child .games-grid,
+    .stage-page--adult .games-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    /* Ajustes tipográficos y de espaciado para Niñez y Adultez en móvil */
+    .stage-page--child .stage-container,
+    .stage-page--adult .stage-container {
+        padding: 2.5rem 1.25rem;
+    }
+
+    .stage-page--child .stage-header,
+    .stage-page--adult .stage-header {
+        margin-bottom: 3rem;
+    }
+
+    .stage-page--child .stage-header__title,
+    .stage-page--adult .stage-header__title {
+        font-size: 2.2rem;
+    }
+
+    .stage-page--child .stage-header__subtitle,
+    .stage-page--adult .stage-header__subtitle {
+        font-size: 0.85rem;
+        letter-spacing: 1px;
+    }
+}
+
+@media (max-width: 480px) {
+    .stage-page--child .games-grid,
+    .stage-page--adult .games-grid {
+        gap: 1.5rem;
+    }
+
+    .stage-page--child .stage-header__title,
+    .stage-page--adult .stage-header__title {
+        font-size: 1.8rem;
+    }
+}

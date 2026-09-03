@@ -10,6 +10,25 @@ import { DIFFICULTIES, START_INTEGRITY, closingMessage } from './figures.js';
 import { initSky } from './sky.js';
 import { soundEnabled, toggleSound } from './audio.js';
 import { saveCentinelaResult } from '../utils/teen-records.js';
+import i18n from './i18n.json';
+
+const locale = typeof window !== 'undefined' && window.APP_LOCALE ? window.APP_LOCALE : 'es';
+
+function t(key, vars = {}) {
+    const parts = key.split('.');
+    let value = i18n[locale];
+    for (const part of parts) {
+        value = value?.[part];
+    }
+    if (typeof value !== 'string') {
+        value = i18n['es'];
+        for (const part of parts) {
+            value = value?.[part];
+        }
+    }
+    if (typeof value !== 'string') return key;
+    return value.replace(/\{(\w+)\}/g, (_, k) => (vars[k] !== undefined ? vars[k] : `{${k}}`));
+}
 
 const $ = (id) => document.getElementById(id);
 
@@ -104,7 +123,7 @@ function renderDifficulties() {
 
         const level = document.createElement('span');
         level.className = 'difficulty-card-level';
-        level.textContent = `${d.level} · ${d.total} figuras`;
+        level.textContent = `${d.level} · ${t('ui.figures_count', { total: d.total })}`;
 
         const desc = document.createElement('span');
         desc.className = 'difficulty-card-desc';
@@ -115,7 +134,7 @@ function renderDifficulties() {
         if (best[d.key] !== undefined) {
             const record = document.createElement('span');
             record.className = 'difficulty-card-best';
-            record.textContent = `Tu mejor puntuación: ${best[d.key]}`;
+            record.textContent = t('ui.best_score', { score: best[d.key] });
             btn.appendChild(record);
         }
 
@@ -158,7 +177,7 @@ function onProgress(stats) {
     const cfg = currentCfg();
     const remaining = Math.max(0, cfg.total - stats.resolved);
     els.progressLabel.textContent =
-        remaining === 0 ? 'Últimas figuras…' : `Quedan ${remaining} de ${cfg.total}`;
+        remaining === 0 ? t('ui.last_figures') : t('ui.remaining', { remaining, total: cfg.total });
     els.progressFill.style.width = `${(stats.resolved / cfg.total) * 100}%`;
 }
 
@@ -192,7 +211,7 @@ function startGame(difficultyKey) {
 
     els.difficultyChip.textContent = `${cfg.name} · ${cfg.level}`;
     els.progressFill.style.width = '0%';
-    els.progressLabel.textContent = `Quedan ${cfg.total} de ${cfg.total}`;
+    els.progressLabel.textContent = t('ui.remaining', { remaining: cfg.total, total: cfg.total });
     els.pauseOverlay.classList.remove('is-visible');
 
     showScreen('game');
@@ -258,8 +277,8 @@ function openCurtain() {
  * ------------------------------------------------------------ */
 function renderResults(result) {
     els.resultsSubtitle.textContent = result.earlyEnd
-        ? 'La integridad llegó a 0: la patrulla se detuvo antes de tiempo'
-        : 'La patrulla ha terminado';
+        ? t('ui.results_subtitle_early')
+        : t('ui.results_subtitle_finished');
 
     els.statScore.textContent = String(result.score);
     els.statPrecision.textContent = `${result.precision}%`;
@@ -273,7 +292,7 @@ function renderResults(result) {
  * Sonido
  * ------------------------------------------------------------ */
 function renderSound() {
-    els.btnSound.textContent = soundEnabled() ? 'Sonido: sí' : 'Sonido: no';
+    els.btnSound.textContent = soundEnabled() ? t('ui.sound_on') : t('ui.sound_off');
     els.btnSound.setAttribute('aria-pressed', soundEnabled() ? 'true' : 'false');
 }
 

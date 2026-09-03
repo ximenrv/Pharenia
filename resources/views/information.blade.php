@@ -16,7 +16,7 @@
         window.translations = @json($translations);
     </script>
 
-    @vite(['resources/css/information.css', 'resources/css/navbar.css', 'resources/css/footer.css', 'resources/css/settings-menu.css', 'resources/js/settings-menu.js', 'resources/js/information.js', 'resources/css/dark-theme.css'])
+    @vite(['resources/css/information.css', 'resources/css/navbar.css', 'resources/css/footer.css', 'resources/css/settings-menu.css', 'resources/js/settings-menu.js', 'resources/js/information.js', 'resources/css/dark-theme.css', 'resources/css/lumen-chat.css', 'resources/js/lumen-chat.js'])
     
 </head>
 <body class="info-body">
@@ -24,8 +24,6 @@
     @include('components.loader')
 
     <x-navbar />
-
-    @include('components.transition-waves')
 
     <div class="info-container" id="section01">
         
@@ -101,8 +99,34 @@
             </div>
 
             <div class="tea-section__right">
-                <div class="tea-section__image-container">
-                    <img src="{{ asset('img/sabias-que.png') }}" alt="¿Sabías qué? - Infografía TEA" class="tea-section__img">
+                <div class="sabias-card" role="group" aria-labelledby="sabias-title">
+                    <div class="sabias-card__orb" aria-hidden="true">
+                        <span class="sabias-card__wheel"></span>
+                        <span class="sabias-card__core">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.4 1 2.3h6c0-.9.4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg>
+                        </span>
+                    </div>
+
+                    <span id="sabias-title" class="sabias-card__badge">{{ __('¿Sabías qué?') }}</span>
+
+                    <ul class="sabias-card__list">
+                        <li class="sabias-card__item">
+                            <span class="sabias-card__dot sabias-card__dot--teal" aria-hidden="true"></span>
+                            <p>{{ __('Se estima que el TEA se presenta en aproximadamente 1 de cada 100 niños en el mundo.') }}</p>
+                        </li>
+                        <li class="sabias-card__item">
+                            <span class="sabias-card__dot sabias-card__dot--gold" aria-hidden="true"></span>
+                            <p>{{ __('Cada persona con TEA es única: tiene sus propias fortalezas y necesidades de apoyo.') }}</p>
+                        </li>
+                        <li class="sabias-card__item">
+                            <span class="sabias-card__dot sabias-card__dot--coral" aria-hidden="true"></span>
+                            <p>{{ __('Con comprensión y apoyo, muchas personas con TEA desarrollan una vida plena y autónoma.') }}</p>
+                        </li>
+                    </ul>
+
+                    <div class="sabias-card__footer">
+                        <p>✦ {{ __('Pharenia te acompaña a entender el TEA.') }}</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -471,6 +495,9 @@
     <x-footer/>
 
     <x-settings-menu />
+
+    <!-- Lumen: compañero virtual con IA -->
+    <x-lumen-chat />
 
     <script>
         window.initialQuizStep = {{ $progress->current_step ?? 1 }};
