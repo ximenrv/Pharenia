@@ -81,7 +81,7 @@
     .cuerpo-olas {
         width: 100%;
         flex-grow: 1;
-        background-color: #0693e3;
+        background-color: #2c525a;
     }
 </style>
 

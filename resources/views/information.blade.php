@@ -16,12 +16,13 @@
         window.translations = @json($translations);
     </script>
 
-    @vite(['resources/css/information.css', 'resources/css/navbar.css', 'resources/js/navbar.js', 'resources/css/footer.css', 'resources/css/settings-menu.css', 'resources/js/settings-menu.js', 'resources/js/information.js', 'resources/css/dark-theme.css'])
+    @vite(['resources/css/information.css', 'resources/css/navbar.css', 'resources/js/navbar.js', 'resources/css/footer.css', 'resources/css/settings-menu.css', 'resources/js/settings-menu.js', 'resources/js/information.js', 'resources/css/dark-theme.css','resources/css/lumen-chat.css'])
     
 </head>
 <body class="info-body">
 
     @include('components.loader')
+    @include('components.transition-waves')
 
     <x-navbar />
 
