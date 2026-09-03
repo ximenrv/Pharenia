@@ -117,10 +117,10 @@
             </div>
             <!-- Contenedor del Asistente Lumen -->
             <div id="assistant">
-                <!-- Pedestal / Base -->
-                <img id="assistantBubble" src="{{ asset('gamesAssets/childs/eco/ASSETS/lumen/assistent/LumenBubbleAssist.png') }}" alt="Pedestal">
-                <!-- Lumen que cambia de imagen (Base / Cartel con Estrella, Corazón, etc.) -->
-                <img id="assistantHead" src="{{ asset('gamesAssets/childs/eco/ASSETS/lumen/assistent/lumenStar.png') }}" alt="Lumen Asistente">
+                <!-- Slot donde lumen reposa -->
+                <img id="assistantBubble" src="{{ asset('gamesAssets/childs/cazador/ASSETS/lumen/assistent/LumenBubbleAssist.png') }}" alt="Pedestal">
+                <!-- Lumen Asistente -->
+                <img id="assistantHead" src="{{ asset('gamesAssets/childs/cazador/ASSETS/lumen/assistent/lumenBase.png') }}" alt="Lumen Asistente">
             </div>
             <!-- Barra de Vidas -->
              <div id="healthBarContainer">

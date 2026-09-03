@@ -41,12 +41,14 @@ AudioManager.playBackground = function() {
 
 AudioManager.playColorSound = function(color) {
     if (this.colorSounds[color]) {
-        // Clonar el nodo permite que el mismo sonido se reproduzca varias veces seguidas sin cortarse
+        // Clonar el nodo permite reproducciones consecutivas rápidas
         const soundClone = this.colorSounds[color].cloneNode();
         soundClone.volume = 0.15;
         soundClone.play().catch(e => console.warn("Audio bloqueado por navegador:", e));
+        return soundClone;
     } else {
         this.playScore();
+        return null;
     }
 };
 

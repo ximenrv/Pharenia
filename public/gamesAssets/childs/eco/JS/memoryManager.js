@@ -159,8 +159,9 @@ const MemoryManager = {
     handleBubbleClick(color) {
         if (!this.canPlayerInput || this.isPlayingSequence) return;
 
+        let currentColorSound = null;
         if (window.SoundManager && typeof SoundManager.playColorSound === "function") {
-            SoundManager.playColorSound(color);
+            currentColorSound = SoundManager.playColorSound(color);
         }
 
         this.activateBubble(color, 250);
@@ -169,10 +170,15 @@ const MemoryManager = {
         this.addMiniBubbleToBar(color);
 
         if (this.playerSequence[currentIndex] !== this.sequence[currentIndex]) {
+            if (currentColorSound) {
+                currentColorSound.pause();
+                currentColorSound.currentTime = 0;
+            }
             this.handleError();
             return;
         }
 
+    
         if (this.playerSequence.length === this.sequence.length) {
             this.handleRoundSuccess();
         }
@@ -209,7 +215,7 @@ const MemoryManager = {
 
         if (this.lives > 0) {
             if (window.AssistLumen && typeof AssistLumen.sayDialogue === "function") {
-                await AssistLumen.sayDialogue( __("¡Uhu! Inténtalo de nuevo."), 1600, "wrong");
+                await AssistLumen.sayDialogue( __("¡Casi perfecto!\nInténtalo de nuevo"), 1600, "wrong");
             }
             this.playerSequence = [];
             this.clearSequenceBar();
