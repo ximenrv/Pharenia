@@ -204,7 +204,6 @@ async function showSpeaker() {
 }
 
 async function finishTutorial() {
-    console.log("Iniciando cierre de tutorial...");
 
     const speakerName = document.getElementById("speakerName");
     if (speakerName) speakerName.classList.remove("show");
