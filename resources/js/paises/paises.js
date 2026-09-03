@@ -8,20 +8,43 @@
  */
 import { initSky } from '../quizzsense/sky.js';
 import { savePaisesResult } from '../utils/teen-records.js';
-import america from './data/america.json';
-import europa from './data/europa.json';
-import asia from './data/asia.json';
-import africa from './data/africa.json';
-import oceania from './data/oceania.json';
+import i18n from './i18n.json';
+import americaEs from './data/america.json';
+import americaEn from './data/america-en.json';
+import europaEs from './data/europa.json';
+import europaEn from './data/europa-en.json';
+import asiaEs from './data/asia.json';
+import asiaEn from './data/asia-en.json';
+import africaEs from './data/africa.json';
+import africaEn from './data/africa-en.json';
+import oceaniaEs from './data/oceania.json';
+import oceaniaEn from './data/oceania-en.json';
 
 const $ = (id) => document.getElementById(id);
 
+const locale = window.APP_LOCALE || 'es';
+const t = (key, vars = {}) => {
+    let text = i18n[locale]?.[key];
+    if (text === undefined) text = i18n.es?.[key];
+    if (text === undefined) return key;
+    if (Array.isArray(text)) return text;
+    return text.replace(/\{(\w+)\}/g, (_, k) => (vars[k] !== undefined ? vars[k] : `{${k}}`));
+};
+
+const continentData = {
+    america: locale === 'en' ? americaEn : americaEs,
+    europa:  locale === 'en' ? europaEn  : europaEs,
+    asia:    locale === 'en' ? asiaEn    : asiaEs,
+    africa:  locale === 'en' ? africaEn  : africaEs,
+    oceania: locale === 'en' ? oceaniaEn : oceaniaEs,
+};
+
 const CONTINENTS = {
-    america: { data: america, label: 'América', color: '#4caf7d' },
-    europa:  { data: europa,  label: 'Europa',  color: '#8577c9' },
-    asia:    { data: asia,    label: 'Asia',    color: '#e0a83c' },
-    africa:  { data: africa,  label: 'África',  color: '#d89c4a' },
-    oceania: { data: oceania, label: 'Oceanía', color: '#6d5ba8' },
+    america: { data: continentData.america, label: t('continents.america'), color: '#4caf7d' },
+    europa:  { data: continentData.europa,  label: t('continents.europa'),  color: '#8577c9' },
+    asia:    { data: continentData.asia,    label: t('continents.asia'),    color: '#e0a83c' },
+    africa:  { data: continentData.africa,  label: t('continents.africa'),  color: '#d89c4a' },
+    oceania: { data: continentData.oceania, label: t('continents.oceania'), color: '#6d5ba8' },
 };
 
 const ROUND_SIZE = 10;
@@ -137,7 +160,7 @@ function renderQuestion() {
     const country = roundCountries[currentIndex];
     const total = roundCountries.length;
 
-    $('progress-label').textContent = `País ${currentIndex + 1} de ${total}`;
+    $('progress-label').textContent = t('game.progress', { current: currentIndex + 1, total });
     $('progress-bar').setAttribute('aria-valuemax', String(total));
     $('progress-bar').setAttribute('aria-valuenow', String(currentIndex + 1));
     $('progress-fill').style.width = `${(currentIndex / total) * 100}%`;
@@ -202,13 +225,14 @@ function onCountryClick(code) {
     const feedbackPanel = $('feedback-panel');
     feedbackPanel.classList.toggle('is-good', isCorrect);
     feedbackPanel.classList.toggle('is-kind', !isCorrect);
+    const country = roundCountries[currentIndex].name;
     $('feedback-title').textContent = isCorrect
-        ? '¡Muy bien!'
-        : 'Casi… este es un buen momento para aprender.';
+        ? t('feedback.correct_title')
+        : t('feedback.incorrect_title');
     $('feedback-text').textContent = isCorrect
-        ? `Has encontrado ${roundCountries[currentIndex].name}.`
-        : `Este país es ${roundCountries[currentIndex].name}. Sigue intentándolo, cada acierto cuenta.`;
-    $('btn-next').textContent = currentIndex + 1 >= roundCountries.length ? 'Ver resultados' : 'Siguiente →';
+        ? t('feedback.correct_text', { country })
+        : t('feedback.incorrect_text', { country });
+    $('btn-next').textContent = currentIndex + 1 >= roundCountries.length ? t('feedback.see_results') : t('feedback.next');
     $('feedback-wrap').classList.remove('hidden');
     slowScrollTo($('feedback-wrap'));
     $('btn-next').focus({ preventScroll: true });
@@ -229,13 +253,7 @@ function finishGame() {
     $('results-score').textContent = String(correctCount);
     $('results-total').textContent = String(total);
 
-    const messages = [
-        'Cada país que localizas amplía tu mapa mental del mundo.',
-        'Explorar mapas es una forma tranquila de aprender geografía.',
-        'No importa el resultado: lo importante es seguir curioseando.',
-        'Hoy has practicado tu orientación en el mapa.',
-        'Cada intento cuenta, ¡sigue explorando continentes!',
-    ];
+    const messages = t('results.messages');
     const messageIndex = Math.floor(Math.random() * messages.length);
     $('results-message').textContent = messages[messageIndex];
 

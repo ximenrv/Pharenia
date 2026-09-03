@@ -1,0 +1,112 @@
+{
+    "es": {
+        "difficulty": {
+            "facil": {
+                "name": "Primer paso",
+                "level": "Fácil",
+                "desc": "Pocas figuras, movimiento lento y mucho espacio entre ellas."
+            },
+            "normal": {
+                "name": "Mantente alerta",
+                "level": "Normal",
+                "desc": "Más figuras verdes y rojas, más velocidad y trayectorias variadas."
+            },
+            "dificil": {
+                "name": "No pierdas el control",
+                "level": "Difícil",
+                "desc": "Figuras rápidas, cambios de dirección y mezclas constantes."
+            }
+        },
+        "figures": {
+            "nino": "un niño",
+            "perro": "un perro",
+            "gato": "un gato",
+            "serpiente": "una serpiente",
+            "arbol": "un árbol",
+            "familia": "una familia",
+            "amigos": "dos amigos"
+        },
+        "threats": {
+            "encapuchado": "una figura encapuchada",
+            "monstruo": "un monstruo",
+            "mascara": "una máscara amenazante",
+            "espectro": "un espectro"
+        },
+        "powerups": {
+            "rapid": "Disparo veloz",
+            "double": "Doble disparo"
+        },
+        "ui": {
+            "remaining": "Quedan {remaining} de {total}",
+            "last_figures": "Últimas figuras…",
+            "figures_count": "{total} figuras",
+            "best_score": "Tu mejor puntuación: {score}",
+            "sound_on": "Sonido: sí",
+            "sound_off": "Sonido: no",
+            "results_subtitle_early": "La integridad llegó a 0: la patrulla se detuvo antes de tiempo",
+            "results_subtitle_finished": "La patrulla ha terminado"
+        },
+        "closing": {
+            "early": "La patrulla se detiene aquí. Distinguir bajo presión es difícil, y cada intento afina la mirada.",
+            "precise": "Mirada fina y pulso sereno: distinguiste con calma casi siempre.",
+            "good": "Buen ojo. Cada patrulla entrena la pausa entre ver y actuar.",
+            "nonviolent": "Protegiste sin disparar: a veces la mejor acción es no actuar. Cuando quieras, practica también la puntería.",
+            "default": "No todo lo que parece diferente es una amenaza. Aprender a distinguir lleva práctica, y hoy has practicado."
+        }
+    },
+    "en": {
+        "difficulty": {
+            "facil": {
+                "name": "First steps",
+                "level": "Easy",
+                "desc": "Few figures, slow movement, and plenty of space between them."
+            },
+            "normal": {
+                "name": "Stay alert",
+                "level": "Normal",
+                "desc": "More green and red figures, faster speed, and varied paths."
+            },
+            "dificil": {
+                "name": "Don't lose control",
+                "level": "Hard",
+                "desc": "Fast figures, sudden direction changes, and constant mixes."
+            }
+        },
+        "figures": {
+            "nino": "a child",
+            "perro": "a dog",
+            "gato": "a cat",
+            "serpiente": "a snake",
+            "arbol": "a tree",
+            "familia": "a family",
+            "amigos": "two friends"
+        },
+        "threats": {
+            "encapuchado": "a hooded figure",
+            "monstruo": "a monster",
+            "mascara": "a threatening mask",
+            "espectro": "a specter"
+        },
+        "powerups": {
+            "rapid": "Rapid fire",
+            "double": "Double shot"
+        },
+        "ui": {
+            "remaining": "{remaining} of {total} left",
+            "last_figures": "Last figures…",
+            "figures_count": "{total} figures",
+            "best_score": "Your best score: {score}",
+            "sound_on": "Sound: on",
+            "sound_off": "Sound: off",
+            "results_subtitle_early": "Integrity reached 0: the patrol stopped early",
+            "results_subtitle_finished": "The patrol is over"
+        },
+        "closing": {
+            "early": "The patrol stops here. Telling things apart under pressure is hard, and every attempt sharpens your eye.",
+            "precise": "Keen eye and steady pulse: you distinguished calmly almost every time.",
+            "good": "Good eye. Every patrol trains the pause between seeing and acting.",
+            "nonviolent": "You protected without shooting: sometimes the best action is no action. Whenever you want, practice your aim too.",
+            "default": "Not everything that looks different is a threat. Learning to tell them apart takes practice, and today you practiced."
+        }
+    }
+}
