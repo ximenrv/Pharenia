@@ -1292,9 +1292,9 @@
         <header class="forum-header">
             <img class="forum-header__deco forum-header__deco--left" src="{{ asset('img/coral.png') }}" alt="">
             <img class="forum-header__deco forum-header__deco--right" src="{{ asset('img/coral-2.png') }}" alt="">
-            <span class="forum-header__subtitle">Comunidad Pharenia</span>
+            <span class="forum-header__subtitle">{{ __('Comunidad Pharenia') }}</span>
             <h1 class="forum-header__title">Lumenia</h1>
-            <p class="forum-header__intro">Comparte tus mejores momentos con Lumen. Toma una foto, agrega stickers y comparte con la comunidad.</p>
+            <p class="forum-header__intro">{{ __('Comparte tus mejores momentos con Lumen. Toma una foto, agrega stickers y comparte con la comunidad.') }}</p>
         </header>
 
         {{-- ============ PANEL: GALERÍA (Hero Lumen + fotos) ============ --}}
@@ -1313,7 +1313,7 @@
                     <div class="lg-zone" id="lgZone">
                         <div class="lg-glow"></div>
                         <div class="lg-lumen" id="lgLumen">
-                            <div class="lg-bubble" id="lgBubble">Hola, soy Lumen</div>
+                            <div class="lg-bubble" id="lgBubble">{{ __('Hola, soy Lumen') }}</div>
                             <img class="lg-pose lg-pose--a" src="{{ asset('img/lumen/lumen-01.png') }}" alt="Lumen saludando">
                             <img class="lg-pose lg-pose--b" src="{{ asset('img/lumen/lumen-11.png') }}" alt="Lumen">
                         </div>
@@ -1321,7 +1321,7 @@
                     <div class="lg-cta">
                         <button type="button" onclick="goToPanel('camera')">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-                            Entrar a la cámara
+                            {{ __('Entrar a la cámara') }}
                         </button>
                     </div>
                 </div>
@@ -1329,14 +1329,14 @@
 
             {{-- Galería de fotos --}}
             <div class="lg-gallery">
-                <h3 class="lg-gallery__title">Fotos de la comunidad</h3>
+                <h3 class="lg-gallery__title">{{ __('Fotos de la comunidad') }}</h3>
                 @if($photos->isEmpty())
                     <div class="gallery-empty">
                         <div class="gallery-empty__icon">
                             <img src="{{ asset('img/lumen.png') }}" alt="Lumen" style="width: 80px; opacity: 0.4;">
                         </div>
-                        <p style="font-size: 1.1rem; color: #5a7a82;">Aun no hay fotos en Lumenia.</p>
-                        <p style="font-size: 0.9rem; color: #a0aec0;">Se el primero en compartir un momento en Lumenia.</p>
+                        <p style="font-size: 1.1rem; color: #5a7a82;">{{ __('Aun no hay fotos en Lumenia.') }}</p>
+                        <p style="font-size: 0.9rem; color: #a0aec0;">{{ __('Se el primero en compartir un momento en Lumenia.') }}</p>
                     </div>
                 @else
                     <div class="gallery-grid">
@@ -1352,7 +1352,7 @@
 
                                     @auth
                                         @if(auth()->user()->id === $photo->user_id || auth()->user()->role === 'admin')
-                                            <button class="photo-card__delete" onclick="deletePhoto({{ $photo->id }})" title="Eliminar">Eliminar</button>
+                                            <button class="photo-card__delete" onclick="deletePhoto({{ $photo->id }})" title="{{ __('Eliminar') }}">{{ __('Eliminar') }}</button>
                                         @endif
                                     @endauth
                                 </div>
@@ -1378,13 +1378,13 @@
         {{-- ============ PANEL: CÁMARA ============ --}}
         <div class="forum-panel" id="panel-camera">
             <div class="lg-cam-topbar">
-                <button type="button" class="lg-back" onclick="goToPanel('gallery')">‹ Volver a la galería</button>
+                <button type="button" class="lg-back" onclick="goToPanel('gallery')">‹ {{ __('Volver a la galería') }}</button>
             </div>
             @guest
                 <div class="camera-section">
                     <div class="camera-login-msg">
-                        <p>Inicia sesion para tomar fotos con Lumen y compartirlas en Lumenia.</p>
-                        <a href="{{ route('login') }}">Iniciar sesion</a>
+                        <p>{{ __('Inicia sesion para tomar fotos con Lumen y compartirlas en Lumenia.') }}</p>
+                        <a href="{{ route('login') }}">{{ __('Iniciar sesion') }}</a>
                     </div>
                 </div>
             @else
@@ -1394,7 +1394,7 @@
                     <div class="cam-power-area">
                         <button class="cam-power-btn" id="camPowerBtn" onclick="toggleCamera()">
                             <span class="cam-power-dot"></span>
-                            <span id="camPowerLabel">Encender camara</span>
+                            <span id="camPowerLabel">{{ __('Encender camara') }}</span>
                         </button>
                     </div>
 
@@ -1403,9 +1403,9 @@
 
                         {{-- Barra de herramientas: Lumens + iconos stickers/filtros --}}
                         <div class="cam-toolbar">
-                            <button class="cam-tool-btn" id="btnFilters" onclick="toggleDropdown('filters')" title="Filtros">
+                            <button class="cam-tool-btn" id="btnFilters" onclick="toggleDropdown('filters')" title="{{ __('Filtros') }}">
                                 📸
-                                <span class="cam-tool-btn__label">Filtros</span>
+                                <span class="cam-tool-btn__label">{{ __('Filtros') }}</span>
                             </button>
 
                             <div class="cam-toolbar__divider"></div>
@@ -1429,73 +1429,73 @@
 
                             <div class="cam-toolbar__divider"></div>
 
-                            <button class="cam-tool-btn" id="btnStickers" onclick="toggleDropdown('stickers')" title="Stickers">
+                            <button class="cam-tool-btn" id="btnStickers" onclick="toggleDropdown('stickers')" title="{{ __('Stickers') }}">
                                 ⭐
-                                <span class="cam-tool-btn__label">Stickers</span>
+                                <span class="cam-tool-btn__label">{{ __('Stickers') }}</span>
                                 <span class="cam-sticker-badge" id="stickerBadge">0</span>
                             </button>
                         </div>
 
                         {{-- Dropdown de filtros --}}
                         <div class="cam-dropdown" id="dropFilters">
-                            <div class="cam-dropdown__title">Filtros</div>
+                            <div class="cam-dropdown__title">{{ __('Filtros') }}</div>
                             <div class="cam-dropdown__grid">
                                 <div class="cam-filter-item cam-filter-item--active" onclick="applyFilter('none', this)">
                                     <div class="cam-filter-circle"><div class="cam-filter-circle__inner"></div></div>
-                                    <span class="cam-filter-label">Normal</span>
+                                    <span class="cam-filter-label">{{ __('Normal') }}</span>
                                 </div>
                                 <div class="cam-filter-item" onclick="applyFilter('warm', this)">
                                     <div class="cam-filter-circle"><div class="cam-filter-circle__inner" style="filter: saturate(1.4) sepia(0.3) brightness(1.1);"></div></div>
-                                    <span class="cam-filter-label">Calido</span>
+                                    <span class="cam-filter-label">{{ __('Calido') }}</span>
                                 </div>
                                 <div class="cam-filter-item" onclick="applyFilter('cool', this)">
                                     <div class="cam-filter-circle"><div class="cam-filter-circle__inner" style="filter: saturate(1.2) hue-rotate(20deg) brightness(1.05);"></div></div>
-                                    <span class="cam-filter-label">Frio</span>
+                                    <span class="cam-filter-label">{{ __('Frio') }}</span>
                                 </div>
                                 <div class="cam-filter-item" onclick="applyFilter('vintage', this)">
                                     <div class="cam-filter-circle"><div class="cam-filter-circle__inner" style="filter: sepia(0.6) contrast(1.1) brightness(0.95);"></div></div>
-                                    <span class="cam-filter-label">Vintage</span>
+                                    <span class="cam-filter-label">{{ __('Vintage') }}</span>
                                 </div>
                                 <div class="cam-filter-item" onclick="applyFilter('bw', this)">
                                     <div class="cam-filter-circle"><div class="cam-filter-circle__inner" style="filter: grayscale(1) contrast(1.1);"></div></div>
-                                    <span class="cam-filter-label">B/N</span>
+                                    <span class="cam-filter-label">{{ __('B/N') }}</span>
                                 </div>
                                 <div class="cam-filter-item" onclick="applyFilter('dreamy', this)">
                                     <div class="cam-filter-circle"><div class="cam-filter-circle__inner" style="filter: brightness(1.15) contrast(0.9) saturate(1.3);"></div></div>
-                                    <span class="cam-filter-label">Suave</span>
+                                    <span class="cam-filter-label">{{ __('Suave') }}</span>
                                 </div>
                             </div>
                         </div>
 
                         {{-- Dropdown de stickers --}}
                         <div class="cam-dropdown" id="dropStickers">
-                            <div class="cam-dropdown__title">Stickers — toca para agregar</div>
+                            <div class="cam-dropdown__title">{{ __('Stickers — toca para agregar') }}</div>
                             <div class="cam-dropdown__grid">
-                                <div class="cam-sticker-opt" onclick="addSticker('crown')" title="Corona">
+                                <div class="cam-sticker-opt" onclick="addSticker('crown')" title="{{ __('Corona') }}">
                                     <svg viewBox="0 0 120 80"><polygon points="10,70 20,25 35,50 60,10 85,50 100,25 110,70" fill="#bfa12b" stroke="#8a7a1d" stroke-width="2"/><rect x="10" y="65" width="100" height="12" rx="3" fill="#bfa12b" stroke="#8a7a1d" stroke-width="2"/></svg>
                                 </div>
-                                <div class="cam-sticker-opt" onclick="addSticker('glasses')" title="Lentes">
+                                <div class="cam-sticker-opt" onclick="addSticker('glasses')" title="{{ __('Lentes') }}">
                                     <svg viewBox="0 0 120 50"><rect x="5" y="10" width="45" height="30" rx="8" fill="#2c525a" stroke="#bfa12b" stroke-width="3"/><rect x="70" y="10" width="45" height="30" rx="8" fill="#2c525a" stroke="#bfa12b" stroke-width="3"/><path d="M50 25 L70 25" stroke="#bfa12b" stroke-width="3" fill="none"/></svg>
                                 </div>
-                                <div class="cam-sticker-opt" onclick="addSticker('heart-glasses')" title="Lentes corazon">
+                                <div class="cam-sticker-opt" onclick="addSticker('heart-glasses')" title="{{ __('Lentes corazon') }}">
                                     <svg viewBox="0 0 120 55"><path d="M5 22 C5 10,28 5,28 20 C28 5,50 10,50 22 C50 35,28 45,28 45 C28 45,5 35,5 22Z" fill="#7c4dff" opacity="0.9"/><path d="M70 22 C70 10,93 5,93 20 C93 5,115 10,115 22 C115 35,93 45,93 45 C93 45,70 35,70 22Z" fill="#7c4dff" opacity="0.9"/><path d="M50 25 L70 25" stroke="#7c4dff" stroke-width="3" fill="none"/></svg>
                                 </div>
-                                <div class="cam-sticker-opt" onclick="addSticker('party-hat')" title="Gorro">
+                                <div class="cam-sticker-opt" onclick="addSticker('party-hat')" title="{{ __('Gorro') }}">
                                     <svg viewBox="0 0 100 110"><polygon points="50,5 15,95 85,95" fill="#7c4dff" stroke="#5b38c9" stroke-width="2"/><circle cx="50" cy="5" r="8" fill="#bfa12b"/><ellipse cx="50" cy="95" rx="40" ry="8" fill="#5b38c9"/></svg>
                                 </div>
-                                <div class="cam-sticker-opt" onclick="addSticker('mustache')" title="Bigote">
+                                <div class="cam-sticker-opt" onclick="addSticker('mustache')" title="{{ __('Bigote') }}">
                                     <svg viewBox="0 0 140 60"><path d="M70 45 C55 45,40 55,20 50 C5 46,0 30,15 25 C30 20,45 35,70 30 C95 35,110 20,125 25 C140 30,135 46,120 50 C100 55,85 45,70 45Z" fill="#2c525a"/></svg>
                                 </div>
-                                <div class="cam-sticker-opt" onclick="addSticker('cowboy')" title="Sombrero vaquero">
+                                <div class="cam-sticker-opt" onclick="addSticker('cowboy')" title="{{ __('Sombrero vaquero') }}">
                                     <svg viewBox="0 0 140 90"><ellipse cx="70" cy="75" rx="68" ry="12" fill="#8B4513" stroke="#654321" stroke-width="2"/><path d="M30,75 C30,30 50,15 70,15 C90,15 110,30 110,75" fill="#A0522D" stroke="#654321" stroke-width="2"/><rect x="30" y="65" width="80" height="8" rx="2" fill="#bfa12b"/></svg>
                                 </div>
-                                <div class="cam-sticker-opt" onclick="addSticker('cat-ears')" title="Orejas de gato">
+                                <div class="cam-sticker-opt" onclick="addSticker('cat-ears')" title="{{ __('Orejas de gato') }}">
                                     <svg viewBox="0 0 140 80"><polygon points="15,75 5,10 50,55" fill="#e9d5ff" stroke="#7c4dff" stroke-width="2"/><polygon points="125,75 135,10 90,55" fill="#e9d5ff" stroke="#7c4dff" stroke-width="2"/></svg>
                                 </div>
-                                <div class="cam-sticker-opt" onclick="addSticker('halo')" title="Aureola">
+                                <div class="cam-sticker-opt" onclick="addSticker('halo')" title="{{ __('Aureola') }}">
                                     <svg viewBox="0 0 120 50"><ellipse cx="60" cy="30" rx="50" ry="15" fill="none" stroke="#bfa12b" stroke-width="5" opacity="0.9"/></svg>
                                 </div>
-                                <div class="cam-sticker-opt" onclick="addSticker('stars')" title="Estrellas">
+                                <div class="cam-sticker-opt" onclick="addSticker('stars')" title="{{ __('Estrellas') }}">
                                     <svg viewBox="0 0 100 100"><polygon points="50,5 61,35 95,35 68,55 78,90 50,70 22,90 32,55 5,35 39,35" fill="#bfa12b" opacity="0.9"/></svg>
                                 </div>
                             </div>
@@ -1525,20 +1525,20 @@
 
                         {{-- Botones --}}
                         <div class="cam-actions" id="camActions">
-                            <button class="cam-btn cam-btn--secondary" onclick="flipLumen()">↔ Voltear</button>
-                            <button class="cam-btn cam-btn--capture" onclick="capturePhoto()" title="Capturar foto"></button>
-                            <button class="cam-btn cam-btn--secondary" onclick="switchCamera()">🔄 Camara</button>
+                            <button class="cam-btn cam-btn--secondary" onclick="flipLumen()">↔ {{ __('Voltear') }}</button>
+                            <button class="cam-btn cam-btn--capture" onclick="capturePhoto()" title="{{ __('Capturar foto') }}"></button>
+                            <button class="cam-btn cam-btn--secondary" onclick="switchCamera()">🔄 {{ __('Camara') }}</button>
                         </div>
 
                         {{-- Preview --}}
                         <div class="cam-preview" id="camPreview">
                             <img class="cam-preview__img" id="previewImg" src="" alt="Vista previa">
                             <div class="cam-preview__form">
-                                <textarea id="captionInput" placeholder="Agrega una descripcion... (opcional)" maxlength="200"></textarea>
+                                <textarea id="captionInput" placeholder="{{ __('Agrega una descripcion... (opcional)') }}" maxlength="200"></textarea>
                             </div>
                             <div class="cam-preview__actions">
-                                <button class="cam-btn cam-btn--retake" onclick="retakePhoto()">Otra vez</button>
-                                <button class="cam-btn cam-btn--save" onclick="savePhoto()">Publicar en Lumenia</button>
+                                <button class="cam-btn cam-btn--retake" onclick="retakePhoto()">{{ __('Otra vez') }}</button>
+                                <button class="cam-btn cam-btn--save" onclick="savePhoto()">{{ __('Publicar en Lumenia') }}</button>
                             </div>
                         </div>
 
@@ -1561,7 +1561,7 @@
         </div>
     </div>
 
-    <div class="cam-toast" id="camToast">Foto publicada en Lumenia</div>
+    <div class="cam-toast" id="camToast">{{ __('Foto publicada en Lumenia') }}</div>
 
     <script>
         // ==========================================
@@ -1586,7 +1586,7 @@
             var lumen = document.getElementById('lgLumen');
             var bubble = document.getElementById('lgBubble');
             if (!lumen) return;
-            var frases = ['Hola, soy Lumen', '¿Te tomas una foto conmigo?', 'Ven, entra a la cámara', 'Capturemos el momento juntos'];
+            var frases = [@json(__('Hola, soy Lumen')), @json(__('¿Te tomas una foto conmigo?')), @json(__('Ven, entra a la cámara')), @json(__('Capturemos el momento juntos'))];
             var fi = 0;
             function cycle() {
                 if (bubble) {
@@ -1639,7 +1639,7 @@
         // ELIMINAR FOTO
         // ==========================================
         function deletePhoto(id) {
-            if (!confirm('¿Eliminar esta foto?')) return;
+            if (!confirm(@json(__('¿Eliminar esta foto?')))) return;
             fetch('/lumenia/' + id, {
                 method: 'DELETE',
                 headers: {
@@ -1652,7 +1652,7 @@
                     if (card) card.remove();
                 }
             }).catch(function() {
-                alert('Error al eliminar. Intenta de nuevo.');
+                alert(@json(__('Error al eliminar. Intenta de nuevo.')));
             });
         }
 
@@ -1733,7 +1733,7 @@
                 video.style.display = 'block';
                 content.classList.add('cam-content--active');
                 btn.classList.add('cam-power-btn--on');
-                label.textContent = 'Apagar camara';
+                label.textContent = @json(__('Apagar camara'));
                 cameraIsOn = true;
                 startIdlePhrases();
                 // Ajustar tamaño de Lumen ahora que la cámara es visible
@@ -1743,7 +1743,7 @@
                 camBox.innerHTML = '<div class="cam-no-camera" style="padding:3rem;text-align:center;color:#5a7a82;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.5rem;"><p>No se pudo acceder a la camara.</p><p style="font-size:0.85rem;">Asegurate de dar permiso al navegador.</p></div>';
                 content.classList.add('cam-content--active');
                 btn.classList.add('cam-power-btn--on');
-                label.textContent = 'Apagar camara';
+                label.textContent = @json(__('Apagar camara'));
                 cameraIsOn = true;
             });
         }
@@ -1761,7 +1761,7 @@
 
             content.classList.remove('cam-content--active');
             btn.classList.remove('cam-power-btn--on');
-            label.textContent = 'Encender camara';
+            label.textContent = @json(__('Encender camara'));
             cameraIsOn = false;
             stopIdlePhrases();
 
@@ -1954,47 +1954,47 @@
         // ==========================================
         var LUMEN_PHRASES = {
             greeting: [
-                '¡Hola! 📸',
-                '¡Sonrie!',
-                '¿Listos?',
-                '¡Vamos!',
-                '¡Que bien te ves!'
+                @json(__('¡Hola! 📸')),
+                @json(__('¡Sonrie!')),
+                @json(__('¿Listos?')),
+                @json(__('¡Vamos!')),
+                @json(__('¡Que bien te ves!'))
             ],
             changeLumen: [
-                '¡Nuevo look!',
-                '¡Me gusta este!',
-                '¡Mira, soy yo!',
-                '¡Genial!',
-                '¡Cambio de estilo!'
+                @json(__('¡Nuevo look!')),
+                @json(__('¡Me gusta este!')),
+                @json(__('¡Mira, soy yo!')),
+                @json(__('¡Genial!')),
+                @json(__('¡Cambio de estilo!'))
             ],
             capture: [
-                '¡Perfecta! ⭐',
-                '¡Quedo genial!',
-                '¡Hermosa foto!',
-                '¡Increible!',
-                '¡Me encanta!'
+                @json(__('¡Perfecta! ⭐')),
+                @json(__('¡Quedo genial!')),
+                @json(__('¡Hermosa foto!')),
+                @json(__('¡Increible!')),
+                @json(__('¡Me encanta!'))
             ],
             sticker: [
-                '¡Que bonito!',
-                '¡Mas stickers!',
-                '¡Me queda bien!',
-                '¡Eso, eso!'
+                @json(__('¡Que bonito!')),
+                @json(__('¡Mas stickers!')),
+                @json(__('¡Me queda bien!')),
+                @json(__('¡Eso, eso!'))
             ],
             filter: [
-                '¡Ese filtro queda bien!',
-                '¡Wow, que cambio!',
-                '¡Me gusta como se ve!',
-                '¡Queda diferente!',
-                '¡Buena eleccion!'
+                @json(__('¡Ese filtro queda bien!')),
+                @json(__('¡Wow, que cambio!')),
+                @json(__('¡Me gusta como se ve!')),
+                @json(__('¡Queda diferente!')),
+                @json(__('¡Buena eleccion!'))
             ],
             idle: [
-                '¡Toma una foto!',
-                'Arrastra los stickers',
-                '¡Prueba un filtro!',
-                '¿Y si cambias de Lumen?',
-                '¡Comparte con todos!',
-                '¡Mueve los stickers!',
-                '¡Hazme mas grande! +'
+                @json(__('¡Toma una foto!')),
+                @json(__('Arrastra los stickers')),
+                @json(__('¡Prueba un filtro!')),
+                @json(__('¿Y si cambias de Lumen?')),
+                @json(__('¡Comparte con todos!')),
+                @json(__('¡Mueve los stickers!')),
+                @json(__('¡Hazme mas grande! +'))
             ]
         };
 
@@ -2251,10 +2251,10 @@
                         window.location.href = '{{ route("forum.index") }}';
                     }, 1500);
                 } else {
-                    alert(res.data.message || 'Error al guardar.');
+                    alert(res.data.message || @json(__('Error al guardar.')));
                 }
             }).catch(function() {
-                alert('Error de conexion. Intenta de nuevo.');
+                alert(@json(__('Error de conexion. Intenta de nuevo.')));
             });
         }
 

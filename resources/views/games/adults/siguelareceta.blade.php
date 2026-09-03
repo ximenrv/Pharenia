@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sigue la Receta - Pharenia</title>
+    <title>{{ __('Sigue la Receta') }} - Pharenia</title>
     <base href="{{ asset('gamesAssets/adults/siguelareceta') }}/">
 
     <link rel="stylesheet" href="css/style.css">
@@ -43,16 +43,24 @@
 </head>
 <body>
 
-    <a href="{{ route('activities.adultez') }}" class="btn-volver-actividades" title="Regresar a Actividades">
-        <span class="bva-flecha">◀</span> Regresar a Actividades
+    <a href="{{ route('activities.adultez') }}" class="btn-volver-actividades" title="{{ __('Regresar a Actividades') }}">
+        <span class="bva-flecha">◀</span> {{ __('Regresar a Actividades') }}
     </a>
 
     <div id="app" class="app"></div>
 
+    @php
+        $locale = app()->getLocale();
+        $p1 = lang_path($locale . '.json');
+        $p2 = resource_path('lang/' . $locale . '.json');
+        $jsonPath = file_exists($p1) ? $p1 : (file_exists($p2) ? $p2 : null);
+        $translations = $jsonPath ? json_decode(file_get_contents($jsonPath), true) : [];
+    @endphp
     <script>
         window.GAME_MENU_URL = '{{ route('activities.adultez') }}';
         window.CSRF_TOKEN = '{{ csrf_token() }}';
         window.SAVE_RECORD_URL = '{{ route('games.adults.record.update') }}';
+        window.translations = @json($translations, JSON_FORCE_OBJECT);
     </script>
     <script type="module" src="js/main.js"></script>
 </body>
