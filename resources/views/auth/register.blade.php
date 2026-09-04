@@ -63,10 +63,14 @@
                         <label for="role">{{ __('¿QUÉ PERFIL DESCRIBE TU OBJETIVO?') }}</label>
                         <select id="role" name="role"  style="width: 100%; padding: 7px; border: 1px solid #cbd5e0; border-radius: 8px; background-color: #fff; font-size: 14px; color: #2f4f4f;">
                             <option value="" disabled selected>{{ __('Selecciona tu perfil...') }}</option>
-                            <option value="adult_tea" {{ old('role') == 'adult_tea' ? 'selected' : '' }}>{{ __('Adulto Autogestor (TEA)') }}</option>
-                            <option value="ally_no_tea" {{ old('role') == 'ally_no_tea' ? 'selected' : '' }}>{{ __('Tutor / Aliado (+18)') }}</option>
-                            <option value="teen" {{ old('role') == 'teen' ? 'selected' : '' }}>{{ __('Joven / Adolescente (13-17 años)') }}</option>
+                            <option value="visitor" {{ old('role') == 'visitor' ? 'selected' : '' }}>{{ __('Visitante General') }}</option>
+                            <option value="adult_tea" {{ old('role') == 'adult_tea' ? 'selected' : '' }}>{{ __('Adulto (TEA)') }}</option>
+                            <option value="ally_no_tea" {{ old('role') == 'ally_no_tea' ? 'selected' : '' }}>{{ __('Adulto Padre/Madre (NO TEA)') }}</option>
+                            <option value="teen" {{ old('role') == 'teen' ? 'selected' : '' }}>{{ __('Adolescente (TEA)') }}</option>
                         </select>
+
+                        <!-- Aviso dinámico de edad según el rol seleccionado -->
+                        <p class="auth-error-message auth-error-message--dynamic" id="visitorAgeError" aria-live="polite">{{ __('auth.visitor_under_12') }}</p>
                     </div>
 
                     <div class="auth-group auth-group--password">
@@ -88,6 +92,9 @@
                             </div>
                             <span class="strength-label" id="strengthLabel">{{ __('Escribe una contraseña') }}</span>
                         </div>
+
+                        <!-- Aviso dinámico: requisitos de contraseña que faltan -->
+                        <p class="auth-error-message auth-error-message--dynamic password-hint" id="passwordHint" aria-live="polite"></p>
                     </div>
 
                     <div class="auth-group auth-group--password">
@@ -145,6 +152,27 @@
         }
     </script>
 
+    @php
+        /** Mensajes de validación en tiempo real traducidos (lang/es.json, lang/en.json) */
+        $registerMessages = [
+            'wordAnd' => __('auth.word_and'),
+            'passPrefix' => __('auth.pass_need_prefix'),
+            'passOk' => __('auth.pass_ok'),
+            'passReqLength' => __('auth.pass_req_length'),
+            'passReqUpper' => __('auth.pass_req_upper'),
+            'passReqLower' => __('auth.pass_req_lower'),
+            'passReqNumber' => __('auth.pass_req_number'),
+            'passReqSymbol' => __('auth.pass_req_symbol'),
+            'passReqNoSpace' => __('auth.pass_req_no_space'),
+            'roleVisitor' => __('auth.visitor_under_12'),
+            'roleAdultTea' => __('auth.role_age_adult_tea'),
+            'roleAlly' => __('auth.role_age_ally'),
+            'roleTeen' => __('auth.role_age_teen'),
+            'teenRoleRequired' => __('auth.teen_role_required'),
+            'adultNoTeen' => __('auth.adult_no_teen'),
+        ];
+    @endphp
+
     <script>
     // Función para manejar el diseño activo de las tarjetas de rol
     function seleccionarRol(elementoCard, valor) {
@@ -168,17 +196,143 @@
         }
     }
 
+    // Mensajes de validación traducidos en el servidor (ver bloque @php superior)
+    const registerMessages = @json($registerMessages);
+
     const passwordInput = document.getElementById('password');
     const confirmInput = document.getElementById('password_confirmation');
     const errorConfirmar = document.getElementById('confirmError');
+    const passwordHint = document.getElementById('passwordHint');
+    const roleSelect = document.getElementById('role');
+    const birthdateInput = document.getElementById('birthdate');
+    const ageMessage = document.getElementById('visitorAgeError');
+    const registerForm = document.querySelector('.auth-form');
+
+    // Calcula la edad exacta (años cumplidos) a partir de la fecha de nacimiento.
+    // Se parsea Y-M-D manualmente para evitar desfases por zona horaria.
+    function calcularEdad(valorFecha) {
+        const partes = valorFecha.split('-').map(Number);
+        if (partes.length !== 3 || partes.some(parte => isNaN(parte))) return null;
+
+        const nacimiento = new Date(partes[0], partes[1] - 1, partes[2]);
+        const hoy = new Date();
+        let edad = hoy.getFullYear() - nacimiento.getFullYear();
+        const diferenciaMeses = hoy.getMonth() - nacimiento.getMonth();
+
+        if (diferenciaMeses < 0 || (diferenciaMeses === 0 && hoy.getDate() < nacimiento.getDate())) {
+            edad--;
+        }
+
+        return edad;
+    }
+
+    // Devuelve el aviso para la combinación rol/edad, o null si cumple los
+    // requisitos del perfil (mismas reglas que valida el backend).
+    function getMensajeEdadPorRol() {
+        if (!roleSelect.value || !birthdateInput.value) return null;
+
+        const edad = calcularEdad(birthdateInput.value);
+        if (edad === null) return null;
+
+        switch (roleSelect.value) {
+            case 'visitor': // Visitante General: más de 12 años cumplidos
+                if (edad <= 12) return registerMessages.roleVisitor;
+                return (edad <= 17) ? registerMessages.teenRoleRequired : null;
+            case 'adult_tea': // Adultos: al menos 18 años cumplidos
+                return (edad >= 18) ? null : registerMessages.roleAdultTea;
+            case 'ally_no_tea':
+                return (edad >= 18) ? null : registerMessages.roleAlly;
+            case 'teen': // Adolescente: entre 13 y 17 años
+                if (edad >= 13 && edad <= 17) return null;
+                return (edad >= 18) ? registerMessages.adultNoTeen : registerMessages.roleTeen;
+            default:
+                return null;
+        }
+    }
+
+    // Muestra u oculta el aviso justo debajo del campo de fecha/rol
+    function actualizarAvisoEdad() {
+        const mensaje = getMensajeEdadPorRol();
+
+        if (ageMessage) {
+            ageMessage.textContent = mensaje || '';
+            ageMessage.classList.toggle('is-visible', Boolean(mensaje));
+        }
+
+        return !mensaje;
+    }
+
+    if (roleSelect && birthdateInput && ageMessage && registerForm) {
+        roleSelect.addEventListener('change', actualizarAvisoEdad);
+        birthdateInput.addEventListener('change', actualizarAvisoEdad);
+        birthdateInput.addEventListener('input', actualizarAvisoEdad);
+
+        // Estado inicial (p. ej. cuando el formulario vuelve con old())
+        actualizarAvisoEdad();
+
+        registerForm.addEventListener('submit', function (event) {
+            if (!actualizarAvisoEdad()) {
+                event.preventDefault();
+                ageMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
+    }
 
     if (passwordInput && confirmInput) {
         const barras = ['strengthBar1', 'strengthBar2', 'strengthBar3'].map(id => document.getElementById(id));
         const etiqueta = document.getElementById('strengthLabel');
 
+        // Une los requisitos faltantes respetando la gramática: "a", "a y b", "a, b y c"
+        function unirRequisitos(requisitos) {
+            if (requisitos.length === 1) return requisitos[0];
+
+            const ultimo = requisitos[requisitos.length - 1];
+            return requisitos.slice(0, -1).join(', ') + ' ' + registerMessages.wordAnd + ' ' + ultimo;
+        }
+
+        // Lista de requisitos que aún faltan (vacía = contraseña válida)
+        function getRequisitosFaltantes(valor) {
+            const faltantes = [];
+
+            if (valor.length < 8) faltantes.push(registerMessages.passReqLength);
+            if (!/[A-Z]/.test(valor)) faltantes.push(registerMessages.passReqUpper);
+            if (!/[a-z]/.test(valor)) faltantes.push(registerMessages.passReqLower);
+            if (!/[0-9]/.test(valor)) faltantes.push(registerMessages.passReqNumber);
+            if (!/[^a-zA-Z0-9]/.test(valor)) faltantes.push(registerMessages.passReqSymbol);
+            if (/\s/.test(valor)) faltantes.push(registerMessages.passReqNoSpace);
+
+            return faltantes;
+        }
+
+        // Texto dinámico que guía al usuario mientras escribe la contraseña
+        function actualizarAvisoPassword() {
+            if (!passwordHint) return;
+
+            const valor = passwordInput.value;
+
+            if (valor.length === 0) {
+                passwordHint.textContent = '';
+                passwordHint.classList.remove('is-visible', 'password-hint--ok');
+                return;
+            }
+
+            const faltantes = getRequisitosFaltantes(valor);
+
+            if (faltantes.length > 0) {
+                passwordHint.textContent = registerMessages.passPrefix + ' ' + unirRequisitos(faltantes) + '.';
+                passwordHint.classList.add('is-visible');
+                passwordHint.classList.remove('password-hint--ok');
+            } else {
+                passwordHint.textContent = registerMessages.passOk;
+                passwordHint.classList.add('is-visible', 'password-hint--ok');
+            }
+        }
+
         function validarPasswords() {
             const val1 = passwordInput.value.trim();
             const val2 = confirmInput.value.trim();
+
+            if (!errorConfirmar) return;
 
             if (val2.length > 0) {
                 errorConfirmar.textContent = (val1 === val2) ? '' : 'Las contraseñas no coinciden.';
@@ -192,18 +346,19 @@
             let puntaje = 0;
 
             if (valor.length >= 8) puntaje++;
+            if (/[A-Z]/.test(valor)) puntaje++;
+            if (/[a-z]/.test(valor)) puntaje++;
             if (/[0-9]/.test(valor)) puntaje++;
-            if (/[a-zA-Z]/.test(valor)) puntaje++;
             if (/[^a-zA-Z0-9]/.test(valor)) puntaje++;
 
             barras.forEach(barra => barra.className = 'strength-bar');
 
             if (valor.length === 0) {
                 etiqueta.textContent = 'Escribe una contraseña';
-            } else if (puntaje <= 1) {
+            } else if (puntaje <= 2) {
                 barras[0].classList.add('debil');
                 etiqueta.textContent = 'Débil';
-            } else if (puntaje <= 2) {
+            } else if (puntaje <= 4) {
                 barras[0].classList.add('media');
                 barras[1].classList.add('media');
                 etiqueta.textContent = 'Media';
@@ -212,11 +367,20 @@
                 etiqueta.textContent = 'Fuerte';
             }
 
+            actualizarAvisoPassword();
             validarPasswords();
         });
 
         confirmInput.addEventListener('input', validarPasswords);
+
+        // Restaura el aviso si el navegador autocompleta el campo al cargar
+        if (passwordInput.value.length > 0) {
+            passwordInput.dispatchEvent(new Event('input'));
+        }
     }
+
+    // (La validación de edad por rol ahora vive junto a la validación de la
+    // contraseña, más arriba: ver getMensajeEdadPorRol / actualizarAvisoEdad.)
 </script>
 
 </body>

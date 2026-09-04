@@ -19,7 +19,7 @@ class AuthController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'birthdate' => ['required', 'date', 'before:today'],
-            'role' => ['required', 'string', 'in:adult_tea,ally_no_tea,teen'],
+            'role' => ['required', 'string', 'in:adult_tea,ally_no_tea,teen,visitor'],
             'terms' => ['required', 'accepted'],
             'password' => [
                 'required',
@@ -57,6 +57,12 @@ class AuthController extends Controller
         $age = Carbon::parse($validated['birthdate'])->age;
         $role = $validated['role'];
 
+        // 1.bis. Visitante General: debe ser mayor de 12 años cumplidos (> 12)
+        if ($role === 'visitor' && $age <= 12) {
+            return back()->withErrors([
+                'birthdate' => __('auth.visitor_under_12')
+            ])->withInput();
+        }
 
         if ($age < 13) {
             return back()->withErrors([

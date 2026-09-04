@@ -78,7 +78,7 @@ Route::post('/forgot-password', function () {
 | Rutas para: Juventud (Etapas y Juegos de Juventud)
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth', 'role:admin,adult_tea,teen,ally_no_tea'])->group(function () {
+Route::middleware(['auth', 'role:admin,adult_tea,teen,ally_no_tea,visitor'])->group(function () {
     Route::get('/activities/juventud', function () { 
         return view('stages.youth'); 
     })->name('activities.youth');
@@ -110,7 +110,7 @@ Route::middleware(['auth', 'role:admin,adult_tea,teen,ally_no_tea'])->group(func
 | Rutas para: Etapa Adultez y sus Juegos
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth', 'role:admin,adult_tea,ally_no_tea'])->group(function () {
+Route::middleware(['auth', 'role:admin,adult_tea,ally_no_tea,visitor'])->group(function () {
     Route::get('/activities/adultez', function () { 
         return view('stages.adult'); 
     })->name('activities.adultez');
@@ -160,6 +160,29 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::post('/minor/store', [AdminController::class, 'storeMinor'])->name('admin.minor.store');
     Route::put('/minor/{id}', [AdminController::class, 'updateMinor'])->name('admin.minor.update');
     Route::delete('/minor/{id}', [AdminController::class, 'destroyMinor'])->name('admin.minor.destroy');
+
+    // Gestión de Visitantes Generales (CRUD completo: listar, ver, editar, eliminar)
+    Route::get('/visitors', [AdminController::class, 'visitors'])->name('admin.visitors');
+    Route::post('/visitors/store', [AdminController::class, 'storeVisitor'])->name('admin.visitors.store');
+    Route::get('/visitors/{id}', [AdminController::class, 'showVisitor'])->name('admin.visitors.show');
+    Route::get('/visitors/{id}/edit', [AdminController::class, 'editVisitor'])->name('admin.visitors.edit');
+    Route::put('/visitors/{id}', [AdminController::class, 'updateVisitor'])->name('admin.visitors.update');
+    Route::delete('/visitors/{id}', [AdminController::class, 'destroyVisitor'])->name('admin.visitors.destroy');
+
+    // Gestión de Adultos (TEA y Aliados): listar, ver y editar
+    Route::get('/adults', [AdminController::class, 'adults'])->name('admin.adults');
+    Route::get('/adults/{id}', [AdminController::class, 'showAdult'])->name('admin.adults.show');
+    Route::get('/adults/{id}/edit', [AdminController::class, 'editAdult'])->name('admin.adults.edit');
+
+    // Gestión de Jóvenes / Adolescentes: listar, ver y editar
+    Route::get('/teens', [AdminController::class, 'teens'])->name('admin.teens');
+    Route::get('/teens/{id}', [AdminController::class, 'showTeen'])->name('admin.teens.show');
+    Route::get('/teens/{id}/edit', [AdminController::class, 'editTeen'])->name('admin.teens.edit');
+
+    // Gestión de Niños / Menores: listar, ver y editar
+    Route::get('/minors', [AdminController::class, 'minors'])->name('admin.minors');
+    Route::get('/minors/{id}', [AdminController::class, 'showMinor'])->name('admin.minors.show');
+    Route::get('/minors/{id}/edit', [AdminController::class, 'editMinor'])->name('admin.minors.edit');
 });
 
 /*
@@ -180,7 +203,7 @@ Route::middleware(['auth'])->group(function () {
 | Rutas Exclusivas para el Menor Autenticado (Child)
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth','role:admin,adult_tea,ally_no_tea'])->group(function () {
+Route::middleware(['auth','role:admin,adult_tea,ally_no_tea,visitor'])->group(function () {
     Route::get('/actividades/ninez', function () { return view('stages.child'); })->name('child.activities');
     Route::get('/activities/ninez', function () { return view('stages.child'); })->name('activities.child');
     Route::get('/child/logout-confirm', [ChildAuthController::class, 'showLogoutPinForm'])->name('child.logout.form');
@@ -192,7 +215,7 @@ Route::middleware(['auth','role:admin,adult_tea,ally_no_tea'])->group(function (
 | Módulos de Pruebas, Simulaciones y Mitos
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth', 'role:admin,adult_tea,teen,ally_no_tea'])->group(function () {
+Route::middleware(['auth', 'role:admin,adult_tea,teen,ally_no_tea,visitor'])->group(function () {
     Route::post('/information/mchat/progress', [MchatChallenge::class, 'saveProgress']);
     Route::post('/information/mchat/submit', [MchatChallenge::class, 'calculateResult']);
     Route::post('/information/mchat/reset', [MchatChallenge::class, 'resetTest'])->name('information.mchat.reset');
@@ -237,7 +260,7 @@ Route::post('/lumen/chat', [LumenController::class, 'chat'])
 | Juegos Niñez
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth', 'role:admin,adult_tea,ally_no_tea'])->prefix('games/childs')->group(function () {
+Route::middleware(['auth', 'role:admin,adult_tea,ally_no_tea,visitor'])->prefix('games/childs')->group(function () {
     Route::get('/guardianes', [ChildGamesController::class, 'guardianes'])->name('games.guardianes');
     Route::get('/eco', [ChildGamesController::class, 'eco'])->name('games.eco');
     Route::get('/cazador', [ChildGamesController::class, 'cazador'])->name('games.cazador');

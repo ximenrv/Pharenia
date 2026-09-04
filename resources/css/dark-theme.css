@@ -1530,6 +1530,19 @@
     font-weight: 600;
 }
 
+/* Avisos dinámicos de validación (edad por rol y requisitos de contraseña) */
+[data-theme="dark"] .auth-error-message {
+    color: #fc8181;
+}
+
+[data-theme="dark"] .password-hint.is-visible {
+    color: #f6ad55;
+}
+
+[data-theme="dark"] .password-hint.is-visible.password-hint--ok {
+    color: #68d391;
+}
+
 [data-theme="dark"] .auth-status {
     background-color: rgba(47, 133, 90, 0.15) !important;
     border: 1px solid rgba(47, 133, 90, 0.4) !important;

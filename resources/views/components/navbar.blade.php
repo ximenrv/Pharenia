@@ -55,6 +55,20 @@
                     <a href="{{ route('forum.index') }}" class="navbar__link {{ Request::is('lumenia*') ? 'navbar__link--active' : '' }}">{{ __('Lumenia') }}</a>
                 </li>
 
+            {{-- Si es Visitante General: navega igual que Adulto Autogestor (TEA), sin gestión --}}
+            @elseif(auth()->user()->role === 'visitor')
+                <li class="navbar__item navbar__item--dropdown">
+                    <a href="/activities" class="navbar__link {{ Request::is('activities*') ? 'navbar__link--active' : '' }}">{{ __('Actividades') }} ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ route('activities.child') }}" class="dropdown-link">{{ __('Niñez') }}</a></li>
+                        <li><a href="{{ route('activities.youth') }}" class="dropdown-link">{{ __('Juventud') }}</a></li>
+                        <li><a href="{{ route('activities.adultez') }}" class="dropdown-link">{{ __('Adultez') }}</a></li>
+                    </ul>
+                </li>
+                <li class="navbar__item">
+                    <a href="{{ route('forum.index') }}" class="navbar__link {{ Request::is('lumenia*') ? 'navbar__link--active' : '' }}">{{ __('Lumenia') }}</a>
+                </li>
+
             {{-- Si es Tutor / Aliado --}}
             @elseif(auth()->user()->role === 'ally_no_tea')
                  <li class="navbar__item navbar__item--dropdown">

@@ -45,6 +45,10 @@
                 <p style="font-size: 24px; font-weight: bold; color: #2f4f4f; margin-top: 5px;">{{ $teenCount }}</p>
             </div>
             <div class="pharenia-card" style="text-align: center; padding: 15px;">
+                <h3>{{ __('Visitantes') }}</h3>
+                <p style="font-size: 24px; font-weight: bold; color: #2f4f4f; margin-top: 5px;">{{ $visitorCount }}</p>
+            </div>
+            <div class="pharenia-card" style="text-align: center; padding: 15px;">
                 <h3>{{ __('Menores') }}</h3>
                 <p style="font-size: 24px; font-weight: bold; color: #2f4f4f; margin-top: 5px;">{{ $minorCount }}</p>
             </div>
@@ -68,7 +72,10 @@
         <div class="pharenia-card" style="margin-bottom: 25px;">
             <div class="pharenia-table-action-header">
                 <h3 style="margin: 0; color: #2f4f4f;">{{ __('1. Directorio de Adultos (TEA y Aliados)') }}</h3>
-                <button type="button" class="pharenia-btn-primary" onclick="openModal('createAdultModal')">{{ __('Crear Adulto +') }}</button>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <button type="button" class="pharenia-btn-primary" onclick="openModal('createAdultModal')" style="padding: 8px 14px; font-size: 13px;">{{ __('Crear Adulto +') }}</button>
+                    <a href="{{ route('admin.adults') }}" class="pharenia-btn-primary" style="padding: 8px 14px; font-size: 13px; text-decoration: none;">{{ __('Gestionar Adultos →') }}</a>
+                </div>
             </div>
 
             <div style="overflow-x: auto;">
@@ -93,6 +100,7 @@
                                 <td data-label="{{ __('Rol') }}"><span class="pharenia-role-badge">{{ $user->role }}</span></td>
                                 <td data-label="{{ __('Acciones') }}" style="text-align: center;">
                                     <div style="display: flex; gap: 8px; justify-content: center;">
+                                        <a href="{{ route('admin.adults.show', $user->id) }}" class="pharenia-btn-secondary" style="padding: 6px 12px; font-size: 12px; text-decoration: none;">{{ __('Ver') }}</a>
                                         <button type="button" class="pharenia-btn-primary" 
                                                 onclick="openEditAdultModal('{{ $user->id }}', '{{ $user->name }}', '{{ $user->email }}')"
                                                 style="padding: 6px 12px; font-size: 12px;">{{ __('Editar') }}</button>
@@ -112,7 +120,10 @@
         <div class="pharenia-card" style="margin-bottom: 25px;">
             <div class="pharenia-table-action-header">
                 <h3 style="margin: 0; color: #2f4f4f;">{{ __('2. Directorio de Jóvenes (Teens 13-17)') }}</h3>
-                <button type="button" class="pharenia-btn-primary" onclick="openModal('createTeenModal')">{{ __('Crear Joven +') }}</button>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <button type="button" class="pharenia-btn-primary" onclick="openModal('createTeenModal')" style="padding: 8px 14px; font-size: 13px;">{{ __('Crear Joven +') }}</button>
+                    <a href="{{ route('admin.teens') }}" class="pharenia-btn-primary" style="padding: 8px 14px; font-size: 13px; text-decoration: none;">{{ __('Gestionar Jóvenes →') }}</a>
+                </div>
             </div>
 
             <div style="overflow-x: auto;">
@@ -137,6 +148,7 @@
                                 <td data-label="{{ __('Supervisor ID') }}" style="font-family: monospace;">{{ $user->supervisor_id ?? '---' }}</td>
                                 <td data-label="{{ __('Acciones') }}" style="text-align: center;">
                                     <div style="display: flex; gap: 8px; justify-content: center;">
+                                        <a href="{{ route('admin.teens.show', $user->id) }}" class="pharenia-btn-secondary" style="padding: 6px 12px; font-size: 12px; text-decoration: none;">{{ __('Ver') }}</a>
                                         <button type="button" class="pharenia-btn-primary" 
                                                 onclick="openEditTeenModal('{{ $user->id }}', '{{ $user->name }}', '{{ $user->email }}', '{{ $user->supervisor_id }}')"
                                                 style="padding: 6px 12px; font-size: 12px;">{{ __('Editar') }}</button>
@@ -156,7 +168,10 @@
         <div class="pharenia-card" style="margin-bottom: 25px;">
             <div class="pharenia-table-action-header">
                 <h3 style="margin: 0; color: #2f4f4f;">{{ __('3. Directorio de Menores (<13 años)') }}</h3>
-                <button type="button" class="pharenia-btn-primary" onclick="openModal('createMinorModal')">{{ __('Crear Menor +') }}</button>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <button type="button" class="pharenia-btn-primary" onclick="openModal('createMinorModal')" style="padding: 8px 14px; font-size: 13px;">{{ __('Crear Menor +') }}</button>
+                    <a href="{{ route('admin.minors') }}" class="pharenia-btn-primary" style="padding: 8px 14px; font-size: 13px; text-decoration: none;">{{ __('Gestionar Menores →') }}</a>
+                </div>
             </div>
 
             <div style="overflow-x: auto;">
@@ -181,6 +196,7 @@
                                 <td data-label="{{ __('Supervisor ID') }}">{{ $minor->user_id }}</td>
                                 <td data-label="{{ __('Acciones') }}" style="text-align: center;">
                                     <div style="display: flex; gap: 8px; justify-content: center;">
+                                        <a href="{{ route('admin.minors.show', $minor->id) }}" class="pharenia-btn-secondary" style="padding: 6px 12px; font-size: 12px; text-decoration: none;">{{ __('Ver') }}</a>
                                         <button type="button" class="pharenia-btn-primary" 
                                                 onclick="openEditMinorModal('{{ $minor->id }}', '{{ $minor->name }}', '{{ $minor->parent_pin }}', '{{ $minor->user_id }}')"
                                                 style="padding: 6px 12px; font-size: 12px;">{{ __('Editar') }}</button>
@@ -190,6 +206,52 @@
                             </tr>
                         @empty
                             <tr><td colspan="6" style="padding: 20px; text-align: center; color: #718096;">{{ __('No hay menores registrados.') }}</td></tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ================= 4. TABLA VISITANTES ================= -->
+        <div class="pharenia-card" style="margin-bottom: 25px;">
+            <div class="pharenia-table-action-header">
+                <h3 style="margin: 0; color: #2f4f4f;">{{ __('4. Directorio de Visitantes') }}</h3>
+                <div style="display: flex; gap: 8px;">
+                    <button type="button" class="pharenia-btn-primary" onclick="openModal('createVisitorModal')" style="padding: 8px 14px; font-size: 13px;">{{ __('Crear Visitante +') }}</button>
+                    <a href="{{ route('admin.visitors') }}" class="pharenia-btn-primary" style="padding: 8px 14px; font-size: 13px; text-decoration: none;">{{ __('Gestionar Visitantes →') }}</a>
+                </div>
+            </div>
+
+            <div style="overflow-x: auto;">
+                <table class="pharenia-data-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 50px;">{{ __('ID') }}</th>
+                            <th>{{ __('Nombre') }}</th>
+                            <th>{{ __('Correo') }}</th>
+                            <th>{{ __('Fecha Nac.') }}</th>
+                            <th>{{ __('Rol') }}</th>
+                            <th style="text-align: center;">{{ __('Acciones') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($visitors as $user)
+                            <tr>
+                                <td data-label="{{ __('ID') }}" style="font-weight: bold; color: #718096; text-align: center;">{{ $user->id }}</td>
+                                <td data-label="{{ __('Nombre') }}" style="font-weight: 600;">{{ $user->name }}</td>
+                                <td data-label="{{ __('Correo') }}" style="color: #4a5568;">{{ $user->email }}</td>
+                                <td data-label="{{ __('Fecha Nac.') }}">{{ $user->birthdate ? \Carbon\Carbon::parse($user->birthdate)->toDateString() : 'N/D' }}</td>
+                                <td data-label="{{ __('Rol') }}"><span class="pharenia-role-badge">{{ $user->role }}</span></td>
+                                <td data-label="{{ __('Acciones') }}" style="text-align: center;">
+                                    <div style="display: flex; gap: 8px; justify-content: center;">
+                                        <a href="{{ route('admin.visitors.show', $user->id) }}" class="pharenia-btn-secondary" style="padding: 6px 12px; font-size: 12px; text-decoration: none;">{{ __('Ver') }}</a>
+                                        <a href="{{ route('admin.visitors.edit', $user->id) }}" class="pharenia-btn-primary" style="padding: 6px 12px; font-size: 12px; text-decoration: none;">{{ __('Editar') }}</a>
+                                        <button type="button" class="pharenia-btn-danger" onclick="openDeleteModal('{{ $user->id }}', '{{ $user->name }}', 'visitor')">{{ __('Eliminar') }}</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr><td colspan="6" style="padding: 20px; text-align: center; color: #718096;">{{ __('No hay visitantes registrados.') }}</td></tr>
                         @endforelse
                     </tbody>
                 </table>
@@ -249,6 +311,22 @@
                 <div class="pharenia-form-group"><label>{{ __('PIN PARENTAL (4 dígitos)') }}</label><input type="text" name="parent_pin" maxlength="4" required></div>
                 <div class="pharenia-form-group"><label>{{ __('CORREO DEL SUPERVISOR') }}</label><input type="email" name="tutor_email" required></div>
                 <button type="submit" class="pharenia-modal-submit">{{ __('GUARDAR MENOR') }}</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: CREAR VISITANTE -->
+    <div id="createVisitorModal" class="pharenia-modal-overlay">
+        <div class="pharenia-modal-content">
+            <button type="button" class="pharenia-modal-close" onclick="closeModal('createVisitorModal')">&times;</button>
+            <h3 class="pharenia-modal-title">{{ __('Registrar Visitante General') }}</h3>
+            <form action="{{ route('admin.visitors.store') }}" method="POST">
+                @csrf
+                <div class="pharenia-form-group"><label>{{ __('NOMBRE COMPLETO') }}</label><input type="text" name="name" required></div>
+                <div class="pharenia-form-group"><label>{{ __('CORREO ELECTRÓNICO') }}</label><input type="email" name="email" required></div>
+                <div class="pharenia-form-group"><label>{{ __('FECHA DE NACIMIENTO') }}</label><input type="date" name="birthdate" required></div>
+                <div class="pharenia-form-group"><label>{{ __('CONTRASEÑA TEMPORAL') }}</label><input type="password" name="password" required></div>
+                <button type="submit" class="pharenia-modal-submit">{{ __('GUARDAR VISITANTE') }}</button>
             </form>
         </div>
     </div>
@@ -343,7 +421,7 @@
         function openDeleteModal(id, name, type) {
             const message = `{{ __('¿Estás seguro de que deseas eliminar a') }} "${name}"{{ __('? Esta acción no se puede deshacer.') }}`;
             document.getElementById('deleteMessage').textContent = message;
-            document.getElementById('deleteForm').action = (type === 'minor') ? `/admin/minor/${id}` : `/admin/users/${id}`;
+            document.getElementById('deleteForm').action = (type === 'minor') ? `/admin/minor/${id}` : (type === 'visitor') ? `/admin/visitors/${id}` : `/admin/users/${id}`;
             openModal('deleteModal');
         }
 

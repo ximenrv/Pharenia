@@ -363,6 +363,41 @@
     margin-top: 2px;
 }
 
+/* --------------------------------------------------------------------------
+   Mensajes de aviso dinámicos (validación en tiempo real)
+   Aparecen y desaparecen con una transición suave de altura y opacidad para
+   no desplazar bruscamente los elementos colindantes del formulario.
+   -------------------------------------------------------------------------- */
+
+.auth-error-message--dynamic {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0;
+    transform: translateY(-3px);
+    transition:
+        max-height 0.25s ease,
+        opacity 0.25s ease,
+        transform 0.25s ease;
+}
+
+.auth-error-message--dynamic.is-visible {
+    max-height: 4.5rem;
+    opacity: 1;
+    margin-top: 2px;
+    transform: translateY(0);
+}
+
+/* Aviso de requisitos de la contraseña: ámbar mientras faltan requisitos y
+   verde cuando cumple con todos los estándares de seguridad. */
+.password-hint.is-visible {
+    color: #dd6b20;
+}
+
+.password-hint.is-visible.password-hint--ok {
+    color: #38a169;
+}
+
 /* ==========================================================================
    09. CORALES DECORATIVOS Y ANIMACIONES
    ========================================================================== */

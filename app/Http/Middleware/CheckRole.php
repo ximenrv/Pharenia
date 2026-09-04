@@ -16,10 +16,10 @@ class CheckRole
                 ->with('error', 'Debes iniciar sesión para acceder a esta sección.');
         }
 
-        $userRole = auth()->user()->role;
+        $user = auth()->user();
 
         // 2. Si el rol del usuario no está dentro de los permitidos para esta ruta
-        if (!in_array($userRole, $roles)) {
+        if (!$user->hasRole(...$roles)) {
             return redirect()->route('home')
                 ->with('error', 'No tienes autorización para acceder a esta sección.');
         }
