@@ -113,7 +113,7 @@
                     <div class="auth-group" style="display: flex; flex-direction: row !important; align-items: center; justify-content: flex-end; gap: 10px; margin-bottom: 20px;">
                         <input type="checkbox" id="terms" name="terms" value="1" {{ old('terms') ? 'checked' : '' }}  style="width: 20px; height: 20px; cursor: pointer; accent-color: #2f4f4f; margin: 0;">
                         <label for="terms" style="font-size: 13px; margin-bottom: 0; cursor: pointer;">
-                            {{ __('Acepto los') }} <a href="#" onclick="openTermsModal(event)" style="text-decoration: underline;">{{ __('Términos y Condiciones') }}</a>
+                            {{ __('Acepto los') }} <a href="{{ asset('docs/terminos-y-condiciones.pdf') }}" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;">{{ __('Términos y Condiciones') }}</a>
                         </label>
                     </div>
 
@@ -141,16 +141,6 @@
         </div>
     </div>
 
-    <script>
-        function openTermsModal(event) {
-            event.preventDefault();
-            document.getElementById('termsModal').style.display = 'flex';
-        }
-
-        function closeTermsModal() {
-            document.getElementById('termsModal').style.display = 'none';
-        }
-    </script>
 
     @php
         /** Mensajes de validación en tiempo real traducidos (lang/es.json, lang/en.json) */
