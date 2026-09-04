@@ -16,6 +16,7 @@
         const messagesEl = document.getElementById('lumen-messages');
         const typingEl = document.getElementById('lumen-typing');
         const typingText = document.getElementById('lumen-typing-text');
+        const suggestionsEl = document.getElementById('lumen-suggestions');
         const form = document.getElementById('lumen-form');
         const input = document.getElementById('lumen-input');
         const sendBtn = document.getElementById('lumen-send');
@@ -29,6 +30,16 @@
         // Historial en memoria (máx. 12 mensajes como contexto para la IA).
         const history = [];
         const MAX_HISTORY = 12;
+
+        // Preguntas sugeridas (estilo Claude) vienen traducidas desde Blade.
+        let SUGGESTIONS = { initial: [], followup: [] };
+        try {
+            const parsed = JSON.parse(root.dataset.suggestions || '{}');
+            if (Array.isArray(parsed.initial)) SUGGESTIONS.initial = parsed.initial;
+            if (Array.isArray(parsed.followup)) SUGGESTIONS.followup = parsed.followup;
+        } catch (e) {
+            SUGGESTIONS = { initial: [], followup: [] };
+        }
 
         // Textos del indicador de escritura vienen traducidos desde Blade.
         let TYPING_PHRASES = [];
@@ -50,6 +61,49 @@
 
         let typingInterval = null;
         let sending = false;
+        let suggestionsShown = false;
+
+        /* ---------- Preguntas sugeridas (estilo Claude) ---------- */
+
+        // Elige n elementos al azar sin repetir del grupo dado.
+        function pickSuggestions(pool, count) {
+            const copy = pool.slice();
+            const picked = [];
+            while (picked.length < count && copy.length) {
+                picked.push(copy.splice(Math.floor(Math.random() * copy.length), 1)[0]);
+            }
+            return picked;
+        }
+
+        function showSuggestions(pool) {
+            if (!suggestionsEl || !loggedIn || sending) return;
+            const options = pickSuggestions(pool, 3);
+            if (!options.length) return;
+
+            suggestionsEl.textContent = '';
+            options.forEach(function (text) {
+                const chip = document.createElement('button');
+                chip.type = 'button';
+                chip.className = 'lumen-chat__suggestion';
+                chip.textContent = text;
+                chip.addEventListener('click', function () {
+                    if (sending) return;
+                    hideSuggestions();
+                    sendMessage(text);
+                });
+                suggestionsEl.appendChild(chip);
+            });
+
+            suggestionsEl.hidden = false;
+            suggestionsShown = true;
+        }
+
+        function hideSuggestions() {
+            if (!suggestionsEl) return;
+            suggestionsEl.hidden = true;
+            suggestionsEl.textContent = '';
+            suggestionsShown = false;
+        }
 
         /* ---------- Abrir / cerrar ---------- */
 
@@ -57,6 +111,8 @@
             window_.hidden = false;
             bubble.setAttribute('aria-expanded', 'true');
             scrollToBottom();
+            // Al abrir el chat se ofrecen 3 preguntas iniciales recomendadas.
+            if (!suggestionsShown) showSuggestions(SUGGESTIONS.initial);
             if (loggedIn) input.focus();
         }
 
@@ -125,16 +181,13 @@
 
         /* ---------- Envío ---------- */
 
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
+        function sendMessage(text) {
             if (!loggedIn || sending) return;
-
-            const text = input.value.trim();
-            if (!text) return;
 
             sending = true;
             input.value = '';
             sendBtn.disabled = true;
+            hideSuggestions();
 
             // Burbuja del usuario al instante (luego se reemplaza por la versión censurada si aplica).
             const userBubble = addMessage(text, 'user');
@@ -173,6 +226,7 @@
                             ERROR_PHRASES.api || 'Ups… algo se movió raro. ¿Intentamos de nuevo?',
                             'lumen'
                         );
+                        showSuggestions(SUGGESTIONS.followup);
                         return;
                     }
 
@@ -188,6 +242,8 @@
                     }
 
                     addMessage(result.data.reply, 'lumen');
+                    // Tras responder, Lumen sugiere 3 preguntas de seguimiento.
+                    showSuggestions(SUGGESTIONS.followup);
                 })
                 .catch(function () {
                     hideTyping();
@@ -195,6 +251,7 @@
                         ERROR_PHRASES.network || 'Parece que la conexión se tomó un descanso. Inténtalo otra vez; yo no me muevo de aquí.',
                         'lumen'
                     );
+                    showSuggestions(SUGGESTIONS.followup);
                 })
                 .finally(function () {
                     sending = false;
@@ -203,6 +260,16 @@
                         input.focus();
                     }
                 });
+        }
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            if (!loggedIn || sending) return;
+
+            const text = input.value.trim();
+            if (!text) return;
+
+            sendMessage(text);
         });
     });
 })();

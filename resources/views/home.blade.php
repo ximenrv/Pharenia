@@ -13,7 +13,7 @@
         })();
     </script>
 
-    @vite(['resources/css/home.css', 'resources/css/navbar.css', 'resources/js/navbar.js', 'resources/css/settings-menu.css', 'resources/js/settings-menu.js', 'resources/css/dark-theme.css', 'resources/css/lumen-chat.css', 'resources/components/lumen-chat.blade.php', 'resources/js/lumen-chat.js'])
+    @vite(['resources/css/home.css', 'resources/css/navbar.css', 'resources/js/navbar.js', 'resources/css/settings-menu.css', 'resources/js/settings-menu.js', 'resources/css/dark-theme.css', 'resources/css/lumen-chat.css', 'resources/js/lumen-chat.js'])
 </head>
 <body class="home-body">
 

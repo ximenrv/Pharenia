@@ -441,6 +441,55 @@
     30% { transform: translateY(-4px); opacity: 1; }
 }
 
+/* ---------- Preguntas sugeridas (estilo Claude) ---------- */
+
+.lumen-chat__suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    padding: 0.6rem 0.9rem 0;
+    background: var(--lumen-bg);
+}
+
+.lumen-chat__suggestion {
+    border: 1.5px solid rgba(44, 82, 90, 0.28);
+    background: var(--lumen-bg-soft);
+    color: var(--lumen-text);
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.38rem 0.8rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.lumen-chat__suggestion:hover {
+    transform: translateY(-2px);
+    border-color: var(--lumen-gold);
+    background: rgba(191, 161, 43, 0.12);
+}
+
+.lumen-chat__suggestion:focus-visible {
+    outline: 3px solid var(--lumen-gold);
+    outline-offset: 2px;
+}
+
+.lumen-chat__suggestion:active {
+    transform: translateY(0);
+}
+
+[data-theme="dark"] .lumen-chat__suggestion {
+    border-color: rgba(159, 212, 221, 0.3);
+    background: rgba(159, 212, 221, 0.08);
+    color: #dbe7ea;
+}
+
+[data-theme="dark"] .lumen-chat__suggestion:hover {
+    border-color: var(--lumen-gold);
+    background: rgba(191, 161, 43, 0.18);
+}
+
 /* ---------- Pie / formulario ---------- */
 
 .lumen-chat__footer {

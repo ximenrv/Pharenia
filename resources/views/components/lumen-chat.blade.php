@@ -30,6 +30,26 @@
         'ally_no_tea' => __('Hola, :name. Soy Lumen, tu amigo en Pharenia. ¿Cómo va tu día? Aquí puedes desahogarte con confianza.', ['name' => $lumenName]),
         default => null,
     };
+
+    // Preguntas sugeridas (estilo Claude): el JS elige 3 al azar de cada grupo.
+    // Se muestran al abrir el chat y después de cada respuesta de Lumen.
+    $lumenSuggestions = [
+        'initial' => [
+            __('¿Cómo estás, Lumen?'),
+            __('Quiero contarte cómo fue mi día'),
+            __('Hoy me siento un poco agobiado'),
+        ],
+        'followup' => [
+            __('¿Tú qué opinas, Lumen?'),
+            __('Cuéntame un dato curioso'),
+            __('¿Cómo puedo calmarme?'),
+            __('Dame un consejo, por favor'),
+            __('Gracias por escucharme 💙'),
+            __('Quiero desahogarme de algo más'),
+            __('¿Cómo va tu día, Lumen?'),
+            __('Ayúdame a ordenar mis ideas'),
+        ],
+    ];
 @endphp
 
 <div
@@ -44,6 +64,7 @@
     data-lumen-avatar-base="{{ asset('img/lumen') }}"
     data-typing-phrases="{{ json_encode([__('Lumen está pensando…'), __('Lumen está escribiendo…'), __('Espera un poco más…')]) }}"
     data-error-phrases="{{ json_encode(['api' => __('Ups… algo se movió raro. ¿Intentamos de nuevo?'), 'network' => __('Parece que la conexión se tomó un descanso. Inténtalo otra vez; yo no me muevo de aquí.')]) }}"
+    data-suggestions="{{ json_encode($lumenSuggestions) }}"
 >
     {{-- Burbuja flotante (esquina inferior izquierda) --}}
     <button
@@ -119,6 +140,9 @@
                 <span class="lumen-chat__dots" aria-hidden="true"><i></i><i></i><i></i></span>
             </div>
         </div>
+
+        {{-- Preguntas sugeridas (estilo Claude), encima del campo de texto --}}
+        <div class="lumen-chat__suggestions" id="lumen-suggestions" role="group" aria-label="{{ __('Preguntas sugeridas') }}" hidden></div>
 
         <footer class="lumen-chat__footer">
             <form id="lumen-form" class="lumen-chat__form" autocomplete="off">

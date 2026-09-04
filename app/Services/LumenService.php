@@ -59,10 +59,16 @@ class LumenService
     {
         $name = $speaker['name'];
 
+        // Idioma de la interfaz: si la página está en inglés, Lumen responde en inglés.
+        $locale = app()->getLocale() === 'en' ? 'en' : 'es';
+        $languageRule = $locale === 'en'
+            ? "LANGUAGE RULE (mandatory): the user is browsing the site in English. Reply ONLY in English, in a natural and friendly way, regardless of the language the user writes in."
+            : 'Hablas siempre en español.';
+
         $base = <<<PROMPT
         Eres Lumen, la mascota oficial y amigo virtual de Pharenia, una plataforma web que potencia las capacidades de personas con Trastorno del Espectro Autista (TEA). Eres un pequeño ajolote-dragón azul con cuernos dorados, alas y gafas redondas; en tu pecho llevas el símbolo dorado del infinito, símbolo de la neurodiversidad.
 
-        Tu propósito NO es dar soporte técnico ni explicar cómo usar la web. Eres un espacio seguro: platicas, escuchas, validas emociones y acompañas. Hablas siempre en español.
+        Tu propósito NO es dar soporte técnico ni explicar cómo usar la web. Eres un espacio seguro: platicas, escuchas, validas emociones y acompañas. {$languageRule}
 
         Te estás dirigiendo a {$name}. Usa su nombre de vez en cuando, con naturalidad, sin repetirlo en cada frase.
 
@@ -136,7 +142,7 @@ class LumenService
         if (empty($apiKey)) {
             Log::warning('Lumen: GROQ_API_KEY no configurada.');
 
-            return $this->fallback($speaker, 'sin configuración');
+            return $this->fallback($speaker);
         }
 
         $messages = [
@@ -148,40 +154,54 @@ class LumenService
             $messages[] = ['role' => $role, 'content' => (string) ($item['content'] ?? '')];
         }
 
-        try {
-            $request = Http::withToken($apiKey)->timeout(30);
+        // Reintento único ante fallos transitorios (red, 429, 5xx) para que
+        // Lumen siempre intente responder de verdad y no reciba un "no puedo".
+        $attempts = 2;
 
-            // WAMP/XAMPP locales suelen no tener bundle de CA configurado
-            // (cURL error 60). Usamos el bundle oficial de curl.se guardado
-            // en storage/app/cacert.pem si existe.
-            $caBundle = storage_path('app/cacert.pem');
-            if (is_file($caBundle)) {
-                $request = $request->withOptions(['verify' => $caBundle]);
-            }
+        for ($attempt = 1; $attempt <= $attempts; $attempt++) {
+            try {
+                $request = Http::withToken($apiKey)->timeout(30);
 
-            $response = $request->post(rtrim(config('services.groq.base_url'), '/') . '/chat/completions', [
-                    'model' => config('services.groq.model'),
-                    'messages' => $messages,
-                    'temperature' => 0.65,
-                    'max_tokens' => 250,
+                // WAMP/XAMPP locales suelen no tener bundle de CA configurado
+                // (cURL error 60). Usamos el bundle oficial de curl.se guardado
+                // en storage/app/cacert.pem si existe.
+                $caBundle = storage_path('app/cacert.pem');
+                if (is_file($caBundle)) {
+                    $request = $request->withOptions(['verify' => $caBundle]);
+                }
+
+                $response = $request->post(rtrim(config('services.groq.base_url'), '/') . '/chat/completions', [
+                        'model' => config('services.groq.model'),
+                        'messages' => $messages,
+                        'temperature' => 0.65,
+                        'max_tokens' => 250,
+                    ]);
+
+                if (! $response->successful()) {
+                    Log::warning('Lumen: Groq respondió ' . $response->status(), [
+                        'body' => $response->body(),
+                        'attempt' => $attempt,
+                    ]);
+
+                    continue;
+                }
+
+                $content = (string) data_get($response->json(), 'choices.0.message.content', '');
+
+                if (trim($content) !== '') {
+                    return $this->extractMood($content);
+                }
+
+                continue;
+            } catch (\Throwable $e) {
+                Log::error('Lumen: excepción llamando a Groq', [
+                    'error' => $e->getMessage(),
+                    'attempt' => $attempt,
                 ]);
-
-            if (! $response->successful()) {
-                Log::warning('Lumen: Groq respondió ' . $response->status(), [
-                    'body' => $response->body(),
-                ]);
-
-                return $this->fallback($speaker, 'la API falló');
             }
-
-            $content = (string) data_get($response->json(), 'choices.0.message.content', '');
-
-            return $this->extractMood($content);
-        } catch (\Throwable $e) {
-            Log::error('Lumen: excepción llamando a Groq', ['error' => $e->getMessage()]);
-
-            return $this->fallback($speaker, 'error de conexión');
         }
+
+        return $this->fallback($speaker);
     }
 
     /**
@@ -210,18 +230,20 @@ class LumenService
     }
 
     /**
-     * Respuesta amable cuando la IA no está disponible. Nunca un error frío.
+     * Último recurso cuando la IA no está disponible, tras reintentar.
+     * Nunca dice que Lumen está "cansado" o "sin energías": es honesto,
+     * cálido e invita a reintentar. Se traduce al idioma activo de la página.
      *
      * @param  array{name: string, role: string}  $speaker
      * @return array{reply: string, mood: string}
      */
-    protected function fallback(array $speaker, string $reason): array
+    protected function fallback(array $speaker): array
     {
         $name = $speaker['name'];
 
         $reply = $speaker['role'] === 'child'
-            ? "¡Hola, {$name}! 🧸 Ahorita estoy un poquito cansado y necesito descansar. ¿Me esperas un ratito y volvemos a platicar? ✨"
-            : "Hola, {$name}. Ahora mismo no puedo responder bien (estoy recargando energías). Inténtalo de nuevo en unos minutos; aquí estaré para escucharte.";
+            ? __('¡Hola, :name! 🧸 Ahora mismo no logré conectar con mi cerebro de ajolote. ¿Intentamos de nuevo en un momentito? ✨', ['name' => $name])
+            : __('Hola, :name. Tuve un problema técnico al preparar mi respuesta, pero sigo aquí contigo. ¿Intentamos de nuevo? 💙', ['name' => $name]);
 
         return ['reply' => $reply, 'mood' => 'pacifico'];
     }
