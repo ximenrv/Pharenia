@@ -674,3 +674,76 @@ body {
     font-size: 1.1rem;
     color: var(--color-texto);
 }
+
+/* =========================================================
+   RESPONSIVE — móvil (≤640px). Solo aplica en pantallas
+   pequeñas; el diseño de escritorio queda intacto.
+   ========================================================= */
+@media (max-width: 640px) {
+    /* ---- Tutorial ---- */
+    .personaje { width: 160px; left: 12px; bottom: 10px; }
+    .dialogo {
+        left: 14px; right: 14px; max-width: none;
+        bottom: 240px; padding: 14px 18px; font-size: 0.92rem;
+    }
+    .tutorial-acciones { right: 14px; bottom: 14px; gap: 10px; }
+    .btn-siguiente, .btn-regresar { padding: 10px 18px; font-size: 0.9rem; }
+
+    /* ---- Selección de recetas: apilar tarjetas ---- */
+    .titulo-seleccion { font-size: 1.9rem; padding: 0 12px; }
+    .recetas-grid {
+        flex-wrap: wrap; gap: 16px; padding: 0 18px 28px; max-width: 100%;
+    }
+    .receta-card {
+        width: min(320px, 84vw); flex: 0 0 auto;
+        padding: 16px; gap: 10px;
+    }
+    .receta-card__img { height: 140px; }
+    .receta-card__nombre { font-size: 1.1rem; padding: 6px 18px; max-width: 100%; }
+
+    /* ---- Intro de nivel ---- */
+    .nivel-intro__caja { padding: 30px 32px; border-radius: 24px; }
+    .nivel-intro__titulo { font-size: 2.4rem; }
+    .nivel-intro__subtitulo { font-size: 1.1rem; letter-spacing: 2px; text-align: center; }
+    .nivel-intro__icono { font-size: 2.4rem; }
+
+    /* ---- Gameplay ---- */
+    .pantalla-nivel { padding: 14px 12px; }
+    .nivel-header { gap: 8px; align-items: flex-start; }
+    .nivel-header__espaciador { display: none; }
+
+    /* Tarjeta de receta compacta (para que no domine la pantalla) */
+    .tarjeta-receta { width: 150px; padding: 12px 14px; }
+    .tarjeta-receta__img { width: 52px; }
+    .tarjeta-receta__nombre { font-size: 1rem; margin-bottom: 6px; }
+    .tarjeta-receta__pasos { font-size: 0.72rem; gap: 4px; padding-left: 16px; }
+
+    /* Badge: que no se corte */
+    .nivel-badge {
+        font-size: 0.72rem; padding: 6px 12px;
+        white-space: normal; max-width: 40vw; text-align: center;
+    }
+
+    /* Stats a la derecha, compactos */
+    .nivel-stats { width: auto; max-width: 42vw; gap: 8px; }
+    .nivel-contador { font-size: 0.78rem; padding: 6px 12px; }
+    .nivel-hint { font-size: 0.72rem; padding: 8px 10px; }
+
+    /* Ingredientes y plato con buen tamaño táctil */
+    .encimera { top: 50%; gap: 1.4vh; }
+    .encimera__ingredientes { gap: 12px; max-width: 94vw; }
+    .ingrediente-btn__img { width: 78px; height: 78px; }
+    .plato-nivel { width: 150px; height: 150px; }
+    .plato-nivel__ingrediente { width: 92px; bottom: 26px; }
+
+    .nivel-controles { left: 16px; right: 16px; bottom: 16px; }
+    .btn-inicio { width: 48px; height: 48px; font-size: 1.2rem; }
+    .btn-reiniciar { padding: 10px 18px; font-size: 0.85rem; }
+
+    /* Overlay memoriza / completado */
+    .memoriza-overlay__titulo { font-size: 1.6rem; text-align: center; padding: 0 16px; }
+    .memoriza-overlay__contador { width: 66px; height: 66px; font-size: 1.4rem; top: -14px; right: -14px; }
+    .nivel-completado { padding: 28px 26px; max-width: 88vw; }
+    .nivel-completado__titulo { font-size: 1.6rem; }
+    .nivel-completado__subtitulo { font-size: 1rem; }
+}

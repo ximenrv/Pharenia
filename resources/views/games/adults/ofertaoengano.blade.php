@@ -126,6 +126,15 @@
 
             {{-- Canvas del laberinto --}}
             <canvas id="maze-canvas"></canvas>
+
+            {{-- Controles táctiles (D-pad) para mover a Lumen sin teclado.
+                 Solo se muestran en pantallas táctiles/pequeñas (ver CSS). --}}
+            <div id="maze-dpad" aria-label="{{ __('Controles') }}">
+                <button type="button" class="dpad-btn dpad-up" data-dir="ArrowUp" aria-label="{{ __('Arriba') }}">▲</button>
+                <button type="button" class="dpad-btn dpad-left" data-dir="ArrowLeft" aria-label="{{ __('Izquierda') }}">◀</button>
+                <button type="button" class="dpad-btn dpad-down" data-dir="ArrowDown" aria-label="{{ __('Abajo') }}">▼</button>
+                <button type="button" class="dpad-btn dpad-right" data-dir="ArrowRight" aria-label="{{ __('Derecha') }}">▶</button>
+            </div>
         </div>
     </div>
 
@@ -150,5 +159,35 @@
     </script>
     <script src="{{ asset('gamesAssets/adults/ofertaoengano/JS/intro.js') }}"></script>
     <script src="{{ asset('gamesAssets/adults/ofertaoengano/JS/game.js') }}"></script>
+
+    {{-- Wiring del D-pad táctil: despacha eventos de flecha sintéticos para
+         reutilizar EXACTAMENTE la misma lógica de movimiento del teclado.
+         No modifica nada del juego. --}}
+    <script>
+        (function () {
+            var dpad = document.getElementById('maze-dpad');
+            if (!dpad) return;
+            function move(key) {
+                document.dispatchEvent(new KeyboardEvent('keydown', { key: key, bubbles: true }));
+            }
+            dpad.addEventListener('pointerdown', function (e) {
+                var btn = e.target.closest('.dpad-btn');
+                if (!btn) return;
+                e.preventDefault();
+                btn.classList.add('is-pressed');
+                move(btn.getAttribute('data-dir'));
+            });
+            dpad.addEventListener('pointerup', function (e) {
+                var btn = e.target.closest('.dpad-btn');
+                if (btn) btn.classList.remove('is-pressed');
+            });
+            dpad.addEventListener('pointerleave', function (e) {
+                var btn = e.target.closest('.dpad-btn');
+                if (btn) btn.classList.remove('is-pressed');
+            }, true);
+            // Evita el zoom por doble-tap sobre los controles
+            dpad.addEventListener('touchstart', function (e) { e.preventDefault(); }, { passive: false });
+        })();
+    </script>
 </body>
 </html>

@@ -1281,6 +1281,91 @@
             .cam-toolbar { gap: 0.35rem; padding: 0.5rem; }
             .cam-lumen-opt { width: 34px; height: 34px; }
         }
+
+        /* ============================================
+           MODO OSCURO DE LUMENIA (inline en el blade, para que no se
+           pierda en los merges de dark-theme.css). Enganchado a la tuerca.
+           ============================================ */
+        [data-theme="dark"] .lumenia-body {
+            background:
+                radial-gradient(1000px 520px at 82% -10%, rgba(124, 77, 255, 0.20), transparent 60%),
+                radial-gradient(900px 500px at 0% 110%, rgba(191, 161, 43, 0.14), transparent 60%),
+                linear-gradient(180deg, #0e2a33 0%, #123a44 45%, #16213e 100%) !important;
+            background-attachment: fixed !important;
+            color: #cfe0e4;
+        }
+        [data-theme="dark"] .forum-header__subtitle { color: #b794f6; }
+        [data-theme="dark"] .forum-header__title { color: #eaf3f5; }
+        [data-theme="dark"] .forum-header__intro { color: #a8bcc2; }
+
+        [data-theme="dark"] .lg-scene {
+            background:
+                radial-gradient(120% 80% at 50% 18%, rgba(124, 77, 255, 0.22), transparent 60%),
+                linear-gradient(180deg, #143543, #0e2a33);
+            border-color: rgba(127, 179, 189, 0.18);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+        }
+        [data-theme="dark"] .lg-glow {
+            background: radial-gradient(circle, rgba(242, 217, 138, 0.40), rgba(124, 77, 255, 0.20) 55%, transparent 72%);
+        }
+        [data-theme="dark"] .lg-lumen .lg-pose {
+            filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.55)) drop-shadow(0 0 28px rgba(242, 217, 138, 0.45));
+        }
+        [data-theme="dark"] .lg-cta button {
+            background: linear-gradient(135deg, #f2d98a, #e0b84f);
+            color: #12191d;
+            box-shadow: 0 10px 30px rgba(242, 217, 138, 0.40);
+        }
+        [data-theme="dark"] .lg-gallery__title { color: #eaf3f5; }
+
+        /* Polaroids en tono azul oscuro (se integran con el tema) */
+        [data-theme="dark"] .lg-gallery .photo-card {
+            background: linear-gradient(#22323b, #1a2831);
+            border: 1px solid rgba(127, 179, 189, 0.18);
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.55), 0 2px 6px rgba(0, 0, 0, 0.4);
+        }
+        [data-theme="dark"] .lg-gallery .photo-card__img-wrap { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08); }
+        [data-theme="dark"] .lg-gallery .photo-card__name { color: #e6f0f2; }
+        [data-theme="dark"] .lg-gallery .photo-card__caption { color: #9fc3cd; }
+        [data-theme="dark"] .lg-gallery .photo-card__date { color: #7a929b; }
+        [data-theme="dark"] .lg-gallery .photo-card__avatar { background: rgba(124, 77, 255, 0.25); color: #c9b6ff; }
+        [data-theme="dark"] .lg-gallery .photo-card__delete { color: #8aa0a8; }
+
+        [data-theme="dark"] .gallery-empty { background: rgba(20, 32, 40, 0.55); border-color: rgba(127, 179, 189, 0.18); }
+        [data-theme="dark"] .gallery-empty p { color: #a8bcc2 !important; }
+        [data-theme="dark"] .gallery-pagination a { background: rgba(26, 36, 41, 0.7); color: #cfe0e4; border-color: rgba(127, 179, 189, 0.2); }
+        [data-theme="dark"] .gallery-pagination a:hover { background: #2c525a; color: #fff; border-color: #2c525a; }
+        [data-theme="dark"] .gallery-pagination span[aria-current="page"] > span { background: #7fb3bd; color: #12191d; border-color: #7fb3bd; }
+        [data-theme="dark"] .lg-back { background: rgba(26, 36, 41, 0.8); color: #7fb3bd; border-color: rgba(127, 179, 189, 0.25); }
+        [data-theme="dark"] .lg-back:hover { background: #222e35; }
+
+        /* Cámara */
+        [data-theme="dark"] .cam-power-btn { background: rgba(26, 36, 41, 0.7); color: #cfe0e4; border-color: #7fb3bd; }
+        [data-theme="dark"] .cam-power-btn:hover { background: #2c525a; color: #fff; }
+        [data-theme="dark"] .cam-toolbar,
+        [data-theme="dark"] .cam-dropdown { background: rgba(20, 30, 38, 0.82); border-color: rgba(127, 179, 189, 0.18); }
+        [data-theme="dark"] .cam-lumen-opt,
+        [data-theme="dark"] .cam-tool-btn { background: rgba(26, 36, 41, 0.6); border-color: rgba(127, 179, 189, 0.18); color: #cfe0e4; }
+        [data-theme="dark"] .cam-lumen-opt--active { background: #223039; border-color: #7fb3bd; }
+        [data-theme="dark"] .cam-dropdown__title { color: #b794f6; }
+        [data-theme="dark"] .cam-filter-label { color: #a8bcc2; }
+        [data-theme="dark"] .cam-filter-item--active .cam-filter-label { color: #eaf3f5; }
+        [data-theme="dark"] .cam-btn--secondary,
+        [data-theme="dark"] .cam-btn--retake { background: rgba(26, 36, 41, 0.78); color: #cfe0e4; border-color: rgba(127, 179, 189, 0.2); }
+        [data-theme="dark"] .cam-btn--secondary:hover { background: #2c3a42; }
+        [data-theme="dark"] .cam-preview__form textarea { background: rgba(20, 30, 38, 0.9); color: #e6f0f2; border-color: rgba(127, 179, 189, 0.2); }
+        [data-theme="dark"] .camera-login-msg { background: rgba(20, 32, 40, 0.6); border-color: rgba(127, 179, 189, 0.18); }
+        [data-theme="dark"] .camera-login-msg p { color: #a8bcc2 !important; }
+
+        /* Fix del navbar en Lumenia: los textos largos ("Panel Admin",
+           "Actividades", "Cerrar sesión") se partían en 2 líneas y se
+           desalineaban. Los forzamos a una sola línea. */
+        .navbar__link,
+        .navbar__logout-btn,
+        .navbar__login-link { white-space: nowrap; }
+        /* Borde transparente en los links no activos para que el subrayado del
+           activo no cambie la altura. */
+        .navbar__link:not(.navbar__link--active) { border-bottom: 2px solid transparent; }
     </style>
 </head>
 <body class="lumenia-body">

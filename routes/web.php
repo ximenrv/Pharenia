@@ -119,9 +119,13 @@ Route::middleware(['auth', 'role:admin,adult_tea,ally_no_tea,visitor'])->group(f
         return view('games.adults.ofertaoengano'); 
     })->name('games.adults.ofertaoengano');
 
-    Route::get('/juegos/adultez/siguelareceta', function () { 
-        return view('games.adults.siguelareceta'); 
+    Route::get('/juegos/adultez/siguelareceta', function () {
+        return view('games.adults.siguelareceta');
     })->name('games.adults.siguelareceta');
+
+    Route::get('/juegos/adultez/cuentasclaras', function () {
+        return view('games.adults.cuentasclaras');
+    })->name('games.adults.cuentasclaras');
 
     Route::post('/games/adults/record/update', [AdultGameRecordController::class, 'updateRecord'])->name('games.adults.record.update');
     Route::get('/games/adults/record/get', [AdultGameRecordController::class, 'getRecords'])->name('games.adults.record.get');

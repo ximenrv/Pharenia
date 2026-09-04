@@ -14,7 +14,7 @@ class AdultGameRecordController extends Controller
     public function updateRecord(Request $request)
     {
         $request->validate([
-            'game' => 'required|string|in:stars_OfertaOEngano,stars_SigueLaReceta',
+            'game' => 'required|string|in:stars_OfertaOEngano,stars_SigueLaReceta,stars_CuentasClaras',
             'score' => 'required|integer|min:0',
         ]);
 

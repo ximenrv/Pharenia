@@ -19,6 +19,21 @@
         .game-card:hover .game-card__img {
             transform: scale(1.14);
         }
+
+        /* La portada de Oferta o Engaño trae un marco gris pintado dentro de la
+           propia imagen; el zoom normal (1.06) no lo recorta y asomaba arriba.
+           Le damos un poco más de zoom para eliminar ese marco. */
+        .game-card__img[src*="ofertaoenganoport"] { transform: scale(1.14); }
+        .game-card:hover .game-card__img[src*="ofertaoenganoport"] { transform: scale(1.20); }
+
+        /* Contenedor oscuro en modo noche (por si alguna portada tiene transparencia). */
+        [data-theme="dark"] .game-card__image-wrapper { background-color: #1a2429; }
+
+        /* Cuentas Claras: Lumen está en la esquina inferior izquierda. Mostramos
+           ese lado y quitamos el zoom extra para que se vean completos su oreja
+           y su cola, sin cortarse. */
+        .game-card__img[src*="cuentasclaras"] { object-position: left center; transform: scale(1); }
+        .game-card:hover .game-card__img[src*="cuentasclaras"] { transform: scale(1.05); }
     </style>
 </head>
 <body style="background-color: #f5efff; margin: 0; padding: 0;">
@@ -74,16 +89,16 @@
                     </div>
                 </a>
 
-                <a href="/juegos/adultez/hogar" class="game-card">
+                <a href="#" class="game-card" data-game-url="{{ route('games.adults.cuentasclaras') }}" data-game-name="{{ __('Cuentas Claras') }}">
                     <div class="game-card__image-wrapper">
-                        <img src="{{ asset('img/game-adul-3.png') }}" alt="{{ __('Organiza tu Espacio') }}" class="game-card__img">
-                        <div class="game-card__overlay" style="background-color: #7c4dff;">
+                        <img src="{{ asset('gamesAssets/adults/cuentasclaras/Assets/cuentasclaras.jpg') }}" alt="{{ __('Cuentas Claras') }}" class="game-card__img">
+                        <div class="game-card__overlay" style="background-color: #2c525a;">
                             <span class="game-card__play-btn">{{ __('¡JUGAR AHORA!') }}</span>
                         </div>
                     </div>
                     <div class="game-card__info">
-                        <h3 class="game-card__title">{{ __('Organiza tu Espacio') }}</h3>
-                        <p class="game-card__description">{{ __('Mantén ordenado tu hogar en el menor tiempo posible.') }}</p>
+                        <h3 class="game-card__title">{{ __('Cuentas Claras') }}</h3>
+                        <p class="game-card__description">{{ __('Reparte tu sueldo del mes entre gastos, ahorro y gustos.') }}</p>
                     </div>
                 </a>
             </div>

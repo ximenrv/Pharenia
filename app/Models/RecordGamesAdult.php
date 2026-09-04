@@ -15,6 +15,7 @@ class RecordGamesAdult extends Model
         'email',
         'stars_OfertaOEngano',
         'stars_SigueLaReceta',
+        'stars_CuentasClaras',
     ];
 
     public function user()
