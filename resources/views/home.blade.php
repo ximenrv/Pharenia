@@ -35,7 +35,7 @@
 
                 <div class="hero__actions">
                     <a href="/activities" class="hero__btn hero__btn--primary">{{ __('EXPLORAR ACTIVIDADES') }}</a>
-                    <a href="/information" class="hero__btn hero__btn--secondary">{{ __('CONOCER MÁS') }}</a>
+                    <a href="#" id="btn-info-home" class="hero__btn hero__btn--secondary" role="button" aria-haspopup="dialog" aria-controls="home-modal" aria-expanded="false">{{ __('CONOCER MÁS') }}</a>
                 </div>
             </section>
 
@@ -54,11 +54,126 @@
         </div>
     </main>
 
+    <!-- Pop-up informativo «Sobre Pharenia» (botón "Conocer más").
+         Misma estructura de pop-ups informativos que en Actividades (.act-modal). -->
+    <div id="home-modal" class="home-modal" role="dialog" aria-modal="true" aria-labelledby="home-modal-title" aria-hidden="true">
+        <div class="home-modal__content">
+            <button type="button" id="home-modal-close" class="home-modal__close" aria-label="{{ __('Cerrar') }}">&times;</button>
+
+            <h2 id="home-modal-title" class="home-modal__title">{{ __('Sobre Pharenia') }}</h2>
+
+            <p class="home-modal__text">
+                {{ __('Pharenia es un espacio con el fin de potenciar las capacidades naturales de personas con Trastorno del Espectro Autista (TEA). A través de la educación, la sensibilización y el acompañamiento, buscamos ser un puente tecnológico entre el hogar y el desarrollo personal de cada persona.') }}
+            </p>
+
+            <h3 class="home-modal__subtitle">{{ __('¿Qué encontrarás en Pharenia?') }}</h3>
+            <ul class="home-modal__list">
+                <li class="home-modal__item">
+                    <h4 class="home-modal__item-title">{{ __('Educación y recursos informativos') }}</h4>
+                    <p class="home-modal__text">
+                        {{ __('Contenido claro y confiable para comprender el TEA y combatir la desinformación que lo rodea.') }}
+                    </p>
+                </li>
+
+                <li class="home-modal__item">
+                    <h4 class="home-modal__item-title">{{ __('Dinámicas y espacios seguros') }}</h4>
+                    <p class="home-modal__text">
+                        {{ __('Actividades interactivas y entornos respetuosos para aprender y experimentar sin presiones.') }}
+                    </p>
+                </li>
+            </ul>
+
+            <h3 class="home-modal__subtitle">{{ __('Clasificación de Roles y Accesos') }}</h3>
+            <ul class="home-modal__list">
+                <li class="home-modal__item">
+                    <h4 class="home-modal__item-title">{{ __('Visitante General') }}</h4>
+                    <p class="home-modal__text">
+                        {{ __('Acceso libre a la información sobre el TEA y a la plataforma para personas mayores de 12 años.') }}
+                    </p>
+                </li>
+
+                <li class="home-modal__item">
+                    <h4 class="home-modal__item-title">{{ __('Adultos (TEA y Aliados)') }}</h4>
+                    <p class="home-modal__text">
+                        {{ __('Personas adultas con TEA y sus tutores o aliados, con acceso a actividades, foro y acompañamiento.') }}
+                    </p>
+                </li>
+
+                <li class="home-modal__item">
+                    <h4 class="home-modal__item-title">{{ __('Jóvenes (Teens de 13 a 17 años)') }}</h4>
+                    <p class="home-modal__text">
+                        {{ __('Espacios y dinámicas adaptadas a la adolescencia, siempre acompañados por un adulto responsable.') }}
+                    </p>
+                </li>
+
+                <li class="home-modal__item">
+                    <h4 class="home-modal__item-title">{{ __('Menores de edad (0 a 12 años) / Panel Familiar') }}</h4>
+                    <p class="home-modal__text">
+                        {{ __('Cuentas creadas únicamente por un adulto responsable, con experiencias supervisadas desde el Panel Familiar.') }}
+                    </p>
+                </li>
+            </ul>
+
+            <p class="home-modal__note">
+                {{ __('Nota: Pharenia no busca sustituir la valoración clínica profesional. Somos un aliado tecnológico diario que complementa el acompañamiento de los especialistas.') }}
+            </p>
+        </div>
+    </div>
+
     <!-- Componente del Menú Flotante -->
     <x-settings-menu />
 
     <!-- Lumen: compañero virtual con IA -->
     <x-lumen-chat />
+
+    <script>
+        (function () {
+            const openBtn = document.getElementById('btn-info-home');
+            const modal = document.getElementById('home-modal');
+            const closeBtn = document.getElementById('home-modal-close');
+
+            if (!openBtn || !modal || !closeBtn) return;
+
+            const openModal = () => {
+                modal.classList.add('home-modal--show');
+                modal.setAttribute('aria-hidden', 'false');
+                openBtn.setAttribute('aria-expanded', 'true');
+                document.body.style.overflow = 'hidden';
+                closeBtn.focus();
+            };
+
+            const closeModal = () => {
+                modal.classList.remove('home-modal--show');
+                modal.setAttribute('aria-hidden', 'true');
+                openBtn.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+                openBtn.focus();
+            };
+
+            // Abrir modal con el botón "Conocer más"
+            openBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                openModal();
+            });
+
+            // Cerrar modal con la 'X'
+            closeBtn.addEventListener('click', closeModal);
+
+            // Cerrar modal al hacer clic fuera del contenedor
+            window.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // Cerrar modal con la tecla Escape
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('home-modal--show')) {
+                    closeModal();
+                }
+            });
+        })();
+    </script>
 
     @if(session('error'))
     <!-- Importar la fuente Nunito desde Google Fonts -->

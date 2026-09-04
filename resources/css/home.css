@@ -482,3 +482,155 @@
         bottom: -120px;
     }
 }
+
+/* ==========================================================================
+   07. MODAL «CONOCER MÁS» (POP-UP INFORMATIVO)
+   Mismo diseño y estructura que los pop-ups informativos de la plataforma
+   (p. ej. el modal de Actividades: .act-modal en activities.css).
+   ========================================================================== */
+
+.home-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(44, 82, 90, 0.6);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+}
+
+.home-modal--show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.home-modal__content {
+    background-color: #ffffff;
+    padding: 2.5rem;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 550px;
+    max-height: 70svh;
+    overflow-y: auto;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    position: relative;
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+}
+
+.home-modal--show .home-modal__content {
+    transform: translateY(0);
+}
+
+.home-modal__close {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.5rem;
+    font-size: 2rem;
+    line-height: 1;
+    color: #a0aec0;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    transition: color 0.2s ease;
+}
+
+.home-modal__close:hover,
+.home-modal__close:focus-visible {
+    color: #2c525a;
+    outline: none;
+}
+
+.home-modal__title {
+    font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
+    color: #2c525a;
+    font-size: 1.8rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.home-modal__text {
+    font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
+    color: #4a5568;
+    line-height: 1.6;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.home-modal__subtitle {
+    font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
+    color: #bfa12b;
+    font-size: 1.05rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 1.75rem 0 0.75rem 0;
+}
+
+.home-modal__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.home-modal__item {
+    padding: 0.5rem 0 0.5rem 1.25rem;
+    border-left: 3px solid rgba(191, 161, 43, 0.35);
+    margin-bottom: 0.5rem;
+}
+
+.home-modal__item-title {
+    font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
+    color: #2c525a;
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0 0 0.25rem 0;
+}
+
+.home-modal__item .home-modal__text {
+    font-size: 0.95rem;
+    margin-bottom: 0;
+}
+
+.home-modal__note {
+    background-color: rgba(191, 161, 43, 0.08);
+    border: 1px solid rgba(191, 161, 43, 0.3);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin-top: 1.75rem;
+    font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
+    color: #4a5568;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* --- Responsive del modal (tablet y móvil) --- */
+@media (max-width: 768px) {
+    .home-modal__content {
+        padding: 1.75rem 1.5rem;
+    }
+
+    .home-modal__title {
+        font-size: 1.55rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .home-modal__content {
+        width: calc(100% - 24px);
+        max-height: 88vh;
+    }
+}
